@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PakCashPlay</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #222;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      color: #ffd700;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: #333;
+      padding: 10px 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .section {
+      padding: 30px;
+      text-align: center;
+    }
+    .card {
+      background-color: #222;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 300px;
+      box-shadow: 0 0 10px #444;
+    }
+    .wheel {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      border: 10px solid #ffd700;
+      border-radius: 50%;
+      position: relative;
+      animation: none;
+    }
+    .spin-button {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #ffd700;
+      color: #111;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .result {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #0f0;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 14px;
+      border-top: 1px solid #333;
+      margin-top: 40px;
+    }
+    .form-input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 80%;
+      border-radius: 5px;
+      border: none;
+    }
+    .form-button {
+      background-color: #ffd700;
+      color: #111;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PakCashPlay 🎮</h1>
+    <p>Get 7% Bonus on Every Deposit!</p>
+  </header>
+
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('deposit')">Deposit</a>
+    <a onclick="showSection('spin')">Spin Wheel</a>
+    <a href="#">Withdraw</a>
+    <a href="#">VIP</a>
+    <a href="#">More</a>
+  </nav>
+
+  <div id="home" class="section">
+    <h2>🎯 Welcome to PakCashPlay!</h2>
+    <p>Choose an option from the menu above.</p>
+  </div>
+
+  <div id="spin" class="section" style="display:none;">
+    <h2>🎡 Spin the Wheel</h2>
+    <div class="card">
+      <div class="wheel" id="wheel"></div>
+      <button class="spin-button" onclick="spinWheel()">Spin Now</button>
+      <div class="result" id="spinResult"></div>
+    </div>
+  </div>
+
+  <div id="deposit" class="section" style="display:none;">
+    <h2>💰 Deposit via JazzCash</h2>
+    <div class="card">
+      <input type="text" class="form-input" id="name" placeholder="Your Name"><br>
+      <input type="text" class="form-input" id="number" placeholder="JazzCash Number"><br>
+      <input type="number" class="form-input" id="amount" placeholder="Amount (PKR)"><br>
+      <button class="form-button" onclick="submitDeposit()">Submit</button>
+      <div class="result" id="depositResult"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    This website is under maintenance — By CSQAMAR 2025
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.getElementById("home").style.display = "none";
+      document.getElementById("deposit").style.display = "none";
+      document.getElementById("spin").style.display = "none";
+      document.getElementById(id).style.display = "block";
+    }
+
+    function spinWheel() {
+      const prizes = ["PKR 10", "PKR 20", "Try Again", "PKR 50", "Better Luck Next Time", "PKR 100"];
+      const result = prizes[Math.floor(Math.random() * prizes.length)];
+      const spinResult = document.getElementById("spinResult");
+      spinResult.innerText = "🎉 You got: " + result;
+    }
+
+    function submitDeposit() {
+      const name = document.getElementById("name").value;
+      const number = document.getElementById("number").value;
+      const amount = document.getElementById("amount").value;
+      const result = document.getElementById("depositResult");
+
+      if (name && number && amount) {
+        result.innerText = `✅ ${amount} PKR will be deducted from ${number}. (Simulated)`;
+      } else {
+        result.innerText = "❌ Please fill all fields.";
+      }
+    }
+  </script>
+</body>
+</html>n requestWithdraw() {
+      const amount = parseInt(document.getElementById("withdrawAmount").value);
+      const method = document.getElementById("withdrawMethod").value;
+      if (amount > 0 && method) {
+        alert(`Withdraw request for PKR ${amount} sent to ${method}. Admin will process it.`);
+      } else {
+        alert("Enter valid amount and number.");
+      }
+    }
+
+    function submitDeposit() {
+      const code = document.getElementById("depositCode").value;
+      if (code) {
+        alert("Deposit request submitted. Admin will verify transaction ID: " + code);
+      } else {
+        alert("Enter your JazzCash/EasyPaisa transaction ID.");
+      }
+    }
+  </script></body>
+</html>
