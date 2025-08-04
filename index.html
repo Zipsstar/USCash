@@ -149,7 +149,6 @@
       z-index: 999;
       display: none;
     }
-    /* Popup */
     #welcomePopup {
       position: fixed;
       top: 0; left: 0;
@@ -187,8 +186,6 @@
 </head>
 <body>
   <div id="particles-js"></div>
-
-  <!-- Welcome Popup -->
   <div id="welcomePopup">
     <div class="popup-content">
       <div class="close" onclick="document.getElementById('welcomePopup').style.display='none'">×</div>
@@ -232,7 +229,6 @@
     <div id="result"></div>
   </div>
 
-  <!-- Audio -->
   <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/audio/2023/03/16/audio_98b541c254.mp3" type="audio/mp3">
   </audio>
@@ -240,9 +236,7 @@
     <source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_07d4930c1c.mp3" type="audio/mp3">
   </audio>
 
-  <!-- Particles.js library -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
   <script>
     let balance = 1000;
     let selectedBet = null;
@@ -263,6 +257,7 @@
       selectedBet = amount;
       document.querySelectorAll('.bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
+      revealAndShuffleCards(); // NEW LINE
     }
 
     function startCardGame() {
@@ -285,16 +280,35 @@
         for (let i = 0; i < 3; i++) allIcons.push(icon);
       });
 
-      allIcons.sort(() => Math.random() - 0.5);
-
       allIcons.forEach((icon) => {
         const card = document.createElement('div');
         card.classList.add('card');
         card.dataset.icon = icon;
-        card.onclick = () => flipCard(card);
         grid.appendChild(card);
         cardData.push({ element: card, icon: icon });
       });
+    }
+
+    function revealAndShuffleCards() {
+      const grid = document.getElementById('cardGrid');
+      setupCards();
+
+      cardData.forEach(data => {
+        data.element.innerText = data.icon;
+        data.element.classList.add('flipped');
+      });
+
+      setTimeout(() => {
+        // Shuffle
+        cardData.sort(() => Math.random() - 0.5);
+        grid.innerHTML = '';
+        cardData.forEach(data => {
+          data.element.innerText = '';
+          data.element.classList.remove('flipped');
+          data.element.onclick = () => flipCard(data.element);
+          grid.appendChild(data.element);
+        });
+      }, 3000);
     }
 
     function flipCard(card) {
