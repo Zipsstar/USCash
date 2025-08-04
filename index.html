@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -120,9 +121,40 @@
       font-size: 1.2rem;
       color: white;
     }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+    .glow {
+      animation: glow 1s infinite alternate;
+    }
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      20% { transform: translate(-2px, 0px) rotate(-1deg); }
+      40% { transform: translate(2px, 2px) rotate(1deg); }
+      60% { transform: translate(-1px, 1px) rotate(0deg); }
+      80% { transform: translate(1px, -1px) rotate(1deg); }
+      100% { transform: translate(1px, 1px) rotate(0deg); }
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 10px gold; }
+      to { box-shadow: 0 0 20px white; }
+    }
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
+
   <h1>USCash 🎮</h1>
   <div id="balanceDisplay">Balance: Rs. <span id="balanceAmount">1000</span></div>
   <div class="nav">
@@ -156,13 +188,27 @@
     <div id="result"></div>
   </div>
 
+  <!-- Audio -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/16/audio_98b541c254.mp3" type="audio/mp3">
+  </audio>
+  <audio id="flipSound">
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_07d4930c1c.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Particles.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
   <script>
     let balance = 1000;
     let selectedBet = null;
-    let icons = ['🐄', '🐔', '🐱', '⭐', '🍎'];
+    let icons = ['🐄', '🐔', '🐱'];
     let cardData = [];
     let flippedCards = [];
     let gameStarted = false;
+
+    const bgMusic = document.getElementById('bgMusic');
+    const flipSound = document.getElementById('flipSound');
 
     function updateBalanceDisplay() {
       document.getElementById('balanceAmount').innerText = Math.floor(balance);
@@ -177,6 +223,7 @@
 
     function startCardGame() {
       document.getElementById('scratchGame').style.display = 'block';
+      bgMusic.play().catch(() => {}); // autoplay
       setupCards();
     }
 
@@ -185,11 +232,12 @@
       cardData = [];
       gameStarted = false;
       const grid = document.getElementById('cardGrid');
+      grid.classList.remove('shake', 'glow');
       grid.innerHTML = '';
+      document.getElementById("particles-js").style.display = "none";
 
       let allIcons = [];
-      const selectedIcons = icons.slice(0, 3); // Only 3 unique
-      selectedIcons.forEach(icon => {
+      icons.forEach(icon => {
         for (let i = 0; i < 3; i++) allIcons.push(icon);
       });
 
@@ -215,6 +263,8 @@
 
       card.classList.add('flipped');
       card.innerText = card.dataset.icon;
+      flipSound.currentTime = 0;
+      flipSound.play().catch(() => {});
       flippedCards.push(card);
 
       if (flippedCards.length === 5) {
@@ -228,12 +278,17 @@
       iconsPicked.forEach(icon => counts[icon] = (counts[icon] || 0) + 1);
       const won = Object.values(counts).some(count => count >= 3);
       const result = document.getElementById('result');
+      const grid = document.getElementById('cardGrid');
       if (won) {
         balance += selectedBet;
         result.innerText = `🎉 You won! Rs. ${selectedBet * 2} added.`;
+        grid.classList.add('glow');
+        document.getElementById("particles-js").style.display = "block";
+        setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
       } else {
         balance -= selectedBet * 0.7;
         result.innerText = `❌ You lost! Rs. ${selectedBet * 0.7} deducted.`;
+        grid.classList.add('shake');
       }
       updateBalanceDisplay();
       setTimeout(() => {
@@ -241,6 +296,20 @@
         setupCards();
       }, 2500);
     }
+
+    /* Configure Particles.js */
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80 },
+        "color": { "value": "#FFD700" },
+        "shape": { "type": "star" },
+        "opacity": { "value": 0.8 },
+        "size": { "value": 5 },
+        "move": { "enable": true, "speed": 6 }
+      },
+      "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false } } },
+      "retina_detect": true
+    });
   </script>
 </body>
-  </html>
+</html>
