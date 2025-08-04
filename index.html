@@ -2,7 +2,7 @@
 <head>  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PakCashPlay 🎮</title>
+  <title>USCash 🎮</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -10,6 +10,17 @@
       background-color: black;
       color: goldenrod;
       text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, black, gold, black);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px gold;
+      margin: 20px 0;
+      letter-spacing: 2px;
     }
     .nav {
       background-color: goldenrod;
@@ -29,6 +40,7 @@
       max-width: 600px;
       border: 2px solid goldenrod;
       border-radius: 10px;
+      box-sizing: border-box;
     }
     .gold-box {
       display: inline-block;
@@ -38,6 +50,36 @@
       padding: 10px;
       border-radius: 8px;
       cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .gold-box.active {
+      background-color: black;
+      color: goldenrod;
+      border: 2px solid goldenrod;
+    }
+    .game-options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+    .game-options .gold-box {
+      width: 160px;
+      height: 120px;
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid goldenrod;
+      box-shadow: 0 0 10px goldenrod;
+      transition: transform 0.3s ease;
+    }
+    .game-options .gold-box:hover {
+      transform: scale(1.05);
+      background-color: black;
+      color: goldenrod;
     }
     .card-grid {
       display: flex;
@@ -50,26 +92,28 @@
     .card {
       width: 80px;
       height: 100px;
-      background-color: #333;
-      color: #00f;
+      background-color: #222;
+      color: black;
       font-size: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid gold;
+      border: 2px solid goldenrod;
       border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.4s;
+      transition: transform 0.4s, background-color 0.3s;
     }
-    .flipped {
-      background-color: #000;
+    .card.flipped {
+      background-color: goldenrod;
+      color: skyblue;
       transform: rotateY(180deg);
     }
     .bet-amounts {
       margin-top: 15px;
-    }
-    .bet-amounts .gold-box {
-      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     #result {
       margin-top: 20px;
@@ -79,7 +123,7 @@
   </style>
 </head>
 <body>
-  <h1>PakCashPlay 🎮</h1>
+  <h1>USCash 🎮</h1>
   <div id="balanceDisplay">Balance: Rs. <span id="balanceAmount">1000</span></div>
   <div class="nav">
     <a href="#">Home</a>
@@ -87,12 +131,18 @@
     <a href="#">Withdraw</a>
     <a href="#">VIP</a>
     <a href="#">More</a>
-  </div>  <div class="section">
+  </div>
+
+  <div class="section">
     <h2>Select Game</h2>
-    <div class="gold-box" onclick="startCardGame()">🃏 Scratch Match</div>
-    <div class="gold-box">Mini Ludo</div>
-    <div class="gold-box">Coming Soon</div>
-  </div>  <div class="section" id="scratchGame" style="display:none;">
+    <div class="game-options">
+      <div class="gold-box" onclick="startCardGame()">🃏 Scratch Match</div>
+      <div class="gold-box">🎲 Mini Ludo</div>
+      <div class="gold-box">🚧 Coming Soon</div>
+    </div>
+  </div>
+
+  <div class="section" id="scratchGame" style="display:none;">
     <h2>📏 Scratch & Match</h2>
     <div class="bet-amounts">
       <div class="gold-box" onclick="selectBet(20)">20</div>
@@ -104,19 +154,25 @@
     </div>
     <div class="card-grid" id="cardGrid"></div>
     <div id="result"></div>
-  </div>  <script>
+  </div>
+
+  <script>
     let balance = 1000;
     let selectedBet = null;
     let icons = ['🐄', '🐔', '🐱', '⭐', '🍎'];
     let cardData = [];
     let flippedCards = [];
+    let gameStarted = false;
 
     function updateBalanceDisplay() {
-      document.getElementById('balanceAmount').innerText = balance;
+      document.getElementById('balanceAmount').innerText = Math.floor(balance);
     }
 
     function selectBet(amount) {
+      if (gameStarted) return;
       selectedBet = amount;
+      document.querySelectorAll('.bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
     }
 
     function startCardGame() {
@@ -127,16 +183,19 @@
     function setupCards() {
       flippedCards = [];
       cardData = [];
+      gameStarted = false;
       const grid = document.getElementById('cardGrid');
       grid.innerHTML = '';
+
       let allIcons = [];
-      icons.forEach(icon => {
-        let count = icon === '🍎' ? 3 : 2;
-        for (let i = 0; i < count; i++) allIcons.push(icon);
+      const selectedIcons = icons.slice(0, 3); // Only 3 unique
+      selectedIcons.forEach(icon => {
+        for (let i = 0; i < 3; i++) allIcons.push(icon);
       });
+
       allIcons.sort(() => Math.random() - 0.5);
 
-      allIcons.forEach((icon, index) => {
+      allIcons.forEach((icon) => {
         const card = document.createElement('div');
         card.classList.add('card');
         card.dataset.icon = icon;
@@ -147,7 +206,13 @@
     }
 
     function flipCard(card) {
-      if (flippedCards.includes(card) || flippedCards.length >= 5 || !selectedBet) return;
+      if (!selectedBet) {
+        alert("Please select a bet amount before starting!");
+        return;
+      }
+      if (flippedCards.includes(card) || flippedCards.length >= 5) return;
+      if (!gameStarted) gameStarted = true;
+
       card.classList.add('flipped');
       card.innerText = card.dataset.icon;
       flippedCards.push(card);
@@ -174,7 +239,8 @@
       setTimeout(() => {
         result.innerText = '';
         setupCards();
-      }, 2000);
+      }, 2500);
     }
-  </script></body>
-    </html>
+  </script>
+</body>
+  </html>
