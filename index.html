@@ -2,7 +2,7 @@
 <html lang="en">
 <head>  
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>USCash 🎮</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
   <!-- Firebase SDK -->
@@ -17,22 +17,54 @@
       text-align: center;
       margin: 0;
       padding: 0;
+      width: 6.2in;
+      height: 2.3in;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .marquee {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #000428, #004e92);
+      color: white;
+      padding: 5px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      border: 2px solid #00b4db;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 180, 219, 0.7);
+      z-index: 1000;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(255,255,255,0.8);
+    }
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
     }
     h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       background: linear-gradient(90deg, black, gold, black);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 4px gold;
-      margin: 20px 0;
-      letter-spacing: 2px;
+      margin: 25px 0 10px;
+      letter-spacing: 1px;
     }
     .nav {
       background-color: goldenrod;
       color: black;
-      padding: 10px;
+      padding: 8px;
       display: flex;
       justify-content: space-around;
+      font-size: 0.8rem;
     }
     .nav a {
       color: black;
@@ -40,11 +72,11 @@
       font-weight: bold;
     }
     .section {
-      margin: 30px auto;
-      padding: 20px;
-      max-width: 600px;
+      margin: 15px auto;
+      padding: 10px;
+      max-width: 5.8in;
       border: 2px solid goldenrod;
-      border-radius: 10px;
+      border-radius: 8px;
       box-sizing: border-box;
     }
     .gold-box {
@@ -52,11 +84,13 @@
       background-color: goldenrod;
       color: black;
       margin: 5px;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: bold;
+      border: 2px solid #000;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
     }
     .gold-box.active {
       background-color: black;
@@ -65,46 +99,53 @@
     }
     .game-options {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
+      flex-direction: row;
+      gap: 10px;
       align-items: center;
+      justify-content: center;
     }
     .game-options .gold-box {
-      width: 160px;
-      height: 120px;
-      font-size: 1.2rem;
+      width: 120px;
+      height: 90px;
+      font-size: 0.9rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       border: 2px solid goldenrod;
-      box-shadow: 0 0 10px goldenrod;
+      box-shadow: 0 0 8px goldenrod;
       transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     .game-options .gold-box:hover {
       transform: scale(1.05);
       background-color: black;
       color: goldenrod;
     }
+    .game-thumbnail {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
     .card-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
-      margin: 20px auto;
-      max-width: 400px;
+      gap: 10px;
+      margin: 15px auto;
+      max-width: 350px;
     }
     .card {
-      width: 80px;
-      height: 100px;
+      width: 60px;
+      height: 80px;
       background-color: #222;
       color: black;
-      font-size: 2rem;
+      font-size: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       border: 2px solid goldenrod;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       transition: transform 0.4s, background-color 0.3s;
     }
@@ -114,15 +155,15 @@
       transform: rotateY(180deg);
     }
     .bet-amounts {
-      margin-top: 15px;
+      margin-top: 10px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
     #result {
-      margin-top: 20px;
-      font-size: 1.2rem;
+      margin-top: 15px;
+      font-size: 1rem;
       color: white;
     }
     .shake {
@@ -166,9 +207,9 @@
     #welcomePopup .popup-content {
       background: black;
       border: 2px solid goldenrod;
-      padding: 25px;
-      border-radius: 12px;
-      max-width: 400px;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 350px;
       color: goldenrod;
       text-align: center;
       position: relative;
@@ -176,6 +217,7 @@
     #welcomePopup .popup-content h2 {
       color: skyblue;
       margin-top: 0;
+      font-size: 1.2rem;
     }
     #welcomePopup .popup-content .close {
       position: absolute;
@@ -184,39 +226,39 @@
       cursor: pointer;
       font-weight: bold;
       color: red;
-      font-size: 20px;
+      font-size: 18px;
     }
     #fruitGame {
       display: none;
     }
     .shoot-area {
       position: relative;
-      height: 400px;
-      border: 3px dashed goldenrod;
-      border-radius: 15px;
+      height: 250px;
+      border: 2px dashed goldenrod;
+      border-radius: 10px;
       background-color: #222;
       overflow: hidden;
-      margin-top: 20px;
+      margin-top: 15px;
     }
     .fruit {
       position: absolute;
-      font-size: 3.2em;
+      font-size: 2.5em;
       cursor: pointer;
       user-select: none;
       pointer-events: auto;
     }
     #fruitTargetDisplay {
-      font-size: 1.5em;
-      margin: 15px 0;
+      font-size: 1.2em;
+      margin: 10px 0;
       color: white;
     }
     #fruitScoreDisplay {
-      margin-top: 10px;
-      font-size: 1.2em;
+      margin-top: 8px;
+      font-size: 1em;
     }
     #fruitCountdown {
-      font-size: 1.3em;
-      margin-top: 10px;
+      font-size: 1.1em;
+      margin-top: 8px;
       color: gold;
     }
     #auth-container {
@@ -234,9 +276,9 @@
     .auth-form {
       background: black;
       border: 2px solid goldenrod;
-      padding: 30px;
-      border-radius: 15px;
-      width: 350px;
+      padding: 20px;
+      border-radius: 12px;
+      width: 300px;
       max-width: 90%;
       color: goldenrod;
     }
@@ -244,70 +286,76 @@
       text-align: center;
       margin-top: 0;
       color: skyblue;
+      font-size: 1.2rem;
     }
     .auth-form input {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
+      padding: 10px;
+      margin: 8px 0;
       border: 1px solid goldenrod;
-      border-radius: 8px;
+      border-radius: 6px;
       background: #222;
       color: white;
+      font-size: 0.9rem;
     }
     .auth-form button {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
+      padding: 10px;
+      margin: 8px 0;
       background: goldenrod;
       color: black;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
+      font-size: 0.9rem;
     }
     .auth-toggle {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 12px;
       color: #aaa;
       cursor: pointer;
+      font-size: 0.8rem;
     }
     .auth-toggle:hover {
       color: goldenrod;
     }
     #auth-tabs {
       display: flex;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
     #auth-tabs button {
       flex: 1;
-      padding: 10px;
+      padding: 8px;
       background: #333;
       color: goldenrod;
       border: none;
       border-bottom: 2px solid goldenrod;
+      font-size: 0.8rem;
     }
     #auth-tabs button:hover {
       background: #444;
     }
     #user-info {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 30px;
+      right: 5px;
       background: rgba(0, 0, 0, 0.7);
-      padding: 10px 15px;
-      border-radius: 20px;
+      padding: 8px 12px;
+      border-radius: 15px;
       color: goldenrod;
-      font-size: 14px;
+      font-size: 0.7rem;
       z-index: 1000;
     }
     #user-info button {
       background: goldenrod;
       color: black;
       border: none;
-      border-radius: 5px;
-      padding: 5px 10px;
-      margin-left: 10px;
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin-left: 8px;
       cursor: pointer;
+      font-size: 0.6rem;
     }
     #login-form, #signup-form {
       display: none;
@@ -315,9 +363,120 @@
     #login-form.active, #signup-form.active {
       display: block;
     }
+    
+    /* Admin Panel Styles */
+    #admin-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10002;
+      overflow-y: auto;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    #admin-panel h2 {
+      color: goldenrod;
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+    #admin-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .admin-section {
+      background: #111;
+      border: 1px solid goldenrod;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 15px;
+    }
+    .admin-section h3 {
+      color: skyblue;
+      margin-top: 0;
+      border-bottom: 1px solid goldenrod;
+      padding-bottom: 8px;
+      font-size: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.7rem;
+    }
+    th, td {
+      border: 1px solid goldenrod;
+      padding: 6px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: goldenrod;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    .admin-input-group {
+      display: flex;
+      margin-bottom: 8px;
+    }
+    .admin-input-group input {
+      flex: 1;
+      padding: 6px;
+      background: #222;
+      border: 1px solid goldenrod;
+      color: white;
+      margin-right: 5px;
+      font-size: 0.7rem;
+    }
+    .admin-input-group button {
+      background: goldenrod;
+      color: black;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 0.7rem;
+    }
+    #admin-link {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      background: goldenrod;
+      color: black;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
+  <!-- Marquee Banner -->
+  <div class="marquee">
+    <span>Welcome to USCash, Earn with Fun. We will add more features soon!</span>
+  </div>
+
   <!-- Firebase Auth UI -->
   <div id="auth-container">
     <div class="auth-form">
@@ -335,9 +494,10 @@
       </div>
       
       <div id="signup-form">
-        <input type="text" id="signup-name" placeholder="Name">
-        <input type="email" id="signup-email" placeholder="Email">
-        <input type="password" id="signup-password" placeholder="Password">
+        <input type="text" id="signup-name" placeholder="Full Name" required>
+        <input type="text" id="signup-phone" placeholder="Phone Number" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="password" id="signup-password" placeholder="Password (min 6 chars)" required>
         <button onclick="signupUser()">Create Account</button>
         <div class="auth-toggle" onclick="showAuthForm('login')">Already have an account? Login</div>
       </div>
@@ -347,6 +507,79 @@
   <div id="user-info" style="display:none;">
     <span id="user-name"></span> | Balance: Rs. <span id="user-balance"></span> | <button onclick="logoutUser()">Logout</button>
   </div>
+
+  <!-- Admin Panel -->
+  <div id="admin-panel">
+    <button id="admin-close" onclick="closeAdminPanel()">×</button>
+    <h2>USCash Admin Panel</h2>
+    
+    <div class="admin-section">
+      <h3>User Management</h3>
+      <div class="admin-input-group">
+        <input type="text" id="admin-search-user" placeholder="Search by email or name">
+        <button onclick="searchUsers()">Search</button>
+      </div>
+      <table id="users-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Balance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-list">
+          <!-- Users will be populated here -->
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="admin-section">
+      <h3>Balance Adjustment</h3>
+      <div class="admin-input-group">
+        <input type="text" id="adjust-user-id" placeholder="User ID" readonly>
+        <input type="number" id="adjust-amount" placeholder="Amount">
+        <button onclick="adjustUserBalance()">Adjust</button>
+      </div>
+      <div>
+        <label>
+          <input type="radio" name="adjust-type" value="add" checked> Add
+        </label>
+        <label>
+          <input type="radio" name="adjust-type" value="subtract"> Subtract
+        </label>
+        <label>
+          <input type="radio" name="adjust-type" value="set"> Set
+        </label>
+      </div>
+    </div>
+    
+    <div class="admin-section">
+      <h3>Transaction History</h3>
+      <div class="admin-input-group">
+        <input type="text" id="history-user-id" placeholder="User ID">
+        <button onclick="loadUserHistory()">Load History</button>
+      </div>
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>User</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Game</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody id="history-list">
+          <!-- History will be populated here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <button id="admin-link" onclick="toggleAdminPanel()" style="display:none;">🔧</button>
 
   <div id="particles-js"></div>
   <div id="welcomePopup">
@@ -372,9 +605,14 @@
   <div class="section">
     <h2>Select Game</h2>
     <div class="game-options">
-      <div class="gold-box" onclick="startCardGame()">🃏 Scratch Match</div>
-      <div class="gold-box" onclick="startFruitGame()">🍓 Fruit Shooting</div>
-      <div class="gold-box">🚧 Coming Soon</div>
+      <div class="gold-box" onclick="startCardGame()">
+        <div class="game-thumbnail">🃏</div>
+        <div>Scratch Match</div>
+      </div>
+      <div class="gold-box" onclick="startFruitGame()">
+        <div class="game-thumbnail">🍓</div>
+        <div>Fruit Shooting</div>
+      </div>
     </div>
   </div>
 
@@ -416,7 +654,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    // Firebase Configuration - REPLACE WITH YOUR ACTUAL CONFIG
+    // Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
       authDomain: "pakcashplay.firebaseapp.com",
@@ -442,6 +680,8 @@
     let balance = 1000;
     let selectedBet = null;
     let gameStarted = false;
+    let currentUserId = null;
+    const ADMIN_EMAIL = "kafe2999@gmail.com"; // Only this email can access admin panel
 
     function updateBalanceDisplay() {
       document.getElementById('balanceAmount').innerText = Math.floor(balance);
@@ -465,7 +705,8 @@
       
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          loadUserData(userCredential.user.uid);
+          currentUserId = userCredential.user.uid;
+          loadUserData(currentUserId);
         })
         .catch((error) => {
           alert("Login failed: " + error.message);
@@ -475,10 +716,11 @@
 
     function signupUser() {
       const name = document.getElementById('signup-name').value;
+      const phone = document.getElementById('signup-phone').value;
       const email = document.getElementById('signup-email').value;
       const password = document.getElementById('signup-password').value;
       
-      if (!name || !email || !password) {
+      if (!name || !phone || !email || !password) {
         alert("Please fill all fields");
         return;
       }
@@ -488,16 +730,32 @@
         return;
       }
       
-      auth.createUserWithEmailAndPassword(email, password)
+      // Check if email already exists
+      db.collection('users').where('email', '==', email).get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            throw new Error("An account with this email already exists");
+          }
+          
+          return auth.createUserWithEmailAndPassword(email, password);
+        })
         .then((userCredential) => {
-          return db.collection('users').doc(userCredential.user.uid).set({
+          currentUserId = userCredential.user.uid;
+          return db.collection('users').doc(currentUserId).set({
             name: name,
+            phone: phone,
+            email: email,
             balance: 1000,
+            isAdmin: email === ADMIN_EMAIL, // Only your email becomes admin
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           });
         })
         .then(() => {
-          loadUserData(auth.currentUser.uid);
+          // Record initial balance transaction
+          return recordTransaction(currentUserId, 'initial', 1000, 'system', 'Initial balance');
+        })
+        .then(() => {
+          loadUserData(currentUserId);
         })
         .catch((error) => {
           console.error("Signup error:", error);
@@ -510,7 +768,9 @@
         document.getElementById('auth-container').style.display = 'flex';
         document.getElementById('user-info').style.display = 'none';
         document.getElementById('balanceDisplay').style.display = 'none';
+        document.getElementById('admin-link').style.display = 'none';
         balance = 1000;
+        currentUserId = null;
         updateBalanceDisplay();
       });
     }
@@ -528,6 +788,11 @@
             document.getElementById('auth-container').style.display = 'none';
             document.getElementById('user-info').style.display = 'block';
             document.getElementById('balanceDisplay').style.display = 'block';
+            
+            // Show admin button if user is admin
+            if (userData.isAdmin) {
+              document.getElementById('admin-link').style.display = 'flex';
+            }
           }
         })
         .catch((error) => {
@@ -535,24 +800,249 @@
         });
     }
 
-    function updateUserBalance(userId, newBalance) {
+    function updateUserBalance(userId, newBalance, gameType = null, amount = 0, result = null) {
       return db.collection('users').doc(userId).update({
         balance: newBalance
+      }).then(() => {
+        // Record transaction if it's related to a game
+        if (gameType) {
+          const transactionType = result === 'win' ? 'win' : 'bet';
+          const description = result === 'win' ? `Won Rs. ${amount} in ${gameType}` : `Bet Rs. ${amount} in ${gameType}`;
+          return recordTransaction(userId, transactionType, amount, gameType, description);
+        }
+      });
+    }
+
+    function recordTransaction(userId, type, amount, game, description) {
+      return db.collection('transactions').add({
+        userId: userId,
+        type: type,
+        amount: amount,
+        game: game,
+        description: description,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
     }
 
     // Auth state listener
     auth.onAuthStateChanged((user) => {
       if (user) {
+        currentUserId = user.uid;
         loadUserData(user.uid);
       } else {
         document.getElementById('auth-container').style.display = 'flex';
         document.getElementById('user-info').style.display = 'none';
         document.getElementById('balanceDisplay').style.display = 'none';
+        document.getElementById('admin-link').style.display = 'none';
       }
     });
 
-    // Game Logic (remain unchanged from your original)
+    // Admin Panel Functions
+    function toggleAdminPanel() {
+      const panel = document.getElementById('admin-panel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+      if (panel.style.display === 'block') {
+        loadAllUsers();
+      }
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('admin-panel').style.display = 'none';
+    }
+
+    function loadAllUsers() {
+      db.collection('users').orderBy('createdAt', 'desc').limit(50).get()
+        .then((querySnapshot) => {
+          const usersList = document.getElementById('users-list');
+          usersList.innerHTML = '';
+          
+          querySnapshot.forEach((doc) => {
+            const user = doc.data();
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+              <td>${user.name || 'N/A'}</td>
+              <td>${user.email || 'N/A'}</td>
+              <td>${user.phone || 'N/A'}</td>
+              <td>${user.balance || 0}</td>
+              <td>
+                <button onclick="selectUserForAdjustment('${doc.id}', '${user.name}', ${user.balance || 0})">Adjust</button>
+                <button onclick="loadUserHistory('${doc.id}', '${user.name}')">History</button>
+              </td>
+            `;
+            
+            usersList.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error loading users:", error);
+        });
+    }
+
+    function searchUsers() {
+      const searchTerm = document.getElementById('admin-search-user').value.toLowerCase();
+      
+      if (!searchTerm) {
+        loadAllUsers();
+        return;
+      }
+      
+      db.collection('users').get()
+        .then((querySnapshot) => {
+          const usersList = document.getElementById('users-list');
+          usersList.innerHTML = '';
+          let found = false;
+          
+          querySnapshot.forEach((doc) => {
+            const user = doc.data();
+            const userName = user.name ? user.name.toLowerCase() : '';
+            const userEmail = user.email ? user.email.toLowerCase() : '';
+            
+            if (userName.includes(searchTerm) || userEmail.includes(searchTerm)) {
+              found = true;
+              const row = document.createElement('tr');
+              
+              row.innerHTML = `
+                <td>${user.name || 'N/A'}</td>
+                <td>${user.email || 'N/A'}</td>
+                <td>${user.phone || 'N/A'}</td>
+                <td>${user.balance || 0}</td>
+                <td>
+                  <button onclick="selectUserForAdjustment('${doc.id}', '${user.name}', ${user.balance || 0})">Adjust</button>
+                  <button onclick="loadUserHistory('${doc.id}', '${user.name}')">History</button>
+                </td>
+              `;
+              
+              usersList.appendChild(row);
+            }
+          });
+          
+          if (!found) {
+            usersList.innerHTML = '<tr><td colspan="5">No users found</td></tr>';
+          }
+        })
+        .catch((error) => {
+          console.error("Error searching users:", error);
+        });
+    }
+
+    function selectUserForAdjustment(userId, userName, currentBalance) {
+      document.getElementById('adjust-user-id').value = userId;
+      document.getElementById('adjust-amount').placeholder = `Current: ${currentBalance}`;
+      document.getElementById('adjust-amount').focus();
+    }
+
+    function adjustUserBalance() {
+      const userId = document.getElementById('adjust-user-id').value;
+      const amount = parseFloat(document.getElementById('adjust-amount').value);
+      const adjustType = document.querySelector('input[name="adjust-type"]:checked').value;
+      
+      if (!userId) {
+        alert("Please select a user first");
+        return;
+      }
+      
+      if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid positive amount");
+        return;
+      }
+      
+      db.collection('users').doc(userId).get()
+        .then((doc) => {
+          if (!doc.exists) {
+            alert("User not found");
+            return;
+          }
+          
+          const user = doc.data();
+          let newBalance = user.balance || 0;
+          let transactionType = 'adjustment';
+          let description = '';
+          
+          switch (adjustType) {
+            case 'add':
+              newBalance += amount;
+              description = `Admin added Rs. ${amount}`;
+              break;
+            case 'subtract':
+              newBalance = Math.max(0, newBalance - amount);
+              description = `Admin subtracted Rs. ${amount}`;
+              break;
+            case 'set':
+              newBalance = amount;
+              description = `Admin set balance to Rs. ${amount}`;
+              break;
+          }
+          
+          return db.collection('users').doc(userId).update({
+            balance: newBalance
+          }).then(() => {
+            return recordTransaction(userId, 'admin', amount, 'system', description);
+          });
+        })
+        .then(() => {
+          alert("Balance updated successfully");
+          document.getElementById('adjust-amount').value = '';
+          loadAllUsers();
+          
+          // If adjusting current user's balance, update display
+          if (userId === currentUserId) {
+            loadUserData(currentUserId);
+          }
+        })
+        .catch((error) => {
+          console.error("Error adjusting balance:", error);
+          alert("Failed to update balance: " + error.message);
+        });
+    }
+
+    function loadUserHistory(userId, userName = '') {
+      if (!userId) {
+        userId = document.getElementById('history-user-id').value;
+        if (!userId) {
+          alert("Please enter a user ID");
+          return;
+        }
+      }
+      
+      db.collection('transactions')
+        .where('userId', '==', userId)
+        .orderBy('timestamp', 'desc')
+        .limit(50)
+        .get()
+        .then((querySnapshot) => {
+          const historyList = document.getElementById('history-list');
+          historyList.innerHTML = '';
+          
+          if (querySnapshot.empty) {
+            historyList.innerHTML = '<tr><td colspan="6">No transactions found</td></tr>';
+            return;
+          }
+          
+          querySnapshot.forEach((doc) => {
+            const transaction = doc.data();
+            const date = transaction.timestamp ? transaction.timestamp.toDate().toLocaleString() : 'N/A';
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${date}</td>
+              <td>${userName || userId}</td>
+              <td>${transaction.type}</td>
+              <td>${transaction.amount}</td>
+              <td>${transaction.game || 'N/A'}</td>
+              <td>${transaction.description || 'N/A'}</td>
+            `;
+            
+            historyList.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error loading history:", error);
+          alert("Failed to load transaction history");
+        });
+    }
+
+    // Game Logic
     let icons = ['🐄', '🐔', '🐱'];
     let cardData = [];
     let flippedCards = [];
@@ -659,11 +1149,16 @@
       const grid = document.getElementById('cardGrid');
 
       if (won) {
-        balance += selectedBet;
-        result.innerText = `🎉 You won! Rs. ${selectedBet * 2} added.`;
+        const winAmount = selectedBet * 2;
+        balance += winAmount;
+        result.innerText = `🎉 You won! Rs. ${winAmount} added.`;
         grid.classList.add('glow');
         document.getElementById("particles-js").style.display = "block";
         setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+        
+        // Record win transaction
+        updateUserBalance(currentUserId, balance, 'scratch', winAmount, 'win')
+          .catch(error => console.error("Error recording win:", error));
       } else {
         const deduction = selectedBet * 0.7;
         if (balance - deduction < 0) {
@@ -671,16 +1166,15 @@
         } else {
           balance -= deduction;
           result.innerText = `❌ You lost! Rs. ${deduction} deducted.`;
+          
+          // Record bet transaction
+          updateUserBalance(currentUserId, balance, 'scratch', selectedBet, 'loss')
+            .catch(error => console.error("Error recording loss:", error));
         }
         grid.classList.add('shake');
       }
 
       updateBalanceDisplay();
-      
-      if (auth.currentUser) {
-        updateUserBalance(auth.currentUser.uid, balance)
-          .catch(error => console.error("Error updating balance:", error));
-      }
 
       setTimeout(() => {
         result.innerText = '';
@@ -724,7 +1218,8 @@
       const fruit = document.createElement("div");
       fruit.classList.add("fruit");
 
-      const isTarget = Math.random() < 0.60;
+      // Changed probability from 60% to 58%
+      const isTarget = Math.random() < 0.58;
       const color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
       fruit.style.color = color;
       fruit.innerText = fruits[color];
@@ -749,6 +1244,7 @@
       shootArea.appendChild(fruit);
 
       let top = -30;
+      // Increased fall speed by 1.5x (from 90ms to 60ms interval)
       const fallSpeed = setInterval(() => {
         top += 10;
         fruit.style.top = `${top}px`;
@@ -756,7 +1252,7 @@
           clearInterval(fallSpeed);
           fruit.remove();
         }
-      }, 90);
+      }, 60); // Changed from 90 to 60 for faster falling
     }
 
     function startFruitGame() {
@@ -779,13 +1275,16 @@
         return;
       }
 
-      balance -= amount;
-      updateBalanceDisplay();
-      
-      if (auth.currentUser) {
-        updateUserBalance(auth.currentUser.uid, balance)
-          .catch(error => console.error("Error updating balance:", error));
-      }
+      // Record bet transaction
+      updateUserBalance(currentUserId, balance - amount, 'fruit', amount, 'bet')
+        .then(() => {
+          balance -= amount;
+          updateBalanceDisplay();
+        })
+        .catch(error => {
+          console.error("Error recording bet:", error);
+          return;
+        });
 
       document.getElementById("shootArea").innerHTML = "";
       clearInterval(fruitGameInterval);
@@ -822,17 +1321,17 @@
         let winAmount = 0;
         if (fruitScore >= fruitSelectedBet) {
           winAmount = fruitSelectedBet * 2;
-          balance += winAmount;
-          alert(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${fruitSelectedBet}).\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+          
+          // Record win transaction
+          updateUserBalance(currentUserId, balance + winAmount, 'fruit', winAmount, 'win')
+            .then(() => {
+              balance += winAmount;
+              updateBalanceDisplay();
+              alert(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${fruitSelectedBet}).\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+            })
+            .catch(error => console.error("Error recording win:", error));
         } else {
           alert(`❌ Game Over! You scored ${fruitScore} points (Target: ${fruitSelectedBet}).\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`);
-        }
-
-        updateBalanceDisplay();
-        
-        if (auth.currentUser) {
-          updateUserBalance(auth.currentUser.uid, balance)
-            .catch(error => console.error("Error updating balance:", error));
         }
 
         document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
