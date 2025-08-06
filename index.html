@@ -566,6 +566,12 @@
       border-radius: 8px;
       text-align: center;
     }
+    .error-message {
+      color: red;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -596,9 +602,13 @@
       
       <div id="signup-form">
         <input type="text" id="signup-name" placeholder="Full Name" required>
+        <div class="error-message" id="name-error"></div>
         <input type="text" id="signup-phone" placeholder="Phone Number" required>
+        <div class="error-message" id="phone-error"></div>
         <input type="email" id="signup-email" placeholder="Email" required>
+        <div class="error-message" id="email-error"></div>
         <input type="password" id="signup-password" placeholder="Password (min 6 chars)" required>
+        <div class="error-message" id="password-error"></div>
         <button onclick="signupUser()">Create Account</button>
         <div class="auth-toggle" onclick="showAuthForm('login')">Already have an account? Login</div>
       </div>
@@ -781,6 +791,12 @@
       document.getElementById('signup-form').classList.remove('active');
       document.getElementById('forgot-password-form').style.display = 'none';
       
+      // Clear error messages when switching forms
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.style.display = 'none';
+        el.textContent = '';
+      });
+      
       if (formType === 'login') {
         document.getElementById('login-form').classList.add('active');
       } else if (formType === 'signup') {
@@ -789,6 +805,18 @@
         document.getElementById('forgot-password-form').style.display = 'block';
         document.getElementById('login-form').classList.remove('active');
       }
+    }
+
+    function showError(fieldId, message) {
+      const errorElement = document.getElementById(`${fieldId}-error`);
+      errorElement.textContent = message;
+      errorElement.style.display = 'block';
+    }
+
+    function clearError(fieldId) {
+      const errorElement = document.getElementById(`${fieldId}-error`);
+      errorElement.textContent = '';
+      errorElement.style.display = 'none';
     }
 
     async function loginUser() {
@@ -908,18 +936,48 @@
       const email = document.getElementById('signup-email').value;
       const password = document.getElementById('signup-password').value;
       
-      if (!name || !phone || !email || !password) {
-        alert("Please fill all fields");
-        return;
+      // Clear previous errors
+      clearError('name');
+      clearError('phone');
+      clearError('email');
+      clearError('password');
+      
+      // Validate inputs
+      let isValid = true;
+      
+      if (!name) {
+        showError('name', 'Please enter your full name');
+        isValid = false;
       }
       
-      if (password.length < 6) {
-        alert("Password should be at least 6 characters");
-        return;
+      if (!phone) {
+        showError('phone', 'Please enter your phone number');
+        isValid = false;
+      } else if (!/^\d+$/.test(phone)) {
+        showError('phone', 'Phone number should contain only digits');
+        isValid = false;
       }
+      
+      if (!email) {
+        showError('email', 'Please enter your email');
+        isValid = false;
+      } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        showError('email', 'Please enter a valid email address');
+        isValid = false;
+      }
+      
+      if (!password) {
+        showError('password', 'Please enter a password');
+        isValid = false;
+      } else if (password.length < 6) {
+        showError('password', 'Password should be at least 6 characters');
+        isValid = false;
+      }
+      
+      if (!isValid) return;
       
       try {
-        // Check if email already exists
+        // First check if email already exists in Firestore
         const q = firebase.firestoreFunctions.query(
           firebase.firestoreFunctions.collection(firebase.db, "users"),
           firebase.firestoreFunctions.where("email", "==", email)
@@ -927,9 +985,11 @@
         const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
         
         if (!querySnapshot.empty) {
-          throw new Error("An account with this email already exists");
+          showError('email', 'An account with this email already exists');
+          return;
         }
         
+        // Create auth account
         const userCredential = await firebase.authFunctions.createUserWithEmailAndPassword(
           firebase.auth, 
           email, 
@@ -961,7 +1021,12 @@
         await updateUIAfterLogin(userCredential.user);
       } catch (error) {
         console.error("Signup error:", error);
-        alert("Signup failed: " + error.message);
+        
+        if (error.code === 'auth/email-already-in-use') {
+          showError('email', 'This email is already registered. Please use a different email or login.');
+        } else {
+          alert("Signup failed: " + error.message);
+        }
       }
     }
 
