@@ -482,6 +482,18 @@
       justify-content: center;
       box-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
+    
+    /* Coming Soon Box */
+    #comingSoonBox {
+      display: none;
+      margin: 20px auto;
+      padding: 15px;
+      max-width: 300px;
+      background: #111;
+      border: 2px solid goldenrod;
+      border-radius: 8px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -614,10 +626,16 @@
   <div id="balanceDisplay" style="display:none;">Balance: Rs. <span id="balanceAmount">1000</span></div>
   <div class="nav">
     <a href="#">Home</a>
-    <a href="#">Deposit</a>
-    <a href="#">Withdraw</a>
-    <a href="#">VIP</a>
+    <a href="#" onclick="showComingSoon('deposit')">Deposit</a>
+    <a href="#" onclick="showComingSoon('withdraw')">Withdraw</a>
+    <a href="#" onclick="checkVIPAccess()">VIP</a>
     <a href="#">More</a>
+  </div>
+
+  <!-- Coming Soon Box -->
+  <div id="comingSoonBox">
+    <h3>Coming Soon</h3>
+    <p>This feature is under development and will be available soon.</p>
   </div>
 
   <div class="section">
@@ -730,6 +748,11 @@
       
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
+          // Check if email is verified
+          if (!userCredential.user.emailVerified) {
+            alert("Please verify your email address before accessing the platform. Check your inbox for the verification link.");
+            return auth.signOut();
+          }
           currentUserId = userCredential.user.uid;
           loadUserData(currentUserId);
         })
@@ -765,6 +788,12 @@
           return auth.createUserWithEmailAndPassword(email, password);
         })
         .then((userCredential) => {
+          // Send email verification
+          return userCredential.user.sendEmailVerification().then(() => {
+            return userCredential;
+          });
+        })
+        .then((userCredential) => {
           currentUserId = userCredential.user.uid;
           return db.collection('users').doc(currentUserId).set({
             name: name,
@@ -772,6 +801,7 @@
             email: email,
             balance: 1000,
             isAdmin: email === ADMIN_EMAIL, // Only your email becomes admin
+            emailVerified: false,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           });
         })
@@ -780,7 +810,8 @@
           return recordTransaction(currentUserId, 'initial', 1000, 'system', 'Initial balance');
         })
         .then(() => {
-          loadUserData(currentUserId);
+          alert("Account created successfully! Please check your email for verification link.");
+          showAuthForm('login');
         })
         .catch((error) => {
           console.error("Signup error:", error);
@@ -814,9 +845,11 @@
             document.getElementById('user-info').style.display = 'block';
             document.getElementById('balanceDisplay').style.display = 'block';
             
-            // Show admin button if user is admin
-            if (userData.isAdmin) {
+            // Show admin button only if user is admin with specific email
+            if (userData.isAdmin && userData.email === ADMIN_EMAIL) {
               document.getElementById('admin-link').style.display = 'flex';
+            } else {
+              document.getElementById('admin-link').style.display = 'none';
             }
           }
         })
@@ -852,6 +885,13 @@
     // Auth state listener
     auth.onAuthStateChanged((user) => {
       if (user) {
+        // Check if email is verified
+        if (!user.emailVerified) {
+          alert("Please verify your email address before accessing the platform. Check your inbox for the verification link.");
+          auth.signOut();
+          return;
+        }
+        
         currentUserId = user.uid;
         loadUserData(user.uid);
       } else {
@@ -1064,6 +1104,45 @@
         .catch((error) => {
           console.error("Error loading history:", error);
           alert("Failed to load transaction history");
+        });
+    }
+
+    // Coming Soon and VIP Functions
+    function showComingSoon(section) {
+      const box = document.getElementById('comingSoonBox');
+      box.style.display = 'block';
+      box.querySelector('h3').textContent = `${section.charAt(0).toUpperCase() + section.slice(1)} Coming Soon`;
+      box.querySelector('p').textContent = 'This feature is under development and will be available soon.';
+      
+      // Hide after 3 seconds
+      setTimeout(() => {
+        box.style.display = 'none';
+      }, 3000);
+    }
+
+    function checkVIPAccess() {
+      if (!auth.currentUser) {
+        alert("Please login to access VIP section");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      // Check if user is admin (kafe2999@gmail.com)
+      db.collection('users').doc(currentUserId).get()
+        .then((doc) => {
+          if (doc.exists) {
+            const userData = doc.data();
+            if (userData.email === ADMIN_EMAIL) {
+              // Show admin panel
+              toggleAdminPanel();
+            } else {
+              showComingSoon('VIP');
+            }
+          }
+        })
+        .catch(error => {
+          console.error("Error checking VIP access:", error);
+          alert("Error checking access. Please try again.");
         });
     }
 
