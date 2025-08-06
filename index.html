@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>USCash 🎮</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+  <!-- Add Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -216,9 +220,136 @@
       margin-top: 10px;
       color: gold;
     }
+    /* Firebase Auth UI Styles */
+    #auth-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10001;
+    }
+    .auth-form {
+      background: black;
+      border: 2px solid goldenrod;
+      padding: 30px;
+      border-radius: 15px;
+      width: 350px;
+      max-width: 90%;
+      color: goldenrod;
+    }
+    .auth-form h2 {
+      text-align: center;
+      margin-top: 0;
+      color: skyblue;
+    }
+    .auth-form input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid goldenrod;
+      border-radius: 8px;
+      background: #222;
+      color: white;
+    }
+    .auth-form button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: goldenrod;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .auth-toggle {
+      text-align: center;
+      margin-top: 15px;
+      color: #aaa;
+      cursor: pointer;
+    }
+    .auth-toggle:hover {
+      color: goldenrod;
+    }
+    #auth-tabs {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    #auth-tabs button {
+      flex: 1;
+      padding: 10px;
+      background: #333;
+      color: goldenrod;
+      border: none;
+      border-bottom: 2px solid goldenrod;
+    }
+    #auth-tabs button:hover {
+      background: #444;
+    }
+    #user-info {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 15px;
+      border-radius: 20px;
+      color: goldenrod;
+      font-size: 14px;
+      z-index: 1000;
+    }
+    #user-info button {
+      background: goldenrod;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #login-form, #signup-form {
+      display: none;
+    }
+    #login-form.active, #signup-form.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
+  <!-- Firebase Auth UI -->
+  <div id="auth-container">
+    <div class="auth-form">
+      <h2>USCash Login</h2>
+      <div id="auth-tabs">
+        <button onclick="showAuthForm('login')">Login</button>
+        <button onclick="showAuthForm('signup')">Sign Up</button>
+      </div>
+      
+      <div id="login-form" class="active">
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button onclick="loginUser()">Login</button>
+        <div class="auth-toggle" onclick="showAuthForm('signup')">Don't have an account? Sign up</div>
+      </div>
+      
+      <div id="signup-form">
+        <input type="text" id="signup-name" placeholder="Name">
+        <input type="email" id="signup-email" placeholder="Email">
+        <input type="password" id="signup-password" placeholder="Password">
+        <button onclick="signupUser()">Create Account</button>
+        <div class="auth-toggle" onclick="showAuthForm('login')">Already have an account? Login</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="user-info" style="display:none;">
+    <span id="user-name"></span> | Balance: Rs. <span id="user-balance"></span> | <button onclick="logoutUser()">Logout</button>
+  </div>
+
   <div id="particles-js"></div>
   <div id="welcomePopup">
     <div class="popup-content">
@@ -231,7 +362,7 @@
   </div>
 
   <h1>USCash 🎮</h1>
-  <div id="balanceDisplay">Balance: Rs. <span id="balanceAmount">1000</span></div>
+  <div id="balanceDisplay" style="display:none;">Balance: Rs. <span id="balanceAmount">1000</span></div>
   <div class="nav">
     <a href="#">Home</a>
     <a href="#">Deposit</a>
@@ -287,6 +418,21 @@
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
     // مشترکہ بیلنس سسٹم
     let balance = 1000;
     let selectedBet = null;
@@ -294,7 +440,94 @@
 
     function updateBalanceDisplay() {
       document.getElementById('balanceAmount').innerText = Math.floor(balance);
+      document.getElementById('user-balance').innerText = Math.floor(balance);
     }
+
+    // Firebase Auth Functions
+    function showAuthForm(formType) {
+      document.getElementById('login-form').classList.toggle('active', formType === 'login');
+      document.getElementById('signup-form').classList.toggle('active', formType === 'signup');
+    }
+
+    function loginUser() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          loadUserData(userCredential.user.uid);
+        })
+        .catch((error) => {
+          alert("Login failed: " + error.message);
+        });
+    }
+
+    function signupUser() {
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Create user document with initial balance
+          return db.collection('users').doc(userCredential.user.uid).set({
+            name: name,
+            balance: 1000, // Starting balance
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        })
+        .then(() => {
+          loadUserData(auth.currentUser.uid);
+        })
+        .catch((error) => {
+          alert("Signup failed: " + error.message);
+        });
+    }
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        document.getElementById('auth-container').style.display = 'flex';
+        document.getElementById('user-info').style.display = 'none';
+        document.getElementById('balanceDisplay').style.display = 'none';
+        balance = 1000;
+        updateBalanceDisplay();
+      });
+    }
+
+    function loadUserData(userId) {
+      db.collection('users').doc(userId).get()
+        .then((doc) => {
+          if (doc.exists) {
+            const userData = doc.data();
+            document.getElementById('user-name').textContent = userData.name;
+            document.getElementById('user-balance').textContent = userData.balance;
+            balance = userData.balance;
+            updateBalanceDisplay();
+            
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('user-info').style.display = 'block';
+            document.getElementById('balanceDisplay').style.display = 'block';
+          }
+        });
+    }
+
+    // Update balance in Firestore
+    function updateUserBalance(userId, newBalance) {
+      return db.collection('users').doc(userId).update({
+        balance: newBalance
+      });
+    }
+
+    // Auth state listener
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        loadUserData(user.uid);
+      } else {
+        document.getElementById('auth-container').style.display = 'flex';
+        document.getElementById('user-info').style.display = 'none';
+        document.getElementById('balanceDisplay').style.display = 'none';
+      }
+    });
 
     // اسکراچ گیم کا کوڈ
     let icons = ['🐄', '🐔', '🐱'];
@@ -306,6 +539,19 @@
 
     function selectBet(amount) {
       if (gameStarted) return;
+      
+      // Check if user is logged in
+      if (!auth.currentUser) {
+        alert("Please login to place bets");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      if (balance < amount) {
+        alert("Insufficient balance!");
+        return;
+      }
+      
       selectedBet = amount;
       document.querySelectorAll('.bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
@@ -409,6 +655,12 @@
       }
 
       updateBalanceDisplay();
+      
+      // Save to Firebase if user is logged in
+      if (auth.currentUser) {
+        updateUserBalance(auth.currentUser.uid, balance)
+          .catch(error => console.error("Error updating balance:", error));
+      }
 
       setTimeout(() => {
         result.innerText = '';
@@ -495,16 +747,29 @@
     }
 
     function startFruitRound(amount) {
-      if (fruitGameStarted || balance < amount) {
-        if (balance < amount) {
-          alert("Insufficient balance! Please deposit more to play.");
-        }
+      if (fruitGameStarted) return;
+      
+      // Check if user is logged in
+      if (!auth.currentUser) {
+        alert("Please login to play");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      if (balance < amount) {
+        alert("Insufficient balance! Please deposit more to play.");
         return;
       }
 
       // Deduct the bet amount at start
       balance -= amount;
       updateBalanceDisplay();
+      
+      // Save to Firebase
+      if (auth.currentUser) {
+        updateUserBalance(auth.currentUser.uid, balance)
+          .catch(error => console.error("Error updating balance:", error));
+      }
 
       document.getElementById("shootArea").innerHTML = "";
       clearInterval(fruitGameInterval);
@@ -548,6 +813,12 @@
         }
 
         updateBalanceDisplay();
+        
+        // Save to Firebase
+        if (auth.currentUser) {
+          updateUserBalance(auth.currentUser.uid, balance)
+            .catch(error => console.error("Error updating balance:", error));
+        }
 
         document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
           btn.style.pointerEvents = "auto";
@@ -576,26 +847,5 @@
       "retina_detect": true
     });
   </script>
-  <!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-firestore.js"></script>
-
-<script>
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
-    authDomain: "pakcashplay.firebaseapp.com",
-    projectId: "pakcashplay",
-    storageBucket: "pakcashplay.firebasestorage.app",
-    messagingSenderId: "551195851632",
-    appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
-  };
-
-  // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-</script>
 </body>
 </html>
