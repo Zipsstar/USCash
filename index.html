@@ -381,12 +381,6 @@
     #forgot-password-form {
       display: none;
     }
-    #verify-code-form {
-      display: none;
-    }
-    #reset-password-form {
-      display: none;
-    }
     .password-reset-step {
       display: none;
     }
@@ -566,28 +560,10 @@
       <!-- Forgot Password Form -->
       <div id="forgot-password-form" class="password-reset-step">
         <h3>Reset Password</h3>
-        <p>Enter your email to receive a verification code</p>
+        <p>Enter your email to receive a password reset link</p>
         <input type="email" id="reset-email" placeholder="Your email">
-        <button onclick="sendResetCode()">Send Verification Code</button>
+        <button onclick="sendResetEmail()">Send Reset Link</button>
         <div class="password-reset-back" onclick="showAuthForm('login')">Back to Login</div>
-      </div>
-      
-      <!-- Verify Code Form -->
-      <div id="verify-code-form" class="password-reset-step">
-        <h3>Verify Code</h3>
-        <p>Enter the verification code sent to your email</p>
-        <input type="text" id="verification-code" placeholder="Verification code">
-        <button onclick="verifyResetCode()">Verify Code</button>
-        <div class="password-reset-back" onclick="showPasswordReset('forgot')">Back</div>
-      </div>
-      
-      <!-- Reset Password Form -->
-      <div id="reset-password-form" class="password-reset-step">
-        <h3>Create New Password</h3>
-        <input type="password" id="new-password" placeholder="New password (min 6 chars)">
-        <input type="password" id="confirm-password" placeholder="Confirm new password">
-        <button onclick="updatePassword()">Update Password</button>
-        <div class="password-reset-back" onclick="showPasswordReset('verify')">Back</div>
       </div>
     </div>
   </div>
@@ -782,7 +758,6 @@
     let gameStarted = false;
     let currentUserId = null;
     const ADMIN_EMAIL = "kafe2999@gmail.com"; // Only this email can access admin panel
-    let passwordResetEmail = ''; // Store email for password reset flow
 
     function updateBalanceDisplay() {
       document.getElementById('balanceAmount').innerText = Math.floor(balance);
@@ -794,10 +769,8 @@
       document.getElementById('login-form').classList.toggle('active', formType === 'login');
       document.getElementById('signup-form').classList.toggle('active', formType === 'signup');
       
-      // Hide all password reset forms
-      document.querySelectorAll('.password-reset-step').forEach(step => {
-        step.classList.remove('active');
-      });
+      // Hide password reset form
+      document.getElementById('forgot-password-form').classList.remove('active');
     }
 
     function showPasswordReset(step) {
@@ -805,19 +778,27 @@
       document.getElementById('login-form').classList.remove('active');
       document.getElementById('signup-form').classList.remove('active');
       
-      // Hide all password reset steps
-      document.querySelectorAll('.password-reset-step').forEach(stepEl => {
-        stepEl.classList.remove('active');
-      });
+      // Show the forgot password form
+      document.getElementById('forgot-password-form').classList.add('active');
+    }
+
+    function sendResetEmail() {
+      const email = document.getElementById('reset-email').value;
       
-      // Show the requested step
-      if (step === 'forgot') {
-        document.getElementById('forgot-password-form').classList.add('active');
-      } else if (step === 'verify') {
-        document.getElementById('verify-code-form').classList.add('active');
-      } else if (step === 'reset') {
-        document.getElementById('reset-password-form').classList.add('active');
+      if (!email) {
+        alert("Please enter your email");
+        return;
       }
+      
+      auth.sendPasswordResetEmail(email)
+        .then(() => {
+          alert("Password reset email sent. Please check your inbox for the reset link.");
+          showAuthForm('login'); // Return to login after sending
+        })
+        .catch((error) => {
+          console.error("Error sending reset email:", error);
+          alert("Error sending reset email: " + error.message);
+        });
     }
 
     function loginUser() {
@@ -912,70 +893,6 @@
         currentUserId = null;
         updateBalanceDisplay();
       });
-    }
-
-    // Password Reset Functions
-    function sendResetCode() {
-      const email = document.getElementById('reset-email').value;
-      
-      if (!email) {
-        alert("Please enter your email");
-        return;
-      }
-      
-      auth.sendPasswordResetEmail(email)
-        .then(() => {
-          passwordResetEmail = email;
-          alert("Password reset email sent. Please check your inbox for the verification code.");
-          showPasswordReset('verify');
-        })
-        .catch(error => {
-          console.error("Error sending reset email:", error);
-          alert("Error sending reset email: " + error.message);
-        });
-    }
-
-    function verifyResetCode() {
-      // In a real implementation, you would verify the code here
-      // For Firebase, we don't actually verify the code on the client side
-      // since the reset link already contains the verification token
-      // So we'll just proceed to the password reset step
-      showPasswordReset('reset');
-    }
-
-    function updatePassword() {
-      const newPassword = document.getElementById('new-password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      
-      if (!newPassword || !confirmPassword) {
-        alert("Please fill in both password fields");
-        return;
-      }
-      
-      if (newPassword.length < 6) {
-        alert("Password should be at least 6 characters");
-        return;
-      }
-      
-      if (newPassword !== confirmPassword) {
-        alert("Passwords don't match");
-        return;
-      }
-      
-      // In a real implementation, you would confirm the password reset here
-      // For Firebase, we would typically handle this through the reset link
-      // So this is just a simulation of the flow
-      
-      // Sign in the user with their email and new password
-      auth.signInWithEmailAndPassword(passwordResetEmail, newPassword)
-        .then(() => {
-          alert("Password updated successfully! Please login with your new password.");
-          showAuthForm('login');
-        })
-        .catch(error => {
-          console.error("Error updating password:", error);
-          alert("Error updating password: " + error.message);
-        });
     }
 
     function loadUserData(userId) {
