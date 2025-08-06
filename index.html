@@ -576,5 +576,26 @@
       "retina_detect": true
     });
   </script>
+  <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-firestore.js"></script>
+
+<script>
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
+    authDomain: "pakcashplay.firebaseapp.com",
+    projectId: "pakcashplay",
+    storageBucket: "pakcashplay.firebasestorage.app",
+    messagingSenderId: "551195851632",
+    appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
 </body>
 </html>
