@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>USCash 🎮</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
-  <!-- Add Firebase SDK -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
@@ -186,7 +186,6 @@
       color: red;
       font-size: 20px;
     }
-    /* فروٹ شوٹر گیم کے لیے اضافی سٹائلز */
     #fruitGame {
       display: none;
     }
@@ -220,7 +219,6 @@
       margin-top: 10px;
       color: gold;
     }
-    /* Firebase Auth UI Styles */
     #auth-container {
       position: fixed;
       top: 0;
@@ -418,22 +416,29 @@
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    // Firebase Configuration
+    // Firebase Configuration - REPLACE WITH YOUR ACTUAL CONFIG
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
+      authDomain: "pakcashplay.firebaseapp.com",
+      projectId: "pakcashplay",
+      storageBucket: "pakcashplay.appspot.com",
+      messagingSenderId: "551195851632",
+      appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
     };
     
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // مشترکہ بیلنس سسٹم
+    // Check Firebase initialization
+    if (!app) {
+      console.error("Firebase failed to initialize!");
+    } else {
+      console.log("Firebase initialized successfully");
+    }
+
+    // Game State
     let balance = 1000;
     let selectedBet = null;
     let gameStarted = false;
@@ -453,12 +458,18 @@
       const email = document.getElementById('login-email').value;
       const password = document.getElementById('login-password').value;
       
+      if (!email || !password) {
+        alert("Please enter both email and password");
+        return;
+      }
+      
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           loadUserData(userCredential.user.uid);
         })
         .catch((error) => {
           alert("Login failed: " + error.message);
+          console.error("Login error:", error);
         });
     }
 
@@ -467,12 +478,21 @@
       const email = document.getElementById('signup-email').value;
       const password = document.getElementById('signup-password').value;
       
+      if (!name || !email || !password) {
+        alert("Please fill all fields");
+        return;
+      }
+      
+      if (password.length < 6) {
+        alert("Password should be at least 6 characters");
+        return;
+      }
+      
       auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Create user document with initial balance
           return db.collection('users').doc(userCredential.user.uid).set({
             name: name,
-            balance: 1000, // Starting balance
+            balance: 1000,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           });
         })
@@ -480,6 +500,7 @@
           loadUserData(auth.currentUser.uid);
         })
         .catch((error) => {
+          console.error("Signup error:", error);
           alert("Signup failed: " + error.message);
         });
     }
@@ -508,10 +529,12 @@
             document.getElementById('user-info').style.display = 'block';
             document.getElementById('balanceDisplay').style.display = 'block';
           }
+        })
+        .catch((error) => {
+          console.error("Error loading user data:", error);
         });
     }
 
-    // Update balance in Firestore
     function updateUserBalance(userId, newBalance) {
       return db.collection('users').doc(userId).update({
         balance: newBalance
@@ -529,7 +552,7 @@
       }
     });
 
-    // اسکراچ گیم کا کوڈ
+    // Game Logic (remain unchanged from your original)
     let icons = ['🐄', '🐔', '🐱'];
     let cardData = [];
     let flippedCards = [];
@@ -540,7 +563,6 @@
     function selectBet(amount) {
       if (gameStarted) return;
       
-      // Check if user is logged in
       if (!auth.currentUser) {
         alert("Please login to place bets");
         document.getElementById('auth-container').style.display = 'flex';
@@ -598,7 +620,6 @@
       });
 
       setTimeout(() => {
-        // Shuffle
         cardData.sort(() => Math.random() - 0.5);
         grid.innerHTML = '';
         cardData.forEach(data => {
@@ -656,7 +677,6 @@
 
       updateBalanceDisplay();
       
-      // Save to Firebase if user is logged in
       if (auth.currentUser) {
         updateUserBalance(auth.currentUser.uid, balance)
           .catch(error => console.error("Error updating balance:", error));
@@ -672,7 +692,6 @@
       }, 2500);
     }
 
-    // فروٹ شوٹر گیم کا اپڈیٹ شدہ کوڈ
     const colors = ["red", "green", "yellow"];
     const fruits = {
       red: "🍎",
@@ -680,11 +699,11 @@
       yellow: "🍋"
     };
     const durations = {
-      20: 10000,  // 20 روپے = 10 سیکنڈ
-      50: 25000,  // 50 روپے = 25 سیکنڈ
-      100: 50000, // 100 روپے = 50 سیکنڈ
-      150: 75000, // 150 روپے = 75 سیکنڈ
-      200: 100000 // 200 روپے = 100 سیکنڈ
+      20: 10000,
+      50: 25000,
+      100: 50000,
+      150: 75000,
+      200: 100000
     };
 
     let targetColor = "";
@@ -705,7 +724,7 @@
       const fruit = document.createElement("div");
       fruit.classList.add("fruit");
 
-      const isTarget = Math.random() < 0.60; // 60% chance for target fruit
+      const isTarget = Math.random() < 0.60;
       const color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
       fruit.style.color = color;
       fruit.innerText = fruits[color];
@@ -749,7 +768,6 @@
     function startFruitRound(amount) {
       if (fruitGameStarted) return;
       
-      // Check if user is logged in
       if (!auth.currentUser) {
         alert("Please login to play");
         document.getElementById('auth-container').style.display = 'flex';
@@ -761,11 +779,9 @@
         return;
       }
 
-      // Deduct the bet amount at start
       balance -= amount;
       updateBalanceDisplay();
       
-      // Save to Firebase
       if (auth.currentUser) {
         updateUserBalance(auth.currentUser.uid, balance)
           .catch(error => console.error("Error updating balance:", error));
@@ -805,7 +821,7 @@
 
         let winAmount = 0;
         if (fruitScore >= fruitSelectedBet) {
-          winAmount = fruitSelectedBet * 2; // Double the bet amount
+          winAmount = fruitSelectedBet * 2;
           balance += winAmount;
           alert(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${fruitSelectedBet}).\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
         } else {
@@ -814,7 +830,6 @@
 
         updateBalanceDisplay();
         
-        // Save to Firebase
         if (auth.currentUser) {
           updateUserBalance(auth.currentUser.uid, balance)
             .catch(error => console.error("Error updating balance:", error));
@@ -833,7 +848,6 @@
       }, durations[amount]);
     }
 
-    // پارٹیکلز ایفیکٹ
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 80 },
@@ -846,6 +860,11 @@
       "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false } } },
       "retina_detect": true
     });
+
+    // Close welcome popup after 5 seconds
+    setTimeout(() => {
+      document.getElementById('welcomePopup').style.display = 'none';
+    }, 5000);
   </script>
 </body>
 </html>
