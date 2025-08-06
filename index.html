@@ -17,26 +17,40 @@
       text-align: center;
       margin: 0;
       padding: 0;
-      width: 6.2in;
-      height: 2.3in;
       overflow-x: hidden;
       position: relative;
     }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+      background: linear-gradient(90deg, black, gold, black);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px gold;
+      letter-spacing: 1px;
+    }
+    .header .logo {
+      font-size: 2rem;
+      margin-left: 10px;
+    }
     .marquee {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       background: linear-gradient(90deg, #000428, #004e92);
       color: white;
-      padding: 5px 0;
+      padding: 8px 0;
       white-space: nowrap;
       overflow: hidden;
       box-sizing: border-box;
       border: 2px solid #00b4db;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 180, 219, 0.7);
-      z-index: 1000;
+      margin: 10px 0;
     }
     .marquee span {
       display: inline-block;
@@ -44,19 +58,11 @@
       animation: marquee 15s linear infinite;
       font-weight: bold;
       text-shadow: 0 0 5px rgba(255,255,255,0.8);
+      font-size: 0.9rem;
     }
     @keyframes marquee {
       0% { transform: translate(0, 0); }
       100% { transform: translate(-100%, 0); }
-    }
-    h1 {
-      font-size: 1.8rem;
-      background: linear-gradient(90deg, black, gold, black);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 4px gold;
-      margin: 25px 0 10px;
-      letter-spacing: 1px;
     }
     .nav {
       background-color: goldenrod;
@@ -74,7 +80,7 @@
     .section {
       margin: 15px auto;
       padding: 10px;
-      max-width: 5.8in;
+      max-width: 95%;
       border: 2px solid goldenrod;
       border-radius: 8px;
       box-sizing: border-box;
@@ -100,13 +106,14 @@
     .game-options {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       gap: 10px;
       align-items: center;
       justify-content: center;
     }
     .game-options .gold-box {
       width: 120px;
-      height: 90px;
+      height: 120px;
       font-size: 0.9rem;
       display: flex;
       flex-direction: column;
@@ -117,15 +124,21 @@
       transition: transform 0.3s ease;
       position: relative;
       overflow: hidden;
+      padding: 0;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-shadow: 1px 1px 3px black;
     }
     .game-options .gold-box:hover {
       transform: scale(1.05);
-      background-color: black;
-      color: goldenrod;
     }
-    .game-thumbnail {
-      font-size: 2rem;
-      margin-bottom: 5px;
+    .game-options .gold-box .game-name {
+      background: rgba(0,0,0,0.7);
+      width: 100%;
+      padding: 5px;
+      position: absolute;
+      bottom: 0;
     }
     .card-grid {
       display: flex;
@@ -472,6 +485,12 @@
   </style>
 </head>
 <body>
+  <!-- Header with USCash and logo -->
+  <div class="header">
+    <h1>USCash</h1>
+    <div class="logo">🎮</div>
+  </div>
+
   <!-- Marquee Banner -->
   <div class="marquee">
     <span>Welcome to USCash, Earn with Fun. We will add more features soon!</span>
@@ -592,7 +611,6 @@
     </div>
   </div>
 
-  <h1>USCash 🎮</h1>
   <div id="balanceDisplay" style="display:none;">Balance: Rs. <span id="balanceAmount">1000</span></div>
   <div class="nav">
     <a href="#">Home</a>
@@ -605,13 +623,20 @@
   <div class="section">
     <h2>Select Game</h2>
     <div class="game-options">
-      <div class="gold-box" onclick="startCardGame()">
-        <div class="game-thumbnail">🃏</div>
-        <div>Scratch Match</div>
+      <div class="gold-box" onclick="startCardGame()" style="background-image: url('https://img.freepik.com/free-vector/hand-drawn-playing-cards-pattern_23-2149397840.jpg');">
+        <div class="game-name">Scratch Match</div>
       </div>
-      <div class="gold-box" onclick="startFruitGame()">
-        <div class="game-thumbnail">🍓</div>
-        <div>Fruit Shooting</div>
+      <div class="gold-box" onclick="startFruitGame()" style="background-image: url('https://img.freepik.com/free-vector/fruit-seamless-pattern_1284-3630.jpg');">
+        <div class="game-name">Fruit Shooting</div>
+      </div>
+      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-poker-table-background_23-2149878700.jpg');">
+        <div class="game-name">Coming Soon</div>
+      </div>
+      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-casino-background_23-2149835043.jpg');">
+        <div class="game-name">Coming Soon</div>
+      </div>
+      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-casino-background_23-2149835044.jpg');">
+        <div class="game-name">Coming Soon</div>
       </div>
     </div>
   </div>
