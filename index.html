@@ -746,12 +746,12 @@
   <div class="section" id="scratchGame" style="display:none;">
     <h2>📏 Scratch & Match</h2>
     <div class="bet-amounts">
-      <div class="gold-box" onclick="selectBet(this, 20)">20</div>
-      <div class="gold-box" onclick="selectBet(this, 50)">50</div>
-      <div class="gold-box" onclick="selectBet(this, 100)">100</div>
-      <div class="gold-box" onclick="selectBet(this, 150)">150</div>
-      <div class="gold-box" onclick="selectBet(this, 200)">200</div>
-      <div class="gold-box" onclick="selectBet(this, 300)">300</div>
+      <div class="gold-box" data-bet="20">20</div>
+      <div class="gold-box" data-bet="50">50</div>
+      <div class="gold-box" data-bet="100">100</div>
+      <div class="gold-box" data-bet="150">150</div>
+      <div class="gold-box" data-bet="200">200</div>
+      <div class="gold-box" data-bet="300">300</div>
     </div>
     <div class="card-grid" id="cardGrid"></div>
     <div id="result"></div>
@@ -761,11 +761,11 @@
     <h2>🍎 Fruit Shooting</h2>
     <div id="fruitTargetDisplay">Target: Shoot the <b style="color:red;">RED</b> Apple 🍎!</div>
     <div class="bet-amounts">
-      <div class="gold-box" onclick="startFruitRound(this, 20)">Rs. 20</div>
-      <div class="gold-box" onclick="startFruitRound(this, 50)">Rs. 50</div>
-      <div class="gold-box" onclick="startFruitRound(this, 100)">Rs. 100</div>
-      <div class="gold-box" onclick="startFruitRound(this, 150)">Rs. 150</div>
-      <div class="gold-box" onclick="startFruitRound(this, 200)">Rs. 200</div>
+      <div class="gold-box" data-bet="20">Rs. 20</div>
+      <div class="gold-box" data-bet="50">Rs. 50</div>
+      <div class="gold-box" data-bet="100">Rs. 100</div>
+      <div class="gold-box" data-bet="150">Rs. 150</div>
+      <div class="gold-box" data-bet="200">Rs. 200</div>
     </div>
     <div id="fruitCountdown">Time: 0s</div>
     <div class="shoot-area" id="shootArea"></div>
@@ -943,6 +943,9 @@
           document.getElementById('admin-link').style.display = 'none';
         }
       }
+      
+      // Initialize bet selection after login
+      initializeBetSelection();
     }
 
     async function signupUser() {
@@ -1138,8 +1141,28 @@
     const bgMusic = document.getElementById('bgMusic');
     const flipSound = document.getElementById('flipSound');
 
+    // Initialize bet selection
+    function initializeBetSelection() {
+      // Scratch game bets
+      document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', function() {
+          selectBet(this, parseInt(this.getAttribute('data-bet')));
+        });
+      });
+
+      // Fruit game bets
+      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', function() {
+          startFruitRound(this, parseInt(this.getAttribute('data-bet')));
+        });
+      });
+    }
+
     function selectBet(element, amount) {
-      if (gameStarted) return;
+      if (gameStarted) {
+        alert("Game already in progress!");
+        return;
+      }
       
       if (!currentUserId) {
         alert("Please login to place bets");
@@ -1152,9 +1175,16 @@
         return;
       }
       
+      // Clear any previous selections
+      document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Set new selection
       selectedBet = amount;
-      document.querySelectorAll('.bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
       element.classList.add('active');
+      
+      // Start the game
       revealAndShuffleCards();
     }
 
@@ -1374,7 +1404,10 @@
     }
 
     async function startFruitRound(element, amount) {
-      if (fruitGameStarted) return;
+      if (fruitGameStarted) {
+        alert("Game already in progress!");
+        return;
+      }
       
       if (!currentUserId) {
         alert("Please login to play");
