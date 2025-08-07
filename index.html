@@ -746,12 +746,12 @@
   <div class="section" id="scratchGame" style="display:none;">
     <h2>📏 Scratch & Match</h2>
     <div class="bet-amounts">
-      <div class="gold-box" onclick="selectBet(20)">20</div>
-      <div class="gold-box" onclick="selectBet(50)">50</div>
-      <div class="gold-box" onclick="selectBet(100)">100</div>
-      <div class="gold-box" onclick="selectBet(150)">150</div>
-      <div class="gold-box" onclick="selectBet(200)">200</div>
-      <div class="gold-box" onclick="selectBet(300)">300</div>
+      <div class="gold-box" onclick="selectBet(this, 20)">20</div>
+      <div class="gold-box" onclick="selectBet(this, 50)">50</div>
+      <div class="gold-box" onclick="selectBet(this, 100)">100</div>
+      <div class="gold-box" onclick="selectBet(this, 150)">150</div>
+      <div class="gold-box" onclick="selectBet(this, 200)">200</div>
+      <div class="gold-box" onclick="selectBet(this, 300)">300</div>
     </div>
     <div class="card-grid" id="cardGrid"></div>
     <div id="result"></div>
@@ -761,11 +761,11 @@
     <h2>🍎 Fruit Shooting</h2>
     <div id="fruitTargetDisplay">Target: Shoot the <b style="color:red;">RED</b> Apple 🍎!</div>
     <div class="bet-amounts">
-      <div class="gold-box" onclick="startFruitRound(20)">Rs. 20</div>
-      <div class="gold-box" onclick="startFruitRound(50)">Rs. 50</div>
-      <div class="gold-box" onclick="startFruitRound(100)">Rs. 100</div>
-      <div class="gold-box" onclick="startFruitRound(150)">Rs. 150</div>
-      <div class="gold-box" onclick="startFruitRound(200)">Rs. 200</div>
+      <div class="gold-box" onclick="startFruitRound(this, 20)">Rs. 20</div>
+      <div class="gold-box" onclick="startFruitRound(this, 50)">Rs. 50</div>
+      <div class="gold-box" onclick="startFruitRound(this, 100)">Rs. 100</div>
+      <div class="gold-box" onclick="startFruitRound(this, 150)">Rs. 150</div>
+      <div class="gold-box" onclick="startFruitRound(this, 200)">Rs. 200</div>
     </div>
     <div id="fruitCountdown">Time: 0s</div>
     <div class="shoot-area" id="shootArea"></div>
@@ -1138,7 +1138,7 @@
     const bgMusic = document.getElementById('bgMusic');
     const flipSound = document.getElementById('flipSound');
 
-    function selectBet(amount) {
+    function selectBet(element, amount) {
       if (gameStarted) return;
       
       if (!currentUserId) {
@@ -1154,7 +1154,7 @@
       
       selectedBet = amount;
       document.querySelectorAll('.bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      element.classList.add('active');
       revealAndShuffleCards();
     }
 
@@ -1373,7 +1373,7 @@
       setNewFruitTarget();
     }
 
-    async function startFruitRound(amount) {
+    async function startFruitRound(element, amount) {
       if (fruitGameStarted) return;
       
       if (!currentUserId) {
@@ -1386,6 +1386,12 @@
         alert("Insufficient balance! Please deposit more to play.");
         return;
       }
+
+      // Highlight selected bet
+      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      element.classList.add('active');
 
       try {
         await firebase.firestoreFunctions.updateDoc(
@@ -1472,6 +1478,7 @@
         document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
           btn.style.pointerEvents = "auto";
           btn.style.opacity = "1";
+          btn.classList.remove('active');
         });
 
         document.getElementById("shootArea").innerHTML = "";
