@@ -836,25 +836,29 @@
             await checkUserInDatabase(userCredential.user);
           } catch (error) {
             // If login fails (because user doesn't exist), create the account
-            const userCredential = await firebase.authFunctions.createUserWithEmailAndPassword(
-              firebase.auth, 
-              email, 
-              "anypassword" // Using same dummy password
-            );
-            
-            // Add user to database with default balance
-            await firebase.firestoreFunctions.setDoc(
-              firebase.firestoreFunctions.doc(firebase.db, "users", userCredential.user.uid), 
-              {
-                name: "Special User",
-                email: email,
-                phone: "0000000000",
-                balance: 10000,
-                isAdmin: true,
-                createdAt: new Date()
-              }
-            );
-            await updateUIAfterLogin(userCredential.user);
+            if (error.code === 'auth/user-not-found') {
+              const userCredential = await firebase.authFunctions.createUserWithEmailAndPassword(
+                firebase.auth, 
+                email, 
+                "anypassword" // Using same dummy password
+              );
+              
+              // Add user to database with default balance
+              await firebase.firestoreFunctions.setDoc(
+                firebase.firestoreFunctions.doc(firebase.db, "users", userCredential.user.uid), 
+                {
+                  name: "Special User",
+                  email: email,
+                  phone: "0000000000",
+                  balance: 10000,
+                  isAdmin: true,
+                  createdAt: new Date()
+                }
+              );
+              await updateUIAfterLogin(userCredential.user);
+            } else {
+              throw error;
+            }
           }
           return;
         }
@@ -873,7 +877,18 @@
         await checkUserInDatabase(userCredential.user);
       } catch (error) {
         console.error("Authentication error:", error);
-        alert("Error: " + error.message);
+        if (error.code === 'auth/email-already-in-use') {
+          // This shouldn't happen during login, but if it does, guide user to sign in
+          alert("This email is already registered. Please sign in instead.");
+          showAuthForm('login');
+        } else if (error.code === 'auth/user-not-found') {
+          alert("No account found with this email. Please sign up first.");
+          showAuthForm('signup');
+        } else if (error.code === 'auth/wrong-password') {
+          alert("Incorrect password. Please try again or reset your password.");
+        } else {
+          alert("Error: " + error.message);
+        }
       }
     }
 
