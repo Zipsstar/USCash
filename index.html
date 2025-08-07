@@ -820,8 +820,8 @@
     }
 
     async function loginUser() {
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value.trim();
       
       try {
         // Special case for kafe2999@gmail.com - no password needed
@@ -864,8 +864,8 @@
         }
         
         // Normal login for other users
-        if (!password) {
-          alert("Please enter your password");
+        if (!email || !password) {
+          alert("Please enter both email and password");
           return;
         }
         
@@ -877,17 +877,17 @@
         await checkUserInDatabase(userCredential.user);
       } catch (error) {
         console.error("Authentication error:", error);
-        if (error.code === 'auth/email-already-in-use') {
-          // This shouldn't happen during login, but if it does, guide user to sign in
-          alert("This email is already registered. Please sign in instead.");
-          showAuthForm('login');
+        if (error.code === 'auth/invalid-credential') {
+          alert("Invalid email or password. Please try again.");
         } else if (error.code === 'auth/user-not-found') {
           alert("No account found with this email. Please sign up first.");
           showAuthForm('signup');
         } else if (error.code === 'auth/wrong-password') {
           alert("Incorrect password. Please try again or reset your password.");
+        } else if (error.code === 'auth/too-many-requests') {
+          alert("Too many failed attempts. Please try again later.");
         } else {
-          alert("Error: " + error.message);
+          alert("Login failed: " + error.message);
         }
       }
     }
@@ -946,10 +946,10 @@
     }
 
     async function signupUser() {
-      const name = document.getElementById('signup-name').value;
-      const phone = document.getElementById('signup-phone').value;
-      const email = document.getElementById('signup-email').value;
-      const password = document.getElementById('signup-password').value;
+      const name = document.getElementById('signup-name').value.trim();
+      const phone = document.getElementById('signup-phone').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value.trim();
       
       // Clear previous errors
       clearError('name');
@@ -992,26 +992,14 @@
       if (!isValid) return;
       
       try {
-        // First check if email already exists in Firestore
-        const q = firebase.firestoreFunctions.query(
-          firebase.firestoreFunctions.collection(firebase.db, "users"),
-          firebase.firestoreFunctions.where("email", "==", email)
-        );
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
-        
-        if (!querySnapshot.empty) {
-          showError('email', 'An account with this email already exists');
-          return;
-        }
-        
-        // Create auth account
+        // First create auth account
         const userCredential = await firebase.authFunctions.createUserWithEmailAndPassword(
           firebase.auth, 
           email, 
           password
         );
         
-        // Add user to database
+        // Then add user to database with proper security rules
         await firebase.firestoreFunctions.setDoc(
           firebase.firestoreFunctions.doc(firebase.db, "users", userCredential.user.uid), 
           {
@@ -1039,6 +1027,10 @@
         
         if (error.code === 'auth/email-already-in-use') {
           showError('email', 'This email is already registered. Please use a different email or login.');
+        } else if (error.code === 'auth/weak-password') {
+          showError('password', 'Password should be at least 6 characters');
+        } else if (error.message.includes('permissions')) {
+          alert("Signup failed: Please make sure your Firebase Firestore rules allow user creation.");
         } else {
           alert("Signup failed: " + error.message);
         }
