@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>USCash 🎮</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { 
@@ -26,7 +27,8 @@
       getDocs,
       orderBy,
       limit,
-      updateDoc
+      updateDoc,
+      serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -62,7 +64,8 @@
         getDocs,
         orderBy,
         limit,
-        updateDoc
+        updateDoc,
+        serverTimestamp
       }
     };
   </script>
@@ -572,6 +575,67 @@
       margin-top: 5px;
       display: none;
     }
+    #withdraw-form {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: #111;
+      border: 1px solid goldenrod;
+      border-radius: 8px;
+    }
+    #withdraw-form input, #withdraw-form select {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      background: #222;
+      border: 1px solid goldenrod;
+      color: white;
+      border-radius: 4px;
+    }
+    #withdraw-form button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      background: goldenrod;
+      color: black;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .refresh-balance {
+      background: none;
+      border: none;
+      color: goldenrod;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 10003;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 8px;
+      border: 2px solid goldenrod;
+      max-width: 400px;
+      width: 90%;
+    }
+    .close-modal {
+      float: right;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: goldenrod;
+    }
   </style>
 </head>
 <body>
@@ -624,7 +688,9 @@
   </div>
 
   <div id="user-info" style="display:none;">
-    <span id="user-name"></span> | Balance: Rs. <span id="user-balance"></span> | <button onclick="logoutUser()">Logout</button>
+    <span id="user-name"></span> | Balance: Rs. <span id="user-balance"></span>
+    <button class="refresh-balance" onclick="refreshBalance()"><i class="fas fa-sync-alt"></i></button>
+    | <button onclick="logoutUser()">Logout</button>
   </div>
 
   <div id="admin-panel">
@@ -648,6 +714,41 @@
           </tr>
         </thead>
         <tbody id="users-list">
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="admin-section">
+      <h3>Deposit Requests</h3>
+      <table id="deposit-requests-table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="deposit-requests-list">
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="admin-section">
+      <h3>Withdrawal Requests</h3>
+      <table id="withdraw-requests-table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="withdraw-requests-list">
         </tbody>
       </table>
     </div>
@@ -712,7 +813,7 @@
   <div class="nav">
     <a href="#">Home</a>
     <a href="#" onclick="showComingSoon('deposit')">Deposit</a>
-    <a href="#" onclick="showComingSoon('withdraw')">Withdraw</a>
+    <a href="#" onclick="showWithdrawForm()">Withdraw</a>
     <a href="#" onclick="checkVIPAccess()">VIP</a>
     <a href="#">More</a>
   </div>
@@ -722,22 +823,39 @@
     <p>This feature is under development and will be available soon.</p>
   </div>
 
+  <!-- Withdraw Modal -->
+  <div id="withdrawModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeWithdrawModal()">&times;</span>
+      <h2>Withdraw Funds</h2>
+      <div id="withdraw-form">
+        <input type="text" id="withdraw-name" placeholder="Full Name" required>
+        <input type="text" id="withdraw-account" placeholder="Account Number" required>
+        <input type="text" id="withdraw-username" placeholder="Game User Name" required>
+        <input type="email" id="withdraw-email" placeholder="Gmail" required>
+        <input type="number" id="withdraw-amount" placeholder="Amount (Minimum Rs. 300)" min="300" required>
+        <button onclick="submitWithdrawRequest()">Submit Request</button>
+        <div class="error-message" id="withdraw-error"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="section">
     <h2>Select Game</h2>
     <div class="game-options">
-      <div class="gold-box" onclick="startCardGame()" style="background-image: url('https://img.freepik.com/free-vector/hand-drawn-playing-cards-pattern_23-2149397840.jpg');">
+      <div class="gold-box" onclick="startCardGame()" style="background-image: url('https://img.freepik.com/free-vector/realistic-playing-cards-background_52683-63441.jpg');">
         <div class="game-name">Scratch Match</div>
       </div>
-      <div class="gold-box" onclick="startFruitGame()" style="background-image: url('https://img.freepik.com/free-vector/fruit-seamless-pattern_1284-3630.jpg');">
+      <div class="gold-box" onclick="startFruitGame()" style="background-image: url('https://img.freepik.com/free-vector/fruit-seamless-pattern-background_53876-93168.jpg');">
         <div class="game-name">Fruit Shooting</div>
-      </div>
-      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-poker-table-background_23-2149878700.jpg');">
-        <div class="game-name">Coming Soon</div>
       </div>
       <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-casino-background_23-2149835043.jpg');">
         <div class="game-name">Coming Soon</div>
       </div>
       <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-casino-background_23-2149835044.jpg');">
+        <div class="game-name">Coming Soon</div>
+      </div>
+      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-poker-table-background_23-2149878700.jpg');">
         <div class="game-name">Coming Soon</div>
       </div>
     </div>
@@ -785,6 +903,8 @@
     const SPECIAL_EMAIL = "kafe2999@gmail.com";
     let currentUserId = null;
     let balance = 1000;
+    let lastWithdrawTime = 0;
+    const WITHDRAW_COOLDOWN = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
 
     function showAuthForm(formType) {
       document.getElementById('login-form').classList.remove('active');
@@ -852,7 +972,7 @@
                   phone: "0000000000",
                   balance: 10000,
                   isAdmin: true,
-                  createdAt: new Date()
+                  createdAt: firebase.firestoreFunctions.serverTimestamp()
                 }
               );
               await updateUIAfterLogin(userCredential.user);
@@ -907,7 +1027,7 @@
             phone: user.phoneNumber || "",
             balance: 1000, // Default balance
             isAdmin: user.email === SPECIAL_EMAIL,
-            createdAt: new Date()
+            createdAt: firebase.firestoreFunctions.serverTimestamp()
           });
           await updateUIAfterLogin(user);
         }
@@ -1011,7 +1131,7 @@
             email: email,
             balance: 1000,
             isAdmin: email === SPECIAL_EMAIL,
-            createdAt: new Date()
+            createdAt: firebase.firestoreFunctions.serverTimestamp()
           }
         );
         
@@ -1083,7 +1203,7 @@
             amount: amount,
             game: game,
             description: description,
-            timestamp: new Date()
+            timestamp: firebase.firestoreFunctions.serverTimestamp()
           }
         );
       } catch (error) {
@@ -1528,6 +1648,8 @@
       panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
       if (panel.style.display === 'block') {
         loadAllUsers();
+        loadDepositRequests();
+        loadWithdrawRequests();
       }
     }
 
@@ -1572,6 +1694,189 @@
       } catch (error) {
         console.error("Error loading users:", error);
         alert("Error loading users. Please try again.");
+      }
+    }
+
+    async function loadDepositRequests() {
+      try {
+        const q = firebase.firestoreFunctions.query(
+          firebase.firestoreFunctions.collection(firebase.db, "deposit_requests"),
+          firebase.firestoreFunctions.orderBy("timestamp", "desc"),
+          firebase.firestoreFunctions.limit(50)
+        );
+        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
+        
+        const depositList = document.getElementById('deposit-requests-list');
+        depositList.innerHTML = '';
+        
+        if (querySnapshot.empty) {
+          depositList.innerHTML = '<tr><td colspan="6">No deposit requests found</td></tr>';
+          return;
+        }
+        
+        querySnapshot.forEach(async (doc) => {
+          const deposit = doc.data();
+          const userDoc = await firebase.firestoreFunctions.getDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", deposit.user_id)
+          );
+          const userName = userDoc.exists() ? userDoc.data().name : 'N/A';
+          
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${userName}</td>
+            <td>${deposit.amount}</td>
+            <td>${deposit.method || 'N/A'}</td>
+            <td>${deposit.status || 'pending'}</td>
+            <td>${deposit.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
+            <td>
+              ${deposit.status === 'pending' ? 
+                `<button onclick="updateDepositStatus('${doc.id}', 'approved')">Approve</button>
+                 <button onclick="updateDepositStatus('${doc.id}', 'rejected')">Reject</button>` : 
+                'Completed'}
+            </td>
+          `;
+          depositList.appendChild(row);
+        });
+      } catch (error) {
+        console.error("Error loading deposit requests:", error);
+      }
+    }
+
+    async function loadWithdrawRequests() {
+      try {
+        const q = firebase.firestoreFunctions.query(
+          firebase.firestoreFunctions.collection(firebase.db, "withdraw_requests"),
+          firebase.firestoreFunctions.orderBy("timestamp", "desc"),
+          firebase.firestoreFunctions.limit(50)
+        );
+        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
+        
+        const withdrawList = document.getElementById('withdraw-requests-list');
+        withdrawList.innerHTML = '';
+        
+        if (querySnapshot.empty) {
+          withdrawList.innerHTML = '<tr><td colspan="5">No withdrawal requests found</td></tr>';
+          return;
+        }
+        
+        querySnapshot.forEach(async (doc) => {
+          const withdraw = doc.data();
+          const userDoc = await firebase.firestoreFunctions.getDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", withdraw.user_id)
+          );
+          const userName = userDoc.exists() ? userDoc.data().name : 'N/A';
+          
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${userName}</td>
+            <td>${withdraw.amount}</td>
+            <td>${withdraw.status || 'pending'}</td>
+            <td>${withdraw.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
+            <td>
+              ${withdraw.status === 'pending' ? 
+                `<button onclick="updateWithdrawStatus('${doc.id}', 'approved')">Approve</button>
+                 <button onclick="updateWithdrawStatus('${doc.id}', 'rejected')">Reject</button>` : 
+                'Completed'}
+            </td>
+          `;
+          withdrawList.appendChild(row);
+        });
+      } catch (error) {
+        console.error("Error loading withdrawal requests:", error);
+      }
+    }
+
+    async function updateDepositStatus(requestId, status) {
+      try {
+        const docRef = firebase.firestoreFunctions.doc(firebase.db, "deposit_requests", requestId);
+        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+          alert("Deposit request not found");
+          return;
+        }
+        
+        const deposit = docSnap.data();
+        
+        if (status === 'approved') {
+          // Update user balance
+          const userRef = firebase.firestoreFunctions.doc(firebase.db, "users", deposit.user_id);
+          await firebase.firestoreFunctions.updateDoc(userRef, {
+            balance: firebase.firestoreFunctions.increment(deposit.amount)
+          });
+          
+          // Record transaction
+          await recordTransaction(
+            deposit.user_id,
+            'deposit',
+            deposit.amount,
+            'system',
+            `Deposit of Rs. ${deposit.amount} approved`
+          );
+        }
+        
+        // Update deposit status
+        await firebase.firestoreFunctions.updateDoc(docRef, {
+          status: status
+        });
+        
+        alert(`Deposit request ${status}`);
+        loadDepositRequests();
+        
+      } catch (error) {
+        console.error("Error updating deposit status:", error);
+        alert("Failed to update deposit status");
+      }
+    }
+
+    async function updateWithdrawStatus(requestId, status) {
+      try {
+        const docRef = firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId);
+        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+          alert("Withdrawal request not found");
+          return;
+        }
+        
+        const withdraw = docSnap.data();
+        
+        if (status === 'approved') {
+          // Record transaction
+          await recordTransaction(
+            withdraw.user_id,
+            'withdrawal',
+            withdraw.amount,
+            'system',
+            `Withdrawal of Rs. ${withdraw.amount} approved`
+          );
+        } else if (status === 'rejected') {
+          // Return funds to user balance
+          const userRef = firebase.firestoreFunctions.doc(firebase.db, "users", withdraw.user_id);
+          await firebase.firestoreFunctions.updateDoc(userRef, {
+            balance: firebase.firestoreFunctions.increment(withdraw.amount)
+          });
+          
+          await recordTransaction(
+            withdraw.user_id,
+            'withdrawal_rejected',
+            withdraw.amount,
+            'system',
+            `Withdrawal of Rs. ${withdraw.amount} rejected - funds returned`
+          );
+        }
+        
+        // Update withdrawal status
+        await firebase.firestoreFunctions.updateDoc(docRef, {
+          status: status
+        });
+        
+        alert(`Withdrawal request ${status}`);
+        loadWithdrawRequests();
+        
+      } catch (error) {
+        console.error("Error updating withdrawal status:", error);
+        alert("Failed to update withdrawal status");
       }
     }
 
@@ -1784,6 +2089,126 @@
       } catch (error) {
         console.error("Error checking VIP access:", error);
         alert("Error checking access. Please try again.");
+      }
+    }
+
+    // Withdraw Functions
+    function showWithdrawForm() {
+      if (!currentUserId) {
+        alert("Please login to withdraw");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      const now = Date.now();
+      if (now - lastWithdrawTime < WITHDRAW_COOLDOWN) {
+        const hoursLeft = Math.ceil((WITHDRAW_COOLDOWN - (now - lastWithdrawTime)) / (60 * 60 * 1000));
+        alert(`You can only withdraw once every 4 hours. Please wait ${hoursLeft} more hour(s).`);
+        return;
+      }
+      
+      document.getElementById('withdrawModal').style.display = 'flex';
+      document.getElementById('withdraw-error').style.display = 'none';
+      document.getElementById('withdraw-error').textContent = '';
+    }
+
+    function closeWithdrawModal() {
+      document.getElementById('withdrawModal').style.display = 'none';
+    }
+
+    async function submitWithdrawRequest() {
+      const name = document.getElementById('withdraw-name').value.trim();
+      const account = document.getElementById('withdraw-account').value.trim();
+      const username = document.getElementById('withdraw-username').value.trim();
+      const email = document.getElementById('withdraw-email').value.trim();
+      const amount = parseFloat(document.getElementById('withdraw-amount').value);
+      
+      const errorElement = document.getElementById('withdraw-error');
+      errorElement.style.display = 'none';
+      errorElement.textContent = '';
+      
+      if (!name || !account || !username || !email || isNaN(amount)) {
+        errorElement.textContent = 'Please fill all fields';
+        errorElement.style.display = 'block';
+        return;
+      }
+      
+      if (amount < 300) {
+        errorElement.textContent = 'Minimum withdrawal amount is Rs. 300';
+        errorElement.style.display = 'block';
+        return;
+      }
+      
+      if (balance < amount) {
+        errorElement.textContent = 'Insufficient balance';
+        errorElement.style.display = 'block';
+        return;
+      }
+      
+      try {
+        // Create withdrawal request
+        await firebase.firestoreFunctions.addDoc(
+          firebase.firestoreFunctions.collection(firebase.db, "withdraw_requests"), 
+          {
+            user_id: currentUserId,
+            name: name,
+            account_number: account,
+            game_username: username,
+            email: email,
+            amount: amount,
+            status: 'pending',
+            timestamp: firebase.firestoreFunctions.serverTimestamp()
+          }
+        );
+        
+        // Deduct from user balance
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: balance - amount }
+        );
+        
+        // Record transaction
+        await recordTransaction(
+          currentUserId,
+          'withdrawal_request',
+          amount,
+          'system',
+          `Withdrawal request of Rs. ${amount} submitted`
+        );
+        
+        // Update local balance
+        balance -= amount;
+        document.getElementById('user-balance').textContent = balance;
+        document.getElementById('balanceAmount').textContent = balance;
+        
+        // Set cooldown
+        lastWithdrawTime = Date.now();
+        
+        alert('Withdrawal request submitted successfully! It will be processed soon.');
+        closeWithdrawModal();
+      } catch (error) {
+        console.error("Error submitting withdrawal:", error);
+        errorElement.textContent = 'Failed to submit withdrawal request. Please try again.';
+        errorElement.style.display = 'block';
+      }
+    }
+
+    // Refresh balance
+    async function refreshBalance() {
+      if (!currentUserId) return;
+      
+      try {
+        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId);
+        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          balance = userData.balance;
+          document.getElementById('user-balance').textContent = balance;
+          document.getElementById('balanceAmount').textContent = balance;
+        }
+      } catch (error) {
+        console.error("Error refreshing balance:", error);
       }
     }
 
