@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -28,7 +28,8 @@
       orderBy,
       limit,
       updateDoc,
-      serverTimestamp
+      serverTimestamp,
+      increment
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -65,7 +66,8 @@
         orderBy,
         limit,
         updateDoc,
-        serverTimestamp
+        serverTimestamp,
+        increment
       }
     };
   </script>
@@ -319,6 +321,13 @@
       cursor: pointer;
       user-select: none;
       pointer-events: auto;
+    }
+    .fruit.bomb {
+      animation: pulse 0.5s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
     }
     #fruitTargetDisplay {
       font-size: 1.2em;
@@ -636,6 +645,20 @@
       font-size: 1.5rem;
       color: goldenrod;
     }
+    .loading-spinner {
+      display: none;
+      border: 3px solid rgba(255, 215, 0, 0.3);
+      border-radius: 50%;
+      border-top: 3px solid goldenrod;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -836,6 +859,7 @@
         <input type="number" id="withdraw-amount" placeholder="Amount (Minimum Rs. 300)" min="300" required>
         <button onclick="submitWithdrawRequest()">Submit Request</button>
         <div class="error-message" id="withdraw-error"></div>
+        <div class="loading-spinner" id="withdraw-spinner"></div>
       </div>
     </div>
   </div>
@@ -884,6 +908,8 @@
       <div class="gold-box" data-bet="100">Rs. 100</div>
       <div class="gold-box" data-bet="150">Rs. 150</div>
       <div class="gold-box" data-bet="200">Rs. 200</div>
+      <div class="gold-box" data-bet="250">Rs. 250</div>
+      <div class="gold-box" data-bet="300">Rs. 300</div>
     </div>
     <div id="fruitCountdown">Time: 0s</div>
     <div class="shoot-area" id="shootArea"></div>
@@ -896,6 +922,9 @@
   <audio id="flipSound">
     <source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_07d4930c1c.mp3" type="audio/mp3">
   </audio>
+  <audio id="explosionSound">
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/09/audio_2a5c1dcc0a.mp3" type="audio/mp3">
+  </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
@@ -905,6 +934,28 @@
     let balance = 1000;
     let lastWithdrawTime = 0;
     const WITHDRAW_COOLDOWN = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+
+    // Game durations in seconds (converted to milliseconds)
+    const gameDurations = {
+      20: 11000,  // 11 seconds
+      50: 20000,  // 20 seconds
+      100: 40000, // 40 seconds
+      150: 60000, // 60 seconds
+      200: 80000, // 80 seconds
+      250: 90000, // 90 seconds
+      300: 100000 // 100 seconds
+    };
+
+    // Target fruits count based on bet amount
+    const targetFruitsCount = {
+      20: 25,
+      50: 55,
+      100: 105,
+      150: 155,
+      200: 205,
+      250: 255,
+      300: 305
+    };
 
     function showAuthForm(formType) {
       document.getElementById('login-form').classList.remove('active');
@@ -1260,12 +1311,14 @@
 
     const bgMusic = document.getElementById('bgMusic');
     const flipSound = document.getElementById('flipSound');
+    const explosionSound = document.getElementById('explosionSound');
 
     // Initialize bet selection
     function initializeBetSelection() {
       // Scratch game bets
       document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(bet => {
         bet.addEventListener('click', function() {
+          if (this.classList.contains('active')) return; // Already selected
           selectBet(this, parseInt(this.getAttribute('data-bet')));
         });
       });
@@ -1273,6 +1326,10 @@
       // Fruit game bets
       document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(bet => {
         bet.addEventListener('click', function() {
+          if (fruitGameStarted) {
+            alert("Game already in progress!");
+            return;
+          }
           startFruitRound(this, parseInt(this.getAttribute('data-bet')));
         });
       });
@@ -1304,8 +1361,42 @@
       selectedBet = amount;
       element.classList.add('active');
       
-      // Start the game
-      revealAndShuffleCards();
+      // Deduct balance immediately when bet is placed
+      deductBetAmount(amount).then(() => {
+        // Start the game after balance is updated
+        revealAndShuffleCards();
+      }).catch(error => {
+        console.error("Error deducting bet:", error);
+        alert("Failed to place bet. Please try again.");
+        element.classList.remove('active');
+      });
+    }
+
+    async function deductBetAmount(amount) {
+      try {
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: firebase.firestoreFunctions.increment(-amount) }
+        );
+        
+        await recordTransaction(
+          currentUserId,
+          'bet',
+          amount,
+          'scratch',
+          `Bet Rs. ${amount} in Scratch Match`
+        );
+        
+        // Update local balance
+        balance -= amount;
+        document.getElementById('user-balance').textContent = balance;
+        document.getElementById('balanceAmount').textContent = balance;
+        
+        return true;
+      } catch (error) {
+        console.error("Error deducting bet:", error);
+        throw error;
+      }
     }
 
     function startCardGame() {
@@ -1456,19 +1547,16 @@
       green: "🍏",
       yellow: "🍋"
     };
-    const durations = {
-      20: 10000,
-      50: 25000,
-      100: 50000,
-      150: 75000,
-      200: 100000
-    };
 
     let targetColor = "";
     let fruitScore = 0;
     let fruitGameInterval, fruitGameTimer, fruitCountdownInterval;
     let fruitGameStarted = false;
     let fruitSelectedBet = 0;
+    let fruitsShot = 0;
+    let currentSpeed = 10; // Initial speed (pixels per frame)
+    let speedMultiplier = 1; // Speed multiplier that increases over time
+    let targetFruits = 0;
 
     function setNewFruitTarget() {
       targetColor = colors[Math.floor(Math.random() * colors.length)];
@@ -1482,8 +1570,19 @@
       const fruit = document.createElement("div");
       fruit.classList.add("fruit");
 
-      const isTarget = Math.random() < 0.58;
-      const color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
+      // 30% chance to spawn a bomb (but only if it's not the target color)
+      const isBomb = Math.random() < 0.3;
+      let color;
+      
+      if (isBomb) {
+        // Bomb should look like a target but with different behavior
+        color = targetColor;
+        fruit.classList.add("bomb");
+      } else {
+        const isTarget = Math.random() < 0.58;
+        color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
+      }
+
       fruit.style.color = color;
       fruit.innerText = fruits[color];
 
@@ -1495,20 +1594,34 @@
         if (!fruitGameStarted || fruit.clicked) return;
         fruit.clicked = true;
 
+        if (fruit.classList.contains("bomb")) {
+          // Handle bomb click
+          explosionSound.currentTime = 0;
+          explosionSound.play().catch(() => {});
+          fruitGameOver(false, "💣 You clicked a bomb! Game over.");
+          return;
+        }
+
         if (color === targetColor) {
           fruitScore++;
+          fruitsShot++;
         } else {
           fruitScore = Math.max(0, fruitScore - 1);
         }
-        document.getElementById("fruitScoreDisplay").innerText = `Score: ${fruitScore}`;
+        document.getElementById("fruitScoreDisplay").innerText = `Score: ${fruitScore} (${fruitsShot}/${targetFruits})`;
         fruit.remove();
+
+        // Check if player has shot enough target fruits
+        if (fruitsShot >= targetFruits) {
+          fruitGameOver(true, `🎉 You won! Shot ${fruitsShot} target fruits.`);
+        }
       });
 
       shootArea.appendChild(fruit);
 
       let top = -30;
       const fallSpeed = setInterval(() => {
-        top += 10;
+        top += currentSpeed * speedMultiplier;
         fruit.style.top = `${top}px`;
         if (top > shootArea.clientHeight) {
           clearInterval(fallSpeed);
@@ -1549,7 +1662,7 @@
       try {
         await firebase.firestoreFunctions.updateDoc(
           firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: balance - amount }
+          { balance: firebase.firestoreFunctions.increment(-amount) }
         );
         await recordTransaction(
           currentUserId,
@@ -1571,8 +1684,14 @@
       clearInterval(fruitGameInterval);
       clearInterval(fruitCountdownInterval);
       clearTimeout(fruitGameTimer);
+      
       fruitScore = 0;
-      document.getElementById("fruitScoreDisplay").innerText = "Score: 0";
+      fruitsShot = 0;
+      currentSpeed = 10;
+      speedMultiplier = 1;
+      targetFruits = targetFruitsCount[amount] || amount + 5;
+      
+      document.getElementById("fruitScoreDisplay").innerText = `Score: 0 (0/${targetFruits})`;
       setNewFruitTarget();
 
       fruitSelectedBet = amount;
@@ -1583,63 +1702,82 @@
         btn.style.opacity = "0.4";
       });
 
-      let timeLeft = durations[amount] / 1000;
+      const duration = gameDurations[amount] || 10000;
+      let timeLeft = duration / 1000;
       document.getElementById("fruitCountdown").innerText = `Time: ${timeLeft}s`;
 
       fruitCountdownInterval = setInterval(() => {
         timeLeft--;
         document.getElementById("fruitCountdown").innerText = `Time: ${timeLeft}s`;
-        if (timeLeft <= 0) clearInterval(fruitCountdownInterval);
+        
+        // Calculate time progress percentage
+        const progress = 1 - (timeLeft / (duration / 1000));
+        
+        // Increase speed gradually after 17% of time has passed
+        if (progress > 0.17) {
+          // Increase speed multiplier every 12% of time passed (max 3.7x)
+          const speedSteps = Math.min(Math.floor((progress - 0.17) / 0.12), 5);
+          speedMultiplier = 1 + (speedSteps * 0.54); // 0.54 per step to reach ~3.7x at last step
+        }
+        
+        if (timeLeft <= 0) {
+          clearInterval(fruitCountdownInterval);
+        }
       }, 1000);
 
       fruitGameInterval = setInterval(spawnFruit, 300);
 
-      fruitGameTimer = setTimeout(async () => {
-        clearInterval(fruitGameInterval);
-        clearInterval(fruitCountdownInterval);
-        fruitGameStarted = false;
-
-        let winAmount = 0;
-        if (fruitScore >= fruitSelectedBet) {
-          winAmount = fruitSelectedBet * 2;
-          
-          try {
-            await firebase.firestoreFunctions.updateDoc(
-              firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-              { balance: balance + winAmount }
-            );
-            await recordTransaction(
-              currentUserId,
-              'win',
-              winAmount,
-              'fruit',
-              `Won Rs. ${winAmount} in Fruit Shooting`
-            );
-            
-            balance += winAmount;
-            document.getElementById('user-balance').textContent = balance;
-            document.getElementById('balanceAmount').textContent = balance;
-            
-            alert(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${fruitSelectedBet}).\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
-          } catch (error) {
-            console.error("Error recording win:", error);
-          }
-        } else {
-          alert(`❌ Game Over! You scored ${fruitScore} points (Target: ${fruitSelectedBet}).\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`);
+      fruitGameTimer = setTimeout(() => {
+        if (fruitGameStarted) {
+          fruitGameOver(false, `❌ Time's up! You shot ${fruitsShot} target fruits (needed ${targetFruits}).`);
         }
+      }, duration);
+    }
 
-        document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
-          btn.style.pointerEvents = "auto";
-          btn.style.opacity = "1";
-          btn.classList.remove('active');
-        });
+    async function fruitGameOver(won, message) {
+      clearInterval(fruitGameInterval);
+      clearInterval(fruitCountdownInterval);
+      fruitGameStarted = false;
 
-        document.getElementById("shootArea").innerHTML = "";
-        document.getElementById("fruitScoreDisplay").innerText = "";
-        document.getElementById("fruitCountdown").innerText = "Time: 0s";
-        setNewFruitTarget();
+      let winAmount = 0;
+      if (won) {
+        winAmount = fruitSelectedBet * 2;
+        
+        try {
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+            { balance: firebase.firestoreFunctions.increment(winAmount) }
+          );
+          await recordTransaction(
+            currentUserId,
+            'win',
+            winAmount,
+            'fruit',
+            `Won Rs. ${winAmount} in Fruit Shooting`
+          );
+          
+          balance += winAmount;
+          document.getElementById('user-balance').textContent = balance;
+          document.getElementById('balanceAmount').textContent = balance;
+          
+          alert(`${message}\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+        } catch (error) {
+          console.error("Error recording win:", error);
+        }
+      } else {
+        alert(`${message}\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`);
+      }
 
-      }, durations[amount]);
+      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
+        btn.style.pointerEvents = "auto";
+        btn.style.opacity = "1";
+        btn.classList.remove('active');
+      });
+
+      document.getElementById("shootArea").innerHTML = "";
+      document.getElementById("fruitScoreDisplay").innerText = "";
+      document.getElementById("fruitCountdown").innerText = "Time: 0s";
+      setNewFruitTarget();
     }
 
     // Admin Panel Functions
@@ -2110,6 +2248,18 @@
       document.getElementById('withdrawModal').style.display = 'flex';
       document.getElementById('withdraw-error').style.display = 'none';
       document.getElementById('withdraw-error').textContent = '';
+      
+      // Pre-fill user details if available
+      if (currentUserId) {
+        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId);
+        firebase.firestoreFunctions.getDoc(docRef).then(docSnap => {
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            document.getElementById('withdraw-name').value = userData.name || '';
+            document.getElementById('withdraw-email').value = userData.email || '';
+          }
+        });
+      }
     }
 
     function closeWithdrawModal() {
@@ -2145,7 +2295,30 @@
         return;
       }
       
+      // Show loading spinner
+      const spinner = document.getElementById('withdraw-spinner');
+      spinner.style.display = 'block';
+      
       try {
+        // First check if user has sufficient balance
+        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId);
+        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+          errorElement.textContent = 'User not found';
+          errorElement.style.display = 'block';
+          spinner.style.display = 'none';
+          return;
+        }
+        
+        const userData = docSnap.data();
+        if (userData.balance < amount) {
+          errorElement.textContent = 'Insufficient balance';
+          errorElement.style.display = 'block';
+          spinner.style.display = 'none';
+          return;
+        }
+        
         // Create withdrawal request
         await firebase.firestoreFunctions.addDoc(
           firebase.firestoreFunctions.collection(firebase.db, "withdraw_requests"), 
@@ -2163,8 +2336,8 @@
         
         // Deduct from user balance
         await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: balance - amount }
+          docRef,
+          { balance: firebase.firestoreFunctions.increment(-amount) }
         );
         
         // Record transaction
@@ -2190,6 +2363,8 @@
         console.error("Error submitting withdrawal:", error);
         errorElement.textContent = 'Failed to submit withdrawal request. Please try again.';
         errorElement.style.display = 'block';
+      } finally {
+        spinner.style.display = 'none';
       }
     }
 
