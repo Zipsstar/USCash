@@ -624,6 +624,33 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    /* Deposit Contact Box */
+    .contact-box {
+      background: #111;
+      border: 1px solid goldenrod;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px auto;
+      max-width: 350px;
+      text-align: center;
+    }
+    .contact-box h3 {
+      color: goldenrod;
+      margin-top: 0;
+    }
+    .contact-box p {
+      margin-bottom: 10px;
+    }
+    .contact-box .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -731,6 +758,7 @@
           <tr>
             <th>User</th>
             <th>Amount</th>
+            <th>Method</th>
             <th>Status</th>
             <th>Date</th>
             <th>Actions</th>
@@ -801,37 +829,15 @@
   
   <!-- Updated Nav Section -->
   <div class="nav">
-    <a href="#">Home</a>
-    <a href="#" onclick="showComingSoon('deposit')">Deposit</a>
-    <a href="#" id="withdraw-link">Withdraw</a> <!-- Updated this line -->
+    <a href="#" onclick="showHomeSection()">Home</a>
+    <a href="#" onclick="showDepositSection()">Deposit</a>
+    <a href="#" id="withdraw-link">Withdraw</a>
     <a href="#" onclick="checkVIPAccess()">VIP</a>
-    <a href="#">More</a>
+    <a href="#" onclick="showMoreSection()">More</a>
   </div>
 
-  <div id="comingSoonBox">
-    <h3>Coming Soon</h3>
-    <p>This feature is under development and will be available soon.</p>
-  </div>
-
-  <!-- Updated Withdraw Modal -->
-  <div id="withdrawModal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeWithdrawModal()">&times;</span>
-      <h2>Withdraw Funds</h2>
-      <form id="withdraw-form" onsubmit="event.preventDefault(); submitWithdrawRequest();">
-        <input type="text" id="withdraw-name" placeholder="Full Name" required>
-        <input type="text" id="withdraw-account" placeholder="Account Number" required>
-        <input type="text" id="withdraw-username" placeholder="Game User Name" required>
-        <input type="email" id="withdraw-email" placeholder="Email" required>
-        <input type="number" id="withdraw-amount" placeholder="Amount (Minimum Rs. 300)" min="300" required>
-        <button type="submit">Submit Request</button>
-        <div class="error-message" id="withdraw-error"></div>
-        <div class="loading-spinner" id="withdraw-spinner"></div>
-      </form>
-    </div>
-  </div>
-
-  <div class="section">
+  <!-- Home Section (Games) -->
+  <div id="homeSection" class="section">
     <h2>Select Game</h2>
     <div class="game-options">
       <div class="gold-box" onclick="startCardGame()" style="background-image: url('https://img.freepik.com/free-vector/realistic-playing-cards-background_52683-63441.jpg');">
@@ -852,16 +858,68 @@
     </div>
   </div>
 
+  <!-- Deposit Section -->
+  <div id="depositSection" class="section" style="display:none;">
+    <h2>Deposit Funds</h2>
+    <div class="contact-box">
+      <h3>Contact Our Referral</h3>
+      <p>To deposit funds, please contact our referral agent via WhatsApp:</p>
+      <p><strong>Minimum Deposit: Rs. 300</strong></p>
+      <a href="https://wa.me/923123456789" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- More Section -->
+  <div id="moreSection" class="section" style="display:none;">
+    <h2>More Options</h2>
+    <div class="contact-box">
+      <h3>Admin Access</h3>
+      <p>Only admin users can access special features.</p>
+      <p>If you're an admin, login with your admin account to access the admin panel.</p>
+    </div>
+  </div>
+
+  <div id="comingSoonBox" style="display:none;">
+    <h3>Coming Soon</h3>
+    <p>This feature is under development and will be available soon.</p>
+  </div>
+
+  <!-- Updated Withdraw Modal -->
+  <div id="withdrawModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeWithdrawModal()">&times;</span>
+      <h2>Withdraw Funds</h2>
+      <form id="withdraw-form" onsubmit="event.preventDefault(); submitWithdrawRequest();">
+        <input type="text" id="withdraw-name" placeholder="Full Name" required>
+        <input type="text" id="withdraw-account" placeholder="Account Number/Phone Number" required>
+        <select id="withdraw-method" required>
+          <option value="">Select Payment Method</option>
+          <option value="easypaisa">EasyPaisa</option>
+          <option value="jazzcash">JazzCash</option>
+          <option value="bank">Bank Transfer</option>
+        </select>
+        <input type="text" id="withdraw-username" placeholder="Game User Name" required>
+        <input type="email" id="withdraw-email" placeholder="Email" required>
+        <input type="number" id="withdraw-amount" placeholder="Amount (Minimum Rs. 300)" min="300" required>
+        <button type="submit">Submit Request</button>
+        <div class="error-message" id="withdraw-error"></div>
+        <div class="loading-spinner" id="withdraw-spinner"></div>
+      </form>
+    </div>
+  </div>
+
   <!-- Updated Scratch Game Section -->
   <div class="section" id="scratchGame" style="display:none;">
     <h2>📏 Scratch & Match</h2>
     <div class="bet-amounts">
-      <div class="gold-box" data-bet="20">20</div>
-      <div class="gold-box" data-bet="50">50</div>
-      <div class="gold-box" data-bet="100">100</div>
-      <div class="gold-box" data-bet="150">150</div>
-      <div class="gold-box" data-bet="200">200</div>
-      <div class="gold-box" data-bet="300">300</div>
+      <div class="gold-box" data-bet="20" onclick="selectBet(this, 20)">20</div>
+      <div class="gold-box" data-bet="50" onclick="selectBet(this, 50)">50</div>
+      <div class="gold-box" data-bet="100" onclick="selectBet(this, 100)">100</div>
+      <div class="gold-box" data-bet="150" onclick="selectBet(this, 150)">150</div>
+      <div class="gold-box" data-bet="200" onclick="selectBet(this, 200)">200</div>
+      <div class="gold-box" data-bet="300" onclick="selectBet(this, 300)">300</div>
     </div>
     <div class="card-grid" id="cardGrid"></div>
     <div id="result"></div>
@@ -871,13 +929,13 @@
     <h2>🍎 Fruit Shooting</h2>
     <div id="fruitTargetDisplay">Target: Shoot the <b style="color:red;">RED</b> Apple 🍎!</div>
     <div class="bet-amounts">
-      <div class="gold-box" data-bet="20">Rs. 20</div>
-      <div class="gold-box" data-bet="50">Rs. 50</div>
-      <div class="gold-box" data-bet="100">Rs. 100</div>
-      <div class="gold-box" data-bet="150">Rs. 150</div>
-      <div class="gold-box" data-bet="200">Rs. 200</div>
-      <div class="gold-box" data-bet="250">Rs. 250</div>
-      <div class="gold-box" data-bet="300">Rs. 300</div>
+      <div class="gold-box" data-bet="20" onclick="startFruitRound(this, 20)">Rs. 20</div>
+      <div class="gold-box" data-bet="50" onclick="startFruitRound(this, 50)">Rs. 50</div>
+      <div class="gold-box" data-bet="100" onclick="startFruitRound(this, 100)">Rs. 100</div>
+      <div class="gold-box" data-bet="150" onclick="startFruitRound(this, 150)">Rs. 150</div>
+      <div class="gold-box" data-bet="200" onclick="startFruitRound(this, 200)">Rs. 200</div>
+      <div class="gold-box" data-bet="250" onclick="startFruitRound(this, 250)">Rs. 250</div>
+      <div class="gold-box" data-bet="300" onclick="startFruitRound(this, 300)">Rs. 300</div>
     </div>
     <div id="fruitCountdown">Time: 0s</div>
     <div class="shoot-area" id="shootArea"></div>
@@ -925,7 +983,7 @@
       300: 305
     };
 
-    // Initialize betting system when page loads
+    // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
       // Set up withdraw link
       document.getElementById('withdraw-link').addEventListener('click', function(e) {
@@ -937,51 +995,91 @@
       initializeBetting();
     });
 
-    // Improved betting initialization
+    // Section navigation functions
+    function showHomeSection() {
+      document.getElementById('homeSection').style.display = 'block';
+      document.getElementById('depositSection').style.display = 'none';
+      document.getElementById('moreSection').style.display = 'none';
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+    }
+
+    function showDepositSection() {
+      document.getElementById('homeSection').style.display = 'none';
+      document.getElementById('depositSection').style.display = 'block';
+      document.getElementById('moreSection').style.display = 'none';
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+    }
+
+    function showMoreSection() {
+      document.getElementById('homeSection').style.display = 'none';
+      document.getElementById('depositSection').style.display = 'none';
+      document.getElementById('moreSection').style.display = 'block';
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+    }
+
+    // Initialize betting system
     function initializeBetting() {
       // Scratch game bets
       document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', async function() {
+        bet.addEventListener('click', function() {
           const amount = parseInt(this.getAttribute('data-bet'));
-          
-          if (gameStarted) {
-            alert("Game already in progress!");
-            return;
-          }
-          
-          if (!currentUserId) {
-            alert("Please login to play");
-            document.getElementById('auth-container').style.display = 'flex';
-            return;
-          }
-          
-          if (balance < amount) {
-            alert("Insufficient balance!");
-            return;
-          }
-          
-          try {
-            // Deduct balance
-            await firebase.firestoreFunctions.updateDoc(
-              firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-              { balance: firebase.firestoreFunctions.increment(-amount) }
-            );
-            
-            // Update local balance
-            balance -= amount;
-            updateBalanceDisplay();
-            
-            // Start game
-            selectedBet = amount;
-            this.classList.add('active');
-            revealAndShuffleCards();
-            
-          } catch (error) {
-            console.error("Betting error:", error);
-            alert("Failed to place bet. Please try again.");
-          }
+          selectBet(this, amount);
         });
       });
+
+      // Fruit game bets
+      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', function() {
+          const amount = parseInt(this.getAttribute('data-bet'));
+          startFruitRound(this, amount);
+        });
+      });
+    }
+
+    // Improved bet selection
+    async function selectBet(element, amount) {
+      if (gameStarted) {
+        alert("Game already in progress!");
+        return;
+      }
+      
+      if (!currentUserId) {
+        alert("Please login to play");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      if (balance < amount) {
+        alert("Insufficient balance!");
+        return;
+      }
+      
+      try {
+        // Deduct balance
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: firebase.firestoreFunctions.increment(-amount) }
+        );
+        
+        // Update local balance
+        balance -= amount;
+        updateBalanceDisplay();
+        
+        // Start game
+        selectedBet = amount;
+        document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        element.classList.add('active');
+        revealAndShuffleCards();
+        
+      } catch (error) {
+        console.error("Betting error:", error);
+        alert("Failed to place bet. Please try again.");
+      }
     }
 
     // Improved withdraw form handling
@@ -1033,12 +1131,13 @@
       // Validate inputs
       const name = document.getElementById('withdraw-name').value.trim();
       const account = document.getElementById('withdraw-account').value.trim();
+      const method = document.getElementById('withdraw-method').value;
       const username = document.getElementById('withdraw-username').value.trim();
       const email = document.getElementById('withdraw-email').value.trim();
       const amount = parseFloat(document.getElementById('withdraw-amount').value);
 
       // Validation checks
-      if (!name || !account || !username || !email || isNaN(amount)) {
+      if (!name || !account || !method || !username || !email || isNaN(amount)) {
         showError('withdraw-error', 'Please fill all fields correctly');
         return;
       }
@@ -1065,6 +1164,7 @@
             user_id: currentUserId,
             name: name,
             account_number: account,
+            method: method,
             game_username: username,
             email: email,
             amount: amount,
@@ -1083,6 +1183,7 @@
         balance -= amount;
         document.getElementById('user-balance').textContent = balance;
         document.getElementById('balanceAmount').textContent = balance;
+        lastWithdrawTime = Date.now();
         
         // Close modal
         closeWithdrawModal();
@@ -1094,6 +1195,10 @@
       } finally {
         spinner.style.display = 'none';
       }
+    }
+
+    function closeWithdrawModal() {
+      document.getElementById('withdrawModal').style.display = 'none';
     }
 
     // Helper function to update balance display
@@ -1124,13 +1229,13 @@
     }
 
     function showError(fieldId, message) {
-      const errorElement = document.getElementById(`${fieldId}-error`);
+      const errorElement = document.getElementById(fieldId);
       errorElement.textContent = message;
       errorElement.style.display = 'block';
     }
 
     function clearError(fieldId) {
-      const errorElement = document.getElementById(`${fieldId}-error`);
+      const errorElement = document.getElementById(fieldId);
       errorElement.textContent = '';
       errorElement.style.display = 'none';
     }
@@ -1259,9 +1364,6 @@
           document.getElementById('admin-link').style.display = 'none';
         }
       }
-      
-      // Initialize bet selection after login
-      initializeBetSelection();
     }
 
     async function signupUser() {
@@ -1280,31 +1382,31 @@
       let isValid = true;
       
       if (!name) {
-        showError('name', 'Please enter your full name');
+        showError('name-error', 'Please enter your full name');
         isValid = false;
       }
       
       if (!phone) {
-        showError('phone', 'Please enter your phone number');
+        showError('phone-error', 'Please enter your phone number');
         isValid = false;
       } else if (!/^\d+$/.test(phone)) {
-        showError('phone', 'Phone number should contain only digits');
+        showError('phone-error', 'Phone number should contain only digits');
         isValid = false;
       }
       
       if (!email) {
-        showError('email', 'Please enter your email');
+        showError('email-error', 'Please enter your email');
         isValid = false;
       } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-        showError('email', 'Please enter a valid email address');
+        showError('email-error', 'Please enter a valid email address');
         isValid = false;
       }
       
       if (!password) {
-        showError('password', 'Please enter a password');
+        showError('password-error', 'Please enter a password');
         isValid = false;
       } else if (password.length < 6) {
-        showError('password', 'Password should be at least 6 characters');
+        showError('password-error', 'Password should be at least 6 characters');
         isValid = false;
       }
       
@@ -1345,9 +1447,9 @@
         console.error("Signup error:", error);
         
         if (error.code === 'auth/email-already-in-use') {
-          showError('email', 'This email is already registered. Please use a different email or login.');
+          showError('email-error', 'This email is already registered. Please use a different email or login.');
         } else if (error.code === 'auth/weak-password') {
-          showError('password', 'Password should be at least 6 characters');
+          showError('password-error', 'Password should be at least 6 characters');
         } else if (error.message.includes('permissions')) {
           alert("Signup failed: Please make sure your Firebase Firestore rules allow user creation.");
         } else {
@@ -1458,65 +1560,6 @@
     const flipSound = document.getElementById('flipSound');
     const explosionSound = document.getElementById('explosionSound');
 
-    // Initialize bet selection
-    function initializeBetSelection() {
-      // Scratch game bets
-      document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          if (this.classList.contains('active')) return; // Already selected
-          selectBet(this, parseInt(this.getAttribute('data-bet')));
-        });
-      });
-
-      // Fruit game bets
-      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          if (fruitGameStarted) {
-            alert("Game already in progress!");
-            return;
-          }
-          startFruitRound(this, parseInt(this.getAttribute('data-bet')));
-        });
-      });
-    }
-
-    function selectBet(element, amount) {
-      if (gameStarted) {
-        alert("Game already in progress!");
-        return;
-      }
-      
-      if (!currentUserId) {
-        alert("Please login to place bets");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      if (balance < amount) {
-        alert("Insufficient balance!");
-        return;
-      }
-      
-      // Clear any previous selections
-      document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      
-      // Set new selection
-      selectedBet = amount;
-      element.classList.add('active');
-      
-      // Deduct balance immediately when bet is placed
-      deductBetAmount(amount).then(() => {
-        // Start the game after balance is updated
-        revealAndShuffleCards();
-      }).catch(error => {
-        console.error("Error deducting bet:", error);
-        alert("Failed to place bet. Please try again.");
-        element.classList.remove('active');
-      });
-    }
-
     async function deductBetAmount(amount) {
       try {
         await firebase.firestoreFunctions.updateDoc(
@@ -1545,6 +1588,7 @@
     }
 
     function startCardGame() {
+      document.getElementById('homeSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'block';
       document.getElementById('fruitGame').style.display = 'none';
       bgMusic.play().catch(() => {});
@@ -1776,6 +1820,7 @@
     }
 
     function startFruitGame() {
+      document.getElementById('homeSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'block';
       setNewFruitTarget();
@@ -2038,7 +2083,7 @@
         withdrawList.innerHTML = '';
         
         if (querySnapshot.empty) {
-          withdrawList.innerHTML = '<tr><td colspan="5">No withdrawal requests found</td></tr>';
+          withdrawList.innerHTML = '<tr><td colspan="6">No withdrawal requests found</td></tr>';
           return;
         }
         
@@ -2053,6 +2098,7 @@
           row.innerHTML = `
             <td>${userName}</td>
             <td>${withdraw.amount}</td>
+            <td>${withdraw.method || 'N/A'}</td>
             <td>${withdraw.status || 'pending'}</td>
             <td>${withdraw.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
             <td>
@@ -2373,10 +2419,6 @@
         console.error("Error checking VIP access:", error);
         alert("Error checking access. Please try again.");
       }
-    }
-
-    function closeWithdrawModal() {
-      document.getElementById('withdrawModal').style.display = 'none';
     }
 
     // Refresh balance
