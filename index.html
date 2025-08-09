@@ -363,71 +363,99 @@
       width: 300px;
       max-width: 90%;
       color: goldenrod;
+      box-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
     }
     .auth-form h2 {
       text-align: center;
       margin-top: 0;
       color: skyblue;
       font-size: 1.2rem;
+      text-shadow: 0 0 5px rgba(135, 206, 235, 0.8);
     }
     .auth-form input {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
+      padding: 12px;
+      margin: 10px 0;
       border: 1px solid goldenrod;
       border-radius: 6px;
       background: #222;
       color: white;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .auth-form input:focus {
+      outline: none;
+      border-color: skyblue;
+      box-shadow: 0 0 8px rgba(135, 206, 235, 0.6);
     }
     .auth-form button {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      background: goldenrod;
+      padding: 12px;
+      margin: 10px 0;
+      background: linear-gradient(to right, goldenrod, #daa520);
       color: black;
       border: none;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .auth-form button:hover {
+      background: linear-gradient(to right, #daa520, goldenrod);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
     .auth-toggle {
       text-align: center;
-      margin-top: 12px;
+      margin-top: 15px;
       color: #aaa;
       cursor: pointer;
       font-size: 0.8rem;
+      transition: color 0.3s ease;
     }
     .auth-toggle:hover {
       color: goldenrod;
+      text-decoration: underline;
     }
     #auth-tabs {
       display: flex;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      overflow: hidden;
     }
     #auth-tabs button {
       flex: 1;
-      padding: 8px;
+      padding: 10px;
       background: #333;
       color: goldenrod;
       border: none;
-      border-bottom: 2px solid goldenrod;
       font-size: 0.8rem;
+      transition: all 0.3s ease;
     }
     #auth-tabs button:hover {
       background: #444;
     }
+    #auth-tabs button.active {
+      background: goldenrod;
+      color: black;
+      font-weight: bold;
+    }
     #user-info {
-      position: absolute;
-      top: 30px;
-      right: 5px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 8px 12px;
-      border-radius: 15px;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px 15px;
+      border-radius: 20px;
       color: goldenrod;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid goldenrod;
     }
     #user-info button {
       background: goldenrod;
@@ -435,9 +463,12 @@
       border: none;
       border-radius: 4px;
       padding: 4px 8px;
-      margin-left: 8px;
       cursor: pointer;
-      font-size: 0.6rem;
+      font-size: 0.7rem;
+      transition: all 0.3s ease;
+    }
+    #user-info button:hover {
+      background: #daa520;
     }
     #login-form, #signup-form {
       display: none;
@@ -460,9 +491,11 @@
       font-size: 0.8rem;
       margin-top: 10px;
       display: inline-block;
+      transition: color 0.3s ease;
     }
     .password-reset-back:hover {
       color: goldenrod;
+      text-decoration: underline;
     }
     #admin-panel {
       display: none;
@@ -567,6 +600,10 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 0 5px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
+    }
+    #admin-link:hover {
+      transform: scale(1.1);
     }
     #comingSoonBox {
       display: none;
@@ -650,6 +687,12 @@
       text-decoration: none;
       display: inline-block;
       margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    .contact-box .whatsapp-btn:hover {
+      background: #128C7E;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     /* New styles for custom bet amount */
     .custom-bet-container {
@@ -676,6 +719,10 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .custom-bet-btn:hover {
+      background: #daa520;
     }
     /* Improved withdraw form styles */
     #withdraw-form input,
@@ -719,6 +766,164 @@
       margin-top: 15px;
       font-weight: bold;
     }
+    /* New game styles */
+    #findAceGame {
+      display: none;
+    }
+    #ticTacToeGame {
+      display: none;
+    }
+    #memoryGame {
+      display: none;
+    }
+    #numberGuessGame {
+      display: none;
+    }
+    .ace-card {
+      width: 80px;
+      height: 120px;
+      background-color: #222;
+      color: black;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid goldenrod;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 5px;
+    }
+    .ace-card.flipped {
+      background-color: goldenrod;
+      color: black;
+    }
+    .ace-card.selected {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px gold;
+    }
+    .ace-card.ace {
+      background-color: red;
+      color: white;
+    }
+    .ace-timer {
+      font-size: 1.5rem;
+      margin: 15px 0;
+      color: gold;
+    }
+    .tic-tac-toe-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      max-width: 300px;
+      margin: 15px auto;
+    }
+    .tic-tac-toe-cell {
+      width: 90px;
+      height: 90px;
+      background-color: #222;
+      border: 2px solid goldenrod;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .tic-tac-toe-cell:hover {
+      background-color: #333;
+    }
+    .tic-tac-toe-cell.x {
+      color: red;
+    }
+    .tic-tac-toe-cell.o {
+      color: blue;
+    }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 300px;
+      margin: 15px auto;
+    }
+    .memory-card {
+      width: 60px;
+      height: 60px;
+      background-color: #222;
+      border: 2px solid goldenrod;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .memory-card.flipped {
+      background-color: goldenrod;
+      transform: rotateY(180deg);
+    }
+    .number-guess-container {
+      margin: 15px auto;
+      max-width: 300px;
+    }
+    .number-guess-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #222;
+      border: 1px solid goldenrod;
+      color: white;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .number-guess-btn {
+      background: goldenrod;
+      color: black;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+    .number-guess-btn:hover {
+      background: #daa520;
+    }
+    .number-guess-hint {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: white;
+    }
+    .number-guess-attempts {
+      margin: 10px 0;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .verified-badge {
+      color: #1DA1F2;
+      margin-left: 5px;
+      font-size: 0.8rem;
+    }
+    .history-item {
+      background: #111;
+      border: 1px solid goldenrod;
+      border-radius: 6px;
+      padding: 10px;
+      margin: 10px 0;
+      text-align: left;
+    }
+    .history-item .date {
+      color: #aaa;
+      font-size: 0.7rem;
+    }
+    .history-item .amount.win {
+      color: #4CAF50;
+    }
+    .history-item .amount.loss {
+      color: #F44336;
+    }
   </style>
 </head>
 <body>
@@ -735,7 +940,7 @@
     <div class="auth-form">
       <h2>USCash Login</h2>
       <div id="auth-tabs">
-        <button onclick="showAuthForm('login')">Login</button>
+        <button class="active" onclick="showAuthForm('login')">Login</button>
         <button onclick="showAuthForm('signup')">Sign Up</button>
       </div>
       
@@ -771,7 +976,9 @@
   </div>
 
   <div id="user-info" style="display:none;">
-    <span id="user-name"></span> | Balance: Rs. <span id="user-balance"></span>
+    <span id="user-name"></span>
+    <span id="verified-badge" class="verified-badge" style="display:none;"><i class="fas fa-check-circle"></i></span>
+    | Balance: Rs. <span id="user-balance"></span>
     <button class="refresh-balance" onclick="refreshBalance()"><i class="fas fa-sync-alt"></i></button>
     | <button onclick="logoutUser()">Logout</button>
   </div>
@@ -893,8 +1100,6 @@
     </div>
   </div>
 
-  <div id="balanceDisplay" style="display:none;">Balance: Rs. <span id="balanceAmount">1000</span></div>
-  
   <!-- Updated Nav Section -->
   <div class="nav">
     <a href="#" onclick="showHomeSection()">Home</a>
@@ -914,14 +1119,17 @@
       <div class="gold-box" onclick="startFruitGame()" style="background-image: url('https://img.freepik.com/free-vector/fruit-seamless-pattern-background_53876-93168.jpg');">
         <div class="game-name">Fruit Shooting</div>
       </div>
-      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-casino-background_23-2149835043.jpg');">
-        <div class="game-name">Coming Soon</div>
+      <div class="gold-box" onclick="startFindAceGame()" style="background-image: url('https://img.freepik.com/free-vector/playing-card-pattern-background_53876-93170.jpg');">
+        <div class="game-name">Find Ace</div>
       </div>
-      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-casino-background_23-2149835044.jpg');">
-        <div class="game-name">Coming Soon</div>
+      <div class="gold-box" onclick="startTicTacToeGame()" style="background-image: url('https://img.freepik.com/free-vector/tic-tac-toe-seamless-pattern-background_53876-93172.jpg');">
+        <div class="game-name">Tic-Tac-Toe</div>
       </div>
-      <div class="gold-box" style="background-image: url('https://img.freepik.com/free-vector/gradient-poker-table-background_23-2149878700.jpg');">
-        <div class="game-name">Coming Soon</div>
+      <div class="gold-box" onclick="startMemoryGame()" style="background-image: url('https://img.freepik.com/free-vector/memory-game-seamless-pattern-background_53876-93174.jpg');">
+        <div class="game-name">Memory Match</div>
+      </div>
+      <div class="gold-box" onclick="startNumberGuessGame()" style="background-image: url('https://img.freepik.com/free-vector/number-pattern-background_53876-93176.jpg');">
+        <div class="game-name">Number Guess</div>
       </div>
     </div>
   </div>
@@ -933,7 +1141,7 @@
       <h3>Contact Our Referral</h3>
       <p>To deposit funds, please contact our referral agent via WhatsApp:</p>
       <p><strong>Minimum Deposit: Rs. 300</strong></p>
-      <a href="https://wa.me/923123456789" class="whatsapp-btn">
+      <a href="https://wa.me/923174136799" class="whatsapp-btn">
         <i class="fab fa-whatsapp"></i> Contact on WhatsApp
       </a>
     </div>
@@ -942,6 +1150,10 @@
   <!-- More Section -->
   <div id="moreSection" class="section" style="display:none;">
     <h2>More Options</h2>
+    <div class="contact-box">
+      <h3>Transaction History</h3>
+      <div id="user-history"></div>
+    </div>
     <div class="contact-box">
       <h3>Admin Access</h3>
       <p>Only admin users can access special features.</p>
@@ -1020,6 +1232,91 @@
     <div id="fruitScoreDisplay"></div>
   </div>
 
+  <!-- Find Ace Game Section -->
+  <div class="section" id="findAceGame" style="display:none;">
+    <h2>🃏 Find the Ace</h2>
+    <div class="bet-amounts">
+      <div class="gold-box" data-bet="20" onclick="startFindAceRound(this, 20)">Rs. 20</div>
+      <div class="gold-box" data-bet="50" onclick="startFindAceRound(this, 50)">Rs. 50</div>
+      <div class="gold-box" data-bet="100" onclick="startFindAceRound(this, 100)">Rs. 100</div>
+      <div class="gold-box" data-bet="150" onclick="startFindAceRound(this, 150)">Rs. 150</div>
+      <div class="gold-box" data-bet="200" onclick="startFindAceRound(this, 200)">Rs. 200</div>
+      <div class="gold-box" data-bet="300" onclick="startFindAceRound(this, 300)">Rs. 300</div>
+    </div>
+    <div class="custom-bet-container">
+      <input type="number" id="custom-ace-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
+      <button class="custom-bet-btn" onclick="placeCustomAceBet()">Bet</button>
+    </div>
+    <div class="ace-timer" id="aceTimer">Time left: 15s</div>
+    <div id="aceCards" style="display: flex; justify-content: center; flex-wrap: wrap;"></div>
+    <div id="aceResult"></div>
+  </div>
+
+  <!-- Tic-Tac-Toe Game Section -->
+  <div class="section" id="ticTacToeGame" style="display:none;">
+    <h2>⭕ Tic-Tac-Toe</h2>
+    <div class="bet-amounts">
+      <div class="gold-box" data-bet="20" onclick="startTicTacToeRound(this, 20)">Rs. 20</div>
+      <div class="gold-box" data-bet="50" onclick="startTicTacToeRound(this, 50)">Rs. 50</div>
+      <div class="gold-box" data-bet="100" onclick="startTicTacToeRound(this, 100)">Rs. 100</div>
+      <div class="gold-box" data-bet="150" onclick="startTicTacToeRound(this, 150)">Rs. 150</div>
+      <div class="gold-box" data-bet="200" onclick="startTicTacToeRound(this, 200)">Rs. 200</div>
+      <div class="gold-box" data-bet="300" onclick="startTicTacToeRound(this, 300)">Rs. 300</div>
+    </div>
+    <div class="custom-bet-container">
+      <input type="number" id="custom-tic-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
+      <button class="custom-bet-btn" onclick="placeCustomTicBet()">Bet</button>
+    </div>
+    <div id="ticResult"></div>
+    <div class="tic-tac-toe-board" id="ticTacToeBoard"></div>
+  </div>
+
+  <!-- Memory Game Section -->
+  <div class="section" id="memoryGame" style="display:none;">
+    <h2>🧠 Memory Match</h2>
+    <div class="bet-amounts">
+      <div class="gold-box" data-bet="20" onclick="startMemoryRound(this, 20)">Rs. 20</div>
+      <div class="gold-box" data-bet="50" onclick="startMemoryRound(this, 50)">Rs. 50</div>
+      <div class="gold-box" data-bet="100" onclick="startMemoryRound(this, 100)">Rs. 100</div>
+      <div class="gold-box" data-bet="150" onclick="startMemoryRound(this, 150)">Rs. 150</div>
+      <div class="gold-box" data-bet="200" onclick="startMemoryRound(this, 200)">Rs. 200</div>
+      <div class="gold-box" data-bet="300" onclick="startMemoryRound(this, 300)">Rs. 300</div>
+    </div>
+    <div class="custom-bet-container">
+      <input type="number" id="custom-memory-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
+      <button class="custom-bet-btn" onclick="placeCustomMemoryBet()">Bet</button>
+    </div>
+    <div id="memoryMoves">Moves: 0</div>
+    <div id="memoryTimer">Time: 0s</div>
+    <div class="memory-grid" id="memoryGrid"></div>
+    <div id="memoryResult"></div>
+  </div>
+
+  <!-- Number Guess Game Section -->
+  <div class="section" id="numberGuessGame" style="display:none;">
+    <h2>🔢 Number Guess</h2>
+    <div class="bet-amounts">
+      <div class="gold-box" data-bet="20" onclick="startNumberGuessRound(this, 20)">Rs. 20</div>
+      <div class="gold-box" data-bet="50" onclick="startNumberGuessRound(this, 50)">Rs. 50</div>
+      <div class="gold-box" data-bet="100" onclick="startNumberGuessRound(this, 100)">Rs. 100</div>
+      <div class="gold-box" data-bet="150" onclick="startNumberGuessRound(this, 150)">Rs. 150</div>
+      <div class="gold-box" data-bet="200" onclick="startNumberGuessRound(this, 200)">Rs. 200</div>
+      <div class="gold-box" data-bet="300" onclick="startNumberGuessRound(this, 300)">Rs. 300</div>
+    </div>
+    <div class="custom-bet-container">
+      <input type="number" id="custom-number-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
+      <button class="custom-bet-btn" onclick="placeCustomNumberBet()">Bet</button>
+    </div>
+    <div id="numberGuessResult"></div>
+    <div class="number-guess-container">
+      <p>Guess a number between 1 and 100</p>
+      <input type="number" id="numberGuessInput" class="number-guess-input" min="1" max="100">
+      <button class="number-guess-btn" onclick="submitNumberGuess()">Submit</button>
+      <div id="numberGuessHint" class="number-guess-hint"></div>
+      <div id="numberGuessAttempts" class="number-guess-attempts">Attempts: 0/5</div>
+    </div>
+  </div>
+
   <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/audio/2023/03/16/audio_98b541c254.mp3" type="audio/mp3">
   </audio>
@@ -1029,11 +1326,18 @@
   <audio id="explosionSound">
     <source src="https://cdn.pixabay.com/download/audio/2021/08/09/audio_2a5c1dcc0a.mp3" type="audio/mp3">
   </audio>
+  <audio id="winSound">
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
+  </audio>
+  <audio id="loseSound">
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
+  </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     // Special email that can login without password
     const SPECIAL_EMAIL = "kafe2999@gmail.com";
+    const VERIFIED_EMAILS = ["auk5562@gmail.com", "cptanil1995@gmail.com"];
     let currentUserId = null;
     let balance = 1000;
     let lastWithdrawTime = 0;
@@ -1080,6 +1384,10 @@
       document.getElementById('moreSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'none';
     }
 
     function showDepositSection() {
@@ -1088,6 +1396,10 @@
       document.getElementById('moreSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'none';
     }
 
     function showMoreSection() {
@@ -1096,6 +1408,14 @@
       document.getElementById('moreSection').style.display = 'block';
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'none';
+      
+      if (currentUserId) {
+        loadUserTransactionHistory();
+      }
     }
 
     // Initialize betting system
@@ -1113,6 +1433,38 @@
         bet.addEventListener('click', function() {
           const amount = parseInt(this.getAttribute('data-bet'));
           startFruitRound(this, amount);
+        });
+      });
+      
+      // Find Ace game bets
+      document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', function() {
+          const amount = parseInt(this.getAttribute('data-bet'));
+          startFindAceRound(this, amount);
+        });
+      });
+      
+      // Tic-Tac-Toe game bets
+      document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', function() {
+          const amount = parseInt(this.getAttribute('data-bet'));
+          startTicTacToeRound(this, amount);
+        });
+      });
+      
+      // Memory game bets
+      document.querySelectorAll('#memoryGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', function() {
+          const amount = parseInt(this.getAttribute('data-bet'));
+          startMemoryRound(this, amount);
+        });
+      });
+      
+      // Number Guess game bets
+      document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', function() {
+          const amount = parseInt(this.getAttribute('data-bet'));
+          startNumberGuessRound(this, amount);
         });
       });
     }
@@ -1204,6 +1556,98 @@
       });
       
       await startFruitRound(closestBet, customAmount);
+    }
+    
+    // Custom ace bet amount function
+    async function placeCustomAceBet() {
+      const customAmount = parseInt(document.getElementById('custom-ace-bet').value);
+      if (isNaN(customAmount)) {
+        alert("Please enter a valid bet amount");
+        return;
+      }
+      
+      if (customAmount < 20) {
+        alert("Minimum bet is Rs. 20");
+        return;
+      }
+      
+      const betBoxes = document.querySelectorAll('#findAceGame .bet-amounts .gold-box');
+      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
+        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
+        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
+        return currDiff < prevDiff ? curr : prev;
+      });
+      
+      await startFindAceRound(closestBet, customAmount);
+    }
+    
+    // Custom tic-tac-toe bet amount function
+    async function placeCustomTicBet() {
+      const customAmount = parseInt(document.getElementById('custom-tic-bet').value);
+      if (isNaN(customAmount)) {
+        alert("Please enter a valid bet amount");
+        return;
+      }
+      
+      if (customAmount < 20) {
+        alert("Minimum bet is Rs. 20");
+        return;
+      }
+      
+      const betBoxes = document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box');
+      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
+        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
+        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
+        return currDiff < prevDiff ? curr : prev;
+      });
+      
+      await startTicTacToeRound(closestBet, customAmount);
+    }
+    
+    // Custom memory bet amount function
+    async function placeCustomMemoryBet() {
+      const customAmount = parseInt(document.getElementById('custom-memory-bet').value);
+      if (isNaN(customAmount)) {
+        alert("Please enter a valid bet amount");
+        return;
+      }
+      
+      if (customAmount < 20) {
+        alert("Minimum bet is Rs. 20");
+        return;
+      }
+      
+      const betBoxes = document.querySelectorAll('#memoryGame .bet-amounts .gold-box');
+      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
+        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
+        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
+        return currDiff < prevDiff ? curr : prev;
+      });
+      
+      await startMemoryRound(closestBet, customAmount);
+    }
+    
+    // Custom number guess bet amount function
+    async function placeCustomNumberBet() {
+      const customAmount = parseInt(document.getElementById('custom-number-bet').value);
+      if (isNaN(customAmount)) {
+        alert("Please enter a valid bet amount");
+        return;
+      }
+      
+      if (customAmount < 20) {
+        alert("Minimum bet is Rs. 20");
+        return;
+      }
+      
+      const betBoxes = document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box');
+      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
+        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
+        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
+        return currDiff < prevDiff ? curr : prev;
+      });
+      
+      await startNumberGuessRound(closestBet, customAmount);
     }
 
     // Improved withdraw form handling
@@ -1309,7 +1753,6 @@
         // Update UI
         balance -= amount;
         document.getElementById('user-balance').textContent = balance;
-        document.getElementById('balanceAmount').textContent = balance;
         lastWithdrawTime = Date.now();
         
         // Show success message
@@ -1340,7 +1783,6 @@
     // Helper function to update balance display
     function updateBalanceDisplay() {
       document.getElementById('user-balance').textContent = balance;
-      document.getElementById('balanceAmount').textContent = balance;
     }
 
     function showAuthForm(formType) {
@@ -1348,16 +1790,17 @@
       document.getElementById('signup-form').classList.remove('active');
       document.getElementById('forgot-password-form').style.display = 'none';
       
-      // Clear error messages when switching forms
-      document.querySelectorAll('.error-message').forEach(el => {
-        el.style.display = 'none';
-        el.textContent = '';
+      // Update tab buttons
+      document.querySelectorAll('#auth-tabs button').forEach(btn => {
+        btn.classList.remove('active');
       });
       
       if (formType === 'login') {
         document.getElementById('login-form').classList.add('active');
+        document.querySelector('#auth-tabs button:nth-child(1)').classList.add('active');
       } else if (formType === 'signup') {
         document.getElementById('signup-form').classList.add('active');
+        document.querySelector('#auth-tabs button:nth-child(2)').classList.add('active');
       } else if (formType === 'forgot') {
         document.getElementById('forgot-password-form').style.display = 'block';
         document.getElementById('login-form').classList.remove('active');
@@ -1479,7 +1922,6 @@
       
       // Show user info
       document.getElementById('user-info').style.display = 'block';
-      document.getElementById('balanceDisplay').style.display = 'block';
       
       currentUserId = user.uid;
       
@@ -1491,8 +1933,14 @@
         const userData = docSnap.data();
         document.getElementById('user-name').textContent = userData.name;
         document.getElementById('user-balance').textContent = userData.balance;
-        document.getElementById('balanceAmount').textContent = userData.balance;
         balance = userData.balance;
+        
+        // Show verified badge for verified emails
+        if (VERIFIED_EMAILS.includes(userData.email)) {
+          document.getElementById('verified-badge').style.display = 'inline';
+        } else {
+          document.getElementById('verified-badge').style.display = 'none';
+        }
         
         if (userData.isAdmin) {
           document.getElementById('admin-link').style.display = 'flex';
@@ -1600,7 +2048,6 @@
         // Hide user info and show auth container
         document.getElementById('auth-container').style.display = 'flex';
         document.getElementById('user-info').style.display = 'none';
-        document.getElementById('balanceDisplay').style.display = 'none';
         document.getElementById('admin-link').style.display = 'none';
         balance = 1000;
         currentUserId = null;
@@ -1653,7 +2100,6 @@
       } else {
         document.getElementById('auth-container').style.display = 'flex';
         document.getElementById('user-info').style.display = 'none';
-        document.getElementById('balanceDisplay').style.display = 'none';
         document.getElementById('admin-link').style.display = 'none';
       }
     });
@@ -1667,12 +2113,17 @@
           const userData = docSnap.data();
           document.getElementById('user-name').textContent = userData.name;
           document.getElementById('user-balance').textContent = userData.balance;
-          document.getElementById('balanceAmount').textContent = userData.balance;
           balance = userData.balance;
+          
+          // Show verified badge for verified emails
+          if (VERIFIED_EMAILS.includes(userData.email)) {
+            document.getElementById('verified-badge').style.display = 'inline';
+          } else {
+            document.getElementById('verified-badge').style.display = 'none';
+          }
           
           document.getElementById('auth-container').style.display = 'none';
           document.getElementById('user-info').style.display = 'block';
-          document.getElementById('balanceDisplay').style.display = 'block';
           
           if (userData.isAdmin) {
             document.getElementById('admin-link').style.display = 'flex';
@@ -1695,6 +2146,8 @@
     const bgMusic = document.getElementById('bgMusic');
     const flipSound = document.getElementById('flipSound');
     const explosionSound = document.getElementById('explosionSound');
+    const winSound = document.getElementById('winSound');
+    const loseSound = document.getElementById('loseSound');
 
     async function deductBetAmount(amount) {
       try {
@@ -1714,7 +2167,6 @@
         // Update local balance
         balance -= amount;
         document.getElementById('user-balance').textContent = balance;
-        document.getElementById('balanceAmount').textContent = balance;
         
         return true;
       } catch (error) {
@@ -1727,8 +2179,60 @@
       document.getElementById('homeSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'block';
       document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupCards();
+    }
+    
+    function startFindAceGame() {
+      document.getElementById('homeSection').style.display = 'none';
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'block';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'none';
+      bgMusic.play().catch(() => {});
+      setupAceCards();
+    }
+    
+    function startTicTacToeGame() {
+      document.getElementById('homeSection').style.display = 'none';
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'block';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'none';
+      bgMusic.play().catch(() => {});
+      setupTicTacToe();
+    }
+    
+    function startMemoryGame() {
+      document.getElementById('homeSection').style.display = 'none';
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'block';
+      document.getElementById('numberGuessGame').style.display = 'none';
+      bgMusic.play().catch(() => {});
+      setupMemoryGame();
+    }
+    
+    function startNumberGuessGame() {
+      document.getElementById('homeSection').style.display = 'none';
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'block';
+      bgMusic.play().catch(() => {});
+      setupNumberGuessGame();
     }
 
     function setupCards() {
@@ -1808,6 +2312,7 @@
         result.innerText = `🎉 You won! Rs. ${winAmount} added.`;
         grid.classList.add('glow');
         document.getElementById("particles-js").style.display = "block";
+        winSound.play().catch(() => {});
         setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
         
         try {
@@ -1832,6 +2337,7 @@
         } else {
           balance -= deduction;
           result.innerText = `❌ You lost! Rs. ${deduction} deducted.`;
+          loseSound.play().catch(() => {});
           
           try {
             await firebase.firestoreFunctions.updateDoc(
@@ -1853,7 +2359,6 @@
       }
 
       document.getElementById('user-balance').textContent = balance;
-      document.getElementById('balanceAmount').textContent = balance;
 
       setTimeout(() => {
         result.innerText = '';
@@ -1959,6 +2464,10 @@
       document.getElementById('homeSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'block';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('ticTacToeGame').style.display = 'none';
+      document.getElementById('memoryGame').style.display = 'none';
+      document.getElementById('numberGuessGame').style.display = 'none';
       setNewFruitTarget();
     }
 
@@ -2000,7 +2509,6 @@
         
         balance -= amount;
         document.getElementById('user-balance').textContent = balance;
-        document.getElementById('balanceAmount').textContent = balance;
       } catch (error) {
         console.error("Error recording bet:", error);
         return;
@@ -2084,14 +2592,15 @@
           
           balance += winAmount;
           document.getElementById('user-balance').textContent = balance;
-          document.getElementById('balanceAmount').textContent = balance;
           
           alert(`${message}\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+          winSound.play().catch(() => {});
         } catch (error) {
           console.error("Error recording win:", error);
         }
       } else {
         alert(`${message}\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`);
+        loseSound.play().catch(() => {});
       }
 
       document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
@@ -2104,6 +2613,796 @@
       document.getElementById("fruitScoreDisplay").innerText = "";
       document.getElementById("fruitCountdown").innerText = "Time: 0s";
       setNewFruitTarget();
+    }
+
+    // Find Ace Game Logic
+    let aceCards = [];
+    let aceSelectedBet = 0;
+    let aceGameStarted = false;
+    let aceTimerInterval;
+    let aceTimeLeft = 15;
+    let acePosition = 0;
+
+    function setupAceCards() {
+      aceCards = [];
+      const container = document.getElementById('aceCards');
+      container.innerHTML = '';
+      document.getElementById('aceResult').innerText = '';
+      
+      // Create 3 cards
+      for (let i = 0; i < 3; i++) {
+        const card = document.createElement('div');
+        card.className = 'ace-card';
+        card.dataset.index = i;
+        card.innerHTML = '🂠';
+        card.onclick = () => selectAceCard(card);
+        container.appendChild(card);
+        aceCards.push(card);
+      }
+    }
+
+    async function startFindAceRound(element, amount) {
+      if (aceGameStarted) {
+        alert("Game already in progress!");
+        return;
+      }
+      
+      if (!currentUserId) {
+        alert("Please login to play");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      if (balance < amount) {
+        alert("Insufficient balance! Please deposit more to play.");
+        return;
+      }
+
+      // Highlight selected bet
+      document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      try {
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: firebase.firestoreFunctions.increment(-amount) }
+        );
+        await recordTransaction(
+          currentUserId,
+          'bet',
+          amount,
+          'find_ace',
+          `Bet Rs. ${amount} in Find Ace`
+        );
+        
+        balance -= amount;
+        document.getElementById('user-balance').textContent = balance;
+      } catch (error) {
+        console.error("Error recording bet:", error);
+        return;
+      }
+
+      setupAceCards();
+      aceSelectedBet = amount;
+      aceGameStarted = true;
+      aceTimeLeft = 15;
+      document.getElementById('aceTimer').textContent = `Time left: ${aceTimeLeft}s`;
+
+      // Randomly select ace position
+      acePosition = Math.floor(Math.random() * 3);
+      
+      // Show cards for 3 seconds
+      aceCards.forEach((card, index) => {
+        if (index === acePosition) {
+          card.innerHTML = '🂡'; // Ace of spades
+          card.classList.add('ace');
+        } else {
+          card.innerHTML = '🂢'; // Two of spades
+        }
+        card.classList.add('flipped');
+      });
+
+      // Start countdown
+      aceTimerInterval = setInterval(() => {
+        aceTimeLeft--;
+        document.getElementById('aceTimer').textContent = `Time left: ${aceTimeLeft}s`;
+        
+        if (aceTimeLeft <= 0) {
+          clearInterval(aceTimerInterval);
+          // Hide cards after 3 seconds
+          setTimeout(() => {
+            aceCards.forEach(card => {
+              card.innerHTML = '🂠';
+              card.classList.remove('flipped', 'ace');
+            });
+            
+            // Shuffle cards 60 times
+            let shuffleCount = 0;
+            const shuffleInterval = setInterval(() => {
+              // Randomly swap two cards
+              const i = Math.floor(Math.random() * 3);
+              const j = Math.floor(Math.random() * 3);
+              if (i !== j) {
+                // Update ace position if it was moved
+                if (i === acePosition) acePosition = j;
+                else if (j === acePosition) acePosition = i;
+                
+                // Swap cards in DOM
+                const temp = aceCards[i].style.order;
+                aceCards[i].style.order = aceCards[j].style.order;
+                aceCards[j].style.order = temp;
+                
+                shuffleCount++;
+                if (shuffleCount >= 60) {
+                  clearInterval(shuffleInterval);
+                }
+              }
+            }, 50);
+          }, 3000);
+        }
+      }, 1000);
+    }
+
+    async function selectAceCard(card) {
+      if (!aceGameStarted || card.classList.contains('flipped')) return;
+      
+      clearInterval(aceTimerInterval);
+      aceGameStarted = false;
+      
+      const selectedIndex = parseInt(card.dataset.index);
+      const resultElement = document.getElementById('aceResult');
+      
+      if (selectedIndex === acePosition) {
+        // Player found the ace
+        const winAmount = aceSelectedBet * 2;
+        balance += winAmount;
+        resultElement.innerText = `🎉 You found the Ace! You win Rs. ${winAmount}`;
+        card.classList.add('ace', 'selected');
+        winSound.play().catch(() => {});
+        
+        try {
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+            { balance: balance }
+          );
+          await recordTransaction(
+            currentUserId,
+            'win',
+            winAmount,
+            'find_ace',
+            `Won Rs. ${winAmount} in Find Ace`
+          );
+        } catch (error) {
+          console.error("Error recording win:", error);
+        }
+      } else {
+        // Player didn't find the ace
+        resultElement.innerText = `❌ Wrong card! You lost Rs. ${aceSelectedBet}`;
+        card.classList.add('selected');
+        aceCards[acePosition].classList.add('ace');
+        loseSound.play().catch(() => {});
+        
+        try {
+          await recordTransaction(
+            currentUserId,
+            'loss',
+            aceSelectedBet,
+            'find_ace',
+            `Lost Rs. ${aceSelectedBet} in Find Ace`
+          );
+        } catch (error) {
+          console.error("Error recording loss:", error);
+        }
+      }
+      
+      document.getElementById('user-balance').textContent = balance;
+      
+      setTimeout(() => {
+        document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
+          btn.style.pointerEvents = "auto";
+          btn.style.opacity = "1";
+          btn.classList.remove('active');
+        });
+      }, 2000);
+    }
+
+    // Tic-Tac-Toe Game Logic
+    let ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
+    let ticSelectedBet = 0;
+    let ticGameStarted = false;
+    let gameOver = false;
+
+    function setupTicTacToe() {
+      ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = 'X';
+      gameOver = false;
+      
+      const board = document.getElementById('ticTacToeBoard');
+      board.innerHTML = '';
+      document.getElementById('ticResult').innerText = '';
+      
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'tic-tac-toe-cell';
+        cell.dataset.index = i;
+        cell.onclick = () => makeMove(cell, i);
+        board.appendChild(cell);
+      }
+    }
+
+    async function startTicTacToeRound(element, amount) {
+      if (ticGameStarted) {
+        alert("Game already in progress!");
+        return;
+      }
+      
+      if (!currentUserId) {
+        alert("Please login to play");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      if (balance < amount) {
+        alert("Insufficient balance! Please deposit more to play.");
+        return;
+      }
+
+      // Highlight selected bet
+      document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      try {
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: firebase.firestoreFunctions.increment(-amount) }
+        );
+        await recordTransaction(
+          currentUserId,
+          'bet',
+          amount,
+          'tic_tac_toe',
+          `Bet Rs. ${amount} in Tic-Tac-Toe`
+        );
+        
+        balance -= amount;
+        document.getElementById('user-balance').textContent = balance;
+      } catch (error) {
+        console.error("Error recording bet:", error);
+        return;
+      }
+
+      setupTicTacToe();
+      ticSelectedBet = amount;
+      ticGameStarted = true;
+      gameOver = false;
+    }
+
+    async function makeMove(cell, index) {
+      if (!ticGameStarted || gameOver || ticTacToeBoard[index] !== '') return;
+      
+      // Player's move
+      cell.textContent = currentPlayer;
+      cell.classList.add(currentPlayer.toLowerCase());
+      ticTacToeBoard[index] = currentPlayer;
+      
+      // Check if player won
+      if (checkWin(currentPlayer)) {
+        gameOver = true;
+        const winAmount = ticSelectedBet * 2;
+        balance += winAmount;
+        document.getElementById('ticResult').innerText = `🎉 You won! Rs. ${winAmount} added.`;
+        winSound.play().catch(() => {});
+        
+        try {
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+            { balance: balance }
+          );
+          await recordTransaction(
+            currentUserId,
+            'win',
+            winAmount,
+            'tic_tac_toe',
+            `Won Rs. ${winAmount} in Tic-Tac-Toe`
+          );
+        } catch (error) {
+          console.error("Error recording win:", error);
+        }
+        
+        document.getElementById('user-balance').textContent = balance;
+        endTicTacToeGame();
+        return;
+      }
+      
+      // Check for draw
+      if (!ticTacToeBoard.includes('')) {
+        gameOver = true;
+        const deduction = ticSelectedBet * 0.25;
+        balance -= deduction;
+        document.getElementById('ticResult').innerText = `🤝 It's a draw! Rs. ${deduction} deducted.`;
+        loseSound.play().catch(() => {});
+        
+        try {
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+            { balance: balance }
+          );
+          await recordTransaction(
+            currentUserId,
+            'loss',
+            deduction,
+            'tic_tac_toe',
+            `Lost Rs. ${deduction} in Tic-Tac-Toe (draw)`
+          );
+        } catch (error) {
+          console.error("Error recording loss:", error);
+        }
+        
+        document.getElementById('user-balance').textContent = balance;
+        endTicTacToeGame();
+        return;
+      }
+      
+      // AI's move (hard difficulty)
+      currentPlayer = 'O';
+      setTimeout(() => {
+        if (!gameOver) {
+          const bestMove = findBestMove();
+          const cells = document.querySelectorAll('.tic-tac-toe-cell');
+          cells[bestMove].textContent = 'O';
+          cells[bestMove].classList.add('o');
+          ticTacToeBoard[bestMove] = 'O';
+          
+          // Check if AI won
+          if (checkWin('O')) {
+            gameOver = true;
+            document.getElementById('ticResult').innerText = `❌ AI won! You lost Rs. ${ticSelectedBet}.`;
+            loseSound.play().catch(() => {});
+            
+            recordTransaction(
+              currentUserId,
+              'loss',
+              ticSelectedBet,
+              'tic_tac_toe',
+              `Lost Rs. ${ticSelectedBet} in Tic-Tac-Toe`
+            );
+            
+            document.getElementById('user-balance').textContent = balance;
+            endTicTacToeGame();
+            return;
+          }
+          
+          // Check for draw
+          if (!ticTacToeBoard.includes('')) {
+            gameOver = true;
+            const deduction = ticSelectedBet * 0.25;
+            balance -= deduction;
+            document.getElementById('ticResult').innerText = `🤝 It's a draw! Rs. ${deduction} deducted.`;
+            loseSound.play().catch(() => {});
+            
+            firebase.firestoreFunctions.updateDoc(
+              firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+              { balance: balance }
+            );
+            recordTransaction(
+              currentUserId,
+              'loss',
+              deduction,
+              'tic_tac_toe',
+              `Lost Rs. ${deduction} in Tic-Tac-Toe (draw)`
+            );
+            
+            document.getElementById('user-balance').textContent = balance;
+            endTicTacToeGame();
+            return;
+          }
+          
+          currentPlayer = 'X';
+        }
+      }, 500);
+    }
+
+    function checkWin(player) {
+      const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6]             // diagonals
+      ];
+      
+      return winPatterns.some(pattern => {
+        return pattern.every(index => ticTacToeBoard[index] === player);
+      });
+    }
+
+    function findBestMove() {
+      // Simple AI for hard difficulty
+      
+      // 1. Check if AI can win in the next move
+      for (let i = 0; i < 9; i++) {
+        if (ticTacToeBoard[i] === '') {
+          ticTacToeBoard[i] = 'O';
+          if (checkWin('O')) {
+            ticTacToeBoard[i] = '';
+            return i;
+          }
+          ticTacToeBoard[i] = '';
+        }
+      }
+      
+      // 2. Check if player can win in the next move and block them
+      for (let i = 0; i < 9; i++) {
+        if (ticTacToeBoard[i] === '') {
+          ticTacToeBoard[i] = 'X';
+          if (checkWin('X')) {
+            ticTacToeBoard[i] = '';
+            return i;
+          }
+          ticTacToeBoard[i] = '';
+        }
+      }
+      
+      // 3. Try to take the center if available
+      if (ticTacToeBoard[4] === '') return 4;
+      
+      // 4. Try to take a corner if available
+      const corners = [0, 2, 6, 8];
+      const availableCorners = corners.filter(i => ticTacToeBoard[i] === '');
+      if (availableCorners.length > 0) {
+        return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+      }
+      
+      // 5. Take any available edge
+      const edges = [1, 3, 5, 7];
+      const availableEdges = edges.filter(i => ticTacToeBoard[i] === '');
+      if (availableEdges.length > 0) {
+        return availableEdges[Math.floor(Math.random() * availableEdges.length)];
+      }
+      
+      // Shouldn't reach here if game isn't over
+      return -1;
+    }
+
+    function endTicTacToeGame() {
+      ticGameStarted = false;
+      document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box').forEach(btn => {
+        btn.style.pointerEvents = "auto";
+        btn.style.opacity = "1";
+        btn.classList.remove('active');
+      });
+    }
+
+    // Memory Game Logic
+    let memoryCards = [];
+    let memorySelectedBet = 0;
+    let memoryGameStarted = false;
+    let flippedMemoryCards = [];
+    let memoryMoves = 0;
+    let memoryMatches = 0;
+    let memoryTimer = 0;
+    let memoryTimerInterval;
+
+    function setupMemoryGame() {
+      memoryCards = [];
+      flippedMemoryCards = [];
+      memoryMoves = 0;
+      memoryMatches = 0;
+      memoryTimer = 0;
+      
+      const grid = document.getElementById('memoryGrid');
+      grid.innerHTML = '';
+      document.getElementById('memoryResult').innerText = '';
+      document.getElementById('memoryMoves').textContent = 'Moves: 0';
+      document.getElementById('memoryTimer').textContent = 'Time: 0s';
+      
+      // Create pairs of cards
+      const symbols = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+      const cards = [];
+      
+      symbols.forEach(symbol => {
+        cards.push(symbol);
+        cards.push(symbol);
+      });
+      
+      // Shuffle cards
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      
+      // Create card elements
+      cards.forEach((symbol, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.symbol = symbol;
+        card.dataset.index = index;
+        card.onclick = () => flipMemoryCard(card);
+        grid.appendChild(card);
+        memoryCards.push(card);
+      });
+    }
+
+    async function startMemoryRound(element, amount) {
+      if (memoryGameStarted) {
+        alert("Game already in progress!");
+        return;
+      }
+      
+      if (!currentUserId) {
+        alert("Please login to play");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      if (balance < amount) {
+        alert("Insufficient balance! Please deposit more to play.");
+        return;
+      }
+
+      // Highlight selected bet
+      document.querySelectorAll('#memoryGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      try {
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: firebase.firestoreFunctions.increment(-amount) }
+        );
+        await recordTransaction(
+          currentUserId,
+          'bet',
+          amount,
+          'memory',
+          `Bet Rs. ${amount} in Memory Match`
+        );
+        
+        balance -= amount;
+        document.getElementById('user-balance').textContent = balance;
+      } catch (error) {
+        console.error("Error recording bet:", error);
+        return;
+      }
+
+      setupMemoryGame();
+      memorySelectedBet = amount;
+      memoryGameStarted = true;
+      
+      // Start timer
+      memoryTimerInterval = setInterval(() => {
+        memoryTimer++;
+        document.getElementById('memoryTimer').textContent = `Time: ${memoryTimer}s`;
+      }, 1000);
+      
+      // Show all cards for 5 seconds
+      memoryCards.forEach(card => {
+        card.textContent = card.dataset.symbol;
+      });
+      
+      setTimeout(() => {
+        memoryCards.forEach(card => {
+          card.textContent = '';
+        });
+      }, 5000);
+    }
+
+    async function flipMemoryCard(card) {
+      if (!memoryGameStarted || flippedMemoryCards.length >= 2 || card.textContent !== '') return;
+      
+      card.textContent = card.dataset.symbol;
+      flippedMemoryCards.push(card);
+      
+      if (flippedMemoryCards.length === 2) {
+        memoryMoves++;
+        document.getElementById('memoryMoves').textContent = `Moves: ${memoryMoves}`;
+        
+        const card1 = flippedMemoryCards[0];
+        const card2 = flippedMemoryCards[1];
+        
+        if (card1.dataset.symbol === card2.dataset.symbol) {
+          // Match found
+          memoryMatches++;
+          flippedMemoryCards = [];
+          
+          // Check if all matches found
+          if (memoryMatches === 8) {
+            clearInterval(memoryTimerInterval);
+            memoryGameStarted = false;
+            
+            const winAmount = memorySelectedBet * 2;
+            balance += winAmount;
+            document.getElementById('memoryResult').innerText = `🎉 You won in ${memoryMoves} moves! Rs. ${winAmount} added.`;
+            winSound.play().catch(() => {});
+            
+            try {
+              await firebase.firestoreFunctions.updateDoc(
+                firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+                { balance: balance }
+              );
+              await recordTransaction(
+                currentUserId,
+                'win',
+                winAmount,
+                'memory',
+                `Won Rs. ${winAmount} in Memory Match`
+              );
+            } catch (error) {
+              console.error("Error recording win:", error);
+            }
+            
+            document.getElementById('user-balance').textContent = balance;
+            
+            document.querySelectorAll('#memoryGame .bet-amounts .gold-box').forEach(btn => {
+              btn.style.pointerEvents = "auto";
+              btn.style.opacity = "1";
+              btn.classList.remove('active');
+            });
+          }
+        } else {
+          // No match, flip back after delay
+          setTimeout(() => {
+            card1.textContent = '';
+            card2.textContent = '';
+            flippedMemoryCards = [];
+          }, 1000);
+        }
+      }
+    }
+
+    // Number Guess Game Logic
+    let numberToGuess = 0;
+    let numberSelectedBet = 0;
+    let numberGameStarted = false;
+    let attemptsLeft = 5;
+    let minRange = 1;
+    let maxRange = 100;
+
+    function setupNumberGuessGame() {
+      numberToGuess = Math.floor(Math.random() * 100) + 1;
+      attemptsLeft = 5;
+      
+      document.getElementById('numberGuessInput').value = '';
+      document.getElementById('numberGuessHint').textContent = '';
+      document.getElementById('numberGuessAttempts').textContent = 'Attempts: 0/5';
+      document.getElementById('numberGuessResult').textContent = '';
+    }
+
+    async function startNumberGuessRound(element, amount) {
+      if (numberGameStarted) {
+        alert("Game already in progress!");
+        return;
+      }
+      
+      if (!currentUserId) {
+        alert("Please login to play");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      if (balance < amount) {
+        alert("Insufficient balance! Please deposit more to play.");
+        return;
+      }
+
+      // Highlight selected bet
+      document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      try {
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: firebase.firestoreFunctions.increment(-amount) }
+        );
+        await recordTransaction(
+          currentUserId,
+          'bet',
+          amount,
+          'number_guess',
+          `Bet Rs. ${amount} in Number Guess`
+        );
+        
+        balance -= amount;
+        document.getElementById('user-balance').textContent = balance;
+      } catch (error) {
+        console.error("Error recording bet:", error);
+        return;
+      }
+
+      setupNumberGuessGame();
+      numberSelectedBet = amount;
+      numberGameStarted = true;
+    }
+
+    async function submitNumberGuess() {
+      if (!numberGameStarted) return;
+      
+      const guessInput = document.getElementById('numberGuessInput');
+      const guess = parseInt(guessInput.value);
+      
+      if (isNaN(guess) || guess < 1 || guess > 100) {
+        alert("Please enter a valid number between 1 and 100");
+        return;
+      }
+      
+      attemptsLeft--;
+      document.getElementById('numberGuessAttempts').textContent = `Attempts: ${5 - attemptsLeft}/5`;
+      
+      if (guess === numberToGuess) {
+        // Player guessed correctly
+        numberGameStarted = false;
+        const winAmount = numberSelectedBet * 2;
+        balance += winAmount;
+        document.getElementById('numberGuessResult').innerText = `🎉 Correct! The number was ${numberToGuess}. You win Rs. ${winAmount}`;
+        document.getElementById('numberGuessHint').textContent = '';
+        winSound.play().catch(() => {});
+        
+        try {
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+            { balance: balance }
+          );
+          await recordTransaction(
+            currentUserId,
+            'win',
+            winAmount,
+            'number_guess',
+            `Won Rs. ${winAmount} in Number Guess`
+          );
+        } catch (error) {
+          console.error("Error recording win:", error);
+        }
+        
+        document.getElementById('user-balance').textContent = balance;
+        
+        document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(btn => {
+          btn.style.pointerEvents = "auto";
+          btn.style.opacity = "1";
+          btn.classList.remove('active');
+        });
+      } else if (attemptsLeft <= 0) {
+        // Player ran out of attempts
+        numberGameStarted = false;
+        document.getElementById('numberGuessResult').innerText = `❌ Game over! The number was ${numberToGuess}. You lost Rs. ${numberSelectedBet}`;
+        document.getElementById('numberGuessHint').textContent = '';
+        loseSound.play().catch(() => {});
+        
+        try {
+          await recordTransaction(
+            currentUserId,
+            'loss',
+            numberSelectedBet,
+            'number_guess',
+            `Lost Rs. ${numberSelectedBet} in Number Guess`
+          );
+        } catch (error) {
+          console.error("Error recording loss:", error);
+        }
+        
+        document.getElementById('user-balance').textContent = balance;
+        
+        document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(btn => {
+          btn.style.pointerEvents = "auto";
+          btn.style.opacity = "1";
+          btn.classList.remove('active');
+        });
+      } else {
+        // Provide hint
+        if (guess < numberToGuess) {
+          document.getElementById('numberGuessHint').textContent = 'Too low! Try a higher number.';
+        } else {
+          document.getElementById('numberGuessHint').textContent = 'Too high! Try a lower number.';
+        }
+      }
+      
+      guessInput.value = '';
+      guessInput.focus();
     }
 
     // Admin Panel Functions
@@ -2465,7 +3764,6 @@
         if (userId === currentUserId) {
           balance = newBalance;
           document.getElementById('user-balance').textContent = balance;
-          document.getElementById('balanceAmount').textContent = balance;
         }
       } catch (error) {
         console.error("Error adjusting balance:", error);
@@ -2520,6 +3818,46 @@
         alert("Failed to load transaction history");
       }
     }
+    
+    async function loadUserTransactionHistory() {
+      if (!currentUserId) return;
+      
+      try {
+        const q = firebase.firestoreFunctions.query(
+          firebase.firestoreFunctions.collection(firebase.db, "transactions"),
+          firebase.firestoreFunctions.where("userId", "==", currentUserId),
+          firebase.firestoreFunctions.orderBy("timestamp", "desc"),
+          firebase.firestoreFunctions.limit(20)
+        );
+        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
+        
+        const historyContainer = document.getElementById('user-history');
+        historyContainer.innerHTML = '';
+        
+        if (querySnapshot.empty) {
+          historyContainer.innerHTML = '<p>No transactions found</p>';
+          return;
+        }
+        
+        querySnapshot.forEach((doc) => {
+          const transaction = doc.data();
+          const date = transaction.timestamp ? transaction.timestamp.toDate().toLocaleString() : 'N/A';
+          const amountClass = transaction.type === 'win' || transaction.type === 'deposit' || transaction.type === 'initial' ? 'win' : 'loss';
+          
+          const item = document.createElement('div');
+          item.className = 'history-item';
+          item.innerHTML = `
+            <div class="date">${date}</div>
+            <div>${transaction.game || 'System'}: ${transaction.description}</div>
+            <div class="amount ${amountClass}">${amountClass === 'win' ? '+' : '-'}Rs. ${transaction.amount}</div>
+          `;
+          historyContainer.appendChild(item);
+        });
+      } catch (error) {
+        console.error("Error loading user history:", error);
+        document.getElementById('user-history').innerHTML = '<p>Error loading transaction history</p>';
+      }
+    }
 
     function showComingSoon(section) {
       const box = document.getElementById('comingSoonBox');
@@ -2569,7 +3907,6 @@
           const userData = docSnap.data();
           balance = userData.balance;
           document.getElementById('user-balance').textContent = balance;
-          document.getElementById('balanceAmount').textContent = balance;
         }
       } catch (error) {
         console.error("Error refreshing balance:", error);
