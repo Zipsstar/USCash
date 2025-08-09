@@ -584,41 +584,6 @@
       margin-top: 5px;
       display: none;
     }
-    #withdraw-form {
-      display: none;
-      margin-top: 15px;
-      padding: 15px;
-      background: #111;
-      border: 1px solid goldenrod;
-      border-radius: 8px;
-    }
-    #withdraw-form input, #withdraw-form select {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0;
-      background: #222;
-      border: 1px solid goldenrod;
-      color: white;
-      border-radius: 4px;
-    }
-    #withdraw-form button {
-      width: 100%;
-      padding: 8px;
-      margin-top: 10px;
-      background: goldenrod;
-      color: black;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .refresh-balance {
-      background: none;
-      border: none;
-      color: goldenrod;
-      cursor: pointer;
-      margin-left: 5px;
-    }
     .modal {
       display: none;
       position: fixed;
@@ -833,10 +798,12 @@
   </div>
 
   <div id="balanceDisplay" style="display:none;">Balance: Rs. <span id="balanceAmount">1000</span></div>
+  
+  <!-- Updated Nav Section -->
   <div class="nav">
     <a href="#">Home</a>
     <a href="#" onclick="showComingSoon('deposit')">Deposit</a>
-    <a href="#" onclick="showWithdrawForm()">Withdraw</a>
+    <a href="#" id="withdraw-link">Withdraw</a> <!-- Updated this line -->
     <a href="#" onclick="checkVIPAccess()">VIP</a>
     <a href="#">More</a>
   </div>
@@ -846,21 +813,21 @@
     <p>This feature is under development and will be available soon.</p>
   </div>
 
-  <!-- Withdraw Modal -->
+  <!-- Updated Withdraw Modal -->
   <div id="withdrawModal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeWithdrawModal()">&times;</span>
       <h2>Withdraw Funds</h2>
-      <div id="withdraw-form">
+      <form id="withdraw-form" onsubmit="event.preventDefault(); submitWithdrawRequest();">
         <input type="text" id="withdraw-name" placeholder="Full Name" required>
         <input type="text" id="withdraw-account" placeholder="Account Number" required>
         <input type="text" id="withdraw-username" placeholder="Game User Name" required>
-        <input type="email" id="withdraw-email" placeholder="Gmail" required>
+        <input type="email" id="withdraw-email" placeholder="Email" required>
         <input type="number" id="withdraw-amount" placeholder="Amount (Minimum Rs. 300)" min="300" required>
-        <button onclick="submitWithdrawRequest()">Submit Request</button>
+        <button type="submit">Submit Request</button>
         <div class="error-message" id="withdraw-error"></div>
         <div class="loading-spinner" id="withdraw-spinner"></div>
-      </div>
+      </form>
     </div>
   </div>
 
@@ -885,6 +852,7 @@
     </div>
   </div>
 
+  <!-- Updated Scratch Game Section -->
   <div class="section" id="scratchGame" style="display:none;">
     <h2>📏 Scratch & Match</h2>
     <div class="bet-amounts">
@@ -956,6 +924,183 @@
       250: 255,
       300: 305
     };
+
+    // Initialize betting system when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set up withdraw link
+      document.getElementById('withdraw-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        showWithdrawForm();
+      });
+      
+      // Initialize betting
+      initializeBetting();
+    });
+
+    // Improved betting initialization
+    function initializeBetting() {
+      // Scratch game bets
+      document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(bet => {
+        bet.addEventListener('click', async function() {
+          const amount = parseInt(this.getAttribute('data-bet'));
+          
+          if (gameStarted) {
+            alert("Game already in progress!");
+            return;
+          }
+          
+          if (!currentUserId) {
+            alert("Please login to play");
+            document.getElementById('auth-container').style.display = 'flex';
+            return;
+          }
+          
+          if (balance < amount) {
+            alert("Insufficient balance!");
+            return;
+          }
+          
+          try {
+            // Deduct balance
+            await firebase.firestoreFunctions.updateDoc(
+              firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+              { balance: firebase.firestoreFunctions.increment(-amount) }
+            );
+            
+            // Update local balance
+            balance -= amount;
+            updateBalanceDisplay();
+            
+            // Start game
+            selectedBet = amount;
+            this.classList.add('active');
+            revealAndShuffleCards();
+            
+          } catch (error) {
+            console.error("Betting error:", error);
+            alert("Failed to place bet. Please try again.");
+          }
+        });
+      });
+    }
+
+    // Improved withdraw form handling
+    async function showWithdrawForm() {
+      if (!currentUserId) {
+        alert("Please login to withdraw");
+        document.getElementById('auth-container').style.display = 'flex';
+        return;
+      }
+      
+      const now = Date.now();
+      if (now - lastWithdrawTime < WITHDRAW_COOLDOWN) {
+        const hoursLeft = Math.ceil((WITHDRAW_COOLDOWN - (now - lastWithdrawTime)) / (60 * 60 * 1000));
+        alert(`You can only withdraw once every 4 hours. Please wait ${hoursLeft} more hour(s).`);
+        return;
+      }
+      
+      const modal = document.getElementById('withdrawModal');
+      const form = document.getElementById('withdraw-form');
+      
+      // Reset form
+      form.reset();
+      document.getElementById('withdraw-error').style.display = 'none';
+      
+      // Load user data
+      try {
+        const userDoc = await firebase.firestoreFunctions.getDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId)
+        );
+        
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          document.getElementById('withdraw-name').value = userData.name || '';
+          document.getElementById('withdraw-email').value = userData.email || '';
+        }
+      } catch (error) {
+        console.error("Error loading user data:", error);
+      }
+      
+      // Show modal
+      modal.style.display = 'flex';
+    }
+
+    // Improved withdraw submission
+    async function submitWithdrawRequest() {
+      const spinner = document.getElementById('withdraw-spinner');
+      const errorElement = document.getElementById('withdraw-error');
+      
+      // Validate inputs
+      const name = document.getElementById('withdraw-name').value.trim();
+      const account = document.getElementById('withdraw-account').value.trim();
+      const username = document.getElementById('withdraw-username').value.trim();
+      const email = document.getElementById('withdraw-email').value.trim();
+      const amount = parseFloat(document.getElementById('withdraw-amount').value);
+
+      // Validation checks
+      if (!name || !account || !username || !email || isNaN(amount)) {
+        showError('withdraw-error', 'Please fill all fields correctly');
+        return;
+      }
+      
+      if (amount < 300) {
+        showError('withdraw-error', 'Minimum withdrawal is Rs. 300');
+        return;
+      }
+
+      if (balance < amount) {
+        showError('withdraw-error', 'Insufficient balance');
+        return;
+      }
+
+      // Show loading
+      spinner.style.display = 'block';
+      errorElement.style.display = 'none';
+
+      try {
+        // Create withdrawal request
+        await firebase.firestoreFunctions.addDoc(
+          firebase.firestoreFunctions.collection(firebase.db, "withdraw_requests"), 
+          {
+            user_id: currentUserId,
+            name: name,
+            account_number: account,
+            game_username: username,
+            email: email,
+            amount: amount,
+            status: 'pending',
+            timestamp: firebase.firestoreFunctions.serverTimestamp()
+          }
+        );
+
+        // Update balance
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+          { balance: firebase.firestoreFunctions.increment(-amount) }
+        );
+
+        // Update UI
+        balance -= amount;
+        document.getElementById('user-balance').textContent = balance;
+        document.getElementById('balanceAmount').textContent = balance;
+        
+        // Close modal
+        closeWithdrawModal();
+        alert('Withdrawal request submitted successfully!');
+        
+      } catch (error) {
+        console.error("Withdrawal error:", error);
+        showError('withdraw-error', 'Failed to submit: ' + error.message);
+      } finally {
+        spinner.style.display = 'none';
+      }
+    }
+
+    // Helper function to update balance display
+    function updateBalanceDisplay() {
+      document.getElementById('user-balance').textContent = balance;
+      document.getElementById('balanceAmount').textContent = balance;
+    }
 
     function showAuthForm(formType) {
       document.getElementById('login-form').classList.remove('active');
@@ -2230,142 +2375,8 @@
       }
     }
 
-    // Withdraw Functions
-    function showWithdrawForm() {
-      if (!currentUserId) {
-        alert("Please login to withdraw");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      const now = Date.now();
-      if (now - lastWithdrawTime < WITHDRAW_COOLDOWN) {
-        const hoursLeft = Math.ceil((WITHDRAW_COOLDOWN - (now - lastWithdrawTime)) / (60 * 60 * 1000));
-        alert(`You can only withdraw once every 4 hours. Please wait ${hoursLeft} more hour(s).`);
-        return;
-      }
-      
-      document.getElementById('withdrawModal').style.display = 'flex';
-      document.getElementById('withdraw-error').style.display = 'none';
-      document.getElementById('withdraw-error').textContent = '';
-      
-      // Pre-fill user details if available
-      if (currentUserId) {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId);
-        firebase.firestoreFunctions.getDoc(docRef).then(docSnap => {
-          if (docSnap.exists()) {
-            const userData = docSnap.data();
-            document.getElementById('withdraw-name').value = userData.name || '';
-            document.getElementById('withdraw-email').value = userData.email || '';
-          }
-        });
-      }
-    }
-
     function closeWithdrawModal() {
       document.getElementById('withdrawModal').style.display = 'none';
-    }
-
-    async function submitWithdrawRequest() {
-      const name = document.getElementById('withdraw-name').value.trim();
-      const account = document.getElementById('withdraw-account').value.trim();
-      const username = document.getElementById('withdraw-username').value.trim();
-      const email = document.getElementById('withdraw-email').value.trim();
-      const amount = parseFloat(document.getElementById('withdraw-amount').value);
-      
-      const errorElement = document.getElementById('withdraw-error');
-      errorElement.style.display = 'none';
-      errorElement.textContent = '';
-      
-      if (!name || !account || !username || !email || isNaN(amount)) {
-        errorElement.textContent = 'Please fill all fields';
-        errorElement.style.display = 'block';
-        return;
-      }
-      
-      if (amount < 300) {
-        errorElement.textContent = 'Minimum withdrawal amount is Rs. 300';
-        errorElement.style.display = 'block';
-        return;
-      }
-      
-      if (balance < amount) {
-        errorElement.textContent = 'Insufficient balance';
-        errorElement.style.display = 'block';
-        return;
-      }
-      
-      // Show loading spinner
-      const spinner = document.getElementById('withdraw-spinner');
-      spinner.style.display = 'block';
-      
-      try {
-        // First check if user has sufficient balance
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-        
-        if (!docSnap.exists()) {
-          errorElement.textContent = 'User not found';
-          errorElement.style.display = 'block';
-          spinner.style.display = 'none';
-          return;
-        }
-        
-        const userData = docSnap.data();
-        if (userData.balance < amount) {
-          errorElement.textContent = 'Insufficient balance';
-          errorElement.style.display = 'block';
-          spinner.style.display = 'none';
-          return;
-        }
-        
-        // Create withdrawal request
-        await firebase.firestoreFunctions.addDoc(
-          firebase.firestoreFunctions.collection(firebase.db, "withdraw_requests"), 
-          {
-            user_id: currentUserId,
-            name: name,
-            account_number: account,
-            game_username: username,
-            email: email,
-            amount: amount,
-            status: 'pending',
-            timestamp: firebase.firestoreFunctions.serverTimestamp()
-          }
-        );
-        
-        // Deduct from user balance
-        await firebase.firestoreFunctions.updateDoc(
-          docRef,
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        
-        // Record transaction
-        await recordTransaction(
-          currentUserId,
-          'withdrawal_request',
-          amount,
-          'system',
-          `Withdrawal request of Rs. ${amount} submitted`
-        );
-        
-        // Update local balance
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-        document.getElementById('balanceAmount').textContent = balance;
-        
-        // Set cooldown
-        lastWithdrawTime = Date.now();
-        
-        alert('Withdrawal request submitted successfully! It will be processed soon.');
-        closeWithdrawModal();
-      } catch (error) {
-        console.error("Error submitting withdrawal:", error);
-        errorElement.textContent = 'Failed to submit withdrawal request. Please try again.';
-        errorElement.style.display = 'block';
-      } finally {
-        spinner.style.display = 'none';
-      }
     }
 
     // Refresh balance
