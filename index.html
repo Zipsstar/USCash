@@ -651,6 +651,74 @@
       display: inline-block;
       margin-top: 10px;
     }
+    /* New styles for custom bet amount */
+    .custom-bet-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .custom-bet-input {
+      width: 100px;
+      padding: 8px;
+      margin-right: 8px;
+      background: #222;
+      border: 1px solid goldenrod;
+      color: white;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .custom-bet-btn {
+      background: goldenrod;
+      color: black;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    /* Improved withdraw form styles */
+    #withdraw-form input,
+    #withdraw-form select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      background: #222;
+      border: 1px solid goldenrod;
+      color: white;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    #withdraw-form select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='goldenrod'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 12px;
+    }
+    #withdraw-form button[type="submit"] {
+      background: goldenrod;
+      color: black;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .withdraw-info {
+      font-size: 0.8rem;
+      margin-top: 5px;
+      color: #aaa;
+    }
+    .withdraw-success {
+      display: none;
+      color: #4CAF50;
+      margin-top: 15px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -891,6 +959,7 @@
     <div class="modal-content">
       <span class="close-modal" onclick="closeWithdrawModal()">&times;</span>
       <h2>Withdraw Funds</h2>
+      <div id="withdraw-success" class="withdraw-success"></div>
       <form id="withdraw-form" onsubmit="event.preventDefault(); submitWithdrawRequest();">
         <input type="text" id="withdraw-name" placeholder="Full Name" required>
         <input type="text" id="withdraw-account" placeholder="Account Number/Phone Number" required>
@@ -903,6 +972,7 @@
         <input type="text" id="withdraw-username" placeholder="Game User Name" required>
         <input type="email" id="withdraw-email" placeholder="Email" required>
         <input type="number" id="withdraw-amount" placeholder="Amount (Minimum Rs. 300)" min="300" required>
+        <div class="withdraw-info">Withdrawal processing time: 1-4 hours</div>
         <button type="submit">Submit Request</button>
         <div class="error-message" id="withdraw-error"></div>
         <div class="loading-spinner" id="withdraw-spinner"></div>
@@ -921,6 +991,10 @@
       <div class="gold-box" data-bet="200" onclick="selectBet(this, 200)">200</div>
       <div class="gold-box" data-bet="300" onclick="selectBet(this, 300)">300</div>
     </div>
+    <div class="custom-bet-container">
+      <input type="number" id="custom-bet-amount" class="custom-bet-input" placeholder="Custom amount" min="20">
+      <button class="custom-bet-btn" onclick="placeCustomBet()">Bet</button>
+    </div>
     <div class="card-grid" id="cardGrid"></div>
     <div id="result"></div>
   </div>
@@ -936,6 +1010,10 @@
       <div class="gold-box" data-bet="200" onclick="startFruitRound(this, 200)">Rs. 200</div>
       <div class="gold-box" data-bet="250" onclick="startFruitRound(this, 250)">Rs. 250</div>
       <div class="gold-box" data-bet="300" onclick="startFruitRound(this, 300)">Rs. 300</div>
+    </div>
+    <div class="custom-bet-container">
+      <input type="number" id="custom-fruit-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
+      <button class="custom-bet-btn" onclick="placeCustomFruitBet()">Bet</button>
     </div>
     <div id="fruitCountdown">Time: 0s</div>
     <div class="shoot-area" id="shootArea"></div>
@@ -1082,6 +1160,52 @@
       }
     }
 
+    // Custom bet amount function
+    async function placeCustomBet() {
+      const customAmount = parseInt(document.getElementById('custom-bet-amount').value);
+      if (isNaN(customAmount) {
+        alert("Please enter a valid bet amount");
+        return;
+      }
+      
+      if (customAmount < 20) {
+        alert("Minimum bet is Rs. 20");
+        return;
+      }
+      
+      const betBoxes = document.querySelectorAll('#scratchGame .bet-amounts .gold-box');
+      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
+        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
+        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
+        return currDiff < prevDiff ? curr : prev;
+      });
+      
+      await selectBet(closestBet, customAmount);
+    }
+
+    // Custom fruit bet amount function
+    async function placeCustomFruitBet() {
+      const customAmount = parseInt(document.getElementById('custom-fruit-bet').value);
+      if (isNaN(customAmount)) {
+        alert("Please enter a valid bet amount");
+        return;
+      }
+      
+      if (customAmount < 20) {
+        alert("Minimum bet is Rs. 20");
+        return;
+      }
+      
+      const betBoxes = document.querySelectorAll('#fruitGame .bet-amounts .gold-box');
+      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
+        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
+        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
+        return currDiff < prevDiff ? curr : prev;
+      });
+      
+      await startFruitRound(closestBet, customAmount);
+    }
+
     // Improved withdraw form handling
     async function showWithdrawForm() {
       if (!currentUserId) {
@@ -1103,6 +1227,7 @@
       // Reset form
       form.reset();
       document.getElementById('withdraw-error').style.display = 'none';
+      document.getElementById('withdraw-success').style.display = 'none';
       
       // Load user data
       try {
@@ -1127,6 +1252,7 @@
     async function submitWithdrawRequest() {
       const spinner = document.getElementById('withdraw-spinner');
       const errorElement = document.getElementById('withdraw-error');
+      const successElement = document.getElementById('withdraw-success');
       
       // Validate inputs
       const name = document.getElementById('withdraw-name').value.trim();
@@ -1155,6 +1281,7 @@
       // Show loading
       spinner.style.display = 'block';
       errorElement.style.display = 'none';
+      successElement.style.display = 'none';
 
       try {
         // Create withdrawal request
@@ -1185,13 +1312,22 @@
         document.getElementById('balanceAmount').textContent = balance;
         lastWithdrawTime = Date.now();
         
-        // Close modal
-        closeWithdrawModal();
-        alert('Withdrawal request submitted successfully!');
+        // Show success message
+        successElement.textContent = 'Withdrawal request submitted successfully!';
+        successElement.style.display = 'block';
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          closeWithdrawModal();
+        }, 3000);
         
       } catch (error) {
         console.error("Withdrawal error:", error);
-        showError('withdraw-error', 'Failed to submit: ' + error.message);
+        if (error.code === 'permission-denied') {
+          showError('withdraw-error', 'Failed to submit: Please ensure your Firestore rules allow withdrawals');
+        } else {
+          showError('withdraw-error', 'Failed to submit: ' + error.message);
+        }
       } finally {
         spinner.style.display = 'none';
       }
