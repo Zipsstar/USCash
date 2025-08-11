@@ -2146,7 +2146,7 @@
     }
 
     // Auth state listener
-    firebase.auth.onAuthStateChanged(async (user) => {
+    onAuthStateChanged(firebase.auth(async (user) => {
       if (user) {
         currentUserId = user.uid;
         await loadUserData(user.uid);
