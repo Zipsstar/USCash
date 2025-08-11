@@ -72,21 +72,10 @@
     };
   </script>
   <style>
-    :root {
-      --primary-bg: #1a1a1a;
-      --secondary-bg: #2a2a2a;
-      --accent-color: #FFD700;
-      --accent-dark: #daa520;
-      --text-color: #e0e0e0;
-      --success-color: #4CAF50;
-      --danger-color: #F44336;
-      --info-color: #2196F3;
-    }
-    
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: var(--primary-bg);
-      color: var(--accent-color);
+      background-color: #121212;
+      color: #FFD700;
       text-align: center;
       margin: 0;
       padding: 0;
@@ -102,10 +91,10 @@
     .header h1 {
       margin: 0;
       font-size: 2rem;
-      background: linear-gradient(90deg, var(--primary-bg), var(--accent-color), var(--primary-bg));
+      background: linear-gradient(90deg, #121212, #FFD700, #121212);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 4px var(--accent-color);
+      text-shadow: 2px 2px 4px #FFD700;
       letter-spacing: 1px;
     }
     .header .logo {
@@ -138,15 +127,15 @@
       100% { transform: translate(-100%, 0); }
     }
     .nav {
-      background-color: var(--accent-color);
-      color: var(--primary-bg);
+      background-color: #FFD700;
+      color: #121212;
       padding: 8px;
       display: flex;
       justify-content: space-around;
       font-size: 0.8rem;
     }
     .nav a {
-      color: var(--primary-bg);
+      color: #121212;
       text-decoration: none;
       font-weight: bold;
     }
@@ -154,28 +143,28 @@
       margin: 15px auto;
       padding: 10px;
       max-width: 95%;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #FFD700;
       border-radius: 8px;
       box-sizing: border-box;
-      background-color: var(--secondary-bg);
+      background-color: #1E1E1E;
     }
     .gold-box {
       display: inline-block;
-      background-color: var(--accent-color);
-      color: var(--primary-bg);
+      background-color: #FFD700;
+      color: #121212;
       margin: 5px;
       padding: 8px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.9rem;
       font-weight: bold;
-      border: 2px solid var(--primary-bg);
+      border: 2px solid #000;
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
     }
     .gold-box.active {
-      background-color: var(--primary-bg);
-      color: var(--accent-color);
-      border: 2px solid var(--accent-color);
+      background-color: #121212;
+      color: #FFD700;
+      border: 2px solid #FFD700;
     }
     .game-options {
       display: flex;
@@ -193,8 +182,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 2px solid var(--accent-color);
-      box-shadow: 0 0 8px var(--accent-color);
+      border: 2px solid #FFD700;
+      box-shadow: 0 0 8px #FFD700;
       transition: transform 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -202,7 +191,7 @@
       background-size: cover;
       background-position: center;
       color: white;
-      text-shadow: 1px 1px 3px var(--primary-bg);
+      text-shadow: 1px 1px 3px black;
     }
     .game-options .gold-box:hover {
       transform: scale(1.05);
@@ -231,13 +220,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #FFD700;
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.4s, background-color 0.3s;
     }
     .card.flipped {
-      background-color: var(--accent-color);
+      background-color: #FFD700;
       color: skyblue;
       transform: rotateY(180deg);
     }
@@ -268,7 +257,7 @@
       100% { transform: translate(1px, 1px) rotate(0deg); }
     }
     @keyframes glow {
-      from { box-shadow: 0 0 10px var(--accent-color); }
+      from { box-shadow: 0 0 10px #FFD700; }
       to { box-shadow: 0 0 20px white; }
     }
     #particles-js {
@@ -292,17 +281,17 @@
       z-index: 10000;
     }
     #welcomePopup .popup-content {
-      background: var(--primary-bg);
-      border: 2px solid var(--accent-color);
+      background: #121212;
+      border: 2px solid #FFD700;
       padding: 20px;
       border-radius: 10px;
       max-width: 350px;
-      color: var(--accent-color);
+      color: #FFD700;
       text-align: center;
       position: relative;
     }
     #welcomePopup .popup-content h2 {
-      color: skyblue;
+      color: #87CEEB;
       margin-top: 0;
       font-size: 1.2rem;
     }
@@ -321,7 +310,7 @@
     .shoot-area {
       position: relative;
       height: 250px;
-      border: 2px dashed var(--accent-color);
+      border: 2px dashed #FFD700;
       border-radius: 10px;
       background-color: #222;
       overflow: hidden;
@@ -353,7 +342,7 @@
     #fruitCountdown {
       font-size: 1.1em;
       margin-top: 8px;
-      color: var(--accent-color);
+      color: #FFD700;
     }
     #auth-container {
       position: fixed;
@@ -368,19 +357,19 @@
       z-index: 10001;
     }
     .auth-form {
-      background: var(--primary-bg);
-      border: 2px solid var(--accent-color);
+      background: #121212;
+      border: 2px solid #FFD700;
       padding: 20px;
       border-radius: 12px;
       width: 300px;
       max-width: 90%;
-      color: var(--accent-color);
+      color: #FFD700;
       box-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
     }
     .auth-form h2 {
       text-align: center;
       margin-top: 0;
-      color: skyblue;
+      color: #87CEEB;
       font-size: 1.2rem;
       text-shadow: 0 0 5px rgba(135, 206, 235, 0.8);
     }
@@ -388,7 +377,7 @@
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       border-radius: 6px;
       background: #222;
       color: white;
@@ -397,15 +386,15 @@
     }
     .auth-form input:focus {
       outline: none;
-      border-color: skyblue;
+      border-color: #87CEEB;
       box-shadow: 0 0 8px rgba(135, 206, 235, 0.6);
     }
     .auth-form button {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      background: linear-gradient(to right, var(--accent-color), var(--accent-dark));
-      color: var(--primary-bg);
+      background: linear-gradient(to right, #FFD700, #daa520);
+      color: #121212;
       border: none;
       border-radius: 6px;
       font-weight: bold;
@@ -415,7 +404,7 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .auth-form button:hover {
-      background: linear-gradient(to right, var(--accent-dark), var(--accent-color));
+      background: linear-gradient(to right, #daa520, #FFD700);
       transform: translateY(-2px);
       box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
@@ -428,7 +417,7 @@
       transition: color 0.3s ease;
     }
     .auth-toggle:hover {
-      color: var(--accent-color);
+      color: #FFD700;
       text-decoration: underline;
     }
     #auth-tabs {
@@ -441,7 +430,7 @@
       flex: 1;
       padding: 10px;
       background: #333;
-      color: var(--accent-color);
+      color: #FFD700;
       border: none;
       font-size: 0.8rem;
       transition: all 0.3s ease;
@@ -450,8 +439,8 @@
       background: #444;
     }
     #auth-tabs button.active {
-      background: var(--accent-color);
-      color: var(--primary-bg);
+      background: #FFD700;
+      color: #121212;
       font-weight: bold;
     }
     #user-info {
@@ -461,17 +450,17 @@
       background: rgba(0, 0, 0, 0.8);
       padding: 8px 15px;
       border-radius: 20px;
-      color: var(--accent-color);
+      color: #FFD700;
       font-size: 0.8rem;
       z-index: 1000;
       display: flex;
       align-items: center;
       gap: 10px;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
     }
     #user-info button {
-      background: var(--accent-color);
-      color: var(--primary-bg);
+      background: #FFD700;
+      color: #121212;
       border: none;
       border-radius: 4px;
       padding: 4px 8px;
@@ -480,7 +469,7 @@
       transition: all 0.3s ease;
     }
     #user-info button:hover {
-      background: var(--accent-dark);
+      background: #daa520;
     }
     #login-form, #signup-form {
       display: none;
@@ -506,7 +495,7 @@
       transition: color 0.3s ease;
     }
     .password-reset-back:hover {
-      color: var(--accent-color);
+      color: #FFD700;
       text-decoration: underline;
     }
     #admin-panel {
@@ -538,15 +527,15 @@
     }
     .admin-section {
       background: #111;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       border-radius: 6px;
       padding: 12px;
       margin-bottom: 15px;
     }
     .admin-section h3 {
-      color: skyblue;
+      color: #87CEEB;
       margin-top: 0;
-      border-bottom: 1px solid var(--accent-color);
+      border-bottom: 1px solid #FFD700;
       padding-bottom: 8px;
       font-size: 1rem;
     }
@@ -557,13 +546,13 @@
       font-size: 0.7rem;
     }
     th, td {
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       padding: 6px;
       text-align: left;
     }
     th {
       background-color: #333;
-      color: var(--accent-color);
+      color: #FFD700;
     }
     tr:nth-child(even) {
       background-color: #222;
@@ -576,14 +565,14 @@
       flex: 1;
       padding: 6px;
       background: #222;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       color: white;
       margin-right: 5px;
       font-size: 0.7rem;
     }
     .admin-input-group button {
-      background: var(--accent-color);
-      color: var(--primary-bg);
+      background: #FFD700;
+      color: #121212;
       border: none;
       padding: 6px 12px;
       cursor: pointer;
@@ -593,8 +582,8 @@
       position: fixed;
       bottom: 15px;
       right: 15px;
-      background: var(--accent-color);
-      color: var(--primary-bg);
+      background: #FFD700;
+      color: #121212;
       border: none;
       border-radius: 50%;
       width: 40px;
@@ -617,12 +606,12 @@
       padding: 15px;
       max-width: 300px;
       background: #111;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #FFD700;
       border-radius: 8px;
       text-align: center;
     }
     .error-message {
-      color: var(--danger-color);
+      color: red;
       font-size: 0.8rem;
       margin-top: 5px;
       display: none;
@@ -643,7 +632,7 @@
       background-color: #111;
       padding: 20px;
       border-radius: 8px;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #FFD700;
       max-width: 400px;
       width: 90%;
     }
@@ -651,13 +640,13 @@
       float: right;
       cursor: pointer;
       font-size: 1.5rem;
-      color: var(--accent-color);
+      color: #FFD700;
     }
     .loading-spinner {
       display: none;
       border: 3px solid rgba(255, 215, 0, 0.3);
       border-radius: 50%;
-      border-top: 3px solid var(--accent-color);
+      border-top: 3px solid #FFD700;
       width: 20px;
       height: 20px;
       animation: spin 1s linear infinite;
@@ -670,7 +659,7 @@
     /* Deposit Contact Box */
     .contact-box {
       background: #111;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       border-radius: 8px;
       padding: 15px;
       margin: 15px auto;
@@ -678,7 +667,7 @@
       text-align: center;
     }
     .contact-box h3 {
-      color: var(--accent-color);
+      color: #FFD700;
       margin-top: 0;
     }
     .contact-box p {
@@ -712,14 +701,14 @@
       padding: 8px;
       margin-right: 8px;
       background: #222;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       color: white;
       border-radius: 6px;
       text-align: center;
     }
     .custom-bet-btn {
-      background: var(--accent-color);
-      color: var(--primary-bg);
+      background: #FFD700;
+      color: #121212;
       border: none;
       padding: 8px 12px;
       border-radius: 6px;
@@ -728,7 +717,7 @@
       transition: all 0.3s ease;
     }
     .custom-bet-btn:hover {
-      background: var(--accent-dark);
+      background: #daa520;
     }
     /* Improved withdraw form styles */
     #withdraw-form input,
@@ -737,7 +726,7 @@
       padding: 10px;
       margin: 8px 0;
       background: #222;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       color: white;
       border-radius: 6px;
       box-sizing: border-box;
@@ -745,14 +734,14 @@
     #withdraw-form select {
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='goldenrod'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
       background-repeat: no-repeat;
       background-position: right 10px center;
       background-size: 12px;
     }
     #withdraw-form button[type="submit"] {
-      background: var(--accent-color);
-      color: var(--primary-bg);
+      background: #FFD700;
+      color: #121212;
       border: none;
       padding: 12px;
       border-radius: 6px;
@@ -768,7 +757,7 @@
     }
     .withdraw-success {
       display: none;
-      color: var(--success-color);
+      color: #4CAF50;
       margin-top: 15px;
       font-weight: bold;
     }
@@ -780,6 +769,9 @@
       display: none;
     }
     #memoryGame {
+      display: none;
+    }
+    #numberGuessGame {
       display: none;
     }
     #arrowShootingGame {
@@ -794,19 +786,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #FFD700;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
       margin: 5px;
     }
     .ace-card.flipped {
-      background-color: var(--accent-color);
+      background-color: #FFD700;
       color: black;
     }
     .ace-card.selected {
       transform: scale(1.05);
-      box-shadow: 0 0 15px var(--accent-color);
+      box-shadow: 0 0 15px #FFD700;
     }
     .ace-card.ace {
       background-color: red;
@@ -815,7 +807,7 @@
     .ace-timer {
       font-size: 1.5rem;
       margin: 15px 0;
-      color: var(--accent-color);
+      color: #FFD700;
     }
     .tic-tac-toe-board {
       display: grid;
@@ -828,7 +820,7 @@
       width: 90px;
       height: 90px;
       background-color: #222;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #FFD700;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -856,7 +848,7 @@
       width: 60px;
       height: 60px;
       background-color: #222;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #FFD700;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -865,80 +857,47 @@
       transition: all 0.3s ease;
     }
     .memory-card.flipped {
-      background-color: var(--accent-color);
+      background-color: #FFD700;
       transform: rotateY(180deg);
     }
-    /* Arrow Shooting Game Styles */
-    .arrow-shooting-container {
+    .number-guess-container {
       margin: 15px auto;
-      max-width: 400px;
+      max-width: 300px;
     }
-    .arrow-board {
-      width: 300px;
-      height: 300px;
-      margin: 0 auto;
-      position: relative;
-      border: 3px solid var(--accent-color);
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #222;
-    }
-    .target-center {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background-color: var(--accent-color);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-    }
-    .target-ring {
-      position: absolute;
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: 2px solid var(--accent-color);
-    }
-    .ring-1 { width: 60px; height: 60px; }
-    .ring-2 { width: 90px; height: 90px; }
-    .ring-3 { width: 120px; height: 120px; }
-    .ring-4 { width: 150px; height: 150px; }
-    .ring-5 { width: 180px; height: 180px; }
-    .ring-6 { width: 210px; height: 210px; }
-    .ring-7 { width: 240px; height: 240px; }
-    .ring-8 { width: 270px; height: 270px; }
-    .arrow {
-      position: absolute;
-      font-size: 24px;
-      z-index: 3;
-      transition: transform 0.1s;
-    }
-    .arrow-score-display {
-      margin-top: 15px;
+    .number-guess-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #222;
+      border: 1px solid #FFD700;
+      color: white;
+      border-radius: 6px;
+      text-align: center;
       font-size: 1.2rem;
     }
-    .arrow-timer {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      color: var(--accent-color);
-    }
-    .arrow-controls {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    .arrow-btn {
-      background: var(--accent-color);
-      color: var(--primary-bg);
+    .number-guess-btn {
+      background: #FFD700;
+      color: #121212;
       border: none;
-      padding: 8px 15px;
+      padding: 10px 15px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+    .number-guess-btn:hover {
+      background: #daa520;
+    }
+    .number-guess-hint {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: white;
+    }
+    .number-guess-attempts {
+      margin: 10px 0;
+      font-size: 0.9rem;
+      color: #aaa;
     }
     .verified-badge {
       color: #1DA1F2;
@@ -947,7 +906,7 @@
     }
     .history-item {
       background: #111;
-      border: 1px solid var(--accent-color);
+      border: 1px solid #FFD700;
       border-radius: 6px;
       padding: 10px;
       margin: 10px 0;
@@ -958,10 +917,75 @@
       font-size: 0.7rem;
     }
     .history-item .amount.win {
-      color: var(--success-color);
+      color: #4CAF50;
     }
     .history-item .amount.loss {
-      color: var(--danger-color);
+      color: #F44336;
+    }
+    /* Arrow Shooting Game Styles */
+    .target-board {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      position: relative;
+      border-radius: 50%;
+      background: conic-gradient(
+        #FF0000 0deg 45deg,
+        #FF4500 45deg 90deg,
+        #FFA500 90deg 135deg,
+        #FFFF00 135deg 180deg,
+        #008000 180deg 225deg,
+        #0000FF 225deg 270deg,
+        #4B0082 270deg 315deg,
+        #800080 315deg 360deg
+      );
+      overflow: hidden;
+      border: 3px solid #FFD700;
+    }
+    .target-center {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: white;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid black;
+      z-index: 1;
+    }
+    .aim {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .arrow {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #121212;
+      border-radius: 50%;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .arrow-hit {
+      animation: hit 0.5s forwards;
+    }
+    @keyframes hit {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+    .arrow-shooting-stats {
+      margin-top: 15px;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -972,7 +996,7 @@
   </div>
 
   <div class="marquee">
-    <span>Welcome to USCash, Earn with Fun. Try our new Arrow Shooting game!</span>
+    <span>Welcome to USCash, Earn with Fun. We will add more features soon!</span>
   </div>
 
   <div id="auth-container">
@@ -1161,13 +1185,7 @@
       <div class="gold-box" onclick="startFindAceGame()" style="background-image: url('https://img.freepik.com/free-vector/playing-card-pattern-background_53876-93170.jpg');">
         <div class="game-name">Find Ace</div>
       </div>
-      <div class="gold-box" onclick="startTicTacToeGame()" style="background-image: url('https://img.freepik.com/free-vector/tic-tac-toe-seamless-pattern-background_53876-93172.jpg');">
-        <div class="game-name">Tic-Tac-Toe</div>
-      </div>
-      <div class="gold-box" onclick="startMemoryGame()" style="background-image: url('https://img.freepik.com/free-vector/memory-game-seamless-pattern-background_53876-93174.jpg');">
-        <div class="game-name">Memory Match</div>
-      </div>
-      <div class="gold-box" onclick="startArrowShootingGame()" style="background-image: url('https://img.freepik.com/free-vector/archery-target-seamless-pattern-background_53876-93178.jpg');">
+      <div class="gold-box" onclick="startArrowShootingGame()" style="background-image: url('https://img.freepik.com/free-vector/archery-target-board-realistic_107791-1805.jpg');">
         <div class="game-name">Arrow Shooting</div>
       </div>
     </div>
@@ -1291,49 +1309,9 @@
     <div id="aceResult"></div>
   </div>
 
-  <!-- Tic-Tac-Toe Game Section -->
-  <div class="section" id="ticTacToeGame" style="display:none;">
-    <h2>⭕ Tic-Tac-Toe</h2>
-    <div class="bet-amounts">
-      <div class="gold-box" data-bet="20" onclick="startTicTacToeRound(this, 20)">Rs. 20</div>
-      <div class="gold-box" data-bet="50" onclick="startTicTacToeRound(this, 50)">Rs. 50</div>
-      <div class="gold-box" data-bet="100" onclick="startTicTacToeRound(this, 100)">Rs. 100</div>
-      <div class="gold-box" data-bet="150" onclick="startTicTacToeRound(this, 150)">Rs. 150</div>
-      <div class="gold-box" data-bet="200" onclick="startTicTacToeRound(this, 200)">Rs. 200</div>
-      <div class="gold-box" data-bet="300" onclick="startTicTacToeRound(this, 300)">Rs. 300</div>
-    </div>
-    <div class="custom-bet-container">
-      <input type="number" id="custom-tic-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
-      <button class="custom-bet-btn" onclick="placeCustomTicBet()">Bet</button>
-    </div>
-    <div id="ticResult"></div>
-    <div class="tic-tac-toe-board" id="ticTacToeBoard"></div>
-  </div>
-
-  <!-- Memory Game Section -->
-  <div class="section" id="memoryGame" style="display:none;">
-    <h2>🧠 Memory Match</h2>
-    <div class="bet-amounts">
-      <div class="gold-box" data-bet="20" onclick="startMemoryRound(this, 20)">Rs. 20</div>
-      <div class="gold-box" data-bet="50" onclick="startMemoryRound(this, 50)">Rs. 50</div>
-      <div class="gold-box" data-bet="100" onclick="startMemoryRound(this, 100)">Rs. 100</div>
-      <div class="gold-box" data-bet="150" onclick="startMemoryRound(this, 150)">Rs. 150</div>
-      <div class="gold-box" data-bet="200" onclick="startMemoryRound(this, 200)">Rs. 200</div>
-      <div class="gold-box" data-bet="300" onclick="startMemoryRound(this, 300)">Rs. 300</div>
-    </div>
-    <div class="custom-bet-container">
-      <input type="number" id="custom-memory-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
-      <button class="custom-bet-btn" onclick="placeCustomMemoryBet()">Bet</button>
-    </div>
-    <div id="memoryMoves">Moves: 0</div>
-    <div id="memoryTimer">Time: 0s</div>
-    <div class="memory-grid" id="memoryGrid"></div>
-    <div id="memoryResult"></div>
-  </div>
-
   <!-- Arrow Shooting Game Section -->
   <div class="section" id="arrowShootingGame" style="display:none;">
-    <h2>🏹 Arrow Shooting</h2>
+    <h2>🎯 Arrow Shooting</h2>
     <div class="bet-amounts">
       <div class="gold-box" data-bet="20" onclick="startArrowShootingRound(this, 20)">Rs. 20</div>
       <div class="gold-box" data-bet="50" onclick="startArrowShootingRound(this, 50)">Rs. 50</div>
@@ -1346,24 +1324,13 @@
       <input type="number" id="custom-arrow-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
       <button class="custom-bet-btn" onclick="placeCustomArrowBet()">Bet</button>
     </div>
-    <div id="arrowResult"></div>
-    <div class="arrow-shooting-container">
-      <div class="arrow-board" id="arrowBoard">
-        <div class="target-center"></div>
-        <div class="target-ring ring-1"></div>
-        <div class="target-ring ring-2"></div>
-        <div class="target-ring ring-3"></div>
-        <div class="target-ring ring-4"></div>
-        <div class="target-ring ring-5"></div>
-        <div class="target-ring ring-6"></div>
-        <div class="target-ring ring-7"></div>
-        <div class="target-ring ring-8"></div>
-      </div>
-      <div class="arrow-score-display" id="arrowScore">Score: 0</div>
-      <div class="arrow-timer" id="arrowTimer">Time left: 30s</div>
-      <div class="arrow-controls">
-        <button class="arrow-btn" onclick="shootArrow()">Shoot Arrow (Space)</button>
-      </div>
+    <div id="arrowShootingResult"></div>
+    <div class="target-board" id="targetBoard">
+      <div class="target-center"></div>
+      <div class="aim" id="aim"></div>
+    </div>
+    <div class="arrow-shooting-stats">
+      <p>Hits: <span id="hitsCount">0</span>/5 | Time: <span id="arrowTimeLeft">0</span>s</p>
     </div>
   </div>
 
@@ -1382,7 +1349,7 @@
   <audio id="loseSound">
     <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
   </audio>
-  <audio id="arrowSound">
+  <audio id="hitSound">
     <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
   </audio>
 
@@ -1407,17 +1374,6 @@
       300: 100000 // 100 seconds
     };
 
-    // Target fruits count based on bet amount
-    const targetFruitsCount = {
-      20: 25,
-      50: 55,
-      100: 105,
-      150: 155,
-      200: 205,
-      250: 255,
-      300: 305
-    };
-
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
       // Set up withdraw link
@@ -1438,8 +1394,6 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'none';
       document.getElementById('arrowShootingGame').style.display = 'none';
     }
 
@@ -1450,8 +1404,6 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'none';
       document.getElementById('arrowShootingGame').style.display = 'none';
     }
 
@@ -1462,8 +1414,6 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'none';
       document.getElementById('arrowShootingGame').style.display = 'none';
       
       if (currentUserId) {
@@ -1494,22 +1444,6 @@
         bet.addEventListener('click', function() {
           const amount = parseInt(this.getAttribute('data-bet'));
           startFindAceRound(this, amount);
-        });
-      });
-      
-      // Tic-Tac-Toe game bets
-      document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          const amount = parseInt(this.getAttribute('data-bet'));
-          startTicTacToeRound(this, amount);
-        });
-      });
-      
-      // Memory game bets
-      document.querySelectorAll('#memoryGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          const amount = parseInt(this.getAttribute('data-bet'));
-          startMemoryRound(this, amount);
         });
       });
       
@@ -1632,52 +1566,6 @@
       });
       
       await startFindAceRound(closestBet, customAmount);
-    }
-    
-    // Custom tic-tac-toe bet amount function
-    async function placeCustomTicBet() {
-      const customAmount = parseInt(document.getElementById('custom-tic-bet').value);
-      if (isNaN(customAmount)) {
-        alert("Please enter a valid bet amount");
-        return;
-      }
-      
-      if (customAmount < 20) {
-        alert("Minimum bet is Rs. 20");
-        return;
-      }
-      
-      const betBoxes = document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box');
-      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
-        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
-        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
-        return currDiff < prevDiff ? curr : prev;
-      });
-      
-      await startTicTacToeRound(closestBet, customAmount);
-    }
-    
-    // Custom memory bet amount function
-    async function placeCustomMemoryBet() {
-      const customAmount = parseInt(document.getElementById('custom-memory-bet').value);
-      if (isNaN(customAmount)) {
-        alert("Please enter a valid bet amount");
-        return;
-      }
-      
-      if (customAmount < 20) {
-        alert("Minimum bet is Rs. 20");
-        return;
-      }
-      
-      const betBoxes = document.querySelectorAll('#memoryGame .bet-amounts .gold-box');
-      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
-        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
-        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
-        return currDiff < prevDiff ? curr : prev;
-      });
-      
-      await startMemoryRound(closestBet, customAmount);
     }
     
     // Custom arrow shooting bet amount function
@@ -2146,7 +2034,7 @@
     }
 
     // Auth state listener
-    onAuthStateChanged(firebase.auth(async (user) => {
+    firebase.auth.onAuthStateChanged(async (user) => {
       if (user) {
         currentUserId = user.uid;
         await loadUserData(user.uid);
@@ -2201,7 +2089,7 @@
     const explosionSound = document.getElementById('explosionSound');
     const winSound = document.getElementById('winSound');
     const loseSound = document.getElementById('loseSound');
-    const arrowSound = document.getElementById('arrowSound');
+    const hitSound = document.getElementById('hitSound');
 
     async function deductBetAmount(amount) {
       try {
@@ -2234,8 +2122,6 @@
       document.getElementById('scratchGame').style.display = 'block';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'none';
       document.getElementById('arrowShootingGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupCards();
@@ -2246,35 +2132,9 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('findAceGame').style.display = 'block';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'none';
       document.getElementById('arrowShootingGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupAceCards();
-    }
-    
-    function startTicTacToeGame() {
-      document.getElementById('homeSection').style.display = 'none';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'block';
-      document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('arrowShootingGame').style.display = 'none';
-      bgMusic.play().catch(() => {});
-      setupTicTacToe();
-    }
-    
-    function startMemoryGame() {
-      document.getElementById('homeSection').style.display = 'none';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'block';
-      document.getElementById('arrowShootingGame').style.display = 'none';
-      bgMusic.play().catch(() => {});
-      setupMemoryGame();
     }
     
     function startArrowShootingGame() {
@@ -2282,8 +2142,6 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'none';
       document.getElementById('arrowShootingGame').style.display = 'block';
       bgMusic.play().catch(() => {});
       setupArrowShootingGame();
@@ -2519,8 +2377,6 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'block';
       document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('ticTacToeGame').style.display = 'none';
-      document.getElementById('memoryGame').style.display = 'none';
       document.getElementById('arrowShootingGame').style.display = 'none';
       setNewFruitTarget();
     }
@@ -2679,46 +2535,24 @@
 
     function setupAceCards() {
       aceCards = [];
-      flippedMemoryCards = [];
-      memoryMoves = 0;
-      memoryMatches = 0;
-      memoryTimer = 0;
+      const container = document.getElementById('aceCards');
+      container.innerHTML = '';
+      document.getElementById('aceResult').innerText = '';
       
-      const grid = document.getElementById('memoryGrid');
-      grid.innerHTML = '';
-      document.getElementById('memoryResult').innerText = '';
-      document.getElementById('memoryMoves').textContent = 'Moves: 0';
-      document.getElementById('memoryTimer').textContent = 'Time: 0s';
-      
-      // Create pairs of cards
-      const symbols = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
-      const cards = [];
-      
-      symbols.forEach(symbol => {
-        cards.push(symbol);
-        cards.push(symbol);
-      });
-      
-      // Shuffle cards
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-      
-      // Create card elements
-      cards.forEach((symbol, index) => {
+      // Create 3 cards
+      for (let i = 0; i < 3; i++) {
         const card = document.createElement('div');
-        card.className = 'memory-card';
-        card.dataset.symbol = symbol;
-        card.dataset.index = index;
-        card.onclick = () => flipMemoryCard(card);
-        grid.appendChild(card);
-        memoryCards.push(card);
-      });
+        card.className = 'ace-card';
+        card.dataset.index = i;
+        card.innerHTML = '🂠';
+        card.onclick = () => selectAceCard(card);
+        container.appendChild(card);
+        aceCards.push(card);
+      }
     }
 
-    async function startMemoryRound(element, amount) {
-      if (memoryGameStarted) {
+    async function startFindAceRound(element, amount) {
+      if (aceGameStarted) {
         alert("Game already in progress!");
         return;
       }
@@ -2735,7 +2569,7 @@
       }
 
       // Highlight selected bet
-      document.querySelectorAll('#memoryGame .bet-amounts .gold-box').forEach(btn => {
+      document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
         btn.classList.remove('active');
       });
       element.classList.add('active');
@@ -2749,8 +2583,8 @@
           currentUserId,
           'bet',
           amount,
-          'memory',
-          `Bet Rs. ${amount} in Memory Match`
+          'find_ace',
+          `Bet Rs. ${amount} in Find Ace`
         );
         
         balance -= amount;
@@ -2760,234 +2594,222 @@
         return;
       }
 
-      setupMemoryGame();
-      memorySelectedBet = amount;
-      memoryGameStarted = true;
+      setupAceCards();
+      aceSelectedBet = amount;
+      aceGameStarted = true;
+      aceTimeLeft = 15;
+      document.getElementById('aceTimer').textContent = `Time left: 15s`;
+
+      // Randomly select ace position
+      acePosition = Math.floor(Math.random() * 3);
       
-      // Start timer
-      memoryTimerInterval = setInterval(() => {
-        memoryTimer++;
-        document.getElementById('memoryTimer').textContent = `Time: ${memoryTimer}s`;
-      }, 1000);
-      
-      // Show all cards for 5 seconds
-      memoryCards.forEach(card => {
-        card.textContent = card.dataset.symbol;
+      // Show cards for 3 seconds
+      aceCards.forEach((card, index) => {
+        if (index === acePosition) {
+          card.innerHTML = '🂡'; // Ace of spades
+          card.classList.add('ace');
+        } else {
+          card.innerHTML = '🂢'; // Two of spades
+        }
+        card.classList.add('flipped');
       });
-      
-      setTimeout(() => {
-        memoryCards.forEach(card => {
-          card.textContent = '';
-        });
-      }, 5000);
+
+      // Start countdown
+      aceTimerInterval = setInterval(() => {
+        aceTimeLeft--;
+        document.getElementById('aceTimer').textContent = `Time left: ${aceTimeLeft}s`;
+        
+        if (aceTimeLeft <= 0) {
+          clearInterval(aceTimerInterval);
+          // Hide cards after 3 seconds
+          setTimeout(() => {
+            aceCards.forEach(card => {
+              card.innerHTML = '🂠';
+              card.classList.remove('flipped', 'ace');
+            });
+            
+            // Shuffle cards 60 times
+            let shuffleCount = 0;
+            const shuffleInterval = setInterval(() => {
+              // Randomly swap two cards
+              const i = Math.floor(Math.random() * 3);
+              const j = Math.floor(Math.random() * 3);
+              if (i !== j) {
+                // Update ace position if it was moved
+                if (i === acePosition) acePosition = j;
+                else if (j === acePosition) acePosition = i;
+                
+                // Swap cards in DOM
+                const temp = aceCards[i].style.order;
+                aceCards[i].style.order = aceCards[j].style.order;
+                aceCards[j].style.order = temp;
+                
+                shuffleCount++;
+                if (shuffleCount >= 60) {
+                  clearInterval(shuffleInterval);
+                }
+              }
+            }, 50);
+          }, 3000);
+        }
+      }, 1000);
     }
 
-    async function flipMemoryCard(card) {
-      if (!memoryGameStarted || flippedMemoryCards.length >= 2 || card.textContent !== '') return;
+    async function selectAceCard(card) {
+      if (!aceGameStarted || card.classList.contains('flipped')) return;
       
-      card.textContent = card.dataset.symbol;
-      flippedMemoryCards.push(card);
+      clearInterval(aceTimerInterval);
+      aceGameStarted = false;
       
-      if (flippedMemoryCards.length === 2) {
-        memoryMoves++;
-        document.getElementById('memoryMoves').textContent = `Moves: ${memoryMoves}`;
+      const selectedIndex = parseInt(card.dataset.index);
+      const resultElement = document.getElementById('aceResult');
+      
+      if (selectedIndex === acePosition) {
+        // Player found the ace
+        const winAmount = aceSelectedBet * 2;
+        balance += winAmount;
+        resultElement.innerText = `🎉 You found the Ace! You win Rs. ${winAmount}`;
+        card.classList.add('ace', 'selected');
+        winSound.play().catch(() => {});
         
-        const card1 = flippedMemoryCards[0];
-        const card2 = flippedMemoryCards[1];
+        try {
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
+            { balance: balance }
+          );
+          await recordTransaction(
+            currentUserId,
+            'win',
+            winAmount,
+            'find_ace',
+            `Won Rs. ${winAmount} in Find Ace`
+          );
+        } catch (error) {
+          console.error("Error recording win:", error);
+        }
+      } else {
+        // Player didn't find the ace
+        resultElement.innerText = `❌ Wrong card! You lost Rs. ${aceSelectedBet}`;
+        card.classList.add('selected');
+        aceCards[acePosition].classList.add('ace');
+        loseSound.play().catch(() => {});
         
-        if (card1.dataset.symbol === card2.dataset.symbol) {
-          // Match found
-          memoryMatches++;
-          flippedMemoryCards = [];
-          
-          // Check if all matches found
-          if (memoryMatches === 8) {
-            clearInterval(memoryTimerInterval);
-            memoryGameStarted = false;
-            
-            const winAmount = memorySelectedBet * 2;
-            balance += winAmount;
-            document.getElementById('memoryResult').innerText = `🎉 You won in ${memoryMoves} moves! Rs. ${winAmount} added.`;
-            winSound.play().catch(() => {});
-            
-            try {
-              await firebase.firestoreFunctions.updateDoc(
-                firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-                { balance: balance }
-              );
-              await recordTransaction(
-                currentUserId,
-                'win',
-                winAmount,
-                'memory',
-                `Won Rs. ${winAmount} in Memory Match`
-              );
-            } catch (error) {
-              console.error("Error recording win:", error);
-            }
-            
-            document.getElementById('user-balance').textContent = balance;
-            
-            document.querySelectorAll('#memoryGame .bet-amounts .gold-box').forEach(btn => {
-              btn.style.pointerEvents = "auto";
-              btn.style.opacity = "1";
-              btn.classList.remove('active');
-            });
-          }
-        } else {
-          // No match, flip back after delay
-          setTimeout(() => {
-            card1.textContent = '';
-            card2.textContent = '';
-            flippedMemoryCards = [];
-          }, 1000);
+        try {
+          await recordTransaction(
+            currentUserId,
+            'loss',
+            aceSelectedBet,
+            'find_ace',
+            `Lost Rs. ${aceSelectedBet} in Find Ace`
+          );
+        } catch (error) {
+          console.error("Error recording loss:", error);
         }
       }
+      
+      document.getElementById('user-balance').textContent = balance;
+      
+      setTimeout(() => {
+        document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
+          btn.style.pointerEvents = "auto";
+          btn.style.opacity = "1";
+          btn.classList.remove('active');
+        });
+      }, 2000);
     }
 
     // Arrow Shooting Game Logic
-    let arrowGameStarted = false;
     let arrowSelectedBet = 0;
-    let arrowScore = 0;
-    let arrowTimer = 30;
+    let arrowGameStarted = false;
     let arrowTimerInterval;
-    let arrowGameTimer;
-    let boardDirection = 'right';
-    let boardX = 0;
-    let boardY = 0;
-    let boardSpeed = 5;
-    let boardMoveInterval;
-    let arrowsShot = 0;
-    const arrowTargets = 5;
+    let arrowTimeLeft = 30;
+    let hitsCount = 0;
+    let aimX = 150;
+    let aimY = 150;
+    let aimSpeed = 5;
+    let aimDirectionX = 1;
+    let aimDirectionY = 1;
+    let arrowGameInterval;
 
     function setupArrowShootingGame() {
-      const board = document.getElementById('arrowBoard');
-      board.innerHTML = `
+      document.getElementById('targetBoard').innerHTML = `
         <div class="target-center"></div>
-        <div class="target-ring ring-1"></div>
-        <div class="target-ring ring-2"></div>
-        <div class="target-ring ring-3"></div>
-        <div class="target-ring ring-4"></div>
-        <div class="target-ring ring-5"></div>
-        <div class="target-ring ring-6"></div>
-        <div class="target-ring ring-7"></div>
-        <div class="target-ring ring-8"></div>
+        <div class="aim" id="aim"></div>
       `;
-      document.getElementById('arrowScore').textContent = 'Score: 0';
-      document.getElementById('arrowTimer').textContent = 'Time left: 30s';
-      document.getElementById('arrowResult').textContent = '';
+      document.getElementById('arrowShootingResult').innerText = '';
+      document.getElementById('hitsCount').textContent = '0';
+      document.getElementById('arrowTimeLeft').textContent = '30';
       
-      // Set up keyboard controls
-      document.removeEventListener('keydown', handleArrowKeyPress);
-      document.addEventListener('keydown', handleArrowKeyPress);
+      const aim = document.getElementById('aim');
+      aim.style.left = '150px';
+      aim.style.top = '150px';
+      
+      // Set up the target board click event
+      document.getElementById('targetBoard').onclick = shootArrow;
     }
 
-    function handleArrowKeyPress(e) {
-      if (e.code === 'Space' && arrowGameStarted) {
-        shootArrow();
+    function moveAim() {
+      const aim = document.getElementById('aim');
+      const board = document.getElementById('targetBoard');
+      const boardRect = board.getBoundingClientRect();
+      const boardWidth = boardRect.width;
+      const boardHeight = boardRect.height;
+      
+      // Update aim position
+      aimX += aimSpeed * aimDirectionX;
+      aimY += aimSpeed * aimDirectionY;
+      
+      // Reverse direction if hitting edges
+      if (aimX <= 0 || aimX >= boardWidth) {
+        aimDirectionX *= -1;
       }
+      if (aimY <= 0 || aimY >= boardHeight) {
+        aimDirectionY *= -1;
+      }
+      
+      // Apply new position
+      aim.style.left = `${aimX}px`;
+      aim.style.top = `${aimY}px`;
     }
 
-    function moveBoard() {
-      const board = document.getElementById('arrowBoard');
-      
-      // Change direction when hitting edges
-      if (boardX > 50) {
-        boardDirection = 'left';
-      } else if (boardX < -50) {
-        boardDirection = 'right';
-      }
-      
-      // Move board horizontally
-      if (boardDirection === 'right') {
-        boardX += boardSpeed;
-      } else {
-        boardX -= boardSpeed;
-      }
-      
-      // Also move vertically in a wave pattern
-      boardY = Math.sin(Date.now() / 500) * 30;
-      
-      board.style.transform = `translate(${boardX}px, ${boardY}px)`;
-    }
-
-    function shootArrow() {
+    async function shootArrow(e) {
       if (!arrowGameStarted) return;
       
-      const board = document.getElementById('arrowBoard');
+      const board = document.getElementById('targetBoard');
+      const boardRect = board.getBoundingClientRect();
+      const centerX = boardRect.width / 2;
+      const centerY = boardRect.height / 2;
+      
+      // Calculate distance from center
+      const clickX = e.clientX - boardRect.left;
+      const clickY = e.clientY - boardRect.top;
+      const distance = Math.sqrt(Math.pow(clickX - centerX, 2) + Math.pow(clickY - centerY, 2));
+      
+      // Create arrow element
       const arrow = document.createElement('div');
       arrow.className = 'arrow';
-      arrow.innerHTML = '🏹';
-      arrow.style.left = '50%';
-      arrow.style.bottom = '0';
+      arrow.style.left = `${clickX - 10}px`;
+      arrow.style.top = `${clickY - 10}px`;
       board.appendChild(arrow);
       
-      // Play arrow sound
-      arrowSound.currentTime = 0;
-      arrowSound.play().catch(() => {});
-      
-      // Animate arrow
-      let arrowY = 0;
-      const arrowInterval = setInterval(() => {
-        arrowY += 10;
-        arrow.style.bottom = `${arrowY}px`;
+      // Check if hit the center (within 15px radius)
+      if (distance <= 15) {
+        hitsCount++;
+        document.getElementById('hitsCount').textContent = hitsCount;
+        arrow.classList.add('arrow-hit');
+        hitSound.currentTime = 0;
+        hitSound.play().catch(() => {});
         
-        // Check if arrow hit the target
-        if (arrowY >= 120) {
-          clearInterval(arrowInterval);
-          checkArrowHit(arrow);
-        }
-      }, 30);
-    }
-
-    function checkArrowHit(arrow) {
-      // Calculate distance from center (0 to 150)
-      const centerX = 150;
-      const centerY = 150;
-      const arrowRect = arrow.getBoundingClientRect();
-      const boardRect = document.getElementById('arrowBoard').getBoundingClientRect();
-      
-      const arrowCenterX = arrowRect.left + arrowRect.width/2 - boardRect.left;
-      const arrowCenterY = arrowRect.top + arrowRect.height/2 - boardRect.top;
-      
-      const distance = Math.sqrt(
-        Math.pow(arrowCenterX - centerX, 2) + 
-        Math.pow(arrowCenterY - centerY, 2)
-      );
-      
-      // Determine points based on distance from center
-      let points = 0;
-      if (distance <= 15) { // Bullseye
-        points = 10;
-      } else if (distance <= 30) {
-        points = 8;
-      } else if (distance <= 45) {
-        points = 6;
-      } else if (distance <= 60) {
-        points = 4;
-      } else if (distance <= 75) {
-        points = 2;
-      } else if (distance <= 90) {
-        points = 1;
-      }
-      
-      arrowScore += points;
-      document.getElementById('arrowScore').textContent = `Score: ${arrowScore}`;
-      
-      // Check if player hit the bullseye (10 points)
-      if (points === 10) {
-        arrowsShot++;
-        
-        // Check if player hit 5 bullseyes
-        if (arrowsShot >= arrowTargets) {
-          arrowGameOver(true, `🎉 You hit ${arrowTargets} bullseyes!`);
+        // Check if player has hit the center 5 times
+        if (hitsCount >= 5) {
+          arrowGameOver(true, `🎉 You hit the center 5 times! You win Rs. ${arrowSelectedBet * 2}`);
         }
       }
       
-      // Remove arrow after checking hit
+      // Remove arrow after animation
       setTimeout(() => {
         arrow.remove();
-      }, 500);
+      }, 1000);
     }
 
     async function startArrowShootingRound(element, amount) {
@@ -3036,40 +2858,43 @@
       setupArrowShootingGame();
       arrowSelectedBet = amount;
       arrowGameStarted = true;
-      arrowScore = 0;
-      arrowsShot = 0;
-      arrowTimer = 30;
-      boardSpeed = 5; // Hard difficulty - faster moving board
+      hitsCount = 0;
+      arrowTimeLeft = 30;
+      document.getElementById('hitsCount').textContent = '0';
+      document.getElementById('arrowTimeLeft').textContent = '30';
       
-      document.getElementById('arrowScore').textContent = 'Score: 0';
-      document.getElementById('arrowTimer').textContent = 'Time left: 30s';
+      // Set random initial position and direction for aim
+      aimX = Math.random() * 250 + 25;
+      aimY = Math.random() * 250 + 25;
+      aimDirectionX = Math.random() > 0.5 ? 1 : -1;
+      aimDirectionY = Math.random() > 0.5 ? 1 : -1;
       
+      // Set difficulty (hard)
+      aimSpeed = 8 + Math.random() * 4; // Random speed between 8-12
+      
+      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(btn => {
+        btn.style.pointerEvents = "none";
+        btn.style.opacity = "0.4";
+      });
+
       // Start timer
       arrowTimerInterval = setInterval(() => {
-        arrowTimer--;
-        document.getElementById('arrowTimer').textContent = `Time left: ${arrowTimer}s`;
+        arrowTimeLeft--;
+        document.getElementById('arrowTimeLeft').textContent = arrowTimeLeft;
         
-        if (arrowTimer <= 0) {
+        if (arrowTimeLeft <= 0) {
           clearInterval(arrowTimerInterval);
-          arrowGameOver(false, `❌ Time's up! You hit ${arrowsShot} bullseyes (needed ${arrowTargets}).`);
+          arrowGameOver(false, `❌ Time's up! You hit the center ${hitsCount} times (needed 5).`);
         }
       }, 1000);
 
-      // Start moving the board
-      boardMoveInterval = setInterval(moveBoard, 50);
-      
-      // Increase difficulty over time
-      arrowGameTimer = setTimeout(() => {
-        if (arrowGameStarted) {
-          boardSpeed = 8; // Even faster after 15 seconds
-        }
-      }, 15000);
+      // Start aim movement
+      arrowGameInterval = setInterval(moveAim, 50);
     }
 
     async function arrowGameOver(won, message) {
       clearInterval(arrowTimerInterval);
-      clearInterval(boardMoveInterval);
-      clearTimeout(arrowGameTimer);
+      clearInterval(arrowGameInterval);
       arrowGameStarted = false;
 
       let winAmount = 0;
@@ -3092,7 +2917,7 @@
           balance += winAmount;
           document.getElementById('user-balance').textContent = balance;
           
-          alert(`${message}\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+          alert(`${message}\nNew Balance: Rs. ${balance}`);
           winSound.play().catch(() => {});
         } catch (error) {
           console.error("Error recording win:", error);
@@ -3107,9 +2932,6 @@
         btn.style.opacity = "1";
         btn.classList.remove('active');
       });
-
-      // Reset board position
-      document.getElementById('arrowBoard').style.transform = 'translate(0, 0)';
     }
 
     // Admin Panel Functions
@@ -3180,35 +3002,33 @@
         depositList.innerHTML = '';
         
         if (querySnapshot.empty) {
-          depositList.innerHTML = '<tr><td colspan="6">No deposit requests found</td></tr>';
+                  depositList.innerHTML = '<tr><td colspan="6">No deposit requests found</td></tr>';
           return;
         }
         
-        querySnapshot.forEach(async (doc) => {
+        querySnapshot.forEach((doc) => {
           const deposit = doc.data();
-          const userDoc = await firebase.firestoreFunctions.getDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", deposit.user_id)
-          );
-          const userName = userDoc.exists() ? userDoc.data().name : 'N/A';
-          
           const row = document.createElement('tr');
+          
           row.innerHTML = `
-            <td>${userName}</td>
-            <td>${deposit.amount}</td>
+            <td>${deposit.name || 'N/A'}</td>
+            <td>${deposit.amount || 0}</td>
             <td>${deposit.method || 'N/A'}</td>
             <td>${deposit.status || 'pending'}</td>
             <td>${deposit.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
             <td>
-              ${deposit.status === 'pending' ? 
-                `<button onclick="updateDepositStatus('${doc.id}', 'approved')">Approve</button>
-                 <button onclick="updateDepositStatus('${doc.id}', 'rejected')">Reject</button>` : 
-                'Completed'}
+              ${deposit.status === 'pending' ? `
+                <button onclick="approveDeposit('${doc.id}', '${deposit.user_id}', ${deposit.amount})">Approve</button>
+                <button onclick="rejectDeposit('${doc.id}')">Reject</button>
+              ` : 'Completed'}
             </td>
           `;
+          
           depositList.appendChild(row);
         });
       } catch (error) {
         console.error("Error loading deposit requests:", error);
+        alert("Error loading deposit requests. Please try again.");
       }
     }
 
@@ -3229,183 +3049,35 @@
           return;
         }
         
-        querySnapshot.forEach(async (doc) => {
+        querySnapshot.forEach((doc) => {
           const withdraw = doc.data();
-          const userDoc = await firebase.firestoreFunctions.getDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", withdraw.user_id)
-          );
-          const userName = userDoc.exists() ? userDoc.data().name : 'N/A';
-          
           const row = document.createElement('tr');
+          
           row.innerHTML = `
-            <td>${userName}</td>
-            <td>${withdraw.amount}</td>
+            <td>${withdraw.name || 'N/A'}</td>
+            <td>${withdraw.amount || 0}</td>
             <td>${withdraw.method || 'N/A'}</td>
             <td>${withdraw.status || 'pending'}</td>
             <td>${withdraw.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
             <td>
-              ${withdraw.status === 'pending' ? 
-                `<button onclick="updateWithdrawStatus('${doc.id}', 'approved')">Approve</button>
-                 <button onclick="updateWithdrawStatus('${doc.id}', 'rejected')">Reject</button>` : 
-                'Completed'}
+              ${withdraw.status === 'pending' ? `
+                <button onclick="approveWithdrawal('${doc.id}', '${withdraw.user_id}', ${withdraw.amount})">Approve</button>
+                <button onclick="rejectWithdrawal('${doc.id}')">Reject</button>
+              ` : 'Completed'}
             </td>
           `;
+          
           withdrawList.appendChild(row);
         });
       } catch (error) {
         console.error("Error loading withdrawal requests:", error);
-      }
-    }
-
-    async function updateDepositStatus(requestId, status) {
-      try {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "deposit_requests", requestId);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-        
-        if (!docSnap.exists()) {
-          alert("Deposit request not found");
-          return;
-        }
-        
-        const deposit = docSnap.data();
-        
-        if (status === 'approved') {
-          // Update user balance
-          const userRef = firebase.firestoreFunctions.doc(firebase.db, "users", deposit.user_id);
-          await firebase.firestoreFunctions.updateDoc(userRef, {
-            balance: firebase.firestoreFunctions.increment(deposit.amount)
-          });
-          
-          // Record transaction
-          await recordTransaction(
-            deposit.user_id,
-            'deposit',
-            deposit.amount,
-            'system',
-            `Deposit of Rs. ${deposit.amount} approved`
-          );
-        }
-        
-        // Update deposit status
-        await firebase.firestoreFunctions.updateDoc(docRef, {
-          status: status
-        });
-        
-        alert(`Deposit request ${status}`);
-        loadDepositRequests();
-        
-      } catch (error) {
-        console.error("Error updating deposit status:", error);
-        alert("Failed to update deposit status");
-      }
-    }
-
-    async function updateWithdrawStatus(requestId, status) {
-      try {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-        
-        if (!docSnap.exists()) {
-          alert("Withdrawal request not found");
-          return;
-        }
-        
-        const withdraw = docSnap.data();
-        
-        if (status === 'approved') {
-          // Record transaction
-          await recordTransaction(
-            withdraw.user_id,
-            'withdrawal',
-            withdraw.amount,
-            'system',
-            `Withdrawal of Rs. ${withdraw.amount} approved`
-          );
-        } else if (status === 'rejected') {
-          // Return funds to user balance
-          const userRef = firebase.firestoreFunctions.doc(firebase.db, "users", withdraw.user_id);
-          await firebase.firestoreFunctions.updateDoc(userRef, {
-            balance: firebase.firestoreFunctions.increment(withdraw.amount)
-          });
-          
-          await recordTransaction(
-            withdraw.user_id,
-            'withdrawal_rejected',
-            withdraw.amount,
-            'system',
-            `Withdrawal of Rs. ${withdraw.amount} rejected - funds returned`
-          );
-        }
-        
-        // Update withdrawal status
-        await firebase.firestoreFunctions.updateDoc(docRef, {
-          status: status
-        });
-        
-        alert(`Withdrawal request ${status}`);
-        loadWithdrawRequests();
-        
-      } catch (error) {
-        console.error("Error updating withdrawal status:", error);
-        alert("Failed to update withdrawal status");
-      }
-    }
-
-    async function searchUsers() {
-      const searchTerm = document.getElementById('admin-search-user').value.toLowerCase();
-      
-      if (!searchTerm) {
-        loadAllUsers();
-        return;
-      }
-      
-      try {
-        const q = firebase.firestoreFunctions.query(
-          firebase.firestoreFunctions.collection(firebase.db, "users")
-        );
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
-        
-        const usersList = document.getElementById('users-list');
-        usersList.innerHTML = '';
-        let found = false;
-        
-        querySnapshot.forEach((doc) => {
-          const user = doc.data();
-          const userName = user.name ? user.name.toLowerCase() : '';
-          const userEmail = user.email ? user.email.toLowerCase() : '';
-          
-          if (userName.includes(searchTerm) || userEmail.includes(searchTerm)) {
-            found = true;
-            const row = document.createElement('tr');
-            
-            row.innerHTML = `
-              <td>${user.name || 'N/A'}</td>
-              <td>${user.email || 'N/A'}</td>
-              <td>${user.phone || 'N/A'}</td>
-              <td>${user.balance || 0}</td>
-              <td>
-                <button onclick="selectUserForAdjustment('${doc.id}', '${user.name}', ${user.balance || 0})">Adjust</button>
-                <button onclick="loadUserHistory('${doc.id}', '${user.name}')">History</button>
-              </td>
-            `;
-            
-            usersList.appendChild(row);
-          }
-        });
-        
-        if (!found) {
-          usersList.innerHTML = '<tr><td colspan="5">No users found</td></tr>';
-        }
-      } catch (error) {
-        console.error("Error searching users:", error);
-        alert("Error searching users. Please try again.");
+        alert("Error loading withdrawal requests. Please try again.");
       }
     }
 
     function selectUserForAdjustment(userId, userName, currentBalance) {
       document.getElementById('adjust-user-id').value = userId;
       document.getElementById('adjust-amount').placeholder = `Current: ${currentBalance}`;
-      document.getElementById('adjust-amount').focus();
     }
 
     async function adjustUserBalance() {
@@ -3418,67 +3090,177 @@
         return;
       }
       
-      if (isNaN(amount) || amount <= 0) {
-        alert("Please enter a valid positive amount");
+      if (isNaN(amount) {
+        alert("Please enter a valid amount");
         return;
       }
       
       try {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", userId);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-        
-        if (!docSnap.exists()) {
-          alert("User not found");
-          return;
-        }
-        
-        const user = docSnap.data();
-        let newBalance = user.balance || 0;
-        let transactionType = 'adjustment';
-        let description = '';
+        let updateData = {};
+        let transactionType = '';
+        let transactionDescription = '';
         
         switch (adjustType) {
           case 'add':
-            newBalance += amount;
-            description = `Admin added Rs. ${amount}`;
+            updateData = { balance: firebase.firestoreFunctions.increment(amount) };
+            transactionType = 'admin_add';
+            transactionDescription = `Admin added Rs. ${amount}`;
             break;
           case 'subtract':
-            newBalance = Math.max(0, newBalance - amount);
-            description = `Admin subtracted Rs. ${amount}`;
+            updateData = { balance: firebase.firestoreFunctions.increment(-amount) };
+            transactionType = 'admin_subtract';
+            transactionDescription = `Admin subtracted Rs. ${amount}`;
             break;
           case 'set':
-            newBalance = amount;
-            description = `Admin set balance to Rs. ${amount}`;
+            updateData = { balance: amount };
+            transactionType = 'admin_set';
+            transactionDescription = `Admin set balance to Rs. ${amount}`;
             break;
         }
         
-        await firebase.firestoreFunctions.updateDoc(docRef, {
-          balance: newBalance
-        });
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", userId),
+          updateData
+        );
         
         await recordTransaction(
           userId,
-          'admin',
+          transactionType,
           amount,
-          'system',
-          description
+          'admin',
+          transactionDescription
         );
         
-        alert("Balance updated successfully");
+        alert("Balance updated successfully!");
         document.getElementById('adjust-amount').value = '';
         loadAllUsers();
-        
-        if (userId === currentUserId) {
-          balance = newBalance;
-          document.getElementById('user-balance').textContent = balance;
-        }
       } catch (error) {
         console.error("Error adjusting balance:", error);
-        alert("Failed to update balance: " + error.message);
+        alert("Failed to adjust balance: " + error.message);
       }
     }
 
-    async function loadUserHistory(userId, userName = '') {
+    async function approveDeposit(requestId, userId, amount) {
+      if (!confirm(`Approve deposit of Rs. ${amount}?`)) return;
+      
+      try {
+        // Update request status
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "deposit_requests", requestId),
+          { status: 'approved' }
+        );
+        
+        // Update user balance
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", userId),
+          { balance: firebase.firestoreFunctions.increment(amount) }
+        );
+        
+        // Record transaction
+        await recordTransaction(
+          userId,
+          'deposit',
+          amount,
+          'admin',
+          'Deposit approved by admin'
+        );
+        
+        alert("Deposit approved successfully!");
+        loadDepositRequests();
+        loadAllUsers();
+      } catch (error) {
+        console.error("Error approving deposit:", error);
+        alert("Failed to approve deposit: " + error.message);
+      }
+    }
+
+    async function rejectDeposit(requestId) {
+      if (!confirm("Reject this deposit request?")) return;
+      
+      try {
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "deposit_requests", requestId),
+          { status: 'rejected' }
+        );
+        
+        alert("Deposit request rejected");
+        loadDepositRequests();
+      } catch (error) {
+        console.error("Error rejecting deposit:", error);
+        alert("Failed to reject deposit: " + error.message);
+      }
+    }
+
+    async function approveWithdrawal(requestId, userId, amount) {
+      if (!confirm(`Approve withdrawal of Rs. ${amount}?`)) return;
+      
+      try {
+        // Update request status
+        await firebase.firestoreFunctions.updateDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId),
+          { status: 'approved' }
+        );
+        
+        // Record transaction
+        await recordTransaction(
+          userId,
+          'withdrawal',
+          amount,
+          'admin',
+          'Withdrawal approved by admin'
+        );
+        
+        alert("Withdrawal approved successfully!");
+        loadWithdrawRequests();
+      } catch (error) {
+        console.error("Error approving withdrawal:", error);
+        alert("Failed to approve withdrawal: " + error.message);
+      }
+    }
+
+    async function rejectWithdrawal(requestId) {
+      if (!confirm("Reject this withdrawal request?")) return;
+      
+      try {
+        const requestDoc = await firebase.firestoreFunctions.getDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId)
+        );
+        
+        if (requestDoc.exists()) {
+          const requestData = requestDoc.data();
+          
+          // Update request status
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId),
+            { status: 'rejected' }
+          );
+          
+          // Return funds to user
+          await firebase.firestoreFunctions.updateDoc(
+            firebase.firestoreFunctions.doc(firebase.db, "users", requestData.user_id),
+            { balance: firebase.firestoreFunctions.increment(requestData.amount) }
+          );
+          
+          // Record transaction
+          await recordTransaction(
+            requestData.user_id,
+            'withdrawal_refund',
+            requestData.amount,
+            'admin',
+            'Withdrawal rejected - funds returned'
+          );
+        }
+        
+        alert("Withdrawal request rejected and funds returned to user");
+        loadWithdrawRequests();
+        loadAllUsers();
+      } catch (error) {
+        console.error("Error rejecting withdrawal:", error);
+        alert("Failed to reject withdrawal: " + error.message);
+      }
+    }
+
+    async function loadUserHistory(userId, userName) {
       if (!userId) {
         userId = document.getElementById('history-user-id').value;
         if (!userId) {
@@ -3494,26 +3276,27 @@
           firebase.firestoreFunctions.orderBy("timestamp", "desc"),
           firebase.firestoreFunctions.limit(50)
         );
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
         
+        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
         const historyList = document.getElementById('history-list');
         historyList.innerHTML = '';
         
         if (querySnapshot.empty) {
-          historyList.innerHTML = '<tr><td colspan="6">No transactions found</td></tr>';
+          historyList.innerHTML = '<tr><td colspan="6">No history found</td></tr>';
           return;
         }
         
         querySnapshot.forEach((doc) => {
           const transaction = doc.data();
-          const date = transaction.timestamp ? transaction.timestamp.toDate().toLocaleString() : 'N/A';
-          
           const row = document.createElement('tr');
+          
           row.innerHTML = `
-            <td>${date}</td>
-            <td>${userName || userId}</td>
-            <td>${transaction.type}</td>
-            <td>${transaction.amount}</td>
+            <td>${transaction.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
+            <td>${userName || 'N/A'}</td>
+            <td>${transaction.type || 'N/A'}</td>
+            <td class="${transaction.type.includes('win') || transaction.type === 'deposit' ? 'win' : 'loss'}">
+              ${transaction.amount || 0}
+            </td>
             <td>${transaction.game || 'N/A'}</td>
             <td>${transaction.description || 'N/A'}</td>
           `;
@@ -3522,10 +3305,10 @@
         });
       } catch (error) {
         console.error("Error loading history:", error);
-        alert("Failed to load transaction history");
+        alert("Error loading history: " + error.message);
       }
     }
-    
+
     async function loadUserTransactionHistory() {
       if (!currentUserId) return;
       
@@ -3536,83 +3319,47 @@
           firebase.firestoreFunctions.orderBy("timestamp", "desc"),
           firebase.firestoreFunctions.limit(20)
         );
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
         
+        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
         const historyContainer = document.getElementById('user-history');
-        historyContainer.innerHTML = '';
+        historyContainer.innerHTML = '<h4>Recent Transactions</h4>';
         
         if (querySnapshot.empty) {
-          historyContainer.innerHTML = '<p>No transactions found</p>';
+          historyContainer.innerHTML += '<p>No transactions yet</p>';
           return;
         }
         
         querySnapshot.forEach((doc) => {
           const transaction = doc.data();
-          const date = transaction.timestamp ? transaction.timestamp.toDate().toLocaleString() : 'N/A';
-          const amountClass = transaction.type === 'win' || transaction.type === 'deposit' || transaction.type === 'initial' ? 'win' : 'loss';
-          
           const item = document.createElement('div');
           item.className = 'history-item';
+          
           item.innerHTML = `
-            <div class="date">${date}</div>
-            <div>${transaction.game || 'System'}: ${transaction.description}</div>
-            <div class="amount ${amountClass}">${amountClass === 'win' ? '+' : '-'}Rs. ${transaction.amount}</div>
+            <div class="date">${transaction.timestamp?.toDate().toLocaleString() || 'N/A'}</div>
+            <div>${transaction.description || 'N/A'}</div>
+            <div class="amount ${transaction.type.includes('win') || transaction.type === 'deposit' ? 'win' : 'loss'}">
+              ${transaction.type.includes('win') || transaction.type === 'deposit' ? '+' : '-'}Rs. ${transaction.amount || 0}
+            </div>
           `;
+          
           historyContainer.appendChild(item);
         });
       } catch (error) {
         console.error("Error loading user history:", error);
-        document.getElementById('user-history').innerHTML = '<p>Error loading transaction history</p>';
+        historyContainer.innerHTML = '<p>Error loading transaction history</p>';
       }
     }
 
-    function showComingSoon(section) {
-      const box = document.getElementById('comingSoonBox');
-      box.style.display = 'block';
-      box.querySelector('h3').textContent = `${section.charAt(0).toUpperCase() + section.slice(1)} Coming Soon`;
-      box.querySelector('p').textContent = 'This feature is under development and will be available soon.';
-      
-      setTimeout(() => {
-        box.style.display = 'none';
-      }, 3000);
-    }
-
-    async function checkVIPAccess() {
-      if (!currentUserId) {
-        alert("Please login to access VIP section");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      try {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-        
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          if (userData.isAdmin) {
-            toggleAdminPanel();
-          } else {
-            showComingSoon('VIP');
-          }
-        }
-      } catch (error) {
-        console.error("Error checking VIP access:", error);
-        alert("Error checking access. Please try again.");
-      }
-    }
-
-    // Refresh balance
     async function refreshBalance() {
       if (!currentUserId) return;
       
       try {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
+        const docSnap = await firebase.firestoreFunctions.getDoc(
+          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId)
+        );
         
         if (docSnap.exists()) {
-          const userData = docSnap.data();
-          balance = userData.balance;
+          balance = docSnap.data().balance;
           document.getElementById('user-balance').textContent = balance;
         }
       } catch (error) {
@@ -3620,24 +3367,136 @@
       }
     }
 
-    // Initialize particles
+    function checkVIPAccess() {
+      document.getElementById('comingSoonBox').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('comingSoonBox').style.display = 'none';
+      }, 3000);
+    }
+
+    // Initialize particles.js
     particlesJS("particles-js", {
       "particles": {
-        "number": { "value": 80 },
-        "color": { "value": "#FFD700" },
-        "shape": { "type": "star" },
-        "opacity": { "value": 0.8 },
-        "size": { "value": 5 },
-        "move": { "enable": true, "speed": 6 }
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#FFD700"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#FFD700",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 6,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
       },
-      "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false } } },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
       "retina_detect": true
     });
 
-    // Hide welcome popup after 5 seconds
-    setTimeout(() => {
-      document.getElementById('welcomePopup').style.display = 'none';
-    }, 5000);
+    // Target fruits count based on bet amount
+    const targetFruitsCount = {
+      20: 5,
+      50: 8,
+      100: 12,
+      150: 15,
+      200: 18,
+      250: 20,
+      300: 25
+    };
+
+    // Show welcome popup on first visit
+    if (!localStorage.getItem('welcomeShown')) {
+      document.getElementById('welcomePopup').style.display = 'flex';
+      localStorage.setItem('welcomeShown', 'true');
+    }
   </script>
 </body>
 </html>
