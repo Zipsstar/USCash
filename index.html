@@ -72,10 +72,21 @@
     };
   </script>
   <style>
+    :root {
+      --primary-bg: #1a1a1a;
+      --secondary-bg: #2a2a2a;
+      --accent-color: #FFD700;
+      --accent-dark: #daa520;
+      --text-color: #e0e0e0;
+      --success-color: #4CAF50;
+      --danger-color: #F44336;
+      --info-color: #2196F3;
+    }
+    
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: black;
-      color: goldenrod;
+      background-color: var(--primary-bg);
+      color: var(--accent-color);
       text-align: center;
       margin: 0;
       padding: 0;
@@ -91,10 +102,10 @@
     .header h1 {
       margin: 0;
       font-size: 2rem;
-      background: linear-gradient(90deg, black, gold, black);
+      background: linear-gradient(90deg, var(--primary-bg), var(--accent-color), var(--primary-bg));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 4px gold;
+      text-shadow: 2px 2px 4px var(--accent-color);
       letter-spacing: 1px;
     }
     .header .logo {
@@ -127,15 +138,15 @@
       100% { transform: translate(-100%, 0); }
     }
     .nav {
-      background-color: goldenrod;
-      color: black;
+      background-color: var(--accent-color);
+      color: var(--primary-bg);
       padding: 8px;
       display: flex;
       justify-content: space-around;
       font-size: 0.8rem;
     }
     .nav a {
-      color: black;
+      color: var(--primary-bg);
       text-decoration: none;
       font-weight: bold;
     }
@@ -143,27 +154,28 @@
       margin: 15px auto;
       padding: 10px;
       max-width: 95%;
-      border: 2px solid goldenrod;
+      border: 2px solid var(--accent-color);
       border-radius: 8px;
       box-sizing: border-box;
+      background-color: var(--secondary-bg);
     }
     .gold-box {
       display: inline-block;
-      background-color: goldenrod;
-      color: black;
+      background-color: var(--accent-color);
+      color: var(--primary-bg);
       margin: 5px;
       padding: 8px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.9rem;
       font-weight: bold;
-      border: 2px solid #000;
+      border: 2px solid var(--primary-bg);
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
     }
     .gold-box.active {
-      background-color: black;
-      color: goldenrod;
-      border: 2px solid goldenrod;
+      background-color: var(--primary-bg);
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
     }
     .game-options {
       display: flex;
@@ -181,8 +193,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 2px solid goldenrod;
-      box-shadow: 0 0 8px goldenrod;
+      border: 2px solid var(--accent-color);
+      box-shadow: 0 0 8px var(--accent-color);
       transition: transform 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -190,7 +202,7 @@
       background-size: cover;
       background-position: center;
       color: white;
-      text-shadow: 1px 1px 3px black;
+      text-shadow: 1px 1px 3px var(--primary-bg);
     }
     .game-options .gold-box:hover {
       transform: scale(1.05);
@@ -219,13 +231,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid goldenrod;
+      border: 2px solid var(--accent-color);
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.4s, background-color 0.3s;
     }
     .card.flipped {
-      background-color: goldenrod;
+      background-color: var(--accent-color);
       color: skyblue;
       transform: rotateY(180deg);
     }
@@ -256,7 +268,7 @@
       100% { transform: translate(1px, 1px) rotate(0deg); }
     }
     @keyframes glow {
-      from { box-shadow: 0 0 10px gold; }
+      from { box-shadow: 0 0 10px var(--accent-color); }
       to { box-shadow: 0 0 20px white; }
     }
     #particles-js {
@@ -280,12 +292,12 @@
       z-index: 10000;
     }
     #welcomePopup .popup-content {
-      background: black;
-      border: 2px solid goldenrod;
+      background: var(--primary-bg);
+      border: 2px solid var(--accent-color);
       padding: 20px;
       border-radius: 10px;
       max-width: 350px;
-      color: goldenrod;
+      color: var(--accent-color);
       text-align: center;
       position: relative;
     }
@@ -309,7 +321,7 @@
     .shoot-area {
       position: relative;
       height: 250px;
-      border: 2px dashed goldenrod;
+      border: 2px dashed var(--accent-color);
       border-radius: 10px;
       background-color: #222;
       overflow: hidden;
@@ -341,7 +353,7 @@
     #fruitCountdown {
       font-size: 1.1em;
       margin-top: 8px;
-      color: gold;
+      color: var(--accent-color);
     }
     #auth-container {
       position: fixed;
@@ -356,13 +368,13 @@
       z-index: 10001;
     }
     .auth-form {
-      background: black;
-      border: 2px solid goldenrod;
+      background: var(--primary-bg);
+      border: 2px solid var(--accent-color);
       padding: 20px;
       border-radius: 12px;
       width: 300px;
       max-width: 90%;
-      color: goldenrod;
+      color: var(--accent-color);
       box-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
     }
     .auth-form h2 {
@@ -376,7 +388,7 @@
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       border-radius: 6px;
       background: #222;
       color: white;
@@ -392,8 +404,8 @@
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      background: linear-gradient(to right, goldenrod, #daa520);
-      color: black;
+      background: linear-gradient(to right, var(--accent-color), var(--accent-dark));
+      color: var(--primary-bg);
       border: none;
       border-radius: 6px;
       font-weight: bold;
@@ -403,7 +415,7 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .auth-form button:hover {
-      background: linear-gradient(to right, #daa520, goldenrod);
+      background: linear-gradient(to right, var(--accent-dark), var(--accent-color));
       transform: translateY(-2px);
       box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
@@ -416,7 +428,7 @@
       transition: color 0.3s ease;
     }
     .auth-toggle:hover {
-      color: goldenrod;
+      color: var(--accent-color);
       text-decoration: underline;
     }
     #auth-tabs {
@@ -429,7 +441,7 @@
       flex: 1;
       padding: 10px;
       background: #333;
-      color: goldenrod;
+      color: var(--accent-color);
       border: none;
       font-size: 0.8rem;
       transition: all 0.3s ease;
@@ -438,8 +450,8 @@
       background: #444;
     }
     #auth-tabs button.active {
-      background: goldenrod;
-      color: black;
+      background: var(--accent-color);
+      color: var(--primary-bg);
       font-weight: bold;
     }
     #user-info {
@@ -449,17 +461,17 @@
       background: rgba(0, 0, 0, 0.8);
       padding: 8px 15px;
       border-radius: 20px;
-      color: goldenrod;
+      color: var(--accent-color);
       font-size: 0.8rem;
       z-index: 1000;
       display: flex;
       align-items: center;
       gap: 10px;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
     }
     #user-info button {
-      background: goldenrod;
-      color: black;
+      background: var(--accent-color);
+      color: var(--primary-bg);
       border: none;
       border-radius: 4px;
       padding: 4px 8px;
@@ -468,7 +480,7 @@
       transition: all 0.3s ease;
     }
     #user-info button:hover {
-      background: #daa520;
+      background: var(--accent-dark);
     }
     #login-form, #signup-form {
       display: none;
@@ -494,7 +506,7 @@
       transition: color 0.3s ease;
     }
     .password-reset-back:hover {
-      color: goldenrod;
+      color: var(--accent-color);
       text-decoration: underline;
     }
     #admin-panel {
@@ -509,12 +521,6 @@
       overflow-y: auto;
       padding: 15px;
       box-sizing: border-box;
-    }
-    #admin-panel h2 {
-      color: goldenrod;
-      text-align: center;
-      margin-bottom: 15px;
-      font-size: 1.2rem;
     }
     #admin-close {
       position: absolute;
@@ -532,7 +538,7 @@
     }
     .admin-section {
       background: #111;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       border-radius: 6px;
       padding: 12px;
       margin-bottom: 15px;
@@ -540,7 +546,7 @@
     .admin-section h3 {
       color: skyblue;
       margin-top: 0;
-      border-bottom: 1px solid goldenrod;
+      border-bottom: 1px solid var(--accent-color);
       padding-bottom: 8px;
       font-size: 1rem;
     }
@@ -551,13 +557,13 @@
       font-size: 0.7rem;
     }
     th, td {
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       padding: 6px;
       text-align: left;
     }
     th {
       background-color: #333;
-      color: goldenrod;
+      color: var(--accent-color);
     }
     tr:nth-child(even) {
       background-color: #222;
@@ -570,14 +576,14 @@
       flex: 1;
       padding: 6px;
       background: #222;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       color: white;
       margin-right: 5px;
       font-size: 0.7rem;
     }
     .admin-input-group button {
-      background: goldenrod;
-      color: black;
+      background: var(--accent-color);
+      color: var(--primary-bg);
       border: none;
       padding: 6px 12px;
       cursor: pointer;
@@ -587,8 +593,8 @@
       position: fixed;
       bottom: 15px;
       right: 15px;
-      background: goldenrod;
-      color: black;
+      background: var(--accent-color);
+      color: var(--primary-bg);
       border: none;
       border-radius: 50%;
       width: 40px;
@@ -611,12 +617,12 @@
       padding: 15px;
       max-width: 300px;
       background: #111;
-      border: 2px solid goldenrod;
+      border: 2px solid var(--accent-color);
       border-radius: 8px;
       text-align: center;
     }
     .error-message {
-      color: red;
+      color: var(--danger-color);
       font-size: 0.8rem;
       margin-top: 5px;
       display: none;
@@ -637,7 +643,7 @@
       background-color: #111;
       padding: 20px;
       border-radius: 8px;
-      border: 2px solid goldenrod;
+      border: 2px solid var(--accent-color);
       max-width: 400px;
       width: 90%;
     }
@@ -645,13 +651,13 @@
       float: right;
       cursor: pointer;
       font-size: 1.5rem;
-      color: goldenrod;
+      color: var(--accent-color);
     }
     .loading-spinner {
       display: none;
       border: 3px solid rgba(255, 215, 0, 0.3);
       border-radius: 50%;
-      border-top: 3px solid goldenrod;
+      border-top: 3px solid var(--accent-color);
       width: 20px;
       height: 20px;
       animation: spin 1s linear infinite;
@@ -664,7 +670,7 @@
     /* Deposit Contact Box */
     .contact-box {
       background: #111;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       border-radius: 8px;
       padding: 15px;
       margin: 15px auto;
@@ -672,7 +678,7 @@
       text-align: center;
     }
     .contact-box h3 {
-      color: goldenrod;
+      color: var(--accent-color);
       margin-top: 0;
     }
     .contact-box p {
@@ -706,14 +712,14 @@
       padding: 8px;
       margin-right: 8px;
       background: #222;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       color: white;
       border-radius: 6px;
       text-align: center;
     }
     .custom-bet-btn {
-      background: goldenrod;
-      color: black;
+      background: var(--accent-color);
+      color: var(--primary-bg);
       border: none;
       padding: 8px 12px;
       border-radius: 6px;
@@ -722,7 +728,7 @@
       transition: all 0.3s ease;
     }
     .custom-bet-btn:hover {
-      background: #daa520;
+      background: var(--accent-dark);
     }
     /* Improved withdraw form styles */
     #withdraw-form input,
@@ -731,7 +737,7 @@
       padding: 10px;
       margin: 8px 0;
       background: #222;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       color: white;
       border-radius: 6px;
       box-sizing: border-box;
@@ -745,8 +751,8 @@
       background-size: 12px;
     }
     #withdraw-form button[type="submit"] {
-      background: goldenrod;
-      color: black;
+      background: var(--accent-color);
+      color: var(--primary-bg);
       border: none;
       padding: 12px;
       border-radius: 6px;
@@ -762,7 +768,7 @@
     }
     .withdraw-success {
       display: none;
-      color: #4CAF50;
+      color: var(--success-color);
       margin-top: 15px;
       font-weight: bold;
     }
@@ -776,7 +782,7 @@
     #memoryGame {
       display: none;
     }
-    #numberGuessGame {
+    #arrowShootingGame {
       display: none;
     }
     .ace-card {
@@ -788,19 +794,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid goldenrod;
+      border: 2px solid var(--accent-color);
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
       margin: 5px;
     }
     .ace-card.flipped {
-      background-color: goldenrod;
+      background-color: var(--accent-color);
       color: black;
     }
     .ace-card.selected {
       transform: scale(1.05);
-      box-shadow: 0 0 15px gold;
+      box-shadow: 0 0 15px var(--accent-color);
     }
     .ace-card.ace {
       background-color: red;
@@ -809,7 +815,7 @@
     .ace-timer {
       font-size: 1.5rem;
       margin: 15px 0;
-      color: gold;
+      color: var(--accent-color);
     }
     .tic-tac-toe-board {
       display: grid;
@@ -822,7 +828,7 @@
       width: 90px;
       height: 90px;
       background-color: #222;
-      border: 2px solid goldenrod;
+      border: 2px solid var(--accent-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -850,7 +856,7 @@
       width: 60px;
       height: 60px;
       background-color: #222;
-      border: 2px solid goldenrod;
+      border: 2px solid var(--accent-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -859,47 +865,80 @@
       transition: all 0.3s ease;
     }
     .memory-card.flipped {
-      background-color: goldenrod;
+      background-color: var(--accent-color);
       transform: rotateY(180deg);
     }
-    .number-guess-container {
+    /* Arrow Shooting Game Styles */
+    .arrow-shooting-container {
       margin: 15px auto;
-      max-width: 300px;
+      max-width: 400px;
     }
-    .number-guess-input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      background: #222;
-      border: 1px solid goldenrod;
-      color: white;
-      border-radius: 6px;
-      text-align: center;
+    .arrow-board {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      position: relative;
+      border: 3px solid var(--accent-color);
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #222;
+    }
+    .target-center {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    .target-ring {
+      position: absolute;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid var(--accent-color);
+    }
+    .ring-1 { width: 60px; height: 60px; }
+    .ring-2 { width: 90px; height: 90px; }
+    .ring-3 { width: 120px; height: 120px; }
+    .ring-4 { width: 150px; height: 150px; }
+    .ring-5 { width: 180px; height: 180px; }
+    .ring-6 { width: 210px; height: 210px; }
+    .ring-7 { width: 240px; height: 240px; }
+    .ring-8 { width: 270px; height: 270px; }
+    .arrow {
+      position: absolute;
+      font-size: 24px;
+      z-index: 3;
+      transition: transform 0.1s;
+    }
+    .arrow-score-display {
+      margin-top: 15px;
       font-size: 1.2rem;
     }
-    .number-guess-btn {
-      background: goldenrod;
-      color: black;
+    .arrow-timer {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: var(--accent-color);
+    }
+    .arrow-controls {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .arrow-btn {
+      background: var(--accent-color);
+      color: var(--primary-bg);
       border: none;
-      padding: 10px 15px;
+      padding: 8px 15px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
-      margin: 5px;
-      transition: all 0.3s ease;
-    }
-    .number-guess-btn:hover {
-      background: #daa520;
-    }
-    .number-guess-hint {
-      margin: 10px 0;
-      font-size: 1rem;
-      color: white;
-    }
-    .number-guess-attempts {
-      margin: 10px 0;
-      font-size: 0.9rem;
-      color: #aaa;
     }
     .verified-badge {
       color: #1DA1F2;
@@ -908,7 +947,7 @@
     }
     .history-item {
       background: #111;
-      border: 1px solid goldenrod;
+      border: 1px solid var(--accent-color);
       border-radius: 6px;
       padding: 10px;
       margin: 10px 0;
@@ -919,10 +958,10 @@
       font-size: 0.7rem;
     }
     .history-item .amount.win {
-      color: #4CAF50;
+      color: var(--success-color);
     }
     .history-item .amount.loss {
-      color: #F44336;
+      color: var(--danger-color);
     }
   </style>
 </head>
@@ -933,7 +972,7 @@
   </div>
 
   <div class="marquee">
-    <span>Welcome to USCash, Earn with Fun. We will add more features soon!</span>
+    <span>Welcome to USCash, Earn with Fun. Try our new Arrow Shooting game!</span>
   </div>
 
   <div id="auth-container">
@@ -1128,8 +1167,8 @@
       <div class="gold-box" onclick="startMemoryGame()" style="background-image: url('https://img.freepik.com/free-vector/memory-game-seamless-pattern-background_53876-93174.jpg');">
         <div class="game-name">Memory Match</div>
       </div>
-      <div class="gold-box" onclick="startNumberGuessGame()" style="background-image: url('https://img.freepik.com/free-vector/number-pattern-background_53876-93176.jpg');">
-        <div class="game-name">Number Guess</div>
+      <div class="gold-box" onclick="startArrowShootingGame()" style="background-image: url('https://img.freepik.com/free-vector/archery-target-seamless-pattern-background_53876-93178.jpg');">
+        <div class="game-name">Arrow Shooting</div>
       </div>
     </div>
   </div>
@@ -1292,28 +1331,39 @@
     <div id="memoryResult"></div>
   </div>
 
-  <!-- Number Guess Game Section -->
-  <div class="section" id="numberGuessGame" style="display:none;">
-    <h2>🔢 Number Guess</h2>
+  <!-- Arrow Shooting Game Section -->
+  <div class="section" id="arrowShootingGame" style="display:none;">
+    <h2>🏹 Arrow Shooting</h2>
     <div class="bet-amounts">
-      <div class="gold-box" data-bet="20" onclick="startNumberGuessRound(this, 20)">Rs. 20</div>
-      <div class="gold-box" data-bet="50" onclick="startNumberGuessRound(this, 50)">Rs. 50</div>
-      <div class="gold-box" data-bet="100" onclick="startNumberGuessRound(this, 100)">Rs. 100</div>
-      <div class="gold-box" data-bet="150" onclick="startNumberGuessRound(this, 150)">Rs. 150</div>
-      <div class="gold-box" data-bet="200" onclick="startNumberGuessRound(this, 200)">Rs. 200</div>
-      <div class="gold-box" data-bet="300" onclick="startNumberGuessRound(this, 300)">Rs. 300</div>
+      <div class="gold-box" data-bet="20" onclick="startArrowShootingRound(this, 20)">Rs. 20</div>
+      <div class="gold-box" data-bet="50" onclick="startArrowShootingRound(this, 50)">Rs. 50</div>
+      <div class="gold-box" data-bet="100" onclick="startArrowShootingRound(this, 100)">Rs. 100</div>
+      <div class="gold-box" data-bet="150" onclick="startArrowShootingRound(this, 150)">Rs. 150</div>
+      <div class="gold-box" data-bet="200" onclick="startArrowShootingRound(this, 200)">Rs. 200</div>
+      <div class="gold-box" data-bet="300" onclick="startArrowShootingRound(this, 300)">Rs. 300</div>
     </div>
     <div class="custom-bet-container">
-      <input type="number" id="custom-number-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
-      <button class="custom-bet-btn" onclick="placeCustomNumberBet()">Bet</button>
+      <input type="number" id="custom-arrow-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
+      <button class="custom-bet-btn" onclick="placeCustomArrowBet()">Bet</button>
     </div>
-    <div id="numberGuessResult"></div>
-    <div class="number-guess-container">
-      <p>Guess a number between 1 and 100</p>
-      <input type="number" id="numberGuessInput" class="number-guess-input" min="1" max="100">
-      <button class="number-guess-btn" onclick="submitNumberGuess()">Submit</button>
-      <div id="numberGuessHint" class="number-guess-hint"></div>
-      <div id="numberGuessAttempts" class="number-guess-attempts">Attempts: 0/5</div>
+    <div id="arrowResult"></div>
+    <div class="arrow-shooting-container">
+      <div class="arrow-board" id="arrowBoard">
+        <div class="target-center"></div>
+        <div class="target-ring ring-1"></div>
+        <div class="target-ring ring-2"></div>
+        <div class="target-ring ring-3"></div>
+        <div class="target-ring ring-4"></div>
+        <div class="target-ring ring-5"></div>
+        <div class="target-ring ring-6"></div>
+        <div class="target-ring ring-7"></div>
+        <div class="target-ring ring-8"></div>
+      </div>
+      <div class="arrow-score-display" id="arrowScore">Score: 0</div>
+      <div class="arrow-timer" id="arrowTimer">Time left: 30s</div>
+      <div class="arrow-controls">
+        <button class="arrow-btn" onclick="shootArrow()">Shoot Arrow (Space)</button>
+      </div>
     </div>
   </div>
 
@@ -1330,6 +1380,9 @@
     <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
   </audio>
   <audio id="loseSound">
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
+  </audio>
+  <audio id="arrowSound">
     <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
   </audio>
 
@@ -1387,7 +1440,7 @@
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
     }
 
     function showDepositSection() {
@@ -1399,7 +1452,7 @@
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
     }
 
     function showMoreSection() {
@@ -1411,7 +1464,7 @@
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
       
       if (currentUserId) {
         loadUserTransactionHistory();
@@ -1460,11 +1513,11 @@
         });
       });
       
-      // Number Guess game bets
-      document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(bet => {
+      // Arrow Shooting game bets
+      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(bet => {
         bet.addEventListener('click', function() {
           const amount = parseInt(this.getAttribute('data-bet'));
-          startNumberGuessRound(this, amount);
+          startArrowShootingRound(this, amount);
         });
       });
     }
@@ -1627,9 +1680,9 @@
       await startMemoryRound(closestBet, customAmount);
     }
     
-    // Custom number guess bet amount function
-    async function placeCustomNumberBet() {
-      const customAmount = parseInt(document.getElementById('custom-number-bet').value);
+    // Custom arrow shooting bet amount function
+    async function placeCustomArrowBet() {
+      const customAmount = parseInt(document.getElementById('custom-arrow-bet').value);
       if (isNaN(customAmount)) {
         alert("Please enter a valid bet amount");
         return;
@@ -1640,14 +1693,14 @@
         return;
       }
       
-      const betBoxes = document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box');
+      const betBoxes = document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box');
       const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
         const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
         const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
         return currDiff < prevDiff ? curr : prev;
       });
       
-      await startNumberGuessRound(closestBet, customAmount);
+      await startArrowShootingRound(closestBet, customAmount);
     }
 
     // Improved withdraw form handling
@@ -2148,6 +2201,7 @@
     const explosionSound = document.getElementById('explosionSound');
     const winSound = document.getElementById('winSound');
     const loseSound = document.getElementById('loseSound');
+    const arrowSound = document.getElementById('arrowSound');
 
     async function deductBetAmount(amount) {
       try {
@@ -2182,7 +2236,7 @@
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupCards();
     }
@@ -2194,7 +2248,7 @@
       document.getElementById('findAceGame').style.display = 'block';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupAceCards();
     }
@@ -2206,7 +2260,7 @@
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'block';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupTicTacToe();
     }
@@ -2218,21 +2272,21 @@
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'block';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupMemoryGame();
     }
     
-    function startNumberGuessGame() {
+    function startArrowShootingGame() {
       document.getElementById('homeSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'block';
+      document.getElementById('arrowShootingGame').style.display = 'block';
       bgMusic.play().catch(() => {});
-      setupNumberGuessGame();
+      setupArrowShootingGame();
     }
 
     function setupCards() {
@@ -2467,7 +2521,7 @@
       document.getElementById('findAceGame').style.display = 'none';
       document.getElementById('ticTacToeGame').style.display = 'none';
       document.getElementById('memoryGame').style.display = 'none';
-      document.getElementById('numberGuessGame').style.display = 'none';
+      document.getElementById('arrowShootingGame').style.display = 'none';
       setNewFruitTarget();
     }
 
@@ -2625,469 +2679,6 @@
 
     function setupAceCards() {
       aceCards = [];
-      const container = document.getElementById('aceCards');
-      container.innerHTML = '';
-      document.getElementById('aceResult').innerText = '';
-      
-      // Create 3 cards
-      for (let i = 0; i < 3; i++) {
-        const card = document.createElement('div');
-        card.className = 'ace-card';
-        card.dataset.index = i;
-        card.innerHTML = '🂠';
-        card.onclick = () => selectAceCard(card);
-        container.appendChild(card);
-        aceCards.push(card);
-      }
-    }
-
-    async function startFindAceRound(element, amount) {
-      if (aceGameStarted) {
-        alert("Game already in progress!");
-        return;
-      }
-      
-      if (!currentUserId) {
-        alert("Please login to play");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      if (balance < amount) {
-        alert("Insufficient balance! Please deposit more to play.");
-        return;
-      }
-
-      // Highlight selected bet
-      document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      element.classList.add('active');
-
-      try {
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        await recordTransaction(
-          currentUserId,
-          'bet',
-          amount,
-          'find_ace',
-          `Bet Rs. ${amount} in Find Ace`
-        );
-        
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-      } catch (error) {
-        console.error("Error recording bet:", error);
-        return;
-      }
-
-      setupAceCards();
-      aceSelectedBet = amount;
-      aceGameStarted = true;
-      aceTimeLeft = 15;
-      document.getElementById('aceTimer').textContent = `Time left: ${aceTimeLeft}s`;
-
-      // Randomly select ace position
-      acePosition = Math.floor(Math.random() * 3);
-      
-      // Show cards for 3 seconds
-      aceCards.forEach((card, index) => {
-        if (index === acePosition) {
-          card.innerHTML = '🂡'; // Ace of spades
-          card.classList.add('ace');
-        } else {
-          card.innerHTML = '🂢'; // Two of spades
-        }
-        card.classList.add('flipped');
-      });
-
-      // Start countdown
-      aceTimerInterval = setInterval(() => {
-        aceTimeLeft--;
-        document.getElementById('aceTimer').textContent = `Time left: ${aceTimeLeft}s`;
-        
-        if (aceTimeLeft <= 0) {
-          clearInterval(aceTimerInterval);
-          // Hide cards after 3 seconds
-          setTimeout(() => {
-            aceCards.forEach(card => {
-              card.innerHTML = '🂠';
-              card.classList.remove('flipped', 'ace');
-            });
-            
-            // Shuffle cards 60 times
-            let shuffleCount = 0;
-            const shuffleInterval = setInterval(() => {
-              // Randomly swap two cards
-              const i = Math.floor(Math.random() * 3);
-              const j = Math.floor(Math.random() * 3);
-              if (i !== j) {
-                // Update ace position if it was moved
-                if (i === acePosition) acePosition = j;
-                else if (j === acePosition) acePosition = i;
-                
-                // Swap cards in DOM
-                const temp = aceCards[i].style.order;
-                aceCards[i].style.order = aceCards[j].style.order;
-                aceCards[j].style.order = temp;
-                
-                shuffleCount++;
-                if (shuffleCount >= 60) {
-                  clearInterval(shuffleInterval);
-                }
-              }
-            }, 50);
-          }, 3000);
-        }
-      }, 1000);
-    }
-
-    async function selectAceCard(card) {
-      if (!aceGameStarted || card.classList.contains('flipped')) return;
-      
-      clearInterval(aceTimerInterval);
-      aceGameStarted = false;
-      
-      const selectedIndex = parseInt(card.dataset.index);
-      const resultElement = document.getElementById('aceResult');
-      
-      if (selectedIndex === acePosition) {
-        // Player found the ace
-        const winAmount = aceSelectedBet * 2;
-        balance += winAmount;
-        resultElement.innerText = `🎉 You found the Ace! You win Rs. ${winAmount}`;
-        card.classList.add('ace', 'selected');
-        winSound.play().catch(() => {});
-        
-        try {
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: balance }
-          );
-          await recordTransaction(
-            currentUserId,
-            'win',
-            winAmount,
-            'find_ace',
-            `Won Rs. ${winAmount} in Find Ace`
-          );
-        } catch (error) {
-          console.error("Error recording win:", error);
-        }
-      } else {
-        // Player didn't find the ace
-        resultElement.innerText = `❌ Wrong card! You lost Rs. ${aceSelectedBet}`;
-        card.classList.add('selected');
-        aceCards[acePosition].classList.add('ace');
-        loseSound.play().catch(() => {});
-        
-        try {
-          await recordTransaction(
-            currentUserId,
-            'loss',
-            aceSelectedBet,
-            'find_ace',
-            `Lost Rs. ${aceSelectedBet} in Find Ace`
-          );
-        } catch (error) {
-          console.error("Error recording loss:", error);
-        }
-      }
-      
-      document.getElementById('user-balance').textContent = balance;
-      
-      setTimeout(() => {
-        document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
-          btn.style.pointerEvents = "auto";
-          btn.style.opacity = "1";
-          btn.classList.remove('active');
-        });
-      }, 2000);
-    }
-
-    // Tic-Tac-Toe Game Logic
-    let ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
-    let currentPlayer = 'X';
-    let ticSelectedBet = 0;
-    let ticGameStarted = false;
-    let gameOver = false;
-
-    function setupTicTacToe() {
-      ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
-      currentPlayer = 'X';
-      gameOver = false;
-      
-      const board = document.getElementById('ticTacToeBoard');
-      board.innerHTML = '';
-      document.getElementById('ticResult').innerText = '';
-      
-      for (let i = 0; i < 9; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'tic-tac-toe-cell';
-        cell.dataset.index = i;
-        cell.onclick = () => makeMove(cell, i);
-        board.appendChild(cell);
-      }
-    }
-
-    async function startTicTacToeRound(element, amount) {
-      if (ticGameStarted) {
-        alert("Game already in progress!");
-        return;
-      }
-      
-      if (!currentUserId) {
-        alert("Please login to play");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      if (balance < amount) {
-        alert("Insufficient balance! Please deposit more to play.");
-        return;
-      }
-
-      // Highlight selected bet
-      document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      element.classList.add('active');
-
-      try {
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        await recordTransaction(
-          currentUserId,
-          'bet',
-          amount,
-          'tic_tac_toe',
-          `Bet Rs. ${amount} in Tic-Tac-Toe`
-        );
-        
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-      } catch (error) {
-        console.error("Error recording bet:", error);
-        return;
-      }
-
-      setupTicTacToe();
-      ticSelectedBet = amount;
-      ticGameStarted = true;
-      gameOver = false;
-    }
-
-    async function makeMove(cell, index) {
-      if (!ticGameStarted || gameOver || ticTacToeBoard[index] !== '') return;
-      
-      // Player's move
-      cell.textContent = currentPlayer;
-      cell.classList.add(currentPlayer.toLowerCase());
-      ticTacToeBoard[index] = currentPlayer;
-      
-      // Check if player won
-      if (checkWin(currentPlayer)) {
-        gameOver = true;
-        const winAmount = ticSelectedBet * 2;
-        balance += winAmount;
-        document.getElementById('ticResult').innerText = `🎉 You won! Rs. ${winAmount} added.`;
-        winSound.play().catch(() => {});
-        
-        try {
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: balance }
-          );
-          await recordTransaction(
-            currentUserId,
-            'win',
-            winAmount,
-            'tic_tac_toe',
-            `Won Rs. ${winAmount} in Tic-Tac-Toe`
-          );
-        } catch (error) {
-          console.error("Error recording win:", error);
-        }
-        
-        document.getElementById('user-balance').textContent = balance;
-        endTicTacToeGame();
-        return;
-      }
-      
-      // Check for draw
-      if (!ticTacToeBoard.includes('')) {
-        gameOver = true;
-        const deduction = ticSelectedBet * 0.25;
-        balance -= deduction;
-        document.getElementById('ticResult').innerText = `🤝 It's a draw! Rs. ${deduction} deducted.`;
-        loseSound.play().catch(() => {});
-        
-        try {
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: balance }
-          );
-          await recordTransaction(
-            currentUserId,
-            'loss',
-            deduction,
-            'tic_tac_toe',
-            `Lost Rs. ${deduction} in Tic-Tac-Toe (draw)`
-          );
-        } catch (error) {
-          console.error("Error recording loss:", error);
-        }
-        
-        document.getElementById('user-balance').textContent = balance;
-        endTicTacToeGame();
-        return;
-      }
-      
-      // AI's move (hard difficulty)
-      currentPlayer = 'O';
-      setTimeout(() => {
-        if (!gameOver) {
-          const bestMove = findBestMove();
-          const cells = document.querySelectorAll('.tic-tac-toe-cell');
-          cells[bestMove].textContent = 'O';
-          cells[bestMove].classList.add('o');
-          ticTacToeBoard[bestMove] = 'O';
-          
-          // Check if AI won
-          if (checkWin('O')) {
-            gameOver = true;
-            document.getElementById('ticResult').innerText = `❌ AI won! You lost Rs. ${ticSelectedBet}.`;
-            loseSound.play().catch(() => {});
-            
-            recordTransaction(
-              currentUserId,
-              'loss',
-              ticSelectedBet,
-              'tic_tac_toe',
-              `Lost Rs. ${ticSelectedBet} in Tic-Tac-Toe`
-            );
-            
-            document.getElementById('user-balance').textContent = balance;
-            endTicTacToeGame();
-            return;
-          }
-          
-          // Check for draw
-          if (!ticTacToeBoard.includes('')) {
-            gameOver = true;
-            const deduction = ticSelectedBet * 0.25;
-            balance -= deduction;
-            document.getElementById('ticResult').innerText = `🤝 It's a draw! Rs. ${deduction} deducted.`;
-            loseSound.play().catch(() => {});
-            
-            firebase.firestoreFunctions.updateDoc(
-              firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-              { balance: balance }
-            );
-            recordTransaction(
-              currentUserId,
-              'loss',
-              deduction,
-              'tic_tac_toe',
-              `Lost Rs. ${deduction} in Tic-Tac-Toe (draw)`
-            );
-            
-            document.getElementById('user-balance').textContent = balance;
-            endTicTacToeGame();
-            return;
-          }
-          
-          currentPlayer = 'X';
-        }
-      }, 500);
-    }
-
-    function checkWin(player) {
-      const winPatterns = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-        [0, 4, 8], [2, 4, 6]             // diagonals
-      ];
-      
-      return winPatterns.some(pattern => {
-        return pattern.every(index => ticTacToeBoard[index] === player);
-      });
-    }
-
-    function findBestMove() {
-      // Simple AI for hard difficulty
-      
-      // 1. Check if AI can win in the next move
-      for (let i = 0; i < 9; i++) {
-        if (ticTacToeBoard[i] === '') {
-          ticTacToeBoard[i] = 'O';
-          if (checkWin('O')) {
-            ticTacToeBoard[i] = '';
-            return i;
-          }
-          ticTacToeBoard[i] = '';
-        }
-      }
-      
-      // 2. Check if player can win in the next move and block them
-      for (let i = 0; i < 9; i++) {
-        if (ticTacToeBoard[i] === '') {
-          ticTacToeBoard[i] = 'X';
-          if (checkWin('X')) {
-            ticTacToeBoard[i] = '';
-            return i;
-          }
-          ticTacToeBoard[i] = '';
-        }
-      }
-      
-      // 3. Try to take the center if available
-      if (ticTacToeBoard[4] === '') return 4;
-      
-      // 4. Try to take a corner if available
-      const corners = [0, 2, 6, 8];
-      const availableCorners = corners.filter(i => ticTacToeBoard[i] === '');
-      if (availableCorners.length > 0) {
-        return availableCorners[Math.floor(Math.random() * availableCorners.length)];
-      }
-      
-      // 5. Take any available edge
-      const edges = [1, 3, 5, 7];
-      const availableEdges = edges.filter(i => ticTacToeBoard[i] === '');
-      if (availableEdges.length > 0) {
-        return availableEdges[Math.floor(Math.random() * availableEdges.length)];
-      }
-      
-      // Shouldn't reach here if game isn't over
-      return -1;
-    }
-
-    function endTicTacToeGame() {
-      ticGameStarted = false;
-      document.querySelectorAll('#ticTacToeGame .bet-amounts .gold-box').forEach(btn => {
-        btn.style.pointerEvents = "auto";
-        btn.style.opacity = "1";
-        btn.classList.remove('active');
-      });
-    }
-
-    // Memory Game Logic
-    let memoryCards = [];
-    let memorySelectedBet = 0;
-    let memoryGameStarted = false;
-    let flippedMemoryCards = [];
-    let memoryMoves = 0;
-    let memoryMatches = 0;
-    let memoryTimer = 0;
-    let memoryTimerInterval;
-
-    function setupMemoryGame() {
-      memoryCards = [];
       flippedMemoryCards = [];
       memoryMoves = 0;
       memoryMatches = 0;
@@ -3254,26 +2845,153 @@
       }
     }
 
-    // Number Guess Game Logic
-    let numberToGuess = 0;
-    let numberSelectedBet = 0;
-    let numberGameStarted = false;
-    let attemptsLeft = 5;
-    let minRange = 1;
-    let maxRange = 100;
+    // Arrow Shooting Game Logic
+    let arrowGameStarted = false;
+    let arrowSelectedBet = 0;
+    let arrowScore = 0;
+    let arrowTimer = 30;
+    let arrowTimerInterval;
+    let arrowGameTimer;
+    let boardDirection = 'right';
+    let boardX = 0;
+    let boardY = 0;
+    let boardSpeed = 5;
+    let boardMoveInterval;
+    let arrowsShot = 0;
+    const arrowTargets = 5;
 
-    function setupNumberGuessGame() {
-      numberToGuess = Math.floor(Math.random() * 100) + 1;
-      attemptsLeft = 5;
+    function setupArrowShootingGame() {
+      const board = document.getElementById('arrowBoard');
+      board.innerHTML = `
+        <div class="target-center"></div>
+        <div class="target-ring ring-1"></div>
+        <div class="target-ring ring-2"></div>
+        <div class="target-ring ring-3"></div>
+        <div class="target-ring ring-4"></div>
+        <div class="target-ring ring-5"></div>
+        <div class="target-ring ring-6"></div>
+        <div class="target-ring ring-7"></div>
+        <div class="target-ring ring-8"></div>
+      `;
+      document.getElementById('arrowScore').textContent = 'Score: 0';
+      document.getElementById('arrowTimer').textContent = 'Time left: 30s';
+      document.getElementById('arrowResult').textContent = '';
       
-      document.getElementById('numberGuessInput').value = '';
-      document.getElementById('numberGuessHint').textContent = '';
-      document.getElementById('numberGuessAttempts').textContent = 'Attempts: 0/5';
-      document.getElementById('numberGuessResult').textContent = '';
+      // Set up keyboard controls
+      document.removeEventListener('keydown', handleArrowKeyPress);
+      document.addEventListener('keydown', handleArrowKeyPress);
     }
 
-    async function startNumberGuessRound(element, amount) {
-      if (numberGameStarted) {
+    function handleArrowKeyPress(e) {
+      if (e.code === 'Space' && arrowGameStarted) {
+        shootArrow();
+      }
+    }
+
+    function moveBoard() {
+      const board = document.getElementById('arrowBoard');
+      
+      // Change direction when hitting edges
+      if (boardX > 50) {
+        boardDirection = 'left';
+      } else if (boardX < -50) {
+        boardDirection = 'right';
+      }
+      
+      // Move board horizontally
+      if (boardDirection === 'right') {
+        boardX += boardSpeed;
+      } else {
+        boardX -= boardSpeed;
+      }
+      
+      // Also move vertically in a wave pattern
+      boardY = Math.sin(Date.now() / 500) * 30;
+      
+      board.style.transform = `translate(${boardX}px, ${boardY}px)`;
+    }
+
+    function shootArrow() {
+      if (!arrowGameStarted) return;
+      
+      const board = document.getElementById('arrowBoard');
+      const arrow = document.createElement('div');
+      arrow.className = 'arrow';
+      arrow.innerHTML = '🏹';
+      arrow.style.left = '50%';
+      arrow.style.bottom = '0';
+      board.appendChild(arrow);
+      
+      // Play arrow sound
+      arrowSound.currentTime = 0;
+      arrowSound.play().catch(() => {});
+      
+      // Animate arrow
+      let arrowY = 0;
+      const arrowInterval = setInterval(() => {
+        arrowY += 10;
+        arrow.style.bottom = `${arrowY}px`;
+        
+        // Check if arrow hit the target
+        if (arrowY >= 120) {
+          clearInterval(arrowInterval);
+          checkArrowHit(arrow);
+        }
+      }, 30);
+    }
+
+    function checkArrowHit(arrow) {
+      // Calculate distance from center (0 to 150)
+      const centerX = 150;
+      const centerY = 150;
+      const arrowRect = arrow.getBoundingClientRect();
+      const boardRect = document.getElementById('arrowBoard').getBoundingClientRect();
+      
+      const arrowCenterX = arrowRect.left + arrowRect.width/2 - boardRect.left;
+      const arrowCenterY = arrowRect.top + arrowRect.height/2 - boardRect.top;
+      
+      const distance = Math.sqrt(
+        Math.pow(arrowCenterX - centerX, 2) + 
+        Math.pow(arrowCenterY - centerY, 2)
+      );
+      
+      // Determine points based on distance from center
+      let points = 0;
+      if (distance <= 15) { // Bullseye
+        points = 10;
+      } else if (distance <= 30) {
+        points = 8;
+      } else if (distance <= 45) {
+        points = 6;
+      } else if (distance <= 60) {
+        points = 4;
+      } else if (distance <= 75) {
+        points = 2;
+      } else if (distance <= 90) {
+        points = 1;
+      }
+      
+      arrowScore += points;
+      document.getElementById('arrowScore').textContent = `Score: ${arrowScore}`;
+      
+      // Check if player hit the bullseye (10 points)
+      if (points === 10) {
+        arrowsShot++;
+        
+        // Check if player hit 5 bullseyes
+        if (arrowsShot >= arrowTargets) {
+          arrowGameOver(true, `🎉 You hit ${arrowTargets} bullseyes!`);
+        }
+      }
+      
+      // Remove arrow after checking hit
+      setTimeout(() => {
+        arrow.remove();
+      }, 500);
+    }
+
+    async function startArrowShootingRound(element, amount) {
+      if (arrowGameStarted) {
         alert("Game already in progress!");
         return;
       }
@@ -3290,7 +3008,7 @@
       }
 
       // Highlight selected bet
-      document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(btn => {
+      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(btn => {
         btn.classList.remove('active');
       });
       element.classList.add('active');
@@ -3304,8 +3022,8 @@
           currentUserId,
           'bet',
           amount,
-          'number_guess',
-          `Bet Rs. ${amount} in Number Guess`
+          'arrow_shooting',
+          `Bet Rs. ${amount} in Arrow Shooting`
         );
         
         balance -= amount;
@@ -3315,94 +3033,83 @@
         return;
       }
 
-      setupNumberGuessGame();
-      numberSelectedBet = amount;
-      numberGameStarted = true;
+      setupArrowShootingGame();
+      arrowSelectedBet = amount;
+      arrowGameStarted = true;
+      arrowScore = 0;
+      arrowsShot = 0;
+      arrowTimer = 30;
+      boardSpeed = 5; // Hard difficulty - faster moving board
+      
+      document.getElementById('arrowScore').textContent = 'Score: 0';
+      document.getElementById('arrowTimer').textContent = 'Time left: 30s';
+      
+      // Start timer
+      arrowTimerInterval = setInterval(() => {
+        arrowTimer--;
+        document.getElementById('arrowTimer').textContent = `Time left: ${arrowTimer}s`;
+        
+        if (arrowTimer <= 0) {
+          clearInterval(arrowTimerInterval);
+          arrowGameOver(false, `❌ Time's up! You hit ${arrowsShot} bullseyes (needed ${arrowTargets}).`);
+        }
+      }, 1000);
+
+      // Start moving the board
+      boardMoveInterval = setInterval(moveBoard, 50);
+      
+      // Increase difficulty over time
+      arrowGameTimer = setTimeout(() => {
+        if (arrowGameStarted) {
+          boardSpeed = 8; // Even faster after 15 seconds
+        }
+      }, 15000);
     }
 
-    async function submitNumberGuess() {
-      if (!numberGameStarted) return;
-      
-      const guessInput = document.getElementById('numberGuessInput');
-      const guess = parseInt(guessInput.value);
-      
-      if (isNaN(guess) || guess < 1 || guess > 100) {
-        alert("Please enter a valid number between 1 and 100");
-        return;
-      }
-      
-      attemptsLeft--;
-      document.getElementById('numberGuessAttempts').textContent = `Attempts: ${5 - attemptsLeft}/5`;
-      
-      if (guess === numberToGuess) {
-        // Player guessed correctly
-        numberGameStarted = false;
-        const winAmount = numberSelectedBet * 2;
-        balance += winAmount;
-        document.getElementById('numberGuessResult').innerText = `🎉 Correct! The number was ${numberToGuess}. You win Rs. ${winAmount}`;
-        document.getElementById('numberGuessHint').textContent = '';
-        winSound.play().catch(() => {});
+    async function arrowGameOver(won, message) {
+      clearInterval(arrowTimerInterval);
+      clearInterval(boardMoveInterval);
+      clearTimeout(arrowGameTimer);
+      arrowGameStarted = false;
+
+      let winAmount = 0;
+      if (won) {
+        winAmount = arrowSelectedBet * 2;
         
         try {
           await firebase.firestoreFunctions.updateDoc(
             firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: balance }
+            { balance: firebase.firestoreFunctions.increment(winAmount) }
           );
           await recordTransaction(
             currentUserId,
             'win',
             winAmount,
-            'number_guess',
-            `Won Rs. ${winAmount} in Number Guess`
+            'arrow_shooting',
+            `Won Rs. ${winAmount} in Arrow Shooting`
           );
+          
+          balance += winAmount;
+          document.getElementById('user-balance').textContent = balance;
+          
+          alert(`${message}\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+          winSound.play().catch(() => {});
         } catch (error) {
           console.error("Error recording win:", error);
         }
-        
-        document.getElementById('user-balance').textContent = balance;
-        
-        document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(btn => {
-          btn.style.pointerEvents = "auto";
-          btn.style.opacity = "1";
-          btn.classList.remove('active');
-        });
-      } else if (attemptsLeft <= 0) {
-        // Player ran out of attempts
-        numberGameStarted = false;
-        document.getElementById('numberGuessResult').innerText = `❌ Game over! The number was ${numberToGuess}. You lost Rs. ${numberSelectedBet}`;
-        document.getElementById('numberGuessHint').textContent = '';
-        loseSound.play().catch(() => {});
-        
-        try {
-          await recordTransaction(
-            currentUserId,
-            'loss',
-            numberSelectedBet,
-            'number_guess',
-            `Lost Rs. ${numberSelectedBet} in Number Guess`
-          );
-        } catch (error) {
-          console.error("Error recording loss:", error);
-        }
-        
-        document.getElementById('user-balance').textContent = balance;
-        
-        document.querySelectorAll('#numberGuessGame .bet-amounts .gold-box').forEach(btn => {
-          btn.style.pointerEvents = "auto";
-          btn.style.opacity = "1";
-          btn.classList.remove('active');
-        });
       } else {
-        // Provide hint
-        if (guess < numberToGuess) {
-          document.getElementById('numberGuessHint').textContent = 'Too low! Try a higher number.';
-        } else {
-          document.getElementById('numberGuessHint').textContent = 'Too high! Try a lower number.';
-        }
+        alert(`${message}\nYou lost your bet of Rs. ${arrowSelectedBet}.\nNew Balance: Rs. ${balance}`);
+        loseSound.play().catch(() => {});
       }
-      
-      guessInput.value = '';
-      guessInput.focus();
+
+      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(btn => {
+        btn.style.pointerEvents = "auto";
+        btn.style.opacity = "1";
+        btn.classList.remove('active');
+      });
+
+      // Reset board position
+      document.getElementById('arrowBoard').style.transform = 'translate(0, 0)';
     }
 
     // Admin Panel Functions
