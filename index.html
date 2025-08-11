@@ -603,6 +603,13 @@
       box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
     }
     
+    .auth-form button:disabled {
+      background: #444;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
     .forgot-password {
       text-align: right;
       margin-top: -15px;
@@ -946,23 +953,23 @@
       </div>
       
       <div id="loginForm" class="auth-form active">
-        <input type="email" id="loginEmail" placeholder="Email" />
-        <input type="password" id="loginPassword" placeholder="Password" />
+        <input type="email" id="loginEmail" placeholder="Email" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
         <div class="forgot-password" onclick="showForgotPassword()">Forgot Password?</div>
         <button onclick="loginUser()">Login</button>
       </div>
       
       <div id="signupForm" class="auth-form">
-        <input type="text" id="signupName" placeholder="Full Name" />
-        <input type="tel" id="signupPhone" placeholder="Phone Number" />
-        <input type="email" id="signupEmail" placeholder="Email" />
-        <input type="password" id="signupPassword" placeholder="Password (6+ characters)" />
+        <input type="text" id="signupName" placeholder="Full Name" required />
+        <input type="tel" id="signupPhone" placeholder="Phone Number" required />
+        <input type="email" id="signupEmail" placeholder="Email" required />
+        <input type="password" id="signupPassword" placeholder="Password (6+ characters)" required minlength="6" />
         <input type="text" id="referralCode" placeholder="Referral Code (Optional)" />
         <button onclick="signupUser()">Sign Up</button>
       </div>
       
       <div id="forgotPasswordForm" class="auth-form">
-        <input type="email" id="forgotEmail" placeholder="Enter your email" />
+        <input type="email" id="forgotEmail" placeholder="Enter your email" required />
         <button onclick="resetPassword()">Reset Password</button>
         <button onclick="backToLogin()" style="margin-top: 10px; background-color: #444;">Back to Login</button>
       </div>
@@ -1318,13 +1325,44 @@
         return;
       }
       
+      // Show loading state
+      const loginBtn = document.querySelector('#loginForm button');
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Logging in...';
+      
       auth.signInWithEmailAndPassword(email, password)
         .then(() => {
           hideAuthModal();
-          alert('Login successful!');
+          alert('Login successful! Welcome back.');
+          
+          // Update last login time
+          if (currentUser) {
+            db.collection('users').doc(currentUser.uid).update({
+              lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          }
         })
         .catch(error => {
-          alert('Login failed: ' + error.message);
+          let errorMessage = 'Login failed. ';
+          switch(error.code) {
+            case 'auth/user-not-found':
+              errorMessage += 'No account found with this email.';
+              break;
+            case 'auth/wrong-password':
+              errorMessage += 'Incorrect password.';
+              break;
+            case 'auth/invalid-email':
+              errorMessage += 'The email address is invalid.';
+              break;
+            default:
+              errorMessage += error.message;
+          }
+          alert(errorMessage);
+        })
+        .finally(() => {
+          // Reset button state
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Login';
         });
     }
     
@@ -1335,16 +1373,30 @@
       const phone = document.getElementById('signupPhone').value;
       const referralCode = document.getElementById('referralCode').value;
       
+      // Validate all required fields
       if (!email || !password || !name || !phone) {
         alert('Please fill in all required fields');
         return;
       }
       
+      // Validate email format
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address');
+        return;
+      }
+      
+      // Validate password length
       if (password.length < 6) {
         alert('Password should be at least 6 characters');
         return;
       }
       
+      // Show loading state
+      const signupBtn = document.querySelector('#signupForm button');
+      signupBtn.disabled = true;
+      signupBtn.textContent = 'Creating account...';
+      
+      // Create user with Firebase Auth
       auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           // Create user document in Firestore
@@ -1352,7 +1404,7 @@
             name: name,
             phone: phone,
             email: email,
-            balance: 0,
+            balance: 100, // Give 100 Rs. welcome bonus
             referralCode: generateReferralCode(),
             referredBy: referralCode || null,
             referralCount: 0,
@@ -1376,12 +1428,42 @@
           }
         })
         .then(() => {
+          // Success - hide modal and show welcome message
           hideAuthModal();
-          alert('Signup successful! You can now login.');
+          alert('Signup successful! Welcome to USCash. You have been awarded Rs. 100 as a welcome bonus.');
+          
+          // Reset form
+          document.getElementById('signupForm').reset();
         })
         .catch(error => {
-          alert('Signup failed: ' + error.message);
+          // Handle specific errors
+          let errorMessage = 'Signup failed. ';
+          switch(error.code) {
+            case 'auth/email-already-in-use':
+              errorMessage += 'This email is already registered.';
+              break;
+            case 'auth/invalid-email':
+              errorMessage += 'The email address is invalid.';
+              break;
+            case 'auth/weak-password':
+              errorMessage += 'The password is too weak.';
+              break;
+            default:
+              errorMessage += error.message;
+          }
+          alert(errorMessage);
+        })
+        .finally(() => {
+          // Reset button state
+          signupBtn.disabled = false;
+          signupBtn.textContent = 'Sign Up';
         });
+    }
+    
+    // Helper function to validate email
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
     }
     
     function resetPassword() {
@@ -1600,7 +1682,7 @@
       // Check if 4 hours have passed since last request
       const now = Date.now();
       if (now - lastWithdrawRequestTime < 4 * 60 * 60 * 1000) {
-        const hoursLeft = Math.ceil((4 * 60 * 60 * 1000 - (now - lastWithdrawRequestTime)) / (60 * 60 * 1000);
+        const hoursLeft = Math.ceil((4 * 60 * 60 * 1000 - (now - lastWithdrawRequestTime)) / (60 * 60 * 1000));
         alert(`You can only submit one withdrawal request every 4 hours. Please wait ${hoursLeft.toFixed(1)} more hours.`);
         return;
       }
