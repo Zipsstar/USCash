@@ -953,10 +953,10 @@
       </div>
       
       <div id="signupForm" class="auth-form">
-        <input type="text" id="signupUsername" placeholder="Username" />
+        <input type="text" id="signupName" placeholder="Full Name" />
+        <input type="tel" id="signupPhone" placeholder="Phone Number" />
         <input type="email" id="signupEmail" placeholder="Email" />
-        <input type="password" id="signupPassword" placeholder="Password" />
-        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" />
+        <input type="password" id="signupPassword" placeholder="Password (6+ characters)" />
         <input type="text" id="referralCode" placeholder="Referral Code (Optional)" />
         <button onclick="signupUser()">Sign Up</button>
       </div>
@@ -1331,17 +1331,12 @@
     function signupUser() {
       const email = document.getElementById('signupEmail').value;
       const password = document.getElementById('signupPassword').value;
-      const confirmPassword = document.getElementById('signupConfirmPassword').value;
-      const username = document.getElementById('signupUsername').value;
+      const name = document.getElementById('signupName').value;
+      const phone = document.getElementById('signupPhone').value;
       const referralCode = document.getElementById('referralCode').value;
       
-      if (!email || !password || !confirmPassword || !username) {
+      if (!email || !password || !name || !phone) {
         alert('Please fill in all required fields');
-        return;
-      }
-      
-      if (password !== confirmPassword) {
-        alert('Passwords do not match!');
         return;
       }
       
@@ -1354,14 +1349,31 @@
         .then((userCredential) => {
           // Create user document in Firestore
           return db.collection('users').doc(userCredential.user.uid).set({
-            username: username,
+            name: name,
+            phone: phone,
             email: email,
             balance: 0,
             referralCode: generateReferralCode(),
             referredBy: referralCode || null,
+            referralCount: 0,
+            referralEarnings: 0,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             lastLogin: firebase.firestore.FieldValue.serverTimestamp()
           });
+        })
+        .then(() => {
+          // If referral code was provided, update the referrer's stats
+          if (referralCode) {
+            return db.collection('users').where('referralCode', '==', referralCode).get()
+              .then(querySnapshot => {
+                if (!querySnapshot.empty) {
+                  const referrerId = querySnapshot.docs[0].id;
+                  return db.collection('users').doc(referrerId).update({
+                    referralCount: firebase.firestore.FieldValue.increment(1)
+                  });
+                }
+              });
+          }
         })
         .then(() => {
           hideAuthModal();
@@ -1524,7 +1536,32 @@
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then(() => {
-        alert('Deposit request submitted successfully! It will be processed within 24 hours.');
+        // Update user balance
+        return db.collection('users').doc(currentUser.uid).update({
+          balance: firebase.firestore.FieldValue.increment(amount)
+        });
+      })
+      .then(() => {
+        // Check if user was referred by someone and update their earnings
+        return db.collection('users').doc(currentUser.uid).get()
+          .then(doc => {
+            const userData = doc.data();
+            if (userData.referredBy) {
+              return db.collection('users').where('referralCode', '==', userData.referredBy).get()
+                .then(querySnapshot => {
+                  if (!querySnapshot.empty) {
+                    const referrerId = querySnapshot.docs[0].id;
+                    const referralEarnings = amount * 0.1; // 10% of deposit
+                    return db.collection('users').doc(referrerId).update({
+                      referralEarnings: firebase.firestore.FieldValue.increment(referralEarnings)
+                    });
+                  }
+                });
+            }
+          });
+      })
+      .then(() => {
+        alert('Deposit request submitted successfully! Rs. ' + amount + ' added to your balance.');
         document.getElementById('depositAmount').value = '';
         document.getElementById('transactionId').value = '';
         loadTransactionHistory();
