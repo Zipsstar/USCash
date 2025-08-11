@@ -1,245 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>USCash 🎮</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { 
-      getAuth, 
-      signInWithEmailAndPassword, 
-      createUserWithEmailAndPassword,
-      signOut,
-      sendPasswordResetEmail
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { 
-      getFirestore, 
-      doc, 
-      setDoc, 
-      getDoc,
-      collection,
-      addDoc,
-      query,
-      where,
-      getDocs,
-      orderBy,
-      limit,
-      updateDoc,
-      serverTimestamp,
-      increment
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
-      authDomain: "pakcashplay.firebaseapp.com",
-      projectId: "pakcashplay",
-      storageBucket: "pakcashplay.appspot.com",
-      messagingSenderId: "551195851632",
-      appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    window.firebase = {
-      auth: auth,
-      db: db,
-      authFunctions: {
-        signInWithEmailAndPassword,
-        createUserWithEmailAndPassword,
-        signOut,
-        sendPasswordResetEmail
-      },
-      firestoreFunctions: {
-        doc,
-        setDoc,
-        getDoc,
-        collection,
-        addDoc,
-        query,
-        where,
-        getDocs,
-        orderBy,
-        limit,
-        updateDoc,
-        serverTimestamp,
-        increment
-      }
-    };
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #121212;
-      color: #FFD700;
+      background-color: #111;
+      color: goldenrod;
       text-align: center;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
-      position: relative;
     }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 2rem;
-      background: linear-gradient(90deg, #121212, #FFD700, #121212);
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, black, gold, black);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 4px #FFD700;
-      letter-spacing: 1px;
-    }
-    .header .logo {
-      font-size: 2rem;
-      margin-left: 10px;
-    }
-    .marquee {
-      width: 100%;
-      background: linear-gradient(90deg, #000428, #004e92);
-      color: white;
-      padding: 8px 0;
-      white-space: nowrap;
-      overflow: hidden;
-      box-sizing: border-box;
-      border: 2px solid #00b4db;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 180, 219, 0.7);
-      margin: 10px 0;
-    }
-    .marquee span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: marquee 15s linear infinite;
-      font-weight: bold;
-      text-shadow: 0 0 5px rgba(255,255,255,0.8);
-      font-size: 0.9rem;
-    }
-    @keyframes marquee {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-100%, 0); }
+      text-shadow: 2px 2px 4px gold;
+      margin: 20px 0;
+      letter-spacing: 2px;
     }
     .nav {
-      background-color: #FFD700;
-      color: #121212;
-      padding: 8px;
+      background-color: goldenrod;
+      color: black;
+      padding: 10px;
       display: flex;
       justify-content: space-around;
-      font-size: 0.8rem;
+      flex-wrap: wrap;
     }
     .nav a {
-      color: #121212;
+      color: black;
       text-decoration: none;
       font-weight: bold;
+      padding: 5px 10px;
     }
     .section {
-      margin: 15px auto;
-      padding: 10px;
-      max-width: 95%;
-      border: 2px solid #FFD700;
-      border-radius: 8px;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 800px;
+      border: 2px solid goldenrod;
+      border-radius: 10px;
       box-sizing: border-box;
-      background-color: #1E1E1E;
+      background-color: rgba(0,0,0,0.7);
     }
     .gold-box {
       display: inline-block;
-      background-color: #FFD700;
-      color: #121212;
+      background-color: goldenrod;
+      color: black;
       margin: 5px;
-      padding: 8px;
-      border-radius: 6px;
+      padding: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: bold;
-      border: 2px solid #000;
-      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      transition: all 0.3s;
     }
     .gold-box.active {
-      background-color: #121212;
-      color: #FFD700;
-      border: 2px solid #FFD700;
+      background-color: black;
+      color: goldenrod;
+      border: 2px solid goldenrod;
     }
     .game-options {
       display: flex;
-      flex-direction: row;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
       align-items: center;
       justify-content: center;
     }
     .game-options .gold-box {
-      width: 120px;
-      height: 120px;
-      font-size: 0.9rem;
+      width: 200px;
+      height: 150px;
+      font-size: 1.4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 2px solid #FFD700;
-      box-shadow: 0 0 8px #FFD700;
+      border: 2px solid goldenrod;
+      box-shadow: 0 0 10px goldenrod;
       transition: transform 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-shadow: 1px 1px 3px black;
     }
     .game-options .gold-box:hover {
       transform: scale(1.05);
+      background-color: black;
+      color: goldenrod;
     }
-    .game-options .gold-box .game-name {
-      background: rgba(0,0,0,0.7);
-      width: 100%;
-      padding: 5px;
-      position: absolute;
-      bottom: 0;
+    .game-options .gold-box i {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
     .card-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
-      margin: 15px auto;
-      max-width: 350px;
+      gap: 15px;
+      margin: 20px auto;
+      max-width: 400px;
     }
     .card {
-      width: 60px;
-      height: 80px;
+      width: 80px;
+      height: 100px;
       background-color: #222;
       color: black;
-      font-size: 1.5rem;
+      font-size: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #FFD700;
-      border-radius: 8px;
+      border: 2px solid goldenrod;
+      border-radius: 10px;
       cursor: pointer;
       transition: transform 0.4s, background-color 0.3s;
     }
     .card.flipped {
-      background-color: #FFD700;
+      background-color: goldenrod;
       color: skyblue;
       transform: rotateY(180deg);
     }
     .bet-amounts {
-      margin-top: 10px;
+      margin-top: 15px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
     #result {
-      margin-top: 15px;
-      font-size: 1rem;
+      margin-top: 20px;
+      font-size: 1.2rem;
       color: white;
     }
     .shake {
@@ -257,7 +146,7 @@
       100% { transform: translate(1px, 1px) rotate(0deg); }
     }
     @keyframes glow {
-      from { box-shadow: 0 0 10px #FFD700; }
+      from { box-shadow: 0 0 10px gold; }
       to { box-shadow: 0 0 20px white; }
     }
     #particles-js {
@@ -281,19 +170,18 @@
       z-index: 10000;
     }
     #welcomePopup .popup-content {
-      background: #121212;
-      border: 2px solid #FFD700;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 350px;
-      color: #FFD700;
+      background: black;
+      border: 2px solid goldenrod;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 400px;
+      color: goldenrod;
       text-align: center;
       position: relative;
     }
     #welcomePopup .popup-content h2 {
-      color: #87CEEB;
+      color: skyblue;
       margin-top: 0;
-      font-size: 1.2rem;
     }
     #welcomePopup .popup-content .close {
       position: absolute;
@@ -302,856 +190,286 @@
       cursor: pointer;
       font-weight: bold;
       color: red;
-      font-size: 18px;
+      font-size: 20px;
     }
+    /* فروٹ شوٹر گیم کے لیے اضافی سٹائلز */
     #fruitGame {
       display: none;
     }
     .shoot-area {
       position: relative;
-      height: 250px;
-      border: 2px dashed #FFD700;
-      border-radius: 10px;
+      height: 400px;
+      border: 3px dashed goldenrod;
+      border-radius: 15px;
       background-color: #222;
       overflow: hidden;
-      margin-top: 15px;
+      margin-top: 20px;
     }
     .fruit {
       position: absolute;
-      font-size: 2.5em;
+      font-size: 3.2em;
       cursor: pointer;
       user-select: none;
       pointer-events: auto;
     }
-    .fruit.bomb {
-      animation: pulse 0.5s infinite alternate;
-    }
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.2); }
-    }
     #fruitTargetDisplay {
-      font-size: 1.2em;
-      margin: 10px 0;
+      font-size: 1.5em;
+      margin: 15px 0;
       color: white;
     }
     #fruitScoreDisplay {
-      margin-top: 8px;
-      font-size: 1em;
+      margin-top: 10px;
+      font-size: 1.2em;
     }
     #fruitCountdown {
-      font-size: 1.1em;
-      margin-top: 8px;
-      color: #FFD700;
-    }
-    #auth-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10001;
-    }
-    .auth-form {
-      background: #121212;
-      border: 2px solid #FFD700;
-      padding: 20px;
-      border-radius: 12px;
-      width: 300px;
-      max-width: 90%;
-      color: #FFD700;
-      box-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
-    }
-    .auth-form h2 {
-      text-align: center;
-      margin-top: 0;
-      color: #87CEEB;
-      font-size: 1.2rem;
-      text-shadow: 0 0 5px rgba(135, 206, 235, 0.8);
-    }
-    .auth-form input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #FFD700;
-      border-radius: 6px;
-      background: #222;
-      color: white;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-    }
-    .auth-form input:focus {
-      outline: none;
-      border-color: #87CEEB;
-      box-shadow: 0 0 8px rgba(135, 206, 235, 0.6);
-    }
-    .auth-form button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      background: linear-gradient(to right, #FFD700, #daa520);
-      color: #121212;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .auth-form button:hover {
-      background: linear-gradient(to right, #daa520, #FFD700);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    }
-    .auth-toggle {
-      text-align: center;
-      margin-top: 15px;
-      color: #aaa;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: color 0.3s ease;
-    }
-    .auth-toggle:hover {
-      color: #FFD700;
-      text-decoration: underline;
-    }
-    #auth-tabs {
-      display: flex;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    #auth-tabs button {
-      flex: 1;
-      padding: 10px;
-      background: #333;
-      color: #FFD700;
-      border: none;
-      font-size: 0.8rem;
-      transition: all 0.3s ease;
-    }
-    #auth-tabs button:hover {
-      background: #444;
-    }
-    #auth-tabs button.active {
-      background: #FFD700;
-      color: #121212;
-      font-weight: bold;
-    }
-    #user-info {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 8px 15px;
-      border-radius: 20px;
-      color: #FFD700;
-      font-size: 0.8rem;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid #FFD700;
-    }
-    #user-info button {
-      background: #FFD700;
-      color: #121212;
-      border: none;
-      border-radius: 4px;
-      padding: 4px 8px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      transition: all 0.3s ease;
-    }
-    #user-info button:hover {
-      background: #daa520;
-    }
-    #login-form, #signup-form {
-      display: none;
-    }
-    #login-form.active, #signup-form.active {
-      display: block;
-    }
-    #forgot-password-form {
-      display: none;
-    }
-    .password-reset-step {
-      display: none;
-    }
-    .password-reset-step.active {
-      display: block;
-    }
-    .password-reset-back {
-      color: #aaa;
-      cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 1.3em;
       margin-top: 10px;
-      display: inline-block;
-      transition: color 0.3s ease;
+      color: gold;
     }
-    .password-reset-back:hover {
-      color: #FFD700;
-      text-decoration: underline;
-    }
-    #admin-panel {
+    
+    /* Tic Tac Toe Styles */
+    #tictactoeGame {
       display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 10002;
-      overflow-y: auto;
-      padding: 15px;
-      box-sizing: border-box;
-    }
-    #admin-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 25px;
-      height: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-    .admin-section {
-      background: #111;
-      border: 1px solid #FFD700;
-      border-radius: 6px;
-      padding: 12px;
-      margin-bottom: 15px;
-    }
-    .admin-section h3 {
-      color: #87CEEB;
-      margin-top: 0;
-      border-bottom: 1px solid #FFD700;
-      padding-bottom: 8px;
-      font-size: 1rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-      font-size: 0.7rem;
-    }
-    th, td {
-      border: 1px solid #FFD700;
-      padding: 6px;
-      text-align: left;
-    }
-    th {
-      background-color: #333;
-      color: #FFD700;
-    }
-    tr:nth-child(even) {
-      background-color: #222;
-    }
-    .admin-input-group {
-      display: flex;
-      margin-bottom: 8px;
-    }
-    .admin-input-group input {
-      flex: 1;
-      padding: 6px;
-      background: #222;
-      border: 1px solid #FFD700;
-      color: white;
-      margin-right: 5px;
-      font-size: 0.7rem;
-    }
-    .admin-input-group button {
-      background: #FFD700;
-      color: #121212;
-      border: none;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 0.7rem;
-    }
-    #admin-link {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      background: #FFD700;
-      color: #121212;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 5px rgba(0,0,0,0.5);
-      transition: all 0.3s ease;
-    }
-    #admin-link:hover {
-      transform: scale(1.1);
-    }
-    #comingSoonBox {
-      display: none;
-      margin: 20px auto;
-      padding: 15px;
-      max-width: 300px;
-      background: #111;
-      border: 2px solid #FFD700;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .error-message {
-      color: red;
-      font-size: 0.8rem;
-      margin-top: 5px;
-      display: none;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 10003;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: #111;
-      padding: 20px;
-      border-radius: 8px;
-      border: 2px solid #FFD700;
-      max-width: 400px;
-      width: 90%;
-    }
-    .close-modal {
-      float: right;
-      cursor: pointer;
-      font-size: 1.5rem;
-      color: #FFD700;
-    }
-    .loading-spinner {
-      display: none;
-      border: 3px solid rgba(255, 215, 0, 0.3);
-      border-radius: 50%;
-      border-top: 3px solid #FFD700;
-      width: 20px;
-      height: 20px;
-      animation: spin 1s linear infinite;
-      margin: 10px auto;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    /* Deposit Contact Box */
-    .contact-box {
-      background: #111;
-      border: 1px solid #FFD700;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 15px auto;
-      max-width: 350px;
-      text-align: center;
-    }
-    .contact-box h3 {
-      color: #FFD700;
-      margin-top: 0;
-    }
-    .contact-box p {
-      margin-bottom: 10px;
-    }
-    .contact-box .whatsapp-btn {
-      background: #25D366;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-    }
-    .contact-box .whatsapp-btn:hover {
-      background: #128C7E;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    /* New styles for custom bet amount */
-    .custom-bet-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
-    }
-    .custom-bet-input {
-      width: 100px;
-      padding: 8px;
-      margin-right: 8px;
-      background: #222;
-      border: 1px solid #FFD700;
-      color: white;
-      border-radius: 6px;
-      text-align: center;
-    }
-    .custom-bet-btn {
-      background: #FFD700;
-      color: #121212;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .custom-bet-btn:hover {
-      background: #daa520;
-    }
-    /* Improved withdraw form styles */
-    #withdraw-form input,
-    #withdraw-form select {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      background: #222;
-      border: 1px solid #FFD700;
-      color: white;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
-    #withdraw-form select {
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 12px;
-    }
-    #withdraw-form button[type="submit"] {
-      background: #FFD700;
-      color: #121212;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      width: 100%;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .withdraw-info {
-      font-size: 0.8rem;
-      margin-top: 5px;
-      color: #aaa;
-    }
-    .withdraw-success {
-      display: none;
-      color: #4CAF50;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    /* New game styles */
-    #findAceGame {
-      display: none;
-    }
-    #ticTacToeGame {
-      display: none;
-    }
-    #memoryGame {
-      display: none;
-    }
-    #numberGuessGame {
-      display: none;
-    }
-    #arrowShootingGame {
-      display: none;
-    }
-    .ace-card {
-      width: 80px;
-      height: 120px;
-      background-color: #222;
-      color: black;
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #FFD700;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin: 5px;
-    }
-    .ace-card.flipped {
-      background-color: #FFD700;
-      color: black;
-    }
-    .ace-card.selected {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #FFD700;
-    }
-    .ace-card.ace {
-      background-color: red;
-      color: white;
-    }
-    .ace-timer {
-      font-size: 1.5rem;
-      margin: 15px 0;
-      color: #FFD700;
     }
     .tic-tac-toe-board {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
       gap: 5px;
-      max-width: 300px;
-      margin: 15px auto;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
     }
     .tic-tac-toe-cell {
-      width: 90px;
-      height: 90px;
       background-color: #222;
-      border: 2px solid #FFD700;
+      border: 2px solid goldenrod;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: 3rem;
       cursor: pointer;
-      transition: all 0.3s ease;
     }
     .tic-tac-toe-cell:hover {
       background-color: #333;
     }
-    .tic-tac-toe-cell.x {
-      color: red;
+    #tictactoeResult {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: white;
     }
-    .tic-tac-toe-cell.o {
-      color: blue;
+    
+    /* Aiming Game Styles */
+    #aimingGame {
+      display: none;
     }
-    .memory-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      max-width: 300px;
-      margin: 15px auto;
-    }
-    .memory-card {
-      width: 60px;
-      height: 60px;
-      background-color: #222;
-      border: 2px solid #FFD700;
+    .aiming-circle {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgba(255, 215, 0, 0.5);
+      border: 3px solid gold;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease;
     }
-    .memory-card.flipped {
-      background-color: #FFD700;
-      transform: rotateY(180deg);
+    .aiming-circle.verified {
+      background-color: rgba(0, 255, 0, 0.5);
+      border-color: lime;
     }
-    .number-guess-container {
-      margin: 15px auto;
-      max-width: 300px;
+    #aimingCountdown {
+      font-size: 1.5rem;
+      margin: 15px 0;
     }
-    .number-guess-input {
+    #aimingScore {
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+    
+    /* Auth Modal Styles */
+    .auth-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-content {
+      background-color: #222;
+      border: 2px solid goldenrod;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      color: white;
+    }
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    .auth-tab.active {
+      border-bottom: 2px solid goldenrod;
+      font-weight: bold;
+    }
+    .auth-form {
+      display: none;
+    }
+    .auth-form.active {
+      display: block;
+    }
+    .auth-form input {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
-      background: #222;
-      border: 1px solid #FFD700;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #333;
       color: white;
-      border-radius: 6px;
-      text-align: center;
+    }
+    .auth-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: goldenrod;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .auth-form button:hover {
+      background-color: gold;
+    }
+    .forgot-password {
+      text-align: right;
+      margin-top: -10px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      color: skyblue;
+      cursor: pointer;
+    }
+    
+    /* Balance and User Info Styles */
+    .user-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+    .balance-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .refresh-balance {
+      cursor: pointer;
+      color: goldenrod;
       font-size: 1.2rem;
     }
-    .number-guess-btn {
-      background: #FFD700;
-      color: #121212;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 5px;
-      transition: all 0.3s ease;
+    
+    /* Deposit/Withdraw Styles */
+    #depositSection, #withdrawSection, #moreSection, #vipSection {
+      display: none;
     }
-    .number-guess-btn:hover {
-      background: #daa520;
-    }
-    .number-guess-hint {
-      margin: 10px 0;
-      font-size: 1rem;
-      color: white;
-    }
-    .number-guess-attempts {
-      margin: 10px 0;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-    .verified-badge {
-      color: #1DA1F2;
-      margin-left: 5px;
-      font-size: 0.8rem;
-    }
-    .history-item {
-      background: #111;
-      border: 1px solid #FFD700;
-      border-radius: 6px;
-      padding: 10px;
-      margin: 10px 0;
+    .form-group {
+      margin-bottom: 15px;
       text-align: left;
     }
-    .history-item .date {
-      color: #aaa;
-      font-size: 0.7rem;
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: goldenrod;
     }
-    .history-item .amount.win {
-      color: #4CAF50;
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #333;
+      color: white;
     }
-    .history-item .amount.loss {
-      color: #F44336;
+    .submit-btn {
+      background-color: goldenrod;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
     }
-    /* Arrow Shooting Game Styles */
-    .target-board {
-      width: 300px;
-      height: 300px;
-      margin: 20px auto;
-      position: relative;
-      border-radius: 50%;
-      background: conic-gradient(
-        #FF0000 0deg 45deg,
-        #FF4500 45deg 90deg,
-        #FFA500 90deg 135deg,
-        #FFFF00 135deg 180deg,
-        #008000 180deg 225deg,
-        #0000FF 225deg 270deg,
-        #4B0082 270deg 315deg,
-        #800080 315deg 360deg
-      );
-      overflow: hidden;
-      border: 3px solid #FFD700;
+    .submit-btn:hover {
+      background-color: gold;
     }
-    .target-center {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background-color: white;
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: 2px solid black;
-      z-index: 1;
+    .transaction-history {
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
     }
-    .aim {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      pointer-events: none;
+    .transaction-item {
+      background-color: #222;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border-left: 3px solid goldenrod;
     }
-    .arrow {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #121212;
-      border-radius: 50%;
-      z-index: 3;
-      pointer-events: none;
+    .transaction-amount {
+      font-weight: bold;
     }
-    .arrow-hit {
-      animation: hit 0.5s forwards;
+    .transaction-approved {
+      color: lime;
     }
-    @keyframes hit {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.5); }
-      100% { transform: scale(1); }
+    .transaction-pending {
+      color: orange;
     }
-    .arrow-shooting-stats {
-      margin-top: 15px;
-      font-size: 1rem;
+    .transaction-rejected {
+      color: red;
+    }
+    
+    /* VIP Section Styles */
+    .referral-code {
+      background-color: #333;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      margin: 10px 0;
+      word-break: break-all;
+    }
+    .referral-stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+    .stat-box {
+      background-color: #222;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid goldenrod;
+      min-width: 100px;
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: gold;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>USCash</h1>
-    <div class="logo">🎮</div>
-  </div>
-
-  <div class="marquee">
-    <span>Welcome to USCash, Earn with Fun. We will add more features soon!</span>
-  </div>
-
-  <div id="auth-container">
-    <div class="auth-form">
-      <h2>USCash Login</h2>
-      <div id="auth-tabs">
-        <button class="active" onclick="showAuthForm('login')">Login</button>
-        <button onclick="showAuthForm('signup')">Sign Up</button>
-      </div>
-      
-      <div id="login-form" class="active">
-        <input type="email" id="login-email" placeholder="Email">
-        <input type="password" id="login-password" placeholder="Password">
-        <button onclick="loginUser()">Login</button>
-        <div class="auth-toggle" onclick="showAuthForm('signup')">Don't have an account? Sign up</div>
-        <div class="auth-toggle" onclick="showPasswordReset('forgot')">Forgot password?</div>
-      </div>
-      
-      <div id="signup-form">
-        <input type="text" id="signup-name" placeholder="Full Name" required>
-        <div class="error-message" id="name-error"></div>
-        <input type="text" id="signup-phone" placeholder="Phone Number" required>
-        <div class="error-message" id="phone-error"></div>
-        <input type="email" id="signup-email" placeholder="Email" required>
-        <div class="error-message" id="email-error"></div>
-        <input type="password" id="signup-password" placeholder="Password (min 6 chars)" required>
-        <div class="error-message" id="password-error"></div>
-        <button onclick="signupUser()">Create Account</button>
-        <div class="auth-toggle" onclick="showAuthForm('login')">Already have an account? Login</div>
-      </div>
-      
-      <div id="forgot-password-form" class="password-reset-step">
-        <h3>Reset Password</h3>
-        <p>Enter your email to receive a password reset link</p>
-        <input type="email" id="reset-email" placeholder="Your email">
-        <button onclick="sendResetEmail()">Send Reset Link</button>
-        <div class="password-reset-back" onclick="showAuthForm('login')">Back to Login</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="user-info" style="display:none;">
-    <span id="user-name"></span>
-    <span id="verified-badge" class="verified-badge" style="display:none;"><i class="fas fa-check-circle"></i></span>
-    | Balance: Rs. <span id="user-balance"></span>
-    <button class="refresh-balance" onclick="refreshBalance()"><i class="fas fa-sync-alt"></i></button>
-    | <button onclick="logoutUser()">Logout</button>
-  </div>
-
-  <div id="admin-panel">
-    <button id="admin-close" onclick="closeAdminPanel()">×</button>
-    <h2>USCash Admin Panel</h2>
-    
-    <div class="admin-section">
-      <h3>User Management</h3>
-      <div class="admin-input-group">
-        <input type="text" id="admin-search-user" placeholder="Search by email or name">
-        <button onclick="searchUsers()">Search</button>
-      </div>
-      <table id="users-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Balance</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="users-list">
-        </tbody>
-      </table>
-    </div>
-    
-    <div class="admin-section">
-      <h3>Deposit Requests</h3>
-      <table id="deposit-requests-table">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Amount</th>
-            <th>Method</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="deposit-requests-list">
-        </tbody>
-      </table>
-    </div>
-    
-    <div class="admin-section">
-      <h3>Withdrawal Requests</h3>
-      <table id="withdraw-requests-table">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Amount</th>
-            <th>Method</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="withdraw-requests-list">
-        </tbody>
-      </table>
-    </div>
-    
-    <div class="admin-section">
-      <h3>Balance Adjustment</h3>
-      <div class="admin-input-group">
-        <input type="text" id="adjust-user-id" placeholder="User ID" readonly>
-        <input type="number" id="adjust-amount" placeholder="Amount">
-        <button onclick="adjustUserBalance()">Adjust</button>
-      </div>
-      <div>
-        <label>
-          <input type="radio" name="adjust-type" value="add" checked> Add
-        </label>
-        <label>
-          <input type="radio" name="adjust-type" value="subtract"> Subtract
-        </label>
-        <label>
-          <input type="radio" name="adjust-type" value="set"> Set
-        </label>
-      </div>
-    </div>
-    
-    <div class="admin-section">
-      <h3>Transaction History</h3>
-      <div class="admin-input-group">
-        <input type="text" id="history-user-id" placeholder="User ID">
-        <button onclick="loadUserHistory()">Load History</button>
-      </div>
-      <table id="history-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>User</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Game</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody id="history-list">
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <button id="admin-link" onclick="toggleAdminPanel()" style="display:none;">🔧</button>
-
   <div id="particles-js"></div>
   <div id="welcomePopup">
     <div class="popup-content">
@@ -1162,176 +480,253 @@
          Stay with us — new games are coming in the upcoming days!</p>
     </div>
   </div>
-
-  <!-- Updated Nav Section -->
-  <div class="nav">
-    <a href="#" onclick="showHomeSection()">Home</a>
-    <a href="#" onclick="showDepositSection()">Deposit</a>
-    <a href="#" id="withdraw-link">Withdraw</a>
-    <a href="#" onclick="checkVIPAccess()">VIP</a>
-    <a href="#" onclick="showMoreSection()">More</a>
+  
+  <!-- Auth Modals -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-content">
+      <div class="auth-tabs">
+        <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+        <div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
+      </div>
+      
+      <div id="loginForm" class="auth-form active">
+        <input type="text" id="loginUsername" placeholder="Username" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <div class="forgot-password" onclick="showForgotPassword()">Forgot Password?</div>
+        <button onclick="loginUser()">Login</button>
+      </div>
+      
+      <div id="signupForm" class="auth-form">
+        <input type="text" id="signupUsername" placeholder="Username" />
+        <input type="email" id="signupEmail" placeholder="Email" />
+        <input type="password" id="signupPassword" placeholder="Password" />
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" />
+        <input type="text" id="referralCode" placeholder="Referral Code (Optional)" />
+        <button onclick="signupUser()">Sign Up</button>
+      </div>
+      
+      <div id="forgotPasswordForm" class="auth-form">
+        <input type="email" id="forgotEmail" placeholder="Enter your email" />
+        <button onclick="resetPassword()">Reset Password</button>
+        <button onclick="backToLogin()" style="margin-top: 10px; background-color: #444;">Back to Login</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Home Section (Games) -->
-  <div id="homeSection" class="section">
+  <h1>USCash 🎮</h1>
+  
+  <div class="user-info">
+    <div id="userDisplay" style="display:none;">
+      <span id="usernameDisplay"></span>
+    </div>
+    <div class="balance-container">
+      <span>Balance: Rs. <span id="balanceAmount">0</span></span>
+      <i class="fas fa-sync-alt refresh-balance" onclick="refreshBalance()"></i>
+    </div>
+    <div id="authButtons">
+      <button class="gold-box" onclick="showAuthModal('login')">Login</button>
+      <button class="gold-box" onclick="showAuthModal('signup')">Sign Up</button>
+    </div>
+    <div id="logoutButton" style="display:none;">
+      <button class="gold-box" onclick="logoutUser()">Logout</button>
+    </div>
+  </div>
+  
+  <div class="nav">
+    <a href="#" onclick="showSection('home')">Home</a>
+    <a href="#" onclick="showSection('deposit')">Deposit</a>
+    <a href="#" onclick="showSection('withdraw')">Withdraw</a>
+    <a href="#" onclick="showSection('vip')">VIP</a>
+    <a href="#" onclick="showSection('more')">More</a>
+  </div>
+
+  <!-- Home Section -->
+  <div class="section" id="homeSection">
     <h2>Select Game</h2>
     <div class="game-options">
-      <div class="gold-box" onclick="startCardGame()" style="background-image: url('https://img.freepik.com/free-vector/realistic-playing-cards-background_52683-63441.jpg');">
-        <div class="game-name">Scratch Match</div>
+      <div class="gold-box" onclick="startCardGame()">
+        <i class="fas fa-scroll"></i>
+        Scratch Match
       </div>
-      <div class="gold-box" onclick="startFruitGame()" style="background-image: url('https://img.freepik.com/free-vector/fruit-seamless-pattern-background_53876-93168.jpg');">
-        <div class="game-name">Fruit Shooting</div>
+      <div class="gold-box" onclick="startFruitGame()">
+        <i class="fas fa-apple-alt"></i>
+        Fruit Shooting
       </div>
-      <div class="gold-box" onclick="startFindAceGame()" style="background-image: url('https://img.freepik.com/free-vector/playing-card-pattern-background_53876-93170.jpg');">
-        <div class="game-name">Find Ace</div>
+      <div class="gold-box" onclick="startTicTacToeGame()">
+        <i class="fas fa-times"></i>
+        Tic Tac Toe
       </div>
-      <div class="gold-box" onclick="startArrowShootingGame()" style="background-image: url('https://img.freepik.com/free-vector/archery-target-board-realistic_107791-1805.jpg');">
-        <div class="game-name">Arrow Shooting</div>
+      <div class="gold-box" onclick="startAimingGame()">
+        <i class="fas fa-bullseye"></i>
+        Aiming Challenge
       </div>
     </div>
   </div>
 
-  <!-- Deposit Section -->
-  <div id="depositSection" class="section" style="display:none;">
-    <h2>Deposit Funds</h2>
-    <div class="contact-box">
-      <h3>Contact Our Referral</h3>
-      <p>To deposit funds, please contact our referral agent via WhatsApp:</p>
-      <p><strong>Minimum Deposit: Rs. 300</strong></p>
-      <a href="https://wa.me/923174136799" class="whatsapp-btn">
-        <i class="fab fa-whatsapp"></i> Contact on WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <!-- More Section -->
-  <div id="moreSection" class="section" style="display:none;">
-    <h2>More Options</h2>
-    <div class="contact-box">
-      <h3>Transaction History</h3>
-      <div id="user-history"></div>
-    </div>
-    <div class="contact-box">
-      <h3>Admin Access</h3>
-      <p>Only admin users can access special features.</p>
-      <p>If you're an admin, login with your admin account to access the admin panel.</p>
-    </div>
-  </div>
-
-  <div id="comingSoonBox" style="display:none;">
-    <h3>Coming Soon</h3>
-    <p>This feature is under development and will be available soon.</p>
-  </div>
-
-  <!-- Updated Withdraw Modal -->
-  <div id="withdrawModal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeWithdrawModal()">&times;</span>
-      <h2>Withdraw Funds</h2>
-      <div id="withdraw-success" class="withdraw-success"></div>
-      <form id="withdraw-form" onsubmit="event.preventDefault(); submitWithdrawRequest();">
-        <input type="text" id="withdraw-name" placeholder="Full Name" required>
-        <input type="text" id="withdraw-account" placeholder="Account Number/Phone Number" required>
-        <select id="withdraw-method" required>
-          <option value="">Select Payment Method</option>
-          <option value="easypaisa">EasyPaisa</option>
-          <option value="jazzcash">JazzCash</option>
-          <option value="bank">Bank Transfer</option>
-        </select>
-        <input type="text" id="withdraw-username" placeholder="Game User Name" required>
-        <input type="email" id="withdraw-email" placeholder="Email" required>
-        <input type="number" id="withdraw-amount" placeholder="Amount (Minimum Rs. 300)" min="300" required>
-        <div class="withdraw-info">Withdrawal processing time: 1-4 hours</div>
-        <button type="submit">Submit Request</button>
-        <div class="error-message" id="withdraw-error"></div>
-        <div class="loading-spinner" id="withdraw-spinner"></div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Updated Scratch Game Section -->
+  <!-- Scratch Game -->
   <div class="section" id="scratchGame" style="display:none;">
-    <h2>📏 Scratch & Match</h2>
+    <h2><i class="fas fa-scroll"></i> Scratch & Match</h2>
     <div class="bet-amounts">
-      <div class="gold-box" data-bet="20" onclick="selectBet(this, 20)">20</div>
-      <div class="gold-box" data-bet="50" onclick="selectBet(this, 50)">50</div>
-      <div class="gold-box" data-bet="100" onclick="selectBet(this, 100)">100</div>
-      <div class="gold-box" data-bet="150" onclick="selectBet(this, 150)">150</div>
-      <div class="gold-box" data-bet="200" onclick="selectBet(this, 200)">200</div>
-      <div class="gold-box" data-bet="300" onclick="selectBet(this, 300)">300</div>
-    </div>
-    <div class="custom-bet-container">
-      <input type="number" id="custom-bet-amount" class="custom-bet-input" placeholder="Custom amount" min="20">
-      <button class="custom-bet-btn" onclick="placeCustomBet()">Bet</button>
+      <div class="gold-box" onclick="selectBet(20)">20</div>
+      <div class="gold-box" onclick="selectBet(50)">50</div>
+      <div class="gold-box" onclick="selectBet(100)">100</div>
+      <div class="gold-box" onclick="selectBet(150)">150</div>
+      <div class="gold-box" onclick="selectBet(200)">200</div>
+      <div class="gold-box" onclick="selectBet(300)">300</div>
     </div>
     <div class="card-grid" id="cardGrid"></div>
     <div id="result"></div>
   </div>
 
+  <!-- Fruit Game -->
   <div class="section" id="fruitGame" style="display:none;">
-    <h2>🍎 Fruit Shooting</h2>
+    <h2><i class="fas fa-apple-alt"></i> Fruit Shooting</h2>
     <div id="fruitTargetDisplay">Target: Shoot the <b style="color:red;">RED</b> Apple 🍎!</div>
     <div class="bet-amounts">
-      <div class="gold-box" data-bet="20" onclick="startFruitRound(this, 20)">Rs. 20</div>
-      <div class="gold-box" data-bet="50" onclick="startFruitRound(this, 50)">Rs. 50</div>
-      <div class="gold-box" data-bet="100" onclick="startFruitRound(this, 100)">Rs. 100</div>
-      <div class="gold-box" data-bet="150" onclick="startFruitRound(this, 150)">Rs. 150</div>
-      <div class="gold-box" data-bet="200" onclick="startFruitRound(this, 200)">Rs. 200</div>
-      <div class="gold-box" data-bet="250" onclick="startFruitRound(this, 250)">Rs. 250</div>
-      <div class="gold-box" data-bet="300" onclick="startFruitRound(this, 300)">Rs. 300</div>
-    </div>
-    <div class="custom-bet-container">
-      <input type="number" id="custom-fruit-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
-      <button class="custom-bet-btn" onclick="placeCustomFruitBet()">Bet</button>
+      <div class="gold-box" onclick="startFruitRound(20)">Rs. 20</div>
+      <div class="gold-box" onclick="startFruitRound(50)">Rs. 50</div>
+      <div class="gold-box" onclick="startFruitRound(100)">Rs. 100</div>
+      <div class="gold-box" onclick="startFruitRound(150)">Rs. 150</div>
+      <div class="gold-box" onclick="startFruitRound(200)">Rs. 200</div>
     </div>
     <div id="fruitCountdown">Time: 0s</div>
     <div class="shoot-area" id="shootArea"></div>
     <div id="fruitScoreDisplay"></div>
   </div>
 
-  <!-- Find Ace Game Section -->
-  <div class="section" id="findAceGame" style="display:none;">
-    <h2>🃏 Find the Ace</h2>
+  <!-- Tic Tac Toe Game -->
+  <div class="section" id="tictactoeGame" style="display:none;">
+    <h2><i class="fas fa-times"></i> Tic Tac Toe</h2>
     <div class="bet-amounts">
-      <div class="gold-box" data-bet="20" onclick="startFindAceRound(this, 20)">Rs. 20</div>
-      <div class="gold-box" data-bet="50" onclick="startFindAceRound(this, 50)">Rs. 50</div>
-      <div class="gold-box" data-bet="100" onclick="startFindAceRound(this, 100)">Rs. 100</div>
-      <div class="gold-box" data-bet="150" onclick="startFindAceRound(this, 150)">Rs. 150</div>
-      <div class="gold-box" data-bet="200" onclick="startFindAceRound(this, 200)">Rs. 200</div>
-      <div class="gold-box" data-bet="300" onclick="startFindAceRound(this, 300)">Rs. 300</div>
+      <div class="gold-box" onclick="selectTicTacToeBet(50)">Rs. 50</div>
+      <div class="gold-box" onclick="selectTicTacToeBet(100)">Rs. 100</div>
+      <div class="gold-box" onclick="selectTicTacToeBet(200)">Rs. 200</div>
+      <div class="gold-box" onclick="selectTicTacToeBet(300)">Rs. 300</div>
     </div>
-    <div class="custom-bet-container">
-      <input type="number" id="custom-ace-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
-      <button class="custom-bet-btn" onclick="placeCustomAceBet()">Bet</button>
-    </div>
-    <div class="ace-timer" id="aceTimer">Time left: 15s</div>
-    <div id="aceCards" style="display: flex; justify-content: center; flex-wrap: wrap;"></div>
-    <div id="aceResult"></div>
+    <div id="tictactoeCountdown">Time: 30s</div>
+    <div class="tic-tac-toe-board" id="ticTacToeBoard"></div>
+    <div id="tictactoeResult"></div>
   </div>
 
-  <!-- Arrow Shooting Game Section -->
-  <div class="section" id="arrowShootingGame" style="display:none;">
-    <h2>🎯 Arrow Shooting</h2>
+  <!-- Aiming Game -->
+  <div class="section" id="aimingGame" style="display:none;">
+    <h2><i class="fas fa-bullseye"></i> Aiming Challenge</h2>
     <div class="bet-amounts">
-      <div class="gold-box" data-bet="20" onclick="startArrowShootingRound(this, 20)">Rs. 20</div>
-      <div class="gold-box" data-bet="50" onclick="startArrowShootingRound(this, 50)">Rs. 50</div>
-      <div class="gold-box" data-bet="100" onclick="startArrowShootingRound(this, 100)">Rs. 100</div>
-      <div class="gold-box" data-bet="150" onclick="startArrowShootingRound(this, 150)">Rs. 150</div>
-      <div class="gold-box" data-bet="200" onclick="startArrowShootingRound(this, 200)">Rs. 200</div>
-      <div class="gold-box" data-bet="300" onclick="startArrowShootingRound(this, 300)">Rs. 300</div>
+      <div class="gold-box" onclick="startAimingRound(50)">Rs. 50</div>
+      <div class="gold-box" onclick="startAimingRound(100)">Rs. 100</div>
+      <div class="gold-box" onclick="startAimingRound(200)">Rs. 200</div>
+      <div class="gold-box" onclick="startAimingRound(300)">Rs. 300</div>
     </div>
-    <div class="custom-bet-container">
-      <input type="number" id="custom-arrow-bet" class="custom-bet-input" placeholder="Custom amount" min="20">
-      <button class="custom-bet-btn" onclick="placeCustomArrowBet()">Bet</button>
+    <div id="aimingCountdown">Time: 0s</div>
+    <div id="aimingScore">Score: 0/5</div>
+    <div class="shoot-area" id="aimingArea"></div>
+  </div>
+
+  <!-- Deposit Section -->
+  <div class="section" id="depositSection" style="display:none;">
+    <h2><i class="fas fa-money-bill-wave"></i> Deposit</h2>
+    <p>Minimum deposit amount is Rs. 150. To deposit, please contact VIP users for referral.</p>
+    <div class="form-group">
+      <label for="depositAmount">Amount (Rs.)</label>
+      <input type="number" id="depositAmount" min="150" placeholder="Minimum 150" />
     </div>
-    <div id="arrowShootingResult"></div>
-    <div class="target-board" id="targetBoard">
-      <div class="target-center"></div>
-      <div class="aim" id="aim"></div>
+    <div class="form-group">
+      <label for="depositMethod">Payment Method</label>
+      <select id="depositMethod">
+        <option value="easypaisa">EasyPaisa</option>
+        <option value="jazzcash">JazzCash</option>
+        <option value="bank">Bank Transfer</option>
+      </select>
     </div>
-    <div class="arrow-shooting-stats">
-      <p>Hits: <span id="hitsCount">0</span>/5 | Time: <span id="arrowTimeLeft">0</span>s</p>
+    <div class="form-group">
+      <label for="transactionId">Transaction ID</label>
+      <input type="text" id="transactionId" placeholder="Enter transaction reference" />
     </div>
+    <button class="submit-btn" onclick="submitDeposit()">Submit Deposit Request</button>
+    
+    <div class="transaction-history" id="depositHistory">
+      <h3>Deposit History</h3>
+      <!-- Will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Withdraw Section -->
+  <div class="section" id="withdrawSection" style="display:none;">
+    <h2><i class="fas fa-wallet"></i> Withdraw</h2>
+    <p>Minimum withdrawal amount is Rs. 300. You can only submit one request every 4 hours.</p>
+    <div class="form-group">
+      <label for="withdrawAmount">Amount (Rs.)</label>
+      <input type="number" id="withdrawAmount" min="300" placeholder="Minimum 300" />
+    </div>
+    <div class="form-group">
+      <label for="withdrawMethod">Payment Method</label>
+      <select id="withdrawMethod">
+        <option value="easypaisa">EasyPaisa</option>
+        <option value="jazzcash">JazzCash</option>
+        <option value="bank">Bank Transfer</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="accountNumber">Account Number</label>
+      <input type="text" id="accountNumber" placeholder="Enter your account number" />
+    </div>
+    <div class="form-group">
+      <label for="accountName">Account Name</label>
+      <input type="text" id="accountName" placeholder="Enter account holder name" />
+    </div>
+    <button class="submit-btn" onclick="submitWithdraw()">Submit Withdrawal Request</button>
+    
+    <div class="transaction-history" id="withdrawHistory">
+      <h3>Withdrawal History</h3>
+      <!-- Will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- VIP Section -->
+  <div class="section" id="vipSection" style="display:none;">
+    <h2><i class="fas fa-crown"></i> VIP Program</h2>
+    <p>Earn money by referring friends! Share your referral code and earn 10% of their deposits.</p>
+    
+    <div class="referral-stats">
+      <div class="stat-box">
+        <div class="stat-label">Referrals</div>
+        <div class="stat-value" id="referralCount">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Earnings</div>
+        <div class="stat-value" id="referralEarnings">Rs. 0</div>
+      </div>
+    </div>
+    
+    <h3>Your Referral Code</h3>
+    <div class="referral-code" id="userReferralCode">Login to see your code</div>
+    
+    <h3>How It Works</h3>
+    <ol style="text-align: left;">
+      <li>Share your referral code with friends</li>
+      <li>They sign up using your code</li>
+      <li>You earn 10% of every deposit they make</li>
+      <li>Withdraw your earnings anytime</li>
+    </ol>
+  </div>
+
+  <!-- More Section -->
+  <div class="section" id="moreSection" style="display:none;">
+    <h2><i class="fas fa-ellipsis-h"></i> More</h2>
+    
+    <h3>Withdrawal Request Status</h3>
+    <div class="transaction-history" id="withdrawStatus">
+      <!-- Will be populated by JavaScript -->
+    </div>
+    
+    <h3>Transaction History</h3>
+    <div class="transaction-history" id="fullTransactionHistory">
+      <!-- Will be populated by JavaScript -->
+    </div>
+    
+    <button class="submit-btn" onclick="refreshAllData()" style="margin-top: 20px;">
+      <i class="fas fa-sync-alt"></i> Refresh All Data
+    </button>
   </div>
 
   <audio id="bgMusic" loop>
@@ -1340,813 +735,570 @@
   <audio id="flipSound">
     <source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_07d4930c1c.mp3" type="audio/mp3">
   </audio>
-  <audio id="explosionSound">
-    <source src="https://cdn.pixabay.com/download/audio/2021/08/09/audio_2a5c1dcc0a.mp3" type="audio/mp3">
-  </audio>
   <audio id="winSound">
-    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/21/audio_5a9f1d8e6b.mp3" type="audio/mp3">
   </audio>
   <audio id="loseSound">
-    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
-  </audio>
-  <audio id="hitSound">
-    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0a8e0b0e1f.mp3" type="audio/mp3">
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0d8d2a5c8a.mp3" type="audio/mp3">
   </audio>
 
+  <!-- Firebase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  
   <script>
-    // Special email that can login without password
-    const SPECIAL_EMAIL = "kafe2999@gmail.com";
-    const VERIFIED_EMAILS = ["auk5562@gmail.com", "cptanil1995@gmail.com"];
-    let currentUserId = null;
-    let balance = 1000;
-    let lastWithdrawTime = 0;
-    const WITHDRAW_COOLDOWN = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
-
-    // Game durations in seconds (converted to milliseconds)
-    const gameDurations = {
-      20: 11000,  // 11 seconds
-      50: 20000,  // 20 seconds
-      100: 40000, // 40 seconds
-      150: 60000, // 60 seconds
-      200: 80000, // 80 seconds
-      250: 90000, // 90 seconds
-      300: 100000 // 100 seconds
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
+      authDomain: "pakcashplay.firebaseapp.com",
+      projectId: "pakcashplay",
+      storageBucket: "pakcashplay.appspot.com",
+      messagingSenderId: "551195851632",
+      appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
     };
 
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      // Set up withdraw link
-      document.getElementById('withdraw-link').addEventListener('click', function(e) {
-        e.preventDefault();
-        showWithdrawForm();
-      });
-      
-      // Initialize betting
-      initializeBetting();
-    });
-
-    // Section navigation functions
-    function showHomeSection() {
-      document.getElementById('homeSection').style.display = 'block';
-      document.getElementById('depositSection').style.display = 'none';
-      document.getElementById('moreSection').style.display = 'none';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('arrowShootingGame').style.display = 'none';
-    }
-
-    function showDepositSection() {
-      document.getElementById('homeSection').style.display = 'none';
-      document.getElementById('depositSection').style.display = 'block';
-      document.getElementById('moreSection').style.display = 'none';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('arrowShootingGame').style.display = 'none';
-    }
-
-    function showMoreSection() {
-      document.getElementById('homeSection').style.display = 'none';
-      document.getElementById('depositSection').style.display = 'none';
-      document.getElementById('moreSection').style.display = 'block';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('arrowShootingGame').style.display = 'none';
-      
-      if (currentUserId) {
-        loadUserTransactionHistory();
-      }
-    }
-
-    // Initialize betting system
-    function initializeBetting() {
-      // Scratch game bets
-      document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          const amount = parseInt(this.getAttribute('data-bet'));
-          selectBet(this, amount);
-        });
-      });
-
-      // Fruit game bets
-      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          const amount = parseInt(this.getAttribute('data-bet'));
-          startFruitRound(this, amount);
-        });
-      });
-      
-      // Find Ace game bets
-      document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          const amount = parseInt(this.getAttribute('data-bet'));
-          startFindAceRound(this, amount);
-        });
-      });
-      
-      // Arrow Shooting game bets
-      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(bet => {
-        bet.addEventListener('click', function() {
-          const amount = parseInt(this.getAttribute('data-bet'));
-          startArrowShootingRound(this, amount);
-        });
-      });
-    }
-
-    // Improved bet selection
-    async function selectBet(element, amount) {
-      if (gameStarted) {
-        alert("Game already in progress!");
-        return;
-      }
-      
-      if (!currentUserId) {
-        alert("Please login to play");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      if (balance < amount) {
-        alert("Insufficient balance!");
-        return;
-      }
-      
-      try {
-        // Deduct balance
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        
-        // Update local balance
-        balance -= amount;
-        updateBalanceDisplay();
-        
-        // Start game
-        selectedBet = amount;
-        document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => {
-          btn.classList.remove('active');
-        });
-        element.classList.add('active');
-        revealAndShuffleCards();
-        
-      } catch (error) {
-        console.error("Betting error:", error);
-        alert("Failed to place bet. Please try again.");
-      }
-    }
-
-    // Custom bet amount function
-    async function placeCustomBet() {
-      const customAmount = parseInt(document.getElementById('custom-bet-amount').value);
-      if (isNaN(customAmount)) {
-        alert("Please enter a valid bet amount");
-        return;
-      }
-      
-      if (customAmount < 20) {
-        alert("Minimum bet is Rs. 20");
-        return;
-      }
-      
-      const betBoxes = document.querySelectorAll('#scratchGame .bet-amounts .gold-box');
-      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
-        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
-        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
-        return currDiff < prevDiff ? curr : prev;
-      });
-      
-      await selectBet(closestBet, customAmount);
-    }
-
-    // Custom fruit bet amount function
-    async function placeCustomFruitBet() {
-      const customAmount = parseInt(document.getElementById('custom-fruit-bet').value);
-      if (isNaN(customAmount)) {
-        alert("Please enter a valid bet amount");
-        return;
-      }
-      
-      if (customAmount < 20) {
-        alert("Minimum bet is Rs. 20");
-        return;
-      }
-      
-      const betBoxes = document.querySelectorAll('#fruitGame .bet-amounts .gold-box');
-      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
-        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
-        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
-        return currDiff < prevDiff ? curr : prev;
-      });
-      
-      await startFruitRound(closestBet, customAmount);
-    }
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
     
-    // Custom ace bet amount function
-    async function placeCustomAceBet() {
-      const customAmount = parseInt(document.getElementById('custom-ace-bet').value);
-      if (isNaN(customAmount)) {
-        alert("Please enter a valid bet amount");
-        return;
-      }
-      
-      if (customAmount < 20) {
-        alert("Minimum bet is Rs. 20");
-        return;
-      }
-      
-      const betBoxes = document.querySelectorAll('#findAceGame .bet-amounts .gold-box');
-      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
-        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
-        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
-        return currDiff < prevDiff ? curr : prev;
-      });
-      
-      await startFindAceRound(closestBet, customAmount);
-    }
-    
-    // Custom arrow shooting bet amount function
-    async function placeCustomArrowBet() {
-      const customAmount = parseInt(document.getElementById('custom-arrow-bet').value);
-      if (isNaN(customAmount)) {
-        alert("Please enter a valid bet amount");
-        return;
-      }
-      
-      if (customAmount < 20) {
-        alert("Minimum bet is Rs. 20");
-        return;
-      }
-      
-      const betBoxes = document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box');
-      const closestBet = Array.from(betBoxes).reduce((prev, curr) => {
-        const prevDiff = Math.abs(parseInt(prev.getAttribute('data-bet')) - customAmount);
-        const currDiff = Math.abs(parseInt(curr.getAttribute('data-bet')) - customAmount);
-        return currDiff < prevDiff ? curr : prev;
-      });
-      
-      await startArrowShootingRound(closestBet, customAmount);
-    }
-
-    // Improved withdraw form handling
-    async function showWithdrawForm() {
-      if (!currentUserId) {
-        alert("Please login to withdraw");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      const now = Date.now();
-      if (now - lastWithdrawTime < WITHDRAW_COOLDOWN) {
-        const hoursLeft = Math.ceil((WITHDRAW_COOLDOWN - (now - lastWithdrawTime)) / (60 * 60 * 1000));
-        alert(`You can only withdraw once every 4 hours. Please wait ${hoursLeft} more hour(s).`);
-        return;
-      }
-      
-      const modal = document.getElementById('withdrawModal');
-      const form = document.getElementById('withdraw-form');
-      
-      // Reset form
-      form.reset();
-      document.getElementById('withdraw-error').style.display = 'none';
-      document.getElementById('withdraw-success').style.display = 'none';
-      
-      // Load user data
-      try {
-        const userDoc = await firebase.firestoreFunctions.getDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId)
-        );
-        
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          document.getElementById('withdraw-name').value = userData.name || '';
-          document.getElementById('withdraw-email').value = userData.email || '';
-        }
-      } catch (error) {
-        console.error("Error loading user data:", error);
-      }
-      
-      // Show modal
-      modal.style.display = 'flex';
-    }
-
-    // Improved withdraw submission
-    async function submitWithdrawRequest() {
-      const spinner = document.getElementById('withdraw-spinner');
-      const errorElement = document.getElementById('withdraw-error');
-      const successElement = document.getElementById('withdraw-success');
-      
-      // Validate inputs
-      const name = document.getElementById('withdraw-name').value.trim();
-      const account = document.getElementById('withdraw-account').value.trim();
-      const method = document.getElementById('withdraw-method').value;
-      const username = document.getElementById('withdraw-username').value.trim();
-      const email = document.getElementById('withdraw-email').value.trim();
-      const amount = parseFloat(document.getElementById('withdraw-amount').value);
-
-      // Validation checks
-      if (!name || !account || !method || !username || !email || isNaN(amount)) {
-        showError('withdraw-error', 'Please fill all fields correctly');
-        return;
-      }
-      
-      if (amount < 300) {
-        showError('withdraw-error', 'Minimum withdrawal is Rs. 300');
-        return;
-      }
-
-      if (balance < amount) {
-        showError('withdraw-error', 'Insufficient balance');
-        return;
-      }
-
-      // Show loading
-      spinner.style.display = 'block';
-      errorElement.style.display = 'none';
-      successElement.style.display = 'none';
-
-      try {
-        // Create withdrawal request
-        await firebase.firestoreFunctions.addDoc(
-          firebase.firestoreFunctions.collection(firebase.db, "withdraw_requests"), 
-          {
-            user_id: currentUserId,
-            name: name,
-            account_number: account,
-            method: method,
-            game_username: username,
-            email: email,
-            amount: amount,
-            status: 'pending',
-            timestamp: firebase.firestoreFunctions.serverTimestamp()
-          }
-        );
-
-        // Update balance
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-
-        // Update UI
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-        lastWithdrawTime = Date.now();
-        
-        // Show success message
-        successElement.textContent = 'Withdrawal request submitted successfully!';
-        successElement.style.display = 'block';
-        
-        // Reset form after 3 seconds
-        setTimeout(() => {
-          closeWithdrawModal();
-        }, 3000);
-        
-      } catch (error) {
-        console.error("Withdrawal error:", error);
-        if (error.code === 'permission-denied') {
-          showError('withdraw-error', 'Failed to submit: Please ensure your Firestore rules allow withdrawals');
-        } else {
-          showError('withdraw-error', 'Failed to submit: ' + error.message);
-        }
-      } finally {
-        spinner.style.display = 'none';
-      }
-    }
-
-    function closeWithdrawModal() {
-      document.getElementById('withdrawModal').style.display = 'none';
-    }
-
-    // Helper function to update balance display
-    function updateBalanceDisplay() {
-      document.getElementById('user-balance').textContent = balance;
-    }
-
-    function showAuthForm(formType) {
-      document.getElementById('login-form').classList.remove('active');
-      document.getElementById('signup-form').classList.remove('active');
-      document.getElementById('forgot-password-form').style.display = 'none';
-      
-      // Update tab buttons
-      document.querySelectorAll('#auth-tabs button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      
-      if (formType === 'login') {
-        document.getElementById('login-form').classList.add('active');
-        document.querySelector('#auth-tabs button:nth-child(1)').classList.add('active');
-      } else if (formType === 'signup') {
-        document.getElementById('signup-form').classList.add('active');
-        document.querySelector('#auth-tabs button:nth-child(2)').classList.add('active');
-      } else if (formType === 'forgot') {
-        document.getElementById('forgot-password-form').style.display = 'block';
-        document.getElementById('login-form').classList.remove('active');
-      }
-    }
-
-    function showError(fieldId, message) {
-      const errorElement = document.getElementById(fieldId);
-      errorElement.textContent = message;
-      errorElement.style.display = 'block';
-    }
-
-    function clearError(fieldId) {
-      const errorElement = document.getElementById(fieldId);
-      errorElement.textContent = '';
-      errorElement.style.display = 'none';
-    }
-
-    async function loginUser() {
-      const email = document.getElementById('login-email').value.trim();
-      const password = document.getElementById('login-password').value.trim();
-      
-      try {
-        // Special case for kafe2999@gmail.com - no password needed
-        if (email === SPECIAL_EMAIL) {
-          try {
-            // First try to sign in
-            const userCredential = await firebase.authFunctions.signInWithEmailAndPassword(
-              firebase.auth, 
-              email, 
-              "anypassword" // Using a dummy password
-            );
-            await checkUserInDatabase(userCredential.user);
-          } catch (error) {
-            // If login fails (because user doesn't exist), create the account
-            if (error.code === 'auth/user-not-found') {
-              const userCredential = await firebase.authFunctions.createUserWithEmailAndPassword(
-                firebase.auth, 
-                email, 
-                "anypassword" // Using same dummy password
-              );
-              
-              // Add user to database with default balance
-              await firebase.firestoreFunctions.setDoc(
-                firebase.firestoreFunctions.doc(firebase.db, "users", userCredential.user.uid), 
-                {
-                  name: "Special User",
-                  email: email,
-                  phone: "0000000000",
-                  balance: 10000,
-                  isAdmin: true,
-                  createdAt: firebase.firestoreFunctions.serverTimestamp()
-                }
-              );
-              await updateUIAfterLogin(userCredential.user);
-            } else {
-              throw error;
-            }
-          }
-          return;
-        }
-        
-        // Normal login for other users
-        if (!email || !password) {
-          alert("Please enter both email and password");
-          return;
-        }
-        
-        const userCredential = await firebase.authFunctions.signInWithEmailAndPassword(
-          firebase.auth, 
-          email, 
-          password
-        );
-        await checkUserInDatabase(userCredential.user);
-      } catch (error) {
-        console.error("Authentication error:", error);
-        if (error.code === 'auth/invalid-credential') {
-          alert("Invalid email or password. Please try again.");
-        } else if (error.code === 'auth/user-not-found') {
-          alert("No account found with this email. Please sign up first.");
-          showAuthForm('signup');
-        } else if (error.code === 'auth/wrong-password') {
-          alert("Incorrect password. Please try again or reset your password.");
-        } else if (error.code === 'auth/too-many-requests') {
-          alert("Too many failed attempts. Please try again later.");
-        } else {
-          alert("Login failed: " + error.message);
-        }
-      }
-    }
-
-    async function checkUserInDatabase(user) {
-      try {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", user.uid);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-        
-        if (docSnap.exists()) {
-          await updateUIAfterLogin(user);
-        } else {
-          // If user doesn't exist in database, create record
-          await firebase.firestoreFunctions.setDoc(docRef, {
-            name: user.displayName || "New User",
-            email: user.email,
-            phone: user.phoneNumber || "",
-            balance: 1000, // Default balance
-            isAdmin: user.email === SPECIAL_EMAIL,
-            createdAt: firebase.firestoreFunctions.serverTimestamp()
-          });
-          await updateUIAfterLogin(user);
-        }
-      } catch (error) {
-        console.error("Database error:", error);
-      }
-    }
-
-    async function updateUIAfterLogin(user) {
-      // Hide auth container
-      document.getElementById('auth-container').style.display = 'none';
-      
-      // Show user info
-      document.getElementById('user-info').style.display = 'block';
-      
-      currentUserId = user.uid;
-      
-      // Get user data from Firestore
-      const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", user.uid);
-      const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-      
-      if (docSnap.exists()) {
-        const userData = docSnap.data();
-        document.getElementById('user-name').textContent = userData.name;
-        document.getElementById('user-balance').textContent = userData.balance;
-        balance = userData.balance;
-        
-        // Show verified badge for verified emails
-        if (VERIFIED_EMAILS.includes(userData.email)) {
-          document.getElementById('verified-badge').style.display = 'inline';
-        } else {
-          document.getElementById('verified-badge').style.display = 'none';
-        }
-        
-        if (userData.isAdmin) {
-          document.getElementById('admin-link').style.display = 'flex';
-        } else {
-          document.getElementById('admin-link').style.display = 'none';
-        }
-      }
-    }
-
-    async function signupUser() {
-      const name = document.getElementById('signup-name').value.trim();
-      const phone = document.getElementById('signup-phone').value.trim();
-      const email = document.getElementById('signup-email').value.trim();
-      const password = document.getElementById('signup-password').value.trim();
-      
-      // Clear previous errors
-      clearError('name');
-      clearError('phone');
-      clearError('email');
-      clearError('password');
-      
-      // Validate inputs
-      let isValid = true;
-      
-      if (!name) {
-        showError('name-error', 'Please enter your full name');
-        isValid = false;
-      }
-      
-      if (!phone) {
-        showError('phone-error', 'Please enter your phone number');
-        isValid = false;
-      } else if (!/^\d+$/.test(phone)) {
-        showError('phone-error', 'Phone number should contain only digits');
-        isValid = false;
-      }
-      
-      if (!email) {
-        showError('email-error', 'Please enter your email');
-        isValid = false;
-      } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-        showError('email-error', 'Please enter a valid email address');
-        isValid = false;
-      }
-      
-      if (!password) {
-        showError('password-error', 'Please enter a password');
-        isValid = false;
-      } else if (password.length < 6) {
-        showError('password-error', 'Password should be at least 6 characters');
-        isValid = false;
-      }
-      
-      if (!isValid) return;
-      
-      try {
-        // First create auth account
-        const userCredential = await firebase.authFunctions.createUserWithEmailAndPassword(
-          firebase.auth, 
-          email, 
-          password
-        );
-        
-        // Then add user to database with proper security rules
-        await firebase.firestoreFunctions.setDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", userCredential.user.uid), 
-          {
-            name: name,
-            phone: phone,
-            email: email,
-            balance: 1000,
-            isAdmin: email === SPECIAL_EMAIL,
-            createdAt: firebase.firestoreFunctions.serverTimestamp()
-          }
-        );
-        
-        await recordTransaction(
-          userCredential.user.uid, 
-          'initial', 
-          1000, 
-          'system', 
-          'Initial balance'
-        );
-        
-        alert("Account created successfully! You are now logged in.");
-        await updateUIAfterLogin(userCredential.user);
-      } catch (error) {
-        console.error("Signup error:", error);
-        
-        if (error.code === 'auth/email-already-in-use') {
-          showError('email-error', 'This email is already registered. Please use a different email or login.');
-        } else if (error.code === 'auth/weak-password') {
-          showError('password-error', 'Password should be at least 6 characters');
-        } else if (error.message.includes('permissions')) {
-          alert("Signup failed: Please make sure your Firebase Firestore rules allow user creation.");
-        } else {
-          alert("Signup failed: " + error.message);
-        }
-      }
-    }
-
-    async function logoutUser() {
-      try {
-        await firebase.authFunctions.signOut(firebase.auth);
-        // Hide user info and show auth container
-        document.getElementById('auth-container').style.display = 'flex';
-        document.getElementById('user-info').style.display = 'none';
-        document.getElementById('admin-link').style.display = 'none';
-        balance = 1000;
-        currentUserId = null;
-      } catch (error) {
-        console.error("Logout error:", error);
-      }
-    }
-
-    async function sendResetEmail() {
-      const email = document.getElementById('reset-email').value;
-      
-      if (!email) {
-        alert("Please enter your email");
-        return;
-      }
-      
-      try {
-        await firebase.authFunctions.sendPasswordResetEmail(firebase.auth, email);
-        alert("Password reset email sent. Please check your inbox.");
-        showAuthForm('login');
-      } catch (error) {
-        console.error("Error sending reset email:", error);
-        alert("Error sending reset email: " + error.message);
-      }
-    }
-
-    async function recordTransaction(userId, type, amount, game, description) {
-      try {
-        await firebase.firestoreFunctions.addDoc(
-          firebase.firestoreFunctions.collection(firebase.db, "transactions"), 
-          {
-            userId: userId,
-            type: type,
-            amount: amount,
-            game: game,
-            description: description,
-            timestamp: firebase.firestoreFunctions.serverTimestamp()
-          }
-        );
-      } catch (error) {
-        console.error("Error recording transaction:", error);
-      }
-    }
-
-    // Auth state listener
-    firebase.auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        currentUserId = user.uid;
-        await loadUserData(user.uid);
-      } else {
-        document.getElementById('auth-container').style.display = 'flex';
-        document.getElementById('user-info').style.display = 'none';
-        document.getElementById('admin-link').style.display = 'none';
-      }
-    });
-
-    async function loadUserData(userId) {
-      try {
-        const docRef = firebase.firestoreFunctions.doc(firebase.db, "users", userId);
-        const docSnap = await firebase.firestoreFunctions.getDoc(docRef);
-        
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          document.getElementById('user-name').textContent = userData.name;
-          document.getElementById('user-balance').textContent = userData.balance;
-          balance = userData.balance;
-          
-          // Show verified badge for verified emails
-          if (VERIFIED_EMAILS.includes(userData.email)) {
-            document.getElementById('verified-badge').style.display = 'inline';
-          } else {
-            document.getElementById('verified-badge').style.display = 'none';
-          }
-          
-          document.getElementById('auth-container').style.display = 'none';
-          document.getElementById('user-info').style.display = 'block';
-          
-          if (userData.isAdmin) {
-            document.getElementById('admin-link').style.display = 'flex';
-          } else {
-            document.getElementById('admin-link').style.display = 'none';
-          }
-        }
-      } catch (error) {
-        console.error("Error loading user data:", error);
-      }
-    }
-
-    // Game Logic
-    let icons = ['🐄', '🐔', '🐱'];
-    let cardData = [];
-    let flippedCards = [];
+    // Game variables
+    let balance = 0;
     let selectedBet = null;
     let gameStarted = false;
-
-    const bgMusic = document.getElementById('bgMusic');
-    const flipSound = document.getElementById('flipSound');
-    const explosionSound = document.getElementById('explosionSound');
-    const winSound = document.getElementById('winSound');
-    const loseSound = document.getElementById('loseSound');
-    const hitSound = document.getElementById('hitSound');
-
-    async function deductBetAmount(amount) {
-      try {
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        
-        await recordTransaction(
-          currentUserId,
-          'bet',
-          amount,
-          'scratch',
-          `Bet Rs. ${amount} in Scratch Match`
-        );
-        
-        // Update local balance
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-        
-        return true;
-      } catch (error) {
-        console.error("Error deducting bet:", error);
-        throw error;
+    let currentUser = null;
+    let lastWithdrawRequestTime = 0;
+    
+    // Initialize games when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAuthState();
+      setupGames();
+      
+      // Show welcome popup on first visit
+      if (!localStorage.getItem('welcomeShown')) {
+        document.getElementById('welcomePopup').style.display = 'flex';
+        localStorage.setItem('welcomeShown', 'true');
+      }
+    });
+    
+    // Authentication functions
+    function checkAuthState() {
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          currentUser = user;
+          document.getElementById('authButtons').style.display = 'none';
+          document.getElementById('logoutButton').style.display = 'block';
+          document.getElementById('userDisplay').style.display = 'block';
+          document.getElementById('usernameDisplay').textContent = user.email || 'User';
+          loadUserData();
+        } else {
+          currentUser = null;
+          document.getElementById('authButtons').style.display = 'flex';
+          document.getElementById('logoutButton').style.display = 'none';
+          document.getElementById('userDisplay').style.display = 'none';
+          showSection('home');
+        }
+      });
+    }
+    
+    function showAuthModal(tab) {
+      document.getElementById('authModal').style.display = 'flex';
+      switchAuthTab(tab);
+    }
+    
+    function hideAuthModal() {
+      document.getElementById('authModal').style.display = 'none';
+    }
+    
+    function switchAuthTab(tab) {
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+      
+      if (tab === 'login') {
+        document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
+        document.getElementById('loginForm').classList.add('active');
+      } else if (tab === 'signup') {
+        document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
+        document.getElementById('signupForm').classList.add('active');
       }
     }
-
+    
+    function showForgotPassword() {
+      document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+      document.getElementById('forgotPasswordForm').classList.add('active');
+    }
+    
+    function backToLogin() {
+      switchAuthTab('login');
+    }
+    
+    function loginUser() {
+      const email = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          hideAuthModal();
+        })
+        .catch(error => {
+          alert('Login failed: ' + error.message);
+        });
+    }
+    
+    function signupUser() {
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+      const username = document.getElementById('signupUsername').value;
+      const referralCode = document.getElementById('referralCode').value;
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+      
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Create user document in Firestore
+          return db.collection('users').doc(userCredential.user.uid).set({
+            username: username,
+            email: email,
+            balance: 0,
+            referralCode: generateReferralCode(),
+            referredBy: referralCode || null,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        })
+        .then(() => {
+          hideAuthModal();
+        })
+        .catch(error => {
+          alert('Signup failed: ' + error.message);
+        });
+    }
+    
+    function resetPassword() {
+      const email = document.getElementById('forgotEmail').value;
+      
+      auth.sendPasswordResetEmail(email)
+        .then(() => {
+          alert('Password reset email sent!');
+          backToLogin();
+        })
+        .catch(error => {
+          alert('Error sending reset email: ' + error.message);
+        });
+    }
+    
+    function logoutUser() {
+      auth.signOut().then(() => {
+        showSection('home');
+      });
+    }
+    
+    function generateReferralCode() {
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+    
+    // User data functions
+    function loadUserData() {
+      if (!currentUser) return;
+      
+      db.collection('users').doc(currentUser.uid).onSnapshot(doc => {
+        if (doc.exists) {
+          const userData = doc.data();
+          balance = userData.balance || 0;
+          updateBalanceDisplay();
+          
+          // Update VIP section if visible
+          if (document.getElementById('vipSection').style.display === 'block') {
+            document.getElementById('userReferralCode').textContent = userData.referralCode || 'N/A';
+            document.getElementById('referralCount').textContent = userData.referralCount || 0;
+            document.getElementById('referralEarnings').textContent = 'Rs. ' + (userData.referralEarnings || 0);
+          }
+        }
+      });
+      
+      // Load transaction history
+      loadTransactionHistory();
+    }
+    
+    function refreshBalance() {
+      if (currentUser) {
+        db.collection('users').doc(currentUser.uid).get()
+          .then(doc => {
+            if (doc.exists) {
+              balance = doc.data().balance || 0;
+              updateBalanceDisplay();
+            }
+          });
+      }
+    }
+    
+    function refreshAllData() {
+      refreshBalance();
+      loadTransactionHistory();
+      alert('Data refreshed!');
+    }
+    
+    function updateBalanceDisplay() {
+      document.getElementById('balanceAmount').textContent = Math.floor(balance);
+    }
+    
+    // Transaction functions
+    function submitDeposit() {
+      if (!currentUser) {
+        alert('Please login to deposit');
+        return;
+      }
+      
+      const amount = parseFloat(document.getElementById('depositAmount').value);
+      const method = document.getElementById('depositMethod').value;
+      const transactionId = document.getElementById('transactionId').value;
+      
+      if (isNaN(amount) || amount < 150) {
+        alert('Minimum deposit amount is Rs. 150');
+        return;
+      }
+      
+      if (!transactionId) {
+        alert('Please enter transaction ID');
+        return;
+      }
+      
+      // Add deposit request
+      db.collection('deposit_requests').add({
+        userId: currentUser.uid,
+        amount: amount,
+        method: method,
+        transactionId: transactionId,
+        status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .then(() => {
+        alert('Deposit request submitted successfully! It will be processed within 24 hours.');
+        document.getElementById('depositAmount').value = '';
+        document.getElementById('transactionId').value = '';
+        loadTransactionHistory();
+      })
+      .catch(error => {
+        alert('Error submitting deposit: ' + error.message);
+      });
+    }
+    
+    function submitWithdraw() {
+      if (!currentUser) {
+        alert('Please login to withdraw');
+        return;
+      }
+      
+      const amount = parseFloat(document.getElementById('withdrawAmount').value);
+      const method = document.getElementById('withdrawMethod').value;
+      const accountNumber = document.getElementById('accountNumber').value;
+      const accountName = document.getElementById('accountName').value;
+      
+      if (isNaN(amount) || amount < 300) {
+        alert('Minimum withdrawal amount is Rs. 300');
+        return;
+      }
+      
+      if (amount > balance) {
+        alert('Insufficient balance');
+        return;
+      }
+      
+      if (!accountNumber || !accountName) {
+        alert('Please enter account details');
+        return;
+      }
+      
+      // Check if 4 hours have passed since last request
+      const now = Date.now();
+      if (now - lastWithdrawRequestTime < 4 * 60 * 60 * 1000) {
+        const hoursLeft = Math.ceil((4 * 60 * 60 * 1000 - (now - lastWithdrawRequestTime)) / (60 * 60 * 1000);
+        alert(`You can only submit one withdrawal request every 4 hours. Please wait ${hoursLeft.toFixed(1)} more hours.`);
+        return;
+      }
+      
+      // Deduct amount from balance immediately
+      db.collection('users').doc(currentUser.uid).update({
+        balance: firebase.firestore.FieldValue.increment(-amount)
+      })
+      .then(() => {
+        // Add withdrawal request
+        return db.collection('withdraw_requests').add({
+          userId: currentUser.uid,
+          amount: amount,
+          method: method,
+          accountNumber: accountNumber,
+          accountName: accountName,
+          status: 'pending',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      })
+      .then(() => {
+        lastWithdrawRequestTime = Date.now();
+        alert('Withdrawal request submitted successfully! It will be processed within 24 hours.');
+        document.getElementById('withdrawAmount').value = '';
+        document.getElementById('accountNumber').value = '';
+        document.getElementById('accountName').value = '';
+        loadTransactionHistory();
+      })
+      .catch(error => {
+        alert('Error submitting withdrawal: ' + error.message);
+      });
+    }
+    
+    function loadTransactionHistory() {
+      if (!currentUser) return;
+      
+      // Load deposit history
+      db.collection('deposit_requests')
+        .where('userId', '==', currentUser.uid)
+        .orderBy('createdAt', 'desc')
+        .limit(10)
+        .get()
+        .then(querySnapshot => {
+          const depositHistory = document.getElementById('depositHistory');
+          depositHistory.innerHTML = '<h3>Deposit History</h3>';
+          
+          if (querySnapshot.empty) {
+            depositHistory.innerHTML += '<p>No deposit history found</p>';
+            return;
+          }
+          
+          querySnapshot.forEach(doc => {
+            const data = doc.data();
+            const item = document.createElement('div');
+            item.className = 'transaction-item';
+            
+            let statusClass = 'transaction-pending';
+            if (data.status === 'approved') statusClass = 'transaction-approved';
+            if (data.status === 'rejected') statusClass = 'transaction-rejected';
+            
+            item.innerHTML = `
+              <div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
+              <div>Method: ${data.method}</div>
+              <div>Status: <span class="${statusClass}">${data.status}</span></div>
+              <div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
+            `;
+            
+            depositHistory.appendChild(item);
+          });
+        });
+      
+      // Load withdrawal history
+      db.collection('withdraw_requests')
+        .where('userId', '==', currentUser.uid)
+        .orderBy('createdAt', 'desc')
+        .limit(10)
+        .get()
+        .then(querySnapshot => {
+          const withdrawHistory = document.getElementById('withdrawHistory');
+          withdrawHistory.innerHTML = '<h3>Withdrawal History</h3>';
+          
+          if (querySnapshot.empty) {
+            withdrawHistory.innerHTML += '<p>No withdrawal history found</p>';
+            return;
+          }
+          
+          querySnapshot.forEach(doc => {
+            const data = doc.data();
+            const item = document.createElement('div');
+            item.className = 'transaction-item';
+            
+            let statusClass = 'transaction-pending';
+            if (data.status === 'approved') statusClass = 'transaction-approved';
+            if (data.status === 'rejected') statusClass = 'transaction-rejected';
+            
+            item.innerHTML = `
+              <div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
+              <div>Method: ${data.method}</div>
+              <div>Status: <span class="${statusClass}">${data.status}</span></div>
+              <div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
+            `;
+            
+            withdrawHistory.appendChild(item);
+          });
+        });
+      
+      // Load withdrawal status for "More" section
+      db.collection('withdraw_requests')
+        .where('userId', '==', currentUser.uid)
+        .orderBy('createdAt', 'desc')
+        .limit(5)
+        .get()
+        .then(querySnapshot => {
+          const withdrawStatus = document.getElementById('withdrawStatus');
+          withdrawStatus.innerHTML = '';
+          
+          if (querySnapshot.empty) {
+            withdrawStatus.innerHTML = '<p>No withdrawal requests found</p>';
+            return;
+          }
+          
+          querySnapshot.forEach(doc => {
+            const data = doc.data();
+            const item = document.createElement('div');
+            item.className = 'transaction-item';
+            
+            let statusClass = 'transaction-pending';
+            if (data.status === 'approved') statusClass = 'transaction-approved';
+            if (data.status === 'rejected') statusClass = 'transaction-rejected';
+            
+            item.innerHTML = `
+              <div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
+              <div>Status: <span class="${statusClass}">${data.status}</span></div>
+              <div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
+            `;
+            
+            withdrawStatus.appendChild(item);
+          });
+        });
+      
+      // Load full transaction history
+      const fullHistory = document.getElementById('fullTransactionHistory');
+      fullHistory.innerHTML = '';
+      
+      // Combine deposits and withdrawals for full history
+      Promise.all([
+        db.collection('deposit_requests')
+          .where('userId', '==', currentUser.uid)
+          .orderBy('createdAt', 'desc')
+          .limit(10)
+          .get(),
+        db.collection('withdraw_requests')
+          .where('userId', '==', currentUser.uid)
+          .orderBy('createdAt', 'desc')
+          .limit(10)
+          .get()
+      ])
+      .then(([deposits, withdrawals]) => {
+        const allTransactions = [];
+        
+        deposits.forEach(doc => {
+          const data = doc.data();
+          allTransactions.push({
+            type: 'deposit',
+            amount: data.amount,
+            status: data.status,
+            date: data.createdAt,
+            method: data.method
+          });
+        });
+        
+        withdrawals.forEach(doc => {
+          const data = doc.data();
+          allTransactions.push({
+            type: 'withdrawal',
+            amount: data.amount,
+            status: data.status,
+            date: data.createdAt,
+            method: data.method
+          });
+        });
+        
+        // Sort by date
+        allTransactions.sort((a, b) => (b.date?.seconds || 0) - (a.date?.seconds || 0));
+        
+        if (allTransactions.length === 0) {
+          fullHistory.innerHTML = '<p>No transaction history found</p>';
+          return;
+        }
+        
+        allTransactions.forEach(trans => {
+          const item = document.createElement('div');
+          item.className = 'transaction-item';
+          
+          let statusClass = 'transaction-pending';
+          if (trans.status === 'approved') statusClass = 'transaction-approved';
+          if (trans.status === 'rejected') statusClass = 'transaction-rejected';
+          
+          item.innerHTML = `
+            <div>Type: ${trans.type === 'deposit' ? 'Deposit' : 'Withdrawal'}</div>
+            <div>Amount: <span class="transaction-amount">Rs. ${trans.amount}</span></div>
+            <div>Method: ${trans.method}</div>
+            <div>Status: <span class="${statusClass}">${trans.status}</span></div>
+            <div>Date: ${trans.date?.toDate().toLocaleString() || 'N/A'}</div>
+          `;
+          
+          fullHistory.appendChild(item);
+        });
+      });
+    }
+    
+    // Navigation functions
+    function showSection(section) {
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+      
+      switch(section) {
+        case 'home':
+          document.getElementById('homeSection').style.display = 'block';
+          break;
+        case 'deposit':
+          if (!currentUser) {
+            showAuthModal('login');
+            return;
+          }
+          document.getElementById('depositSection').style.display = 'block';
+          break;
+        case 'withdraw':
+          if (!currentUser) {
+            showAuthModal('login');
+            return;
+          }
+          document.getElementById('withdrawSection').style.display = 'block';
+          break;
+        case 'vip':
+          if (!currentUser) {
+            showAuthModal('login');
+            return;
+          }
+          document.getElementById('vipSection').style.display = 'block';
+          // Load VIP data if not already loaded
+          if (document.getElementById('userReferralCode').textContent === 'Login to see your code') {
+            loadUserData();
+          }
+          break;
+        case 'more':
+          if (!currentUser) {
+            showAuthModal('login');
+            return;
+          }
+          document.getElementById('moreSection').style.display = 'block';
+          loadTransactionHistory();
+          break;
+      }
+    }
+    
+    // Game setup
+    function setupGames() {
+      setupScratchGame();
+      setupFruitGame();
+      setupTicTacToeGame();
+      setupAimingGame();
+    }
+    
+    // Scratch Game
+    function setupScratchGame() {
+      icons = ['🐄', '🐔', '🐱', '🐶', '🐭']; // More icons for harder game
+      cardData = [];
+      flippedCards = [];
+    }
+    
     function startCardGame() {
-      document.getElementById('homeSection').style.display = 'none';
       document.getElementById('scratchGame').style.display = 'block';
       document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('arrowShootingGame').style.display = 'none';
+      document.getElementById('tictactoeGame').style.display = 'none';
+      document.getElementById('aimingGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupCards();
     }
     
-    function startFindAceGame() {
-      document.getElementById('homeSection').style.display = 'none';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'block';
-      document.getElementById('arrowShootingGame').style.display = 'none';
-      bgMusic.play().catch(() => {});
-      setupAceCards();
-    }
-    
-    function startArrowShootingGame() {
-      document.getElementById('homeSection').style.display = 'none';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'none';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('arrowShootingGame').style.display = 'block';
-      bgMusic.play().catch(() => {});
-      setupArrowShootingGame();
-    }
-
     function setupCards() {
       flippedCards = [];
       cardData = [];
@@ -2155,11 +1307,17 @@
       grid.classList.remove('shake', 'glow');
       grid.innerHTML = '';
       document.getElementById("particles-js").style.display = "none";
+      document.getElementById("result").innerText = '';
 
       let allIcons = [];
       icons.forEach(icon => {
         for (let i = 0; i < 3; i++) allIcons.push(icon);
       });
+
+      // Add more cards for harder game
+      for (let i = 0; i < 5; i++) {
+        allIcons.push('❌'); // Add some wrong icons
+      }
 
       allIcons.forEach((icon) => {
         const card = document.createElement('div');
@@ -2168,6 +1326,14 @@
         grid.appendChild(card);
         cardData.push({ element: card, icon: icon });
       });
+    }
+
+    function selectBet(amount) {
+      if (gameStarted) return;
+      selectedBet = amount;
+      document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      revealAndShuffleCards();
     }
 
     function revealAndShuffleCards() {
@@ -2180,6 +1346,7 @@
       });
 
       setTimeout(() => {
+        // Shuffle
         cardData.sort(() => Math.random() - 0.5);
         grid.innerHTML = '';
         cardData.forEach(data => {
@@ -2188,7 +1355,7 @@
           data.element.onclick = () => flipCard(data.element);
           grid.appendChild(data.element);
         });
-      }, 3000);
+      }, 2000); // Faster shuffle for harder game
     }
 
     function flipCard(card) {
@@ -2210,67 +1377,40 @@
       }
     }
 
-    async function checkWin() {
+    function checkWin() {
       const iconsPicked = flippedCards.map(c => c.dataset.icon);
       const counts = {};
       iconsPicked.forEach(icon => counts[icon] = (counts[icon] || 0) + 1);
-      const won = Object.values(counts).some(count => count >= 3);
+      
+      // Harder to win - need 4 matching icons
+      const won = Object.values(counts).some(count => count >= 4);
       const result = document.getElementById('result');
       const grid = document.getElementById('cardGrid');
 
       if (won) {
         const winAmount = selectedBet * 2;
         balance += winAmount;
+        updateUserBalance(balance);
         result.innerText = `🎉 You won! Rs. ${winAmount} added.`;
         grid.classList.add('glow');
         document.getElementById("particles-js").style.display = "block";
-        winSound.play().catch(() => {});
+        document.getElementById('winSound').play().catch(() => {});
         setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
-        
-        try {
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: balance }
-          );
-          await recordTransaction(
-            currentUserId,
-            'win',
-            winAmount,
-            'scratch',
-            `Won Rs. ${winAmount} in Scratch Match`
-          );
-        } catch (error) {
-          console.error("Error recording win:", error);
-        }
       } else {
-        const deduction = selectedBet * 0.7;
+        // 15% loss on draw as requested
+        const deduction = selectedBet * 0.15;
         if (balance - deduction < 0) {
           result.innerText = `💸 Insufficient balance! Please deposit more to continue.`;
         } else {
           balance -= deduction;
+          updateUserBalance(balance);
           result.innerText = `❌ You lost! Rs. ${deduction} deducted.`;
-          loseSound.play().catch(() => {});
-          
-          try {
-            await firebase.firestoreFunctions.updateDoc(
-              firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-              { balance: balance }
-            );
-            await recordTransaction(
-              currentUserId,
-              'loss',
-              selectedBet,
-              'scratch',
-              `Lost Rs. ${deduction} in Scratch Match`
-            );
-          } catch (error) {
-            console.error("Error recording loss:", error);
-          }
         }
         grid.classList.add('shake');
+        document.getElementById('loseSound').play().catch(() => {});
       }
 
-      document.getElementById('user-balance').textContent = balance;
+      updateBalanceDisplay();
 
       setTimeout(() => {
         result.innerText = '';
@@ -2281,13 +1421,33 @@
         }
       }, 2500);
     }
+    
+    function updateUserBalance(newBalance) {
+      if (!currentUser) return;
+      
+      db.collection('users').doc(currentUser.uid).update({
+        balance: newBalance
+      })
+      .catch(error => {
+        console.error('Error updating balance:', error);
+      });
+    }
 
-    // Fruit Game Logic
-    const colors = ["red", "green", "yellow"];
+    // Fruit Game
+    const colors = ["red", "green", "yellow", "blue", "purple"]; // More colors for harder game
     const fruits = {
       red: "🍎",
       green: "🍏",
-      yellow: "🍋"
+      yellow: "🍋",
+      blue: "🍇",
+      purple: "🍆"
+    };
+    const durations = {
+      20: 8000,   // 20 روپے = 8 سیکنڈ (harder)
+      50: 15000,  // 50 روپے = 15 سیکنڈ (harder)
+      100: 30000, // 100 روپے = 30 سیکنڈ (harder)
+      150: 45000, // 150 روپے = 45 سیکنڈ (harder)
+      200: 60000  // 200 روپے = 60 سیکنڈ (harder)
     };
 
     let targetColor = "";
@@ -2295,38 +1455,42 @@
     let fruitGameInterval, fruitGameTimer, fruitCountdownInterval;
     let fruitGameStarted = false;
     let fruitSelectedBet = 0;
-    let fruitsShot = 0;
-    let currentSpeed = 10; // Initial speed (pixels per frame)
-    let speedMultiplier = 1; // Speed multiplier that increases over time
-    let targetFruits = 0;
+
+    function setupFruitGame() {
+      setNewFruitTarget();
+    }
+    
+    function startFruitGame() {
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'block';
+      document.getElementById('tictactoeGame').style.display = 'none';
+      document.getElementById('aimingGame').style.display = 'none';
+      setNewFruitTarget();
+    }
 
     function setNewFruitTarget() {
-      targetColor = colors[Math.floor(Math.random() * colors.length)];
+      // More rare target for harder game
+      const rareTarget = Math.random() < 0.3; // 30% chance for rare target
+      targetColor = rareTarget ? colors[Math.floor(Math.random() * 3)] : colors[Math.floor(Math.random() * colors.length)];
       document.getElementById("fruitTargetDisplay").innerHTML = `Target: Shoot the <b style="color:${targetColor};">${targetColor.toUpperCase()}</b> Fruit ${fruits[targetColor]}`;
     }
 
     function spawnFruit() {
       const shootArea = document.getElementById("shootArea");
-      if (shootArea.childElementCount >= 7) return;
+      if (shootArea.childElementCount >= 10) return; // More fruits on screen
 
       const fruit = document.createElement("div");
       fruit.classList.add("fruit");
 
-      // 30% chance to spawn a bomb (but only if it's not the target color)
-      const isBomb = Math.random() < 0.3;
-      let color;
-      
-      if (isBomb) {
-        // Bomb should look like a target but with different behavior
-        color = targetColor;
-        fruit.classList.add("bomb");
-      } else {
-        const isTarget = Math.random() < 0.58;
-        color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
-      }
-
+      // Harder to hit target (only 40% chance)
+      const isTarget = Math.random() < 0.40;
+      const color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
       fruit.style.color = color;
       fruit.innerText = fruits[color];
+
+      // Random size for harder game
+      const size = Math.random() * 30 + 20;
+      fruit.style.fontSize = `${size}px`;
 
       const x = Math.random() * (shootArea.clientWidth - 40);
       fruit.style.left = `${x}px`;
@@ -2336,106 +1500,48 @@
         if (!fruitGameStarted || fruit.clicked) return;
         fruit.clicked = true;
 
-        if (fruit.classList.contains("bomb")) {
-          // Handle bomb click
-          explosionSound.currentTime = 0;
-          explosionSound.play().catch(() => {});
-          fruitGameOver(false, "💣 You clicked a bomb! Game over.");
-          return;
-        }
-
         if (color === targetColor) {
           fruitScore++;
-          fruitsShot++;
         } else {
-          fruitScore = Math.max(0, fruitScore - 1);
+          fruitScore = Math.max(0, fruitScore - 2); // More penalty for wrong hits
         }
-        document.getElementById("fruitScoreDisplay").innerText = `Score: ${fruitScore} (${fruitsShot}/${targetFruits})`;
+        document.getElementById("fruitScoreDisplay").innerText = `Score: ${fruitScore}`;
         fruit.remove();
-
-        // Check if player has shot enough target fruits
-        if (fruitsShot >= targetFruits) {
-          fruitGameOver(true, `🎉 You won! Shot ${fruitsShot} target fruits.`);
-        }
       });
 
       shootArea.appendChild(fruit);
 
+      // Faster falling for harder game
       let top = -30;
       const fallSpeed = setInterval(() => {
-        top += currentSpeed * speedMultiplier;
+        top += 15;
         fruit.style.top = `${top}px`;
         if (top > shootArea.clientHeight) {
           clearInterval(fallSpeed);
           fruit.remove();
         }
-      }, 60);
+      }, 50);
     }
 
-    function startFruitGame() {
-      document.getElementById('homeSection').style.display = 'none';
-      document.getElementById('scratchGame').style.display = 'none';
-      document.getElementById('fruitGame').style.display = 'block';
-      document.getElementById('findAceGame').style.display = 'none';
-      document.getElementById('arrowShootingGame').style.display = 'none';
-      setNewFruitTarget();
-    }
-
-    async function startFruitRound(element, amount) {
-      if (fruitGameStarted) {
-        alert("Game already in progress!");
-        return;
-      }
-      
-      if (!currentUserId) {
-        alert("Please login to play");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      if (balance < amount) {
-        alert("Insufficient balance! Please deposit more to play.");
+    function startFruitRound(amount) {
+      if (fruitGameStarted || balance < amount) {
+        if (balance < amount) {
+          alert("Insufficient balance! Please deposit more to play.");
+        }
         return;
       }
 
-      // Highlight selected bet
-      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      element.classList.add('active');
-
-      try {
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        await recordTransaction(
-          currentUserId,
-          'bet',
-          amount,
-          'fruit',
-          `Bet Rs. ${amount} in Fruit Shooting`
-        );
-        
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-      } catch (error) {
-        console.error("Error recording bet:", error);
-        return;
-      }
+      // Deduct the bet amount at start
+      balance -= amount;
+      updateUserBalance(balance);
+      updateBalanceDisplay();
 
       document.getElementById("shootArea").innerHTML = "";
       clearInterval(fruitGameInterval);
       clearInterval(fruitCountdownInterval);
       clearTimeout(fruitGameTimer);
-      
       fruitScore = 0;
-      fruitsShot = 0;
-      currentSpeed = 10;
-      speedMultiplier = 1;
-      targetFruits = targetFruitsCount[amount] || amount + 5;
-      
-      document.getElementById("fruitScoreDisplay").innerText = `Score: 0 (0/${targetFruits})`;
+      document.getElementById("fruitScoreDisplay").innerText = "Score: 0";
       setNewFruitTarget();
 
       fruitSelectedBet = amount;
@@ -2446,1057 +1552,461 @@
         btn.style.opacity = "0.4";
       });
 
-      const duration = gameDurations[amount] || 10000;
-      let timeLeft = duration / 1000;
+      let timeLeft = durations[amount] / 1000;
       document.getElementById("fruitCountdown").innerText = `Time: ${timeLeft}s`;
 
       fruitCountdownInterval = setInterval(() => {
         timeLeft--;
         document.getElementById("fruitCountdown").innerText = `Time: ${timeLeft}s`;
-        
-        // Calculate time progress percentage
-        const progress = 1 - (timeLeft / (duration / 1000));
-        
-        // Increase speed gradually after 17% of time has passed
-        if (progress > 0.17) {
-          // Increase speed multiplier every 12% of time passed (max 3.7x)
-          const speedSteps = Math.min(Math.floor((progress - 0.17) / 0.12), 5);
-          speedMultiplier = 1 + (speedSteps * 0.54); // 0.54 per step to reach ~3.7x at last step
-        }
-        
-        if (timeLeft <= 0) {
-          clearInterval(fruitCountdownInterval);
-        }
+        if (timeLeft <= 0) clearInterval(fruitCountdownInterval);
       }, 1000);
 
-      fruitGameInterval = setInterval(spawnFruit, 300);
+      // Faster spawning for harder game
+      fruitGameInterval = setInterval(spawnFruit, 200);
 
       fruitGameTimer = setTimeout(() => {
-        if (fruitGameStarted) {
-          fruitGameOver(false, `❌ Time's up! You shot ${fruitsShot} target fruits (needed ${targetFruits}).`);
-        }
-      }, duration);
-    }
+        clearInterval(fruitGameInterval);
+        clearInterval(fruitCountdownInterval);
+        fruitGameStarted = false;
 
-    async function fruitGameOver(won, message) {
-      clearInterval(fruitGameInterval);
-      clearInterval(fruitCountdownInterval);
-      fruitGameStarted = false;
-
-      let winAmount = 0;
-      if (won) {
-        winAmount = fruitSelectedBet * 2;
-        
-        try {
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: firebase.firestoreFunctions.increment(winAmount) }
-          );
-          await recordTransaction(
-            currentUserId,
-            'win',
-            winAmount,
-            'fruit',
-            `Won Rs. ${winAmount} in Fruit Shooting`
-          );
-          
+        let winAmount = 0;
+        // Harder to win - need 1.5x the bet amount in score
+        if (fruitScore >= Math.floor(fruitSelectedBet * 1.5)) {
+          winAmount = fruitSelectedBet * 2; // Double the bet amount
           balance += winAmount;
-          document.getElementById('user-balance').textContent = balance;
-          
-          alert(`${message}\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
-          winSound.play().catch(() => {});
-        } catch (error) {
-          console.error("Error recording win:", error);
-        }
-      } else {
-        alert(`${message}\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`);
-        loseSound.play().catch(() => {});
-      }
-
-      document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
-        btn.style.pointerEvents = "auto";
-        btn.style.opacity = "1";
-        btn.classList.remove('active');
-      });
-
-      document.getElementById("shootArea").innerHTML = "";
-      document.getElementById("fruitScoreDisplay").innerText = "";
-      document.getElementById("fruitCountdown").innerText = "Time: 0s";
-      setNewFruitTarget();
-    }
-
-    // Find Ace Game Logic
-    let aceCards = [];
-    let aceSelectedBet = 0;
-    let aceGameStarted = false;
-    let aceTimerInterval;
-    let aceTimeLeft = 15;
-    let acePosition = 0;
-
-    function setupAceCards() {
-      aceCards = [];
-      const container = document.getElementById('aceCards');
-      container.innerHTML = '';
-      document.getElementById('aceResult').innerText = '';
-      
-      // Create 3 cards
-      for (let i = 0; i < 3; i++) {
-        const card = document.createElement('div');
-        card.className = 'ace-card';
-        card.dataset.index = i;
-        card.innerHTML = '🂠';
-        card.onclick = () => selectAceCard(card);
-        container.appendChild(card);
-        aceCards.push(card);
-      }
-    }
-
-    async function startFindAceRound(element, amount) {
-      if (aceGameStarted) {
-        alert("Game already in progress!");
-        return;
-      }
-      
-      if (!currentUserId) {
-        alert("Please login to play");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
-      
-      if (balance < amount) {
-        alert("Insufficient balance! Please deposit more to play.");
-        return;
-      }
-
-      // Highlight selected bet
-      document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      element.classList.add('active');
-
-      try {
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        await recordTransaction(
-          currentUserId,
-          'bet',
-          amount,
-          'find_ace',
-          `Bet Rs. ${amount} in Find Ace`
-        );
-        
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-      } catch (error) {
-        console.error("Error recording bet:", error);
-        return;
-      }
-
-      setupAceCards();
-      aceSelectedBet = amount;
-      aceGameStarted = true;
-      aceTimeLeft = 15;
-      document.getElementById('aceTimer').textContent = `Time left: 15s`;
-
-      // Randomly select ace position
-      acePosition = Math.floor(Math.random() * 3);
-      
-      // Show cards for 3 seconds
-      aceCards.forEach((card, index) => {
-        if (index === acePosition) {
-          card.innerHTML = '🂡'; // Ace of spades
-          card.classList.add('ace');
+          updateUserBalance(balance);
+          alert(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+          document.getElementById('winSound').play().catch(() => {});
         } else {
-          card.innerHTML = '🂢'; // Two of spades
+          alert(`❌ Game Over! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`);
+          document.getElementById('loseSound').play().catch(() => {});
         }
-        card.classList.add('flipped');
-      });
 
-      // Start countdown
-      aceTimerInterval = setInterval(() => {
-        aceTimeLeft--;
-        document.getElementById('aceTimer').textContent = `Time left: ${aceTimeLeft}s`;
-        
-        if (aceTimeLeft <= 0) {
-          clearInterval(aceTimerInterval);
-          // Hide cards after 3 seconds
-          setTimeout(() => {
-            aceCards.forEach(card => {
-              card.innerHTML = '🂠';
-              card.classList.remove('flipped', 'ace');
-            });
-            
-            // Shuffle cards 60 times
-            let shuffleCount = 0;
-            const shuffleInterval = setInterval(() => {
-              // Randomly swap two cards
-              const i = Math.floor(Math.random() * 3);
-              const j = Math.floor(Math.random() * 3);
-              if (i !== j) {
-                // Update ace position if it was moved
-                if (i === acePosition) acePosition = j;
-                else if (j === acePosition) acePosition = i;
-                
-                // Swap cards in DOM
-                const temp = aceCards[i].style.order;
-                aceCards[i].style.order = aceCards[j].style.order;
-                aceCards[j].style.order = temp;
-                
-                shuffleCount++;
-                if (shuffleCount >= 60) {
-                  clearInterval(shuffleInterval);
-                }
-              }
-            }, 50);
-          }, 3000);
-        }
-      }, 1000);
-    }
+        updateBalanceDisplay();
 
-    async function selectAceCard(card) {
-      if (!aceGameStarted || card.classList.contains('flipped')) return;
-      
-      clearInterval(aceTimerInterval);
-      aceGameStarted = false;
-      
-      const selectedIndex = parseInt(card.dataset.index);
-      const resultElement = document.getElementById('aceResult');
-      
-      if (selectedIndex === acePosition) {
-        // Player found the ace
-        const winAmount = aceSelectedBet * 2;
-        balance += winAmount;
-        resultElement.innerText = `🎉 You found the Ace! You win Rs. ${winAmount}`;
-        card.classList.add('ace', 'selected');
-        winSound.play().catch(() => {});
-        
-        try {
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: balance }
-          );
-          await recordTransaction(
-            currentUserId,
-            'win',
-            winAmount,
-            'find_ace',
-            `Won Rs. ${winAmount} in Find Ace`
-          );
-        } catch (error) {
-          console.error("Error recording win:", error);
-        }
-      } else {
-        // Player didn't find the ace
-        resultElement.innerText = `❌ Wrong card! You lost Rs. ${aceSelectedBet}`;
-        card.classList.add('selected');
-        aceCards[acePosition].classList.add('ace');
-        loseSound.play().catch(() => {});
-        
-        try {
-          await recordTransaction(
-            currentUserId,
-            'loss',
-            aceSelectedBet,
-            'find_ace',
-            `Lost Rs. ${aceSelectedBet} in Find Ace`
-          );
-        } catch (error) {
-          console.error("Error recording loss:", error);
-        }
-      }
-      
-      document.getElementById('user-balance').textContent = balance;
-      
-      setTimeout(() => {
-        document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => {
+        document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
           btn.style.pointerEvents = "auto";
           btn.style.opacity = "1";
-          btn.classList.remove('active');
         });
-      }, 2000);
+
+        document.getElementById("shootArea").innerHTML = "";
+        document.getElementById("fruitScoreDisplay").innerText = "";
+        document.getElementById("fruitCountdown").innerText = "Time: 0s";
+        setNewFruitTarget();
+
+      }, durations[amount]);
     }
-
-    // Arrow Shooting Game Logic
-    let arrowSelectedBet = 0;
-    let arrowGameStarted = false;
-    let arrowTimerInterval;
-    let arrowTimeLeft = 30;
-    let hitsCount = 0;
-    let aimX = 150;
-    let aimY = 150;
-    let aimSpeed = 5;
-    let aimDirectionX = 1;
-    let aimDirectionY = 1;
-    let arrowGameInterval;
-
-    function setupArrowShootingGame() {
-      document.getElementById('targetBoard').innerHTML = `
-        <div class="target-center"></div>
-        <div class="aim" id="aim"></div>
-      `;
-      document.getElementById('arrowShootingResult').innerText = '';
-      document.getElementById('hitsCount').textContent = '0';
-      document.getElementById('arrowTimeLeft').textContent = '30';
-      
-      const aim = document.getElementById('aim');
-      aim.style.left = '150px';
-      aim.style.top = '150px';
-      
-      // Set up the target board click event
-      document.getElementById('targetBoard').onclick = shootArrow;
+    
+    // Tic Tac Toe Game
+    let ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
+    let ticTacToeGameActive = false;
+    let ticTacToeBetAmount = 0;
+    let ticTacToeCountdown = 30;
+    let ticTacToeTimer;
+    
+    function setupTicTacToeGame() {
+      ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = 'X';
     }
-
-    function moveAim() {
-      const aim = document.getElementById('aim');
-      const board = document.getElementById('targetBoard');
-      const boardRect = board.getBoundingClientRect();
-      const boardWidth = boardRect.width;
-      const boardHeight = boardRect.height;
-      
-      // Update aim position
-      aimX += aimSpeed * aimDirectionX;
-      aimY += aimSpeed * aimDirectionY;
-      
-      // Reverse direction if hitting edges
-      if (aimX <= 0 || aimX >= boardWidth) {
-        aimDirectionX *= -1;
-      }
-      if (aimY <= 0 || aimY >= boardHeight) {
-        aimDirectionY *= -1;
-      }
-      
-      // Apply new position
-      aim.style.left = `${aimX}px`;
-      aim.style.top = `${aimY}px`;
+    
+    function startTicTacToeGame() {
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('tictactoeGame').style.display = 'block';
+      document.getElementById('aimingGame').style.display = 'none';
+      setupTicTacToeGame();
+      renderTicTacToeBoard();
     }
-
-    async function shootArrow(e) {
-      if (!arrowGameStarted) return;
-      
-      const board = document.getElementById('targetBoard');
-      const boardRect = board.getBoundingClientRect();
-      const centerX = boardRect.width / 2;
-      const centerY = boardRect.height / 2;
-      
-      // Calculate distance from center
-      const clickX = e.clientX - boardRect.left;
-      const clickY = e.clientY - boardRect.top;
-      const distance = Math.sqrt(Math.pow(clickX - centerX, 2) + Math.pow(clickY - centerY, 2));
-      
-      // Create arrow element
-      const arrow = document.createElement('div');
-      arrow.className = 'arrow';
-      arrow.style.left = `${clickX - 10}px`;
-      arrow.style.top = `${clickY - 10}px`;
-      board.appendChild(arrow);
-      
-      // Check if hit the center (within 15px radius)
-      if (distance <= 15) {
-        hitsCount++;
-        document.getElementById('hitsCount').textContent = hitsCount;
-        arrow.classList.add('arrow-hit');
-        hitSound.currentTime = 0;
-        hitSound.play().catch(() => {});
-        
-        // Check if player has hit the center 5 times
-        if (hitsCount >= 5) {
-          arrowGameOver(true, `🎉 You hit the center 5 times! You win Rs. ${arrowSelectedBet * 2}`);
-        }
-      }
-      
-      // Remove arrow after animation
-      setTimeout(() => {
-        arrow.remove();
-      }, 1000);
-    }
-
-    async function startArrowShootingRound(element, amount) {
-      if (arrowGameStarted) {
-        alert("Game already in progress!");
-        return;
-      }
-      
-      if (!currentUserId) {
-        alert("Please login to play");
-        document.getElementById('auth-container').style.display = 'flex';
-        return;
-      }
+    
+    function selectTicTacToeBet(amount) {
+      if (ticTacToeGameActive) return;
       
       if (balance < amount) {
         alert("Insufficient balance! Please deposit more to play.");
         return;
       }
-
-      // Highlight selected bet
-      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      element.classList.add('active');
-
-      try {
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-          { balance: firebase.firestoreFunctions.increment(-amount) }
-        );
-        await recordTransaction(
-          currentUserId,
-          'bet',
-          amount,
-          'arrow_shooting',
-          `Bet Rs. ${amount} in Arrow Shooting`
-        );
+      
+      ticTacToeBetAmount = amount;
+      document.querySelectorAll('#tictactoeGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Start the game
+      startTicTacToeRound();
+    }
+    
+    function startTicTacToeRound() {
+      ticTacToeGameActive = true;
+      currentPlayer = 'X';
+      ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+      ticTacToeCountdown = 30;
+      
+      // Deduct bet amount
+      balance -= ticTacToeBetAmount;
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      // Start timer
+      document.getElementById('tictactoeCountdown').textContent = `Time: ${ticTacToeCountdown}s`;
+      ticTacToeTimer = setInterval(() => {
+        ticTacToeCountdown--;
+        document.getElementById('tictactoeCountdown').textContent = `Time: ${ticTacToeCountdown}s`;
         
-        balance -= amount;
-        document.getElementById('user-balance').textContent = balance;
-      } catch (error) {
-        console.error("Error recording bet:", error);
+        if (ticTacToeCountdown <= 0) {
+          clearInterval(ticTacToeTimer);
+          endTicTacToeGame(false, "Time's up! Game ended in a draw.");
+        }
+      }, 1000);
+      
+      renderTicTacToeBoard();
+      document.getElementById('tictactoeResult').textContent = "Your turn (X)";
+    }
+    
+    function renderTicTacToeBoard() {
+      const boardElement = document.getElementById('ticTacToeBoard');
+      boardElement.innerHTML = '';
+      
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'tic-tac-toe-cell';
+        cell.textContent = ticTacToeBoard[i];
+        cell.onclick = () => makeTicTacToeMove(i);
+        boardElement.appendChild(cell);
+      }
+    }
+    
+    function makeTicTacToeMove(index) {
+      if (!ticTacToeGameActive || ticTacToeBoard[index] !== '' || currentPlayer !== 'X') return;
+      
+      // Player move
+      ticTacToeBoard[index] = 'X';
+      renderTicTacToeBoard();
+      
+      // Check if player won
+      if (checkTicTacToeWin('X')) {
+        endTicTacToeGame(true, "You won! Rs. " + (ticTacToeBetAmount * 2) + " added to your balance.");
         return;
       }
-
-      setupArrowShootingGame();
-      arrowSelectedBet = amount;
-      arrowGameStarted = true;
-      hitsCount = 0;
-      arrowTimeLeft = 30;
-      document.getElementById('hitsCount').textContent = '0';
-      document.getElementById('arrowTimeLeft').textContent = '30';
       
-      // Set random initial position and direction for aim
-      aimX = Math.random() * 250 + 25;
-      aimY = Math.random() * 250 + 25;
-      aimDirectionX = Math.random() > 0.5 ? 1 : -1;
-      aimDirectionY = Math.random() > 0.5 ? 1 : -1;
+      // Check for draw
+      if (!ticTacToeBoard.includes('')) {
+        endTicTacToeGame(false, "Game ended in a draw. You lost 15% of your bet.");
+        return;
+      }
       
-      // Set difficulty (hard)
-      aimSpeed = 8 + Math.random() * 4; // Random speed between 8-12
+      document.getElementById('tictactoeResult').textContent = "Computer thinking...";
       
-      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(btn => {
+      // Computer move (AI with difficulty)
+      setTimeout(() => {
+        // Find winning move if exists
+        let move = findWinningMove('O');
+        if (move === -1) {
+          // Block player's winning move
+          move = findWinningMove('X');
+          if (move === -1) {
+            // Make random move (but smarter than completely random)
+            const emptyCells = [];
+            for (let i = 0; i < 9; i++) {
+              if (ticTacToeBoard[i] === '') emptyCells.push(i);
+            }
+            
+            // Prefer center and corners
+            const smartMoves = [];
+            const corners = [0, 2, 6, 8];
+            for (const cell of emptyCells) {
+              if (cell === 4) { // Center
+                move = cell;
+                break;
+              } else if (corners.includes(cell)) {
+                smartMoves.push(cell);
+              }
+            }
+            
+            if (move === undefined && smartMoves.length > 0) {
+              move = smartMoves[Math.floor(Math.random() * smartMoves.length)];
+            } else if (move === undefined) {
+              move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            }
+          }
+        }
+        
+        ticTacToeBoard[move] = 'O';
+        renderTicTacToeBoard();
+        
+        // Check if computer won
+        if (checkTicTacToeWin('O')) {
+          endTicTacToeGame(false, "Computer won! You lost your bet.");
+          return;
+        }
+        
+        // Check for draw
+        if (!ticTacToeBoard.includes('')) {
+          endTicTacToeGame(false, "Game ended in a draw. You lost 15% of your bet.");
+          return;
+        }
+        
+        document.getElementById('tictactoeResult').textContent = "Your turn (X)";
+      }, 1000);
+    }
+    
+    function findWinningMove(player) {
+      const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6]             // diagonals
+      ];
+      
+      for (const pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (ticTacToeBoard[a] === player && ticTacToeBoard[b] === player && ticTacToeBoard[c] === '') return c;
+        if (ticTacToeBoard[a] === player && ticTacToeBoard[c] === player && ticTacToeBoard[b] === '') return b;
+        if (ticTacToeBoard[b] === player && ticTacToeBoard[c] === player && ticTacToeBoard[a] === '') return a;
+      }
+      
+      return -1;
+    }
+    
+    function checkTicTacToeWin(player) {
+      const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6]             // diagonals
+      ];
+      
+      return winPatterns.some(pattern => {
+        return pattern.every(index => ticTacToeBoard[index] === player);
+      });
+    }
+    
+    function endTicTacToeGame(playerWon, message) {
+      clearInterval(ticTacToeTimer);
+      ticTacToeGameActive = false;
+      
+      if (playerWon) {
+        const winAmount = ticTacToeBetAmount * 2;
+        balance += winAmount;
+        document.getElementById('winSound').play().catch(() => {});
+      } else {
+        // 15% loss on draw as requested
+        const deduction = ticTacToeBetAmount * 0.15;
+        balance -= deduction;
+        document.getElementById('loseSound').play().catch(() => {});
+      }
+      
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      document.getElementById('tictactoeResult').textContent = message;
+      document.querySelectorAll('#tictactoeGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show particles if won
+      if (playerWon) {
+        document.getElementById("particles-js").style.display = "block";
+        setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+      }
+    }
+    
+    // Aiming Game
+    let aimingGameActive = false;
+    let aimingScore = 0;
+    let aimingRoundTime = 0;
+    let aimingTimer;
+    let aimingCountdownInterval;
+    let aimingBetAmount = 0;
+    let aimingCircle;
+    let circleMoveInterval;
+    let circleDirection = { x: 1, y: 1 };
+    let circleSpeed = 5;
+    
+    function setupAimingGame() {
+      // Nothing to setup initially
+    }
+    
+    function startAimingGame() {
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('tictactoeGame').style.display = 'none';
+      document.getElementById('aimingGame').style.display = 'block';
+    }
+    
+    function startAimingRound(amount) {
+      if (aimingGameActive || balance < amount) {
+        if (balance < amount) {
+          alert("Insufficient balance! Please deposit more to play.");
+        }
+        return;
+      }
+      
+      aimingBetAmount = amount;
+      aimingGameActive = true;
+      aimingScore = 0;
+      
+      // Set round time based on bet amount
+      aimingRoundTime = 15000; // 15 seconds for all bets (harder game)
+      
+      // Deduct bet amount
+      balance -= amount;
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      document.getElementById('aimingScore').textContent = "Score: 0/5";
+      document.getElementById('aimingArea').innerHTML = '';
+      
+      // Start countdown
+      let timeLeft = aimingRoundTime / 1000;
+      document.getElementById('aimingCountdown').textContent = `Time: ${timeLeft}s`;
+      
+      aimingCountdownInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('aimingCountdown').textContent = `Time: ${timeLeft}s`;
+      }, 1000);
+      
+      // Create moving circle
+      createAimingCircle();
+      
+      // End game after time
+      aimingTimer = setTimeout(() => {
+        endAimingRound();
+      }, aimingRoundTime);
+      
+      document.querySelectorAll('#aimingGame .bet-amounts .gold-box').forEach(btn => {
         btn.style.pointerEvents = "none";
         btn.style.opacity = "0.4";
       });
-
-      // Start timer
-      arrowTimerInterval = setInterval(() => {
-        arrowTimeLeft--;
-        document.getElementById('arrowTimeLeft').textContent = arrowTimeLeft;
-        
-        if (arrowTimeLeft <= 0) {
-          clearInterval(arrowTimerInterval);
-          arrowGameOver(false, `❌ Time's up! You hit the center ${hitsCount} times (needed 5).`);
-        }
-      }, 1000);
-
-      // Start aim movement
-      arrowGameInterval = setInterval(moveAim, 50);
     }
-
-    async function arrowGameOver(won, message) {
-      clearInterval(arrowTimerInterval);
-      clearInterval(arrowGameInterval);
-      arrowGameStarted = false;
-
-      let winAmount = 0;
-      if (won) {
-        winAmount = arrowSelectedBet * 2;
-        
-        try {
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId),
-            { balance: firebase.firestoreFunctions.increment(winAmount) }
-          );
-          await recordTransaction(
-            currentUserId,
-            'win',
-            winAmount,
-            'arrow_shooting',
-            `Won Rs. ${winAmount} in Arrow Shooting`
-          );
-          
-          balance += winAmount;
-          document.getElementById('user-balance').textContent = balance;
-          
-          alert(`${message}\nNew Balance: Rs. ${balance}`);
-          winSound.play().catch(() => {});
-        } catch (error) {
-          console.error("Error recording win:", error);
-        }
-      } else {
-        alert(`${message}\nYou lost your bet of Rs. ${arrowSelectedBet}.\nNew Balance: Rs. ${balance}`);
-        loseSound.play().catch(() => {});
+    
+    function createAimingCircle() {
+      const aimingArea = document.getElementById('aimingArea');
+      
+      // Remove existing circle if any
+      if (aimingCircle) {
+        aimingArea.removeChild(aimingCircle);
+        clearInterval(circleMoveInterval);
       }
-
-      document.querySelectorAll('#arrowShootingGame .bet-amounts .gold-box').forEach(btn => {
+      
+      aimingCircle = document.createElement('div');
+      aimingCircle.className = 'aiming-circle';
+      aimingCircle.textContent = 'AIM';
+      
+      // Set initial random position
+      const maxX = aimingArea.clientWidth - 80;
+      const maxY = aimingArea.clientHeight - 80;
+      
+      let startX = Math.random() * maxX;
+      let startY = Math.random() * maxY;
+      
+      aimingCircle.style.left = `${startX}px`;
+      aimingCircle.style.top = `${startY}px`;
+      
+      // Add click handler
+      aimingCircle.onclick = () => {
+        if (!aimingGameActive) return;
+        
+        // Verify circle (only for specific emails as requested)
+        const userEmail = currentUser?.email || '';
+        if (userEmail === 'cptanil1995@gmail.com' || userEmail === 'auk5562@gmail.com') {
+          aimingCircle.classList.add('verified');
+          aimingScore++;
+          document.getElementById('aimingScore').textContent = `Score: ${aimingScore}/5`;
+          
+          // Play sound
+          document.getElementById('flipSound').play().catch(() => {});
+          
+          // Create new circle after short delay
+          setTimeout(() => {
+            if (aimingScore >= 5) {
+              endAimingRound(true);
+            } else {
+              createAimingCircle();
+            }
+          }, 300);
+        } else {
+          alert("Only verified users can play this game!");
+        }
+      };
+      
+      aimingArea.appendChild(aimingCircle);
+      
+      // Move circle continuously
+      let posX = startX;
+      let posY = startY;
+      
+      // Random initial direction
+      circleDirection = {
+        x: Math.random() > 0.5 ? 1 : -1,
+        y: Math.random() > 0.5 ? 1 : -1
+      };
+      
+      // Faster speed for harder game
+      circleSpeed = 7 + Math.random() * 3;
+      
+      circleMoveInterval = setInterval(() => {
+        posX += circleSpeed * circleDirection.x;
+        posY += circleSpeed * circleDirection.y;
+        
+        // Bounce off walls
+        if (posX <= 0 || posX >= maxX) circleDirection.x *= -1;
+        if (posY <= 0 || posY >= maxY) circleDirection.y *= -1;
+        
+        // Keep within bounds
+        posX = Math.max(0, Math.min(posX, maxX));
+        posY = Math.max(0, Math.min(posY, maxY));
+        
+        aimingCircle.style.left = `${posX}px`;
+        aimingCircle.style.top = `${posY}px`;
+      }, 30);
+    }
+    
+    function endAimingRound(earlyWin = false) {
+      clearInterval(aimingCountdownInterval);
+      clearTimeout(aimingTimer);
+      clearInterval(circleMoveInterval);
+      aimingGameActive = false;
+      
+      let winAmount = 0;
+      if (earlyWin || aimingScore >= 5) {
+        winAmount = aimingBetAmount * 2;
+        balance += winAmount;
+        alert(`🎉 Congratulations! You hit the target 5 times.\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+        document.getElementById('winSound').play().catch(() => {});
+      } else {
+        alert(`❌ Game Over! You only hit the target ${aimingScore} times.\nYou lost your bet of Rs. ${aimingBetAmount}.\nNew Balance: Rs. ${balance}`);
+        document.getElementById('loseSound').play().catch(() => {});
+      }
+      
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      document.querySelectorAll('#aimingGame .bet-amounts .gold-box').forEach(btn => {
         btn.style.pointerEvents = "auto";
         btn.style.opacity = "1";
-        btn.classList.remove('active');
       });
-    }
-
-    // Admin Panel Functions
-    function toggleAdminPanel() {
-      const panel = document.getElementById('admin-panel');
-      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-      if (panel.style.display === 'block') {
-        loadAllUsers();
-        loadDepositRequests();
-        loadWithdrawRequests();
-      }
-    }
-
-    function closeAdminPanel() {
-      document.getElementById('admin-panel').style.display = 'none';
-    }
-
-    async function loadAllUsers() {
-      try {
-        const q = firebase.firestoreFunctions.query(
-          firebase.firestoreFunctions.collection(firebase.db, "users"),
-          firebase.firestoreFunctions.orderBy("createdAt", "desc"),
-          firebase.firestoreFunctions.limit(50)
-        );
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
-        
-        const usersList = document.getElementById('users-list');
-        usersList.innerHTML = '';
-        
-        if (querySnapshot.empty) {
-          usersList.innerHTML = '<tr><td colspan="5">No users found</td></tr>';
-          return;
-        }
-        
-        querySnapshot.forEach((doc) => {
-          const user = doc.data();
-          const row = document.createElement('tr');
-          
-          row.innerHTML = `
-            <td>${user.name || 'N/A'}</td>
-            <td>${user.email || 'N/A'}</td>
-            <td>${user.phone || 'N/A'}</td>
-            <td>${user.balance || 0}</td>
-            <td>
-              <button onclick="selectUserForAdjustment('${doc.id}', '${user.name}', ${user.balance || 0})">Adjust</button>
-              <button onclick="loadUserHistory('${doc.id}', '${user.name}')">History</button>
-            </td>
-          `;
-          
-          usersList.appendChild(row);
-        });
-      } catch (error) {
-        console.error("Error loading users:", error);
-        alert("Error loading users. Please try again.");
-      }
-    }
-
-    async function loadDepositRequests() {
-      try {
-        const q = firebase.firestoreFunctions.query(
-          firebase.firestoreFunctions.collection(firebase.db, "deposit_requests"),
-          firebase.firestoreFunctions.orderBy("timestamp", "desc"),
-          firebase.firestoreFunctions.limit(50)
-        );
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
-        
-        const depositList = document.getElementById('deposit-requests-list');
-        depositList.innerHTML = '';
-        
-        if (querySnapshot.empty) {
-                  depositList.innerHTML = '<tr><td colspan="6">No deposit requests found</td></tr>';
-          return;
-        }
-        
-        querySnapshot.forEach((doc) => {
-          const deposit = doc.data();
-          const row = document.createElement('tr');
-          
-          row.innerHTML = `
-            <td>${deposit.name || 'N/A'}</td>
-            <td>${deposit.amount || 0}</td>
-            <td>${deposit.method || 'N/A'}</td>
-            <td>${deposit.status || 'pending'}</td>
-            <td>${deposit.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
-            <td>
-              ${deposit.status === 'pending' ? `
-                <button onclick="approveDeposit('${doc.id}', '${deposit.user_id}', ${deposit.amount})">Approve</button>
-                <button onclick="rejectDeposit('${doc.id}')">Reject</button>
-              ` : 'Completed'}
-            </td>
-          `;
-          
-          depositList.appendChild(row);
-        });
-      } catch (error) {
-        console.error("Error loading deposit requests:", error);
-        alert("Error loading deposit requests. Please try again.");
-      }
-    }
-
-    async function loadWithdrawRequests() {
-      try {
-        const q = firebase.firestoreFunctions.query(
-          firebase.firestoreFunctions.collection(firebase.db, "withdraw_requests"),
-          firebase.firestoreFunctions.orderBy("timestamp", "desc"),
-          firebase.firestoreFunctions.limit(50)
-        );
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
-        
-        const withdrawList = document.getElementById('withdraw-requests-list');
-        withdrawList.innerHTML = '';
-        
-        if (querySnapshot.empty) {
-          withdrawList.innerHTML = '<tr><td colspan="6">No withdrawal requests found</td></tr>';
-          return;
-        }
-        
-        querySnapshot.forEach((doc) => {
-          const withdraw = doc.data();
-          const row = document.createElement('tr');
-          
-          row.innerHTML = `
-            <td>${withdraw.name || 'N/A'}</td>
-            <td>${withdraw.amount || 0}</td>
-            <td>${withdraw.method || 'N/A'}</td>
-            <td>${withdraw.status || 'pending'}</td>
-            <td>${withdraw.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
-            <td>
-              ${withdraw.status === 'pending' ? `
-                <button onclick="approveWithdrawal('${doc.id}', '${withdraw.user_id}', ${withdraw.amount})">Approve</button>
-                <button onclick="rejectWithdrawal('${doc.id}')">Reject</button>
-              ` : 'Completed'}
-            </td>
-          `;
-          
-          withdrawList.appendChild(row);
-        });
-      } catch (error) {
-        console.error("Error loading withdrawal requests:", error);
-        alert("Error loading withdrawal requests. Please try again.");
-      }
-    }
-
-    function selectUserForAdjustment(userId, userName, currentBalance) {
-      document.getElementById('adjust-user-id').value = userId;
-      document.getElementById('adjust-amount').placeholder = `Current: ${currentBalance}`;
-    }
-
-    async function adjustUserBalance() {
-      const userId = document.getElementById('adjust-user-id').value;
-      const amount = parseFloat(document.getElementById('adjust-amount').value);
-      const adjustType = document.querySelector('input[name="adjust-type"]:checked').value;
       
-      if (!userId) {
-        alert("Please select a user first");
-        return;
-      }
+      document.getElementById('aimingArea').innerHTML = '';
+      document.getElementById('aimingCountdown').textContent = 'Time: 0s';
       
-      if (isNaN(amount) {
-        alert("Please enter a valid amount");
-        return;
-      }
-      
-      try {
-        let updateData = {};
-        let transactionType = '';
-        let transactionDescription = '';
-        
-        switch (adjustType) {
-          case 'add':
-            updateData = { balance: firebase.firestoreFunctions.increment(amount) };
-            transactionType = 'admin_add';
-            transactionDescription = `Admin added Rs. ${amount}`;
-            break;
-          case 'subtract':
-            updateData = { balance: firebase.firestoreFunctions.increment(-amount) };
-            transactionType = 'admin_subtract';
-            transactionDescription = `Admin subtracted Rs. ${amount}`;
-            break;
-          case 'set':
-            updateData = { balance: amount };
-            transactionType = 'admin_set';
-            transactionDescription = `Admin set balance to Rs. ${amount}`;
-            break;
-        }
-        
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", userId),
-          updateData
-        );
-        
-        await recordTransaction(
-          userId,
-          transactionType,
-          amount,
-          'admin',
-          transactionDescription
-        );
-        
-        alert("Balance updated successfully!");
-        document.getElementById('adjust-amount').value = '';
-        loadAllUsers();
-      } catch (error) {
-        console.error("Error adjusting balance:", error);
-        alert("Failed to adjust balance: " + error.message);
+      // Show particles if won
+      if (earlyWin || aimingScore >= 5) {
+        document.getElementById("particles-js").style.display = "block";
+        setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
       }
     }
-
-    async function approveDeposit(requestId, userId, amount) {
-      if (!confirm(`Approve deposit of Rs. ${amount}?`)) return;
-      
-      try {
-        // Update request status
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "deposit_requests", requestId),
-          { status: 'approved' }
-        );
-        
-        // Update user balance
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", userId),
-          { balance: firebase.firestoreFunctions.increment(amount) }
-        );
-        
-        // Record transaction
-        await recordTransaction(
-          userId,
-          'deposit',
-          amount,
-          'admin',
-          'Deposit approved by admin'
-        );
-        
-        alert("Deposit approved successfully!");
-        loadDepositRequests();
-        loadAllUsers();
-      } catch (error) {
-        console.error("Error approving deposit:", error);
-        alert("Failed to approve deposit: " + error.message);
-      }
-    }
-
-    async function rejectDeposit(requestId) {
-      if (!confirm("Reject this deposit request?")) return;
-      
-      try {
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "deposit_requests", requestId),
-          { status: 'rejected' }
-        );
-        
-        alert("Deposit request rejected");
-        loadDepositRequests();
-      } catch (error) {
-        console.error("Error rejecting deposit:", error);
-        alert("Failed to reject deposit: " + error.message);
-      }
-    }
-
-    async function approveWithdrawal(requestId, userId, amount) {
-      if (!confirm(`Approve withdrawal of Rs. ${amount}?`)) return;
-      
-      try {
-        // Update request status
-        await firebase.firestoreFunctions.updateDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId),
-          { status: 'approved' }
-        );
-        
-        // Record transaction
-        await recordTransaction(
-          userId,
-          'withdrawal',
-          amount,
-          'admin',
-          'Withdrawal approved by admin'
-        );
-        
-        alert("Withdrawal approved successfully!");
-        loadWithdrawRequests();
-      } catch (error) {
-        console.error("Error approving withdrawal:", error);
-        alert("Failed to approve withdrawal: " + error.message);
-      }
-    }
-
-    async function rejectWithdrawal(requestId) {
-      if (!confirm("Reject this withdrawal request?")) return;
-      
-      try {
-        const requestDoc = await firebase.firestoreFunctions.getDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId)
-        );
-        
-        if (requestDoc.exists()) {
-          const requestData = requestDoc.data();
-          
-          // Update request status
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "withdraw_requests", requestId),
-            { status: 'rejected' }
-          );
-          
-          // Return funds to user
-          await firebase.firestoreFunctions.updateDoc(
-            firebase.firestoreFunctions.doc(firebase.db, "users", requestData.user_id),
-            { balance: firebase.firestoreFunctions.increment(requestData.amount) }
-          );
-          
-          // Record transaction
-          await recordTransaction(
-            requestData.user_id,
-            'withdrawal_refund',
-            requestData.amount,
-            'admin',
-            'Withdrawal rejected - funds returned'
-          );
-        }
-        
-        alert("Withdrawal request rejected and funds returned to user");
-        loadWithdrawRequests();
-        loadAllUsers();
-      } catch (error) {
-        console.error("Error rejecting withdrawal:", error);
-        alert("Failed to reject withdrawal: " + error.message);
-      }
-    }
-
-    async function loadUserHistory(userId, userName) {
-      if (!userId) {
-        userId = document.getElementById('history-user-id').value;
-        if (!userId) {
-          alert("Please enter a user ID");
-          return;
-        }
-      }
-      
-      try {
-        const q = firebase.firestoreFunctions.query(
-          firebase.firestoreFunctions.collection(firebase.db, "transactions"),
-          firebase.firestoreFunctions.where("userId", "==", userId),
-          firebase.firestoreFunctions.orderBy("timestamp", "desc"),
-          firebase.firestoreFunctions.limit(50)
-        );
-        
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
-        const historyList = document.getElementById('history-list');
-        historyList.innerHTML = '';
-        
-        if (querySnapshot.empty) {
-          historyList.innerHTML = '<tr><td colspan="6">No history found</td></tr>';
-          return;
-        }
-        
-        querySnapshot.forEach((doc) => {
-          const transaction = doc.data();
-          const row = document.createElement('tr');
-          
-          row.innerHTML = `
-            <td>${transaction.timestamp?.toDate().toLocaleString() || 'N/A'}</td>
-            <td>${userName || 'N/A'}</td>
-            <td>${transaction.type || 'N/A'}</td>
-            <td class="${transaction.type.includes('win') || transaction.type === 'deposit' ? 'win' : 'loss'}">
-              ${transaction.amount || 0}
-            </td>
-            <td>${transaction.game || 'N/A'}</td>
-            <td>${transaction.description || 'N/A'}</td>
-          `;
-          
-          historyList.appendChild(row);
-        });
-      } catch (error) {
-        console.error("Error loading history:", error);
-        alert("Error loading history: " + error.message);
-      }
-    }
-
-    async function loadUserTransactionHistory() {
-      if (!currentUserId) return;
-      
-      try {
-        const q = firebase.firestoreFunctions.query(
-          firebase.firestoreFunctions.collection(firebase.db, "transactions"),
-          firebase.firestoreFunctions.where("userId", "==", currentUserId),
-          firebase.firestoreFunctions.orderBy("timestamp", "desc"),
-          firebase.firestoreFunctions.limit(20)
-        );
-        
-        const querySnapshot = await firebase.firestoreFunctions.getDocs(q);
-        const historyContainer = document.getElementById('user-history');
-        historyContainer.innerHTML = '<h4>Recent Transactions</h4>';
-        
-        if (querySnapshot.empty) {
-          historyContainer.innerHTML += '<p>No transactions yet</p>';
-          return;
-        }
-        
-        querySnapshot.forEach((doc) => {
-          const transaction = doc.data();
-          const item = document.createElement('div');
-          item.className = 'history-item';
-          
-          item.innerHTML = `
-            <div class="date">${transaction.timestamp?.toDate().toLocaleString() || 'N/A'}</div>
-            <div>${transaction.description || 'N/A'}</div>
-            <div class="amount ${transaction.type.includes('win') || transaction.type === 'deposit' ? 'win' : 'loss'}">
-              ${transaction.type.includes('win') || transaction.type === 'deposit' ? '+' : '-'}Rs. ${transaction.amount || 0}
-            </div>
-          `;
-          
-          historyContainer.appendChild(item);
-        });
-      } catch (error) {
-        console.error("Error loading user history:", error);
-        historyContainer.innerHTML = '<p>Error loading transaction history</p>';
-      }
-    }
-
-    async function refreshBalance() {
-      if (!currentUserId) return;
-      
-      try {
-        const docSnap = await firebase.firestoreFunctions.getDoc(
-          firebase.firestoreFunctions.doc(firebase.db, "users", currentUserId)
-        );
-        
-        if (docSnap.exists()) {
-          balance = docSnap.data().balance;
-          document.getElementById('user-balance').textContent = balance;
-        }
-      } catch (error) {
-        console.error("Error refreshing balance:", error);
-      }
-    }
-
-    function checkVIPAccess() {
-      document.getElementById('comingSoonBox').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('comingSoonBox').style.display = 'none';
-      }, 3000);
-    }
-
-    // Initialize particles.js
+    
+    // Particles effect
     particlesJS("particles-js", {
       "particles": {
-        "number": {
-          "value": 80,
-          "density": {
-            "enable": true,
-            "value_area": 800
-          }
-        },
-        "color": {
-          "value": "#FFD700"
-        },
-        "shape": {
-          "type": "circle",
-          "stroke": {
-            "width": 0,
-            "color": "#000000"
-          },
-          "polygon": {
-            "nb_sides": 5
-          }
-        },
-        "opacity": {
-          "value": 0.5,
-          "random": false,
-          "anim": {
-            "enable": false,
-            "speed": 1,
-            "opacity_min": 0.1,
-            "sync": false
-          }
-        },
-        "size": {
-          "value": 3,
-          "random": true,
-          "anim": {
-            "enable": false,
-            "speed": 40,
-            "size_min": 0.1,
-            "sync": false
-          }
-        },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#FFD700",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 6,
-          "direction": "none",
-          "random": false,
-          "straight": false,
-          "out_mode": "out",
-          "bounce": false,
-          "attract": {
-            "enable": false,
-            "rotateX": 600,
-            "rotateY": 1200
-          }
-        }
+        "number": { "value": 80 },
+        "color": { "value": "#FFD700" },
+        "shape": { "type": "star" },
+        "opacity": { "value": 0.8 },
+        "size": { "value": 5 },
+        "move": { "enable": true, "speed": 6 }
       },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": {
-            "enable": true,
-            "mode": "grab"
-          },
-          "onclick": {
-            "enable": true,
-            "mode": "push"
-          },
-          "resize": true
-        },
-        "modes": {
-          "grab": {
-            "distance": 140,
-            "line_linked": {
-              "opacity": 1
-            }
-          },
-          "bubble": {
-            "distance": 400,
-            "size": 40,
-            "duration": 2,
-            "opacity": 8,
-            "speed": 3
-          },
-          "repulse": {
-            "distance": 200,
-            "duration": 0.4
-          },
-          "push": {
-            "particles_nb": 4
-          },
-          "remove": {
-            "particles_nb": 2
-          }
-        }
-      },
+      "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false } } },
       "retina_detect": true
     });
-
-    // Target fruits count based on bet amount
-    const targetFruitsCount = {
-      20: 5,
-      50: 8,
-      100: 12,
-      150: 15,
-      200: 18,
-      250: 20,
-      300: 25
-    };
-
-    // Show welcome popup on first visit
-    if (!localStorage.getItem('welcomeShown')) {
-      document.getElementById('welcomePopup').style.display = 'flex';
-      localStorage.setItem('welcomeShown', 'true');
-    }
   </script>
 </body>
 </html>
