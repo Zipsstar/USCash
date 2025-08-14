@@ -205,8 +205,20 @@
       background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
     }
     
-    .aiming-thumbnail {
+    .aim-thumbnail {
       background-image: url('https://images.unsplash.com/photo-1517438322307-e67111335449?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    }
+    
+    .findace-thumbnail {
+      background-image: url('https://images.unsplash.com/photo-1581388655277-9fc7e7f1e1d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    }
+    
+    .tictactoetoe-thumbnail {
+      background-image: url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    }
+    
+    .archery-thumbnail {
+      background-image: url('https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
     }
     
     .card-grid {
@@ -454,12 +466,12 @@
       font-weight: bold;
     }
     
-    /* Aiming Game Styles */
-    #aimingGame {
+    /* Aim Game Styles */
+    #aimGame {
       display: none;
     }
     
-    .aiming-circle {
+    .aim-circle {
       position: absolute;
       width: 90px;
       height: 90px;
@@ -478,27 +490,180 @@
       z-index: 10;
     }
     
-    .aiming-circle:hover {
+    .aim-circle:hover {
       transform: scale(1.1);
     }
     
-    .aiming-circle.verified {
+    .aim-circle.verified {
       background-color: rgba(30, 144, 255, 0.3);
       border-color: var(--secondary);
       box-shadow: 0 0 20px var(--secondary);
     }
     
-    #aimingCountdown {
+    #aimCountdown {
       font-size: 1.5rem;
       margin: 15px 0;
       color: var(--primary);
       font-weight: bold;
     }
     
-    #aimingScore {
+    #aimScore {
       font-size: 1.4rem;
       margin-top: 15px;
       font-weight: bold;
+    }
+    
+    /* Find Ace Game Styles */
+    #findAceGame {
+      display: none;
+    }
+    
+    #findAceCountdown {
+      font-size: 1.5rem;
+      margin: 15px 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    #findAceResult {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      color: var(--light);
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+    
+    /* Tic Tac Toe Toe Game Styles */
+    #tictactoetoeGame {
+      display: none;
+    }
+    
+    .tic-tac-toe-toe-board {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 5px;
+      width: 400px;
+      height: 400px;
+      margin: 25px auto;
+      background-color: rgba(255, 215, 0, 0.1);
+      padding: 15px;
+      border-radius: 15px;
+    }
+    
+    .tic-tac-toe-toe-cell {
+      background-color: #222;
+      border: 1px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: var(--primary);
+    }
+    
+    .tic-tac-toe-toe-cell:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+    
+    .tic-tac-toe-toe-cell.x {
+      color: var(--secondary);
+      text-shadow: 0 0 10px var(--secondary);
+    }
+    
+    .tic-tac-toe-toe-cell.o {
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent);
+    }
+    
+    #tictactoetoeResult {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      color: var(--light);
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+    
+    #tictactoetoeCountdown {
+      font-size: 1.4rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    /* Archery Game Styles */
+    #archeryGame {
+      display: none;
+    }
+    
+    .archery-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .archery-canvas-container {
+      position: relative;
+      width: 520px;
+      height: 520px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    #archeryCanvas {
+      background: transparent;
+      border-radius: 12px;
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 2px solid var(--primary);
+    }
+    
+    .archery-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 520px;
+    }
+    
+    .archery-bets {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .archery-score-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .archery-score-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, #222, #111);
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    
+    #archeryStatus {
+      font-size: 1.1rem;
+      color: var(--light);
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
     }
     
     /* Auth Modal Styles */
@@ -884,6 +1049,16 @@
         height: 280px;
       }
       
+      .tic-tac-toe-toe-board {
+        width: 280px;
+        height: 280px;
+      }
+      
+      .archery-canvas-container {
+        width: 100%;
+        height: auto;
+      }
+      
       .nav a {
         padding: 6px 10px;
         font-size: 0.9rem;
@@ -914,6 +1089,11 @@
         height: 240px;
       }
       
+      .tic-tac-toe-toe-board {
+        width: 240px;
+        height: 240px;
+      }
+      
       .card {
         width: 70px;
         height: 90px;
@@ -928,7 +1108,7 @@
   <!-- Announcement Bar -->
   <div class="announcement-bar">
     <div class="announcement-content">
-      <span>📢 Stay connected with us!</span> For deposits, contact VIP users (verified with blue tick) or email us at support@uscash.com
+      <span>📢 Stay connected with us!</span> For deposits, contact VIP users (verified with blue tick) or WhatsApp us at +923174136799
     </div>
   </div>
   
@@ -1020,9 +1200,21 @@
         <i class="fas fa-times"></i>
         Tic Tac Toe
       </div>
-      <div class="gold-box aiming-thumbnail" onclick="startAimingGame()">
+      <div class="gold-box aim-thumbnail" onclick="startAimGame()">
         <i class="fas fa-bullseye"></i>
-        Aiming Challenge
+        Aim and Shoot
+      </div>
+      <div class="gold-box findace-thumbnail" onclick="startFindAceGame()">
+        <i class="fas fa-search"></i>
+        Find Ace
+      </div>
+      <div class="gold-box tictactoetoe-thumbnail" onclick="startTicTacToeToeGame()">
+        <i class="fas fa-times"></i>
+        Tic-Tac-Toe-Toe
+      </div>
+      <div class="gold-box archery-thumbnail" onclick="startArcheryGame()">
+        <i class="fas fa-bullseye"></i>
+        Archery Challenge
       </div>
     </div>
   </div>
@@ -1072,24 +1264,87 @@
     <div id="tictactoeResult"></div>
   </div>
 
-  <!-- Aiming Game -->
-  <div class="section" id="aimingGame" style="display:none;">
-    <h2><i class="fas fa-bullseye"></i> Aiming Challenge</h2>
+  <!-- Aim Game -->
+  <div class="section" id="aimGame" style="display:none;">
+    <h2><i class="fas fa-bullseye"></i> Aim and Shoot</h2>
     <div class="bet-amounts">
-      <div class="gold-box" onclick="startAimingRound(50)">Rs. 50</div>
-      <div class="gold-box" onclick="startAimingRound(100)">Rs. 100</div>
-      <div class="gold-box" onclick="startAimingRound(200)">Rs. 200</div>
-      <div class="gold-box" onclick="startAimingRound(300)">Rs. 300</div>
+      <div class="gold-box" onclick="startAimRound(50)">Rs. 50</div>
+      <div class="gold-box" onclick="startAimRound(100)">Rs. 100</div>
+      <div class="gold-box" onclick="startAimRound(200)">Rs. 200</div>
+      <div class="gold-box" onclick="startAimRound(300)">Rs. 300</div>
     </div>
-    <div id="aimingCountdown">Time: 0s</div>
-    <div id="aimingScore">Score: 0/5</div>
-    <div class="shoot-area" id="aimingArea"></div>
+    <div id="aimCountdown">Time: 0s</div>
+    <div id="aimScore">Score: 0/5</div>
+    <div class="shoot-area" id="aimArea"></div>
+  </div>
+
+  <!-- Find Ace Game -->
+  <div class="section" id="findAceGame" style="display:none;">
+    <h2><i class="fas fa-search"></i> Find Ace</h2>
+    <div class="bet-amounts">
+      <div class="gold-box" onclick="startFindAceRound(50)">Rs. 50</div>
+      <div class="gold-box" onclick="startFindAceRound(100)">Rs. 100</div>
+      <div class="gold-box" onclick="startFindAceRound(200)">Rs. 200</div>
+      <div class="gold-box" onclick="startFindAceRound(300)">Rs. 300</div>
+    </div>
+    <div id="findAceCountdown">Time: 15s</div>
+    <div class="card-grid" id="findAceGrid"></div>
+    <div id="findAceResult"></div>
+  </div>
+
+  <!-- Tic Tac Toe Toe Game -->
+  <div class="section" id="tictactoetoeGame" style="display:none;">
+    <h2><i class="fas fa-times"></i> Tic-Tac-Toe-Toe</h2>
+    <div class="bet-amounts">
+      <div class="gold-box" onclick="selectTicTacToeToeBet(50)">Rs. 50</div>
+      <div class="gold-box" onclick="selectTicTacToeToeBet(100)">Rs. 100</div>
+      <div class="gold-box" onclick="selectTicTacToeToeBet(200)">Rs. 200</div>
+      <div class="gold-box" onclick="selectTicTacToeToeBet(300)">Rs. 300</div>
+    </div>
+    <div id="tictactoetoeCountdown">Time: 30s</div>
+    <div class="tic-tac-toe-toe-board" id="ticTacToeToeBoard"></div>
+    <div id="tictactoetoeResult"></div>
+  </div>
+
+  <!-- Archery Game -->
+  <div class="section" id="archeryGame" style="display:none;">
+    <h2><i class="fas fa-bullseye"></i> Archery Challenge</h2>
+    <div class="archery-container">
+      <div class="archery-canvas-container">
+        <canvas id="archeryCanvas" width="520" height="520"></canvas>
+      </div>
+      
+      <div class="archery-controls">
+        <div class="bet-amounts">
+          <div class="gold-box" onclick="selectArcheryBet(20)">Rs. 20</div>
+          <div class="gold-box" onclick="selectArcheryBet(50)">Rs. 50</div>
+          <div class="gold-box" onclick="selectArcheryBet(100)">Rs. 100</div>
+          <div class="gold-box" onclick="selectArcheryBet(150)">Rs. 150</div>
+          <div class="gold-box" onclick="selectArcheryBet(200)">Rs. 200</div>
+        </div>
+        
+        <div class="archery-score-row" id="archeryScoreRow">
+          <div class="archery-score-box"></div>
+          <div class="archery-score-box"></div>
+          <div class="archery-score-box"></div>
+          <div class="archery-score-box"></div>
+          <div class="archery-score-box"></div>
+        </div>
+        
+        <div id="archeryStatus">Pick a bet to start</div>
+        
+        <div style="display: flex; justify-content: center; gap: 10px;">
+          <button class="gold-box" onclick="resetArcheryGame()">Reset</button>
+          <button class="gold-box" onclick="toggleArcheryAuto()" id="archeryAutoBtn">Auto: OFF</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Deposit Section -->
   <div class="section" id="depositSection" style="display:none;">
     <h2><i class="fas fa-money-bill-wave"></i> Deposit</h2>
-    <p style="color: var(--secondary);">Minimum deposit amount is Rs. 150. To deposit, please contact VIP users (verified with blue tick) or email us at support@uscash.com</p>
+    <p style="color: var(--secondary);">Minimum deposit amount is Rs. 150. To deposit, please contact VIP users (verified with blue tick) or WhatsApp us at +923174136799</p>
     <div class="form-group">
       <label for="depositAmount">Amount (Rs.)</label>
       <input type="number" id="depositAmount" min="150" placeholder="Minimum 150" />
@@ -1149,7 +1404,7 @@
   <!-- VIP Section -->
   <div class="section" id="vipSection" style="display:none;">
     <h2><i class="fas fa-crown"></i> VIP Program</h2>
-    <p style="color: var(--secondary);">Earn money by referring friends! Share your referral code and earn 10% of their deposits.</p>
+    <p style="color: var(--secondary);">Earn money by referring friends! Share your referral code and earn 5% of their first five deposits.</p>
     
     <div class="referral-stats">
       <div class="stat-box">
@@ -1176,7 +1431,7 @@
     <ol style="text-align: left; padding-left: 20px;">
       <li>Share your unique referral code with friends</li>
       <li>They sign up using your code</li>
-      <li>You earn <b>10% of every deposit</b> they make</li>
+      <li>You earn <b>5% of their first five deposits</b></li>
       <li>Withdraw your earnings anytime</li>
       <li>Reach higher VIP levels for more benefits</li>
     </ol>
@@ -1216,6 +1471,9 @@
   </audio>
   <audio id="loseSound">
     <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0d8d2a5c8a.mp3" type="audio/mp3">
+  </audio>
+  <audio id="shotSound">
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_5a9f1d8e6b.mp3" type="audio/mp3">
   </audio>
 
   <!-- Firebase SDK -->
@@ -1404,13 +1662,14 @@
             name: name,
             phone: phone,
             email: email,
-            balance: 100, // Give 100 Rs. welcome bonus
+            balance: 0, // No welcome bonus
             referralCode: generateReferralCode(),
             referredBy: referralCode || null,
             referralCount: 0,
             referralEarnings: 0,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+            depositCount: 0
           });
         })
         .then(() => {
@@ -1430,7 +1689,7 @@
         .then(() => {
           // Success - hide modal and show welcome message
           hideAuthModal();
-          alert('Signup successful! Welcome to USCash. You have been awarded Rs. 100 as a welcome bonus.');
+          alert('Signup successful! Welcome to USCash.');
           
           // Reset form
           document.getElementById('signupForm').reset();
@@ -1620,20 +1879,21 @@
       .then(() => {
         // Update user balance
         return db.collection('users').doc(currentUser.uid).update({
-          balance: firebase.firestore.FieldValue.increment(amount)
+          balance: firebase.firestore.FieldValue.increment(amount),
+          depositCount: firebase.firestore.FieldValue.increment(1)
         });
       })
       .then(() => {
-        // Check if user was referred by someone and update their earnings
+        // Check if user was referred by someone and update their earnings (5% of first 5 deposits)
         return db.collection('users').doc(currentUser.uid).get()
           .then(doc => {
             const userData = doc.data();
-            if (userData.referredBy) {
+            if (userData.referredBy && userData.depositCount <= 5) {
               return db.collection('users').where('referralCode', '==', userData.referredBy).get()
                 .then(querySnapshot => {
                   if (!querySnapshot.empty) {
                     const referrerId = querySnapshot.docs[0].id;
-                    const referralEarnings = amount * 0.1; // 10% of deposit
+                    const referralEarnings = amount * 0.05; // 5% of deposit
                     return db.collection('users').doc(referrerId).update({
                       referralEarnings: firebase.firestore.FieldValue.increment(referralEarnings)
                     });
@@ -1712,7 +1972,7 @@
         loadTransactionHistory();
       })
       .catch(error => {
-        alert('Error submitting withdrawal: ' + error.message);
+        alert('Error submitting withdrawal: Missing or insufficient permissions.');
       });
     }
     
@@ -1945,7 +2205,10 @@
       setupScratchGame();
       setupFruitGame();
       setupTicTacToeGame();
-      setupAimingGame();
+      setupAimGame();
+      setupFindAceGame();
+      setupTicTacToeToeGame();
+      setupArcheryGame();
     }
     
     // Scratch Game
@@ -1959,7 +2222,10 @@
       document.getElementById('scratchGame').style.display = 'block';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('tictactoeGame').style.display = 'none';
-      document.getElementById('aimingGame').style.display = 'none';
+      document.getElementById('aimGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('tictactoetoeGame').style.display = 'none';
+      document.getElementById('archeryGame').style.display = 'none';
       bgMusic.play().catch(() => {});
       setupCards();
     }
@@ -2129,7 +2395,10 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'block';
       document.getElementById('tictactoeGame').style.display = 'none';
-      document.getElementById('aimingGame').style.display = 'none';
+      document.getElementById('aimGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('tictactoetoeGame').style.display = 'none';
+      document.getElementById('archeryGame').style.display = 'none';
       setNewFruitTarget();
     }
 
@@ -2279,7 +2548,10 @@
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('tictactoeGame').style.display = 'block';
-      document.getElementById('aimingGame').style.display = 'none';
+      document.getElementById('aimGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('tictactoetoeGame').style.display = 'none';
+      document.getElementById('archeryGame').style.display = 'none';
       setupTicTacToeGame();
       renderTicTacToeBoard();
     }
@@ -2355,7 +2627,7 @@
       
       // Check for draw
       if (!ticTacToeBoard.includes('')) {
-        endTicTacToeGame(false, "Game ended in a draw. You lost 15% of your bet.");
+        endTicTacToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
         return;
       }
       
@@ -2406,7 +2678,7 @@
         
         // Check for draw
         if (!ticTacToeBoard.includes('')) {
-          endTicTacToeGame(false, "Game ended in a draw. You lost 15% of your bet.");
+          endTicTacToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
           return;
         }
         
@@ -2452,8 +2724,8 @@
         balance += winAmount;
         document.getElementById('winSound').play().catch(() => {});
       } else {
-        // 15% loss on draw as requested
-        const deduction = ticTacToeBetAmount * 0.15;
+        // 25% loss on draw as requested
+        const deduction = ticTacToeBetAmount * 0.25;
         balance -= deduction;
         document.getElementById('loseSound').play().catch(() => {});
       }
@@ -2473,126 +2745,123 @@
       }
     }
     
-    // Aiming Game
-    let aimingGameActive = false;
-    let aimingScore = 0;
-    let aimingRoundTime = 0;
-    let aimingTimer;
-    let aimingCountdownInterval;
-    let aimingBetAmount = 0;
-    let aimingCircle;
+    // Aim Game
+    let aimGameActive = false;
+    let aimScore = 0;
+    let aimRoundTime = 0;
+    let aimTimer;
+    let aimCountdownInterval;
+    let aimBetAmount = 0;
+    let aimCircle;
     let circleMoveInterval;
     let circleDirection = { x: 1, y: 1 };
     let circleSpeed = 5;
     
-    function setupAimingGame() {
+    function setupAimGame() {
       // Nothing to setup initially
     }
     
-    function startAimingGame() {
+    function startAimGame() {
       document.getElementById('scratchGame').style.display = 'none';
       document.getElementById('fruitGame').style.display = 'none';
       document.getElementById('tictactoeGame').style.display = 'none';
-      document.getElementById('aimingGame').style.display = 'block';
+      document.getElementById('aimGame').style.display = 'block';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('tictactoetoeGame').style.display = 'none';
+      document.getElementById('archeryGame').style.display = 'none';
     }
     
-    function startAimingRound(amount) {
-      if (aimingGameActive || balance < amount) {
+    function startAimRound(amount) {
+      if (aimGameActive || balance < amount) {
         if (balance < amount) {
           alert("Insufficient balance! Please deposit more to play.");
         }
         return;
       }
       
-      aimingBetAmount = amount;
-      aimingGameActive = true;
-      aimingScore = 0;
+      aimBetAmount = amount;
+      aimGameActive = true;
+      aimScore = 0;
       
       // Set round time based on bet amount
-      aimingRoundTime = 15000; // 15 seconds for all bets (harder game)
+      aimRoundTime = 15000; // 15 seconds for all bets (harder game)
       
       // Deduct bet amount
       balance -= amount;
       updateUserBalance(balance);
       updateBalanceDisplay();
       
-      document.getElementById('aimingScore').textContent = "Score: 0/5";
-      document.getElementById('aimingArea').innerHTML = '';
+      document.getElementById('aimScore').textContent = "Score: 0/5";
+      document.getElementById('aimArea').innerHTML = '';
       
       // Start countdown
-      let timeLeft = aimingRoundTime / 1000;
-      document.getElementById('aimingCountdown').textContent = `Time: ${timeLeft}s`;
+      let timeLeft = aimRoundTime / 1000;
+      document.getElementById('aimCountdown').textContent = `Time: ${timeLeft}s`;
       
-      aimingCountdownInterval = setInterval(() => {
+      aimCountdownInterval = setInterval(() => {
         timeLeft--;
-        document.getElementById('aimingCountdown').textContent = `Time: ${timeLeft}s`;
+        document.getElementById('aimCountdown').textContent = `Time: ${timeLeft}s`;
       }, 1000);
       
       // Create moving circle
-      createAimingCircle();
+      createAimCircle();
       
       // End game after time
-      aimingTimer = setTimeout(() => {
-        endAimingRound();
-      }, aimingRoundTime);
+      aimTimer = setTimeout(() => {
+        endAimRound();
+      }, aimRoundTime);
       
-      document.querySelectorAll('#aimingGame .bet-amounts .gold-box').forEach(btn => {
+      document.querySelectorAll('#aimGame .bet-amounts .gold-box').forEach(btn => {
         btn.style.pointerEvents = "none";
         btn.style.opacity = "0.4";
       });
     }
     
-    function createAimingCircle() {
-      const aimingArea = document.getElementById('aimingArea');
+    function createAimCircle() {
+      const aimArea = document.getElementById('aimArea');
       
       // Remove existing circle if any
-      if (aimingCircle) {
-        aimingArea.removeChild(aimingCircle);
+      if (aimCircle) {
+        aimArea.removeChild(aimCircle);
         clearInterval(circleMoveInterval);
       }
       
-      aimingCircle = document.createElement('div');
-      aimingCircle.className = 'aiming-circle';
-      aimingCircle.textContent = 'AIM';
+      aimCircle = document.createElement('div');
+      aimCircle.className = 'aim-circle';
+      aimCircle.textContent = 'AIM';
       
       // Set initial random position
-      const maxX = aimingArea.clientWidth - 80;
-      const maxY = aimingArea.clientHeight - 80;
+      const maxX = aimArea.clientWidth - 80;
+      const maxY = aimArea.clientHeight - 80;
       
       let startX = Math.random() * maxX;
       let startY = Math.random() * maxY;
       
-      aimingCircle.style.left = `${startX}px`;
-      aimingCircle.style.top = `${startY}px`;
+      aimCircle.style.left = `${startX}px`;
+      aimCircle.style.top = `${startY}px`;
       
       // Add click handler
-      aimingCircle.onclick = () => {
-        if (!aimingGameActive) return;
+      aimCircle.onclick = () => {
+        if (!aimGameActive) return;
         
-        // Verify circle (only for specific emails as requested)
-        const userEmail = currentUser?.email || '';
-        if (userEmail === 'cptanil1995@gmail.com' || userEmail === 'auk5562@gmail.com') {
-          aimingCircle.classList.add('verified');
-          aimingScore++;
-          document.getElementById('aimingScore').textContent = `Score: ${aimingScore}/5`;
-          
-          // Play sound
-          document.getElementById('flipSound').play().catch(() => {});
-          
-          // Create new circle after short delay
-          setTimeout(() => {
-            if (aimingScore >= 5) {
-              endAimingRound(true);
-            } else {
-              createAimingCircle();
-            }
-          }, 300);
-        } else {
-          alert("Only verified users can play this game!");
-        }
+        aimCircle.classList.add('verified');
+        aimScore++;
+        document.getElementById('aimScore').textContent = `Score: ${aimScore}/5`;
+        
+        // Play sound
+        document.getElementById('flipSound').play().catch(() => {});
+        
+        // Create new circle after short delay
+        setTimeout(() => {
+          if (aimScore >= 5) {
+            endAimRound(true);
+          } else {
+            createAimCircle();
+          }
+        }, 300);
       };
       
-      aimingArea.appendChild(aimingCircle);
+      aimArea.appendChild(aimCircle);
       
       // Move circle continuously
       let posX = startX;
@@ -2619,44 +2888,812 @@
         posX = Math.max(0, Math.min(posX, maxX));
         posY = Math.max(0, Math.min(posY, maxY));
         
-        aimingCircle.style.left = `${posX}px`;
-        aimingCircle.style.top = `${posY}px`;
+        aimCircle.style.left = `${posX}px`;
+        aimCircle.style.top = `${posY}px`;
       }, 30);
     }
     
-    function endAimingRound(earlyWin = false) {
-      clearInterval(aimingCountdownInterval);
-      clearTimeout(aimingTimer);
+    function endAimRound(earlyWin = false) {
+      clearInterval(aimCountdownInterval);
+      clearTimeout(aimTimer);
       clearInterval(circleMoveInterval);
-      aimingGameActive = false;
+      aimGameActive = false;
       
       let winAmount = 0;
-      if (earlyWin || aimingScore >= 5) {
-        winAmount = aimingBetAmount * 2;
+      if (earlyWin || aimScore >= 5) {
+        winAmount = aimBetAmount * 2;
         balance += winAmount;
         updateUserBalance(balance);
         alert(`🎉 Congratulations! You hit the target 5 times.\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
         document.getElementById('winSound').play().catch(() => {});
       } else {
-        alert(`❌ Game Over! You only hit the target ${aimingScore} times.\nYou lost your bet of Rs. ${aimingBetAmount}.\nNew Balance: Rs. ${balance}`);
+        alert(`❌ Game Over! You only hit the target ${aimScore} times.\nYou lost your bet of Rs. ${aimBetAmount}.\nNew Balance: Rs. ${balance}`);
         document.getElementById('loseSound').play().catch(() => {});
       }
       
       updateBalanceDisplay();
       
-      document.querySelectorAll('#aimingGame .bet-amounts .gold-box').forEach(btn => {
+      document.querySelectorAll('#aimGame .bet-amounts .gold-box').forEach(btn => {
         btn.style.pointerEvents = "auto";
         btn.style.opacity = "1";
       });
       
-      document.getElementById('aimingArea').innerHTML = '';
-      document.getElementById('aimingCountdown').textContent = 'Time: 0s';
+      document.getElementById('aimArea').innerHTML = '';
+      document.getElementById('aimCountdown').textContent = 'Time: 0s';
       
       // Show particles if won
-      if (earlyWin || aimingScore >= 5) {
+      if (earlyWin || aimScore >= 5) {
         document.getElementById("particles-js").style.display = "block";
         setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
       }
+    }
+    
+    // Find Ace Game
+    let findAceCards = [];
+    let findAceFlippedCards = [];
+    let findAceGameActive = false;
+    let findAceBetAmount = 0;
+    let findAceTimer;
+    let findAceCountdown = 15;
+    
+    function setupFindAceGame() {
+      findAceCards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    }
+    
+    function startFindAceGame() {
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('tictactoeGame').style.display = 'none';
+      document.getElementById('aimGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'block';
+      document.getElementById('tictactoetoeGame').style.display = 'none';
+      document.getElementById('archeryGame').style.display = 'none';
+      setupFindAceGame();
+    }
+    
+    function startFindAceRound(amount) {
+      if (findAceGameActive || balance < amount) {
+        if (balance < amount) {
+          alert("Insufficient balance! Please deposit more to play.");
+        }
+        return;
+      }
+      
+      findAceBetAmount = amount;
+      findAceGameActive = true;
+      findAceFlippedCards = [];
+      
+      // Deduct bet amount
+      balance -= amount;
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      document.getElementById('findAceResult').textContent = '';
+      document.getElementById('findAceGrid').innerHTML = '';
+      
+      // Show 3 cards for 3 seconds
+      const cardsToShow = shuffleArray([...findAceCards]).slice(0, 3);
+      const grid = document.getElementById('findAceGrid');
+      
+      cardsToShow.forEach((card, index) => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card flipped';
+        cardElement.textContent = card;
+        cardElement.dataset.value = card;
+        grid.appendChild(cardElement);
+      });
+      
+      // Start countdown
+      findAceCountdown = 15;
+      document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
+      
+      const countdownInterval = setInterval(() => {
+        findAceCountdown--;
+        document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
+        
+        if (findAceCountdown <= 0) {
+          clearInterval(countdownInterval);
+          endFindAceRound(false, "Time's up! You lost your bet.");
+        }
+      }, 1000);
+      
+      // After 3 seconds, flip cards back and shuffle
+      setTimeout(() => {
+        // Flip cards back
+        document.querySelectorAll('#findAceGrid .card').forEach(card => {
+          card.textContent = '';
+          card.classList.remove('flipped');
+        });
+        
+        // Shuffle cards (60 times)
+        let shuffleCount = 0;
+        const shuffleInterval = setInterval(() => {
+          const cards = Array.from(document.querySelectorAll('#findAceGrid .card'));
+          cards.forEach(card => {
+            const randomIndex = Math.floor(Math.random() * cards.length);
+            const temp = card.style.order;
+            card.style.order = cards[randomIndex].style.order;
+            cards[randomIndex].style.order = temp;
+          });
+          
+          shuffleCount++;
+          if (shuffleCount >= 60) {
+            clearInterval(shuffleInterval);
+            
+            // Add click handlers
+            document.querySelectorAll('#findAceGrid .card').forEach(card => {
+              card.onclick = () => flipFindAceCard(card);
+            });
+          }
+        }, 50);
+      }, 3000);
+    }
+    
+    function flipFindAceCard(card) {
+      if (!findAceGameActive || card.classList.contains('flipped')) return;
+      
+      card.classList.add('flipped');
+      card.textContent = card.dataset.value;
+      flipSound.currentTime = 0;
+      flipSound.play().catch(() => {});
+      
+      if (card.dataset.value === 'A') {
+        endFindAceRound(true, "🎉 You found the Ace! You win double your bet.");
+      } else {
+        endFindAceRound(false, "❌ Wrong card! You lost your bet.");
+      }
+    }
+    
+    function endFindAceRound(won, message) {
+      findAceGameActive = false;
+      
+      if (won) {
+        const winAmount = findAceBetAmount * 2;
+        balance += winAmount;
+        document.getElementById('winSound').play().catch(() => {});
+      } else {
+        document.getElementById('loseSound').play().catch(() => {});
+      }
+      
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      document.getElementById('findAceResult').textContent = message;
+      
+      // Show particles if won
+      if (won) {
+        document.getElementById("particles-js").style.display = "block";
+        setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+      }
+    }
+    
+    // Tic Tac Toe Toe Game
+    let ticTacToeToeBoard = Array(25).fill('');
+    let ticTacToeToeGameActive = false;
+    let ticTacToeToeBetAmount = 0;
+    let ticTacToeToeCountdown = 30;
+    let ticTacToeToeTimer;
+    
+    function setupTicTacToeToeGame() {
+      ticTacToeToeBoard = Array(25).fill('');
+    }
+    
+    function startTicTacToeToeGame() {
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('tictactoeGame').style.display = 'none';
+      document.getElementById('aimGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('tictactoetoeGame').style.display = 'block';
+      document.getElementById('archeryGame').style.display = 'none';
+      setupTicTacToeToeGame();
+      renderTicTacToeToeBoard();
+    }
+    
+    function selectTicTacToeToeBet(amount) {
+      if (ticTacToeToeGameActive) return;
+      
+      if (balance < amount) {
+        alert("Insufficient balance! Please deposit more to play.");
+        return;
+      }
+      
+      ticTacToeToeBetAmount = amount;
+      document.querySelectorAll('#tictactoetoeGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Start the game
+      startTicTacToeToeRound();
+    }
+    
+    function startTicTacToeToeRound() {
+      ticTacToeToeGameActive = true;
+      ticTacToeToeBoard = Array(25).fill('');
+      ticTacToeToeCountdown = 30;
+      
+      // Deduct bet amount
+      balance -= ticTacToeToeBetAmount;
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      // Start timer
+      document.getElementById('tictactoetoeCountdown').textContent = `Time: ${ticTacToeToeCountdown}s`;
+      ticTacToeToeTimer = setInterval(() => {
+        ticTacToeToeCountdown--;
+        document.getElementById('tictactoetoeCountdown').textContent = `Time: ${ticTacToeToeCountdown}s`;
+        
+        if (ticTacToeToeCountdown <= 0) {
+          clearInterval(ticTacToeToeTimer);
+          endTicTacToeToeGame(false, "Time's up! Game ended in a draw.");
+        }
+      }, 1000);
+      
+      renderTicTacToeToeBoard();
+      document.getElementById('tictactoetoeResult').textContent = "Your turn (X)";
+    }
+    
+    function renderTicTacToeToeBoard() {
+      const boardElement = document.getElementById('ticTacToeToeBoard');
+      boardElement.innerHTML = '';
+      
+      for (let i = 0; i < 25; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'tic-tac-toe-toe-cell';
+        cell.textContent = ticTacToeToeBoard[i];
+        cell.onclick = () => makeTicTacToeToeMove(i);
+        boardElement.appendChild(cell);
+      }
+    }
+    
+    function makeTicTacToeToeMove(index) {
+      if (!ticTacToeToeGameActive || ticTacToeToeBoard[index] !== '') return;
+      
+      // Player move
+      ticTacToeToeBoard[index] = 'X';
+      renderTicTacToeToeBoard();
+      
+      // Check if player won
+      if (checkTicTacToeToeWin('X')) {
+        endTicTacToeToeGame(true, "You won! Rs. " + (ticTacToeToeBetAmount * 2) + " added to your balance.");
+        return;
+      }
+      
+      // Check for draw
+      if (!ticTacToeToeBoard.includes('')) {
+        endTicTacToeToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
+        return;
+      }
+      
+      document.getElementById('tictactoetoeResult').textContent = "Computer thinking...";
+      
+      // Computer move (AI with difficulty)
+      setTimeout(() => {
+        // Find winning move if exists
+        let move = findTicTacToeToeWinningMove('O');
+        if (move === -1) {
+          // Block player's winning move
+          move = findTicTacToeToeWinningMove('X');
+          if (move === -1) {
+            // Make random move (but smarter than completely random)
+            const emptyCells = [];
+            for (let i = 0; i < 25; i++) {
+              if (ticTacToeToeBoard[i] === '') emptyCells.push(i);
+            }
+            
+            // Prefer center and corners
+            const smartMoves = [];
+            const corners = [0, 4, 20, 24];
+            const center = 12;
+            for (const cell of emptyCells) {
+              if (cell === center) {
+                move = cell;
+                break;
+              } else if (corners.includes(cell)) {
+                smartMoves.push(cell);
+              }
+            }
+            
+            if (move === undefined && smartMoves.length > 0) {
+              move = smartMoves[Math.floor(Math.random() * smartMoves.length)];
+            } else if (move === undefined) {
+              move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            }
+          }
+        }
+        
+        ticTacToeToeBoard[move] = 'O';
+        renderTicTacToeToeBoard();
+        
+        // Check if computer won
+        if (checkTicTacToeToeWin('O')) {
+          endTicTacToeToeGame(false, "Computer won! You lost your bet.");
+          return;
+        }
+        
+        // Check for draw
+        if (!ticTacToeToeBoard.includes('')) {
+          endTicTacToeToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
+          return;
+        }
+        
+        document.getElementById('tictactoetoeResult').textContent = "Your turn (X)";
+      }, 1000);
+    }
+    
+    function findTicTacToeToeWinningMove(player) {
+      // Check rows
+      for (let row = 0; row < 5; row++) {
+        for (let col = 0; col < 3; col++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 1] === player && 
+              ticTacToeToeBoard[index + 2] === '') {
+            return index + 2;
+          }
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 2] === player && 
+              ticTacToeToeBoard[index + 1] === '') {
+            return index + 1;
+          }
+          if (ticTacToeToeBoard[index + 1] === player && 
+              ticTacToeToeBoard[index + 2] === player && 
+              ticTacToeToeBoard[index] === '') {
+            return index;
+          }
+        }
+      }
+      
+      // Check columns
+      for (let col = 0; col < 5; col++) {
+        for (let row = 0; row < 3; row++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 5] === player && 
+              ticTacToeToeBoard[index + 10] === '') {
+            return index + 10;
+          }
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 10] === player && 
+              ticTacToeToeBoard[index + 5] === '') {
+            return index + 5;
+          }
+          if (ticTacToeToeBoard[index + 5] === player && 
+              ticTacToeToeBoard[index + 10] === player && 
+              ticTacToeToeBoard[index] === '') {
+            return index;
+          }
+        }
+      }
+      
+      // Check diagonals
+      // Top-left to bottom-right
+      for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 6] === player && 
+              ticTacToeToeBoard[index + 12] === '') {
+            return index + 12;
+          }
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 12] === player && 
+              ticTacToeToeBoard[index + 6] === '') {
+            return index + 6;
+          }
+          if (ticTacToeToeBoard[index + 6] === player && 
+              ticTacToeToeBoard[index + 12] === player && 
+              ticTacToeToeBoard[index] === '') {
+            return index;
+          }
+        }
+      }
+      
+      // Top-right to bottom-left
+      for (let row = 0; row < 3; row++) {
+        for (let col = 2; col < 5; col++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 4] === player && 
+              ticTacToeToeBoard[index + 8] === '') {
+            return index + 8;
+          }
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 8] === player && 
+              ticTacToeToeBoard[index + 4] === '') {
+            return index + 4;
+          }
+          if (ticTacToeToeBoard[index + 4] === player && 
+              ticTacToeToeBoard[index + 8] === player && 
+              ticTacToeToeBoard[index] === '') {
+            return index;
+          }
+        }
+      }
+      
+      return -1;
+    }
+    
+    function checkTicTacToeToeWin(player) {
+      // Check rows
+      for (let row = 0; row < 5; row++) {
+        for (let col = 0; col < 3; col++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 1] === player && 
+              ticTacToeToeBoard[index + 2] === player) {
+            return true;
+          }
+        }
+      }
+      
+      // Check columns
+      for (let col = 0; col < 5; col++) {
+        for (let row = 0; row < 3; row++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 5] === player && 
+              ticTacToeToeBoard[index + 10] === player) {
+            return true;
+          }
+        }
+      }
+      
+      // Check diagonals
+      // Top-left to bottom-right
+      for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 6] === player && 
+              ticTacToeToeBoard[index + 12] === player) {
+            return true;
+          }
+        }
+      }
+      
+      // Top-right to bottom-left
+      for (let row = 0; row < 3; row++) {
+        for (let col = 2; col < 5; col++) {
+          const index = row * 5 + col;
+          if (ticTacToeToeBoard[index] === player && 
+              ticTacToeToeBoard[index + 4] === player && 
+              ticTacToeToeBoard[index + 8] === player) {
+            return true;
+          }
+        }
+      }
+      
+      return false;
+    }
+    
+    function endTicTacToeToeGame(playerWon, message) {
+      clearInterval(ticTacToeToeTimer);
+      ticTacToeToeGameActive = false;
+      
+      if (playerWon) {
+        const winAmount = ticTacToeToeBetAmount * 2;
+        balance += winAmount;
+        document.getElementById('winSound').play().catch(() => {});
+      } else {
+        // 25% loss on draw as requested
+        const deduction = ticTacToeToeBetAmount * 0.25;
+        balance -= deduction;
+        document.getElementById('loseSound').play().catch(() => {});
+      }
+      
+      updateUserBalance(balance);
+      updateBalanceDisplay();
+      
+      document.getElementById('tictactoetoeResult').textContent = message;
+      document.querySelectorAll('#tictactoetoeGame .bet-amounts .gold-box').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show particles if won
+      if (playerWon) {
+        document.getElementById("particles-js").style.display = "block";
+        setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+      }
+    }
+    
+    // Archery Game
+    let archeryBet = 0;
+    let archeryShots = [];
+    let archeryBalance = 1000;
+    let archeryAutoMode = false;
+    let archeryGameActive = false;
+    
+    function setupArcheryGame() {
+      const canvas = document.getElementById('archeryCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      let DPR = window.devicePixelRatio || 1;
+      function fixCanvas() {
+        const cssW = canvas.clientWidth || canvas.width;
+        const cssH = canvas.clientHeight || canvas.height;
+        canvas.width = Math.round(cssW * DPR);
+        canvas.height = Math.round(cssH * DPR);
+        canvas.style.width = cssW + 'px';
+        canvas.style.height = cssH + 'px';
+        ctx.setTransform(DPR,0,0,DPR,0,0);
+      }
+      fixCanvas();
+      window.addEventListener('resize', () => { fixCanvas(); drawArchery(); });
+      
+      const W = canvas.width / DPR;
+      const H = canvas.height / DPR;
+      const cx = W/2;
+      const cy = H/2;
+      
+      // Board sizing — slightly larger but centered
+      let boardRadius = Math.min(W,H) * 0.42;
+      
+      // Rings (center -> outward) with pro colors chosen to be rich & realistic
+      // Scoring order: center 10, next 8, next 7, next 5, next 2, outer 1
+      const ringDefs = [
+        {score:10, colorInner:'#ffdd66', colorOuter:'#ffcc00', radiusRatio:0.06},  // very small bull
+        {score:8,  colorInner:'#ffb76b', colorOuter:'#ff8f2e', radiusRatio:0.16},
+        {score:7,  colorInner:'#ff6b6b', colorOuter:'#d6453b', radiusRatio:0.28},
+        {score:5,  colorInner:'#3aa0ff', colorOuter:'#1475c7', radiusRatio:0.45},
+        {score:2,  colorInner:'#2e3136', colorOuter:'#0f1112', radiusRatio:0.70},
+        {score:1,  colorInner:'#f6f6f6', colorOuter:'#e9e9e9', radiusRatio:1.00}
+      ];
+      
+      // derived radii (pixels)
+      const ringRadii = ringDefs.map(r => boardRadius * r.radiusRatio);
+      
+      // pointer / sight
+      let sight = {
+        x: W - 8,
+        y: cy,
+        radius: 7,
+        movingLeft: true,
+        speed: 6.0, // user requested final speed -> 6x (px/frame)
+        active: false, // only move after bet selected
+        auto: false,
+        _lastCross: false
+      };
+      
+      // draw board with radial-style gradients ring by ring (center-first)
+      function drawBoard(){
+        // subtle outer wood ring for realism
+        const woodR = boardRadius * 1.08;
+        const g = ctx.createLinearGradient(cx, cy-woodR, cx, cy+woodR);
+        g.addColorStop(0,'#7a5232'); g.addColorStop(0.5,'#a8764f'); g.addColorStop(1,'#5b391f');
+        ctx.beginPath();
+        ctx.arc(cx, cy, woodR, 0, Math.PI*2);
+        ctx.fillStyle = g; ctx.fill();
+      
+        // white backing
+        ctx.beginPath();
+        ctx.arc(cx, cy, boardRadius + 6, 0, Math.PI*2);
+        ctx.fillStyle = '#f8f5ee'; ctx.fill();
+      
+        // draw rings from outermost to innermost for nicer overlaps
+        for(let i = ringDefs.length-1; i >= 0; i--){
+          const rd = ringRadii[i];
+          const def = ringDefs[i];
+          const grad = ctx.createRadialGradient(cx, cy, rd*0.1, cx, cy, rd);
+          grad.addColorStop(0, def.colorInner);
+          grad.addColorStop(1, def.colorOuter);
+          ctx.beginPath();
+          ctx.arc(cx, cy, rd, 0, Math.PI*2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+      
+          // ring subtle border
+          ctx.beginPath();
+          ctx.arc(cx, cy, rd, 0, Math.PI*2);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+          ctx.stroke();
+        }
+      
+        // tiny center guide (very faint)
+        ctx.beginPath();
+        ctx.arc(cx, cy, 2.2, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,255,255,0.06)';
+        ctx.fill();
+      }
+      
+      // draw the moving sight/crosshair
+      function drawSight(){
+        if(!sight.active) return;
+        ctx.save();
+        ctx.translate(sight.x, sight.y);
+        // glow
+        ctx.beginPath();
+        ctx.arc(0,0, sight.radius+6, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(30,220,120,0.04)';
+        ctx.fill();
+        // ring
+        ctx.beginPath();
+        ctx.arc(0,0, sight.radius, 0, Math.PI*2);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(180,255,200,0.95)';
+        ctx.stroke();
+        // cross lines
+        ctx.beginPath();
+        ctx.moveTo(-14,0); ctx.lineTo(-6,0);
+        ctx.moveTo(6,0); ctx.lineTo(14,0);
+        ctx.moveTo(0,-14); ctx.lineTo(0,-6);
+        ctx.moveTo(0,6); ctx.lineTo(0,14);
+        ctx.strokeStyle = 'rgba(180,255,200,0.9)';
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+        ctx.restore();
+      }
+      
+      // update horizontal-only motion (right <-> left), ensures passes center
+      function updateSight(){
+        if(!sight.active) return;
+        // move
+        if(sight.movingLeft){
+          sight.x -= sight.speed;
+          // pass center naturally because centerX in middle
+          if(sight.x <= 8){ // reached left edge, reverse
+            sight.x = 8;
+            sight.movingLeft = false;
+          }
+        } else {
+          sight.x += sight.speed;
+          if(sight.x >= W - 8){
+            sight.x = W - 8;
+            sight.movingLeft = true;
+          }
+        }
+      
+        // auto shoot if enabled: when crossing center area trigger shot once per crossing
+        if(sight.auto){
+          // detect crossing center band (± sight.speed range)
+          const centerBand = 8; // px tolerance
+          // shoot when sight crosses center from right->left or left->right; ensure one shot per crossing
+          if(!sight._lastCross && Math.abs(sight.x - cx) <= centerBand){
+            sight._lastCross = true;
+            performShot();
+          } else if(Math.abs(sight.x - cx) > centerBand){
+            sight._lastCross = false;
+          }
+        }
+      }
+      
+      // compute score by distance from center using ringRadii (center very small)
+      function computeScore(px, py){
+        const dx = px - cx;
+        const dy = py - cy;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        for(let i=0;i<ringRadii.length;i++){
+          if(dist <= ringRadii[i]) {
+            return ringDefs[i].score;
+          }
+        }
+        return 0; // outside board
+      }
+      
+      // handle one shot (when user clicks)
+      function performShot(){
+        if(!sight.active) return;
+        if(archeryBet === 0){
+          document.getElementById('archeryStatus').textContent = 'You must select a bet first.';
+          return;
+        }
+        if(archeryShots.length >= 5) return;
+      
+        const score = computeScore(sight.x, sight.y);
+        archeryShots.push(score);
+        refreshScoreBoxes();
+      
+        document.getElementById('archeryStatus').textContent = `Shot ${archeryShots.length} → ${score} points`;
+        document.getElementById('shotSound').play().catch(() => {});
+        
+        // if 5 shots done, evaluate
+        if(archeryShots.length === 5){
+          sight.active = false;
+          let allTen = archeryShots.every(s=> s === 10);
+          if(allTen){
+            balance += archeryBet; // user wins same as stake (double total)
+            document.getElementById('archeryStatus').textContent = `🎉 PERFECT! All 5 are bullseyes. You doubled your bet to ₨${archeryBet*2}`;
+            document.getElementById('winSound').play().catch(() => {});
+            document.getElementById("particles-js").style.display = "block";
+            setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+          } else {
+            balance -= archeryBet;
+            if(balance < 0) balance = 0;
+            document.getElementById('archeryStatus').textContent = `✖ You lost the bet of ₨${archeryBet}.`;
+            document.getElementById('loseSound').play().catch(() => {});
+          }
+          updateUserBalance(balance);
+          updateBalanceDisplay();
+        }
+      }
+      
+      function refreshScoreBoxes(){
+        const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
+        for(let i=0;i<5;i++){
+          scoreBoxes[i].textContent = archeryShots[i] !== undefined ? archeryShots[i] : '';
+        }
+      }
+      
+      canvas.addEventListener('click', ()=> {
+        performShot();
+      });
+      
+      // draw loop
+      function drawArchery(){
+        ctx.clearRect(0,0,W,H);
+        drawBoard();
+        drawSight();
+      }
+      
+      // main loop
+      function loop(){
+        updateSight();
+        drawArchery();
+        requestAnimationFrame(loop);
+      }
+      loop();
+      
+      // Expose functions to global
+      window.selectArcheryBet = function(amount){
+        if (archeryGameActive) return;
+        
+        if (balance < amount) {
+          alert("Insufficient balance! Please deposit more to play.");
+          return;
+        }
+        
+        archeryBet = amount;
+        archeryShots = [];
+        const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
+        for(let b of scoreBoxes) b.textContent = '';
+        sight.x = W - 8;
+        sight.y = cy;
+        sight.movingLeft = true;
+        sight.active = true;
+        archeryGameActive = true;
+        
+        // Deduct bet amount
+        balance -= amount;
+        updateUserBalance(balance);
+        updateBalanceDisplay();
+        
+        document.getElementById('archeryStatus').textContent = `Bet ₨ ${archeryBet} placed — 5 shots. Click canvas to shoot when sight passes.`;
+      };
+      
+      window.resetArcheryGame = function(){
+        archeryBet = 0;
+        archeryShots = [];
+        const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
+        for(let b of scoreBoxes) b.textContent = '';
+        sight.active = false;
+        archeryGameActive = false;
+        document.getElementById('archeryStatus').textContent = 'Pick a bet to start';
+      };
+      
+      window.toggleArcheryAuto = function(){
+        archeryAutoMode = !archeryAutoMode;
+        document.getElementById('archeryAutoBtn').textContent = 'Auto: ' + (archeryAutoMode ? 'ON' : 'OFF');
+        sight.auto = archeryAutoMode;
+      };
+    }
+    
+    function startArcheryGame() {
+      document.getElementById('scratchGame').style.display = 'none';
+      document.getElementById('fruitGame').style.display = 'none';
+      document.getElementById('tictactoeGame').style.display = 'none';
+      document.getElementById('aimGame').style.display = 'none';
+      document.getElementById('findAceGame').style.display = 'none';
+      document.getElementById('tictactoetoeGame').style.display = 'none';
+      document.getElementById('archeryGame').style.display = 'block';
+    }
+    
+    // Helper function to shuffle array
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
     
     // Particles effect
