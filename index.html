@@ -138,8 +138,8 @@ h1::after {
 }
 
 .game-options {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   align-items: center;
   justify-content: center;
@@ -147,7 +147,7 @@ h1::after {
 }
 
 .game-options .gold-box {
-  width: 220px;
+  width: 100%;
   height: 180px;
   font-size: 1.4rem;
   display: flex;
@@ -194,7 +194,7 @@ h1::after {
 
 /* Game specific thumbnails */
 .scratch-thumbnail {
-  background-image: url('https://images.unsplash.com/photo-1586281380117-5a60ae2050cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+  background-image: url('https://images.unsplash.com/photo-1589476993333-f55b84301219?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
 }
 
 .fruit-thumbnail {
@@ -225,7 +225,7 @@ h1::after {
 .card {
   width: 90px;
   height: 110px;
-  background-color: #222;
+  background-color: white;
   color: black;
   font-size: 2.2rem;
   display: flex;
@@ -236,9 +236,6 @@ h1::after {
   cursor: pointer;
   transition: transform 0.4s, background-color 0.3s;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  background-image: url('https://images.unsplash.com/photo-1581388655277-9fc7e7f1e1d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
-  background-size: cover;
-  background-position: center;
 }
 
 .card.flipped {
@@ -731,11 +728,13 @@ h1::after {
 #usernameDisplay {
   font-weight: bold;
   color: var(--secondary);
+  font-size: 0.8em; /* 40% smaller */
 }
 
 #phoneDisplay {
   font-weight: bold;
   color: var(--primary);
+  font-size: 0.8em; /* 40% smaller */
 }
 
 .country-flag {
@@ -748,6 +747,7 @@ h1::after {
 .verified-badge {
   color: var(--secondary);
   margin-left: 5px;
+  font-size: 0.8em; /* 40% smaller */
 }
 
 /* Deposit/Withdraw Styles */
@@ -934,14 +934,56 @@ h1::after {
   100% { transform: translateX(-100%); }
 }
 
+/* Message Box */
+.message-box {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
+
+.message-box i {
+  font-size: 1.5rem;
+}
+
+.message-box.success i {
+  color: lime;
+}
+
+.message-box.error i {
+  color: var(--accent);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   h1 {
     font-size: 2.2rem;
   }
 
+  .game-options {
+    grid-template-columns: 1fr;
+  }
+
   .game-options .gold-box {
-    width: 160px;
+    width: 100%;
     height: 140px;
     font-size: 1.2rem;
   }
@@ -964,7 +1006,7 @@ h1::after {
   .section {
     padding: 20px;
   }
-  
+
   .user-info {
     flex-direction: column;
     gap: 10px;
@@ -977,7 +1019,7 @@ h1::after {
   }
 
   .game-options .gold-box {
-    width: 140px;
+    width: 100%;
     height: 120px;
     font-size: 1rem;
   }
@@ -1380,6 +1422,22 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Show message box function
+function showMessage(message, isSuccess) {
+  const messageBox = document.createElement('div');
+  messageBox.className = `message-box ${isSuccess ? 'success' : 'error'}`;
+  messageBox.innerHTML = `
+    <i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+    <span>${message}</span>
+  `;
+  document.body.appendChild(messageBox);
+  
+  // Remove after animation completes
+  setTimeout(() => {
+    messageBox.remove();
+  }, 3000);
+}
+
 // Authentication functions
 function checkAuthState() {
   auth.onAuthStateChanged(user => {
@@ -1437,7 +1495,7 @@ function loginUser() {
   const password = document.getElementById('loginPassword').value;
 
   if (!email || !password) {
-    alert('Please enter both email and password');
+    showMessage('Please enter both email and password', false);
     return;
   }
 
@@ -1449,7 +1507,7 @@ function loginUser() {
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
       hideAuthModal();
-      alert('Login successful! Welcome back.');
+      showMessage('Login successful! Welcome back.', true);
 
       // Update last login time
       if (currentUser) {
@@ -1473,7 +1531,7 @@ function loginUser() {
         default:
           errorMessage += error.message;
       }
-      alert(errorMessage);
+      showMessage(errorMessage, false);
     })
     .finally(() => {
       // Reset button state
@@ -1491,19 +1549,19 @@ function signupUser() {
 
   // Validate all required fields
   if (!email || !password || !name || !phone) {
-    alert('Please fill in all required fields');
+    showMessage('Please fill in all required fields', false);
     return;
   }
 
   // Validate email format
   if (!validateEmail(email)) {
-    alert('Please enter a valid email address');
+    showMessage('Please enter a valid email address', false);
     return;
   }
 
   // Validate password length
   if (password.length < 6) {
-    alert('Password should be at least 6 characters');
+    showMessage('Password should be at least 6 characters', false);
     return;
   }
 
@@ -1547,7 +1605,7 @@ function signupUser() {
     .then(() => {
       // Success - hide modal and show welcome message
       hideAuthModal();
-      alert('Signup successful! Welcome to USCash.');
+      showMessage('Signup successful! Welcome to USCash.', true);
 
       // Reset form
       document.getElementById('signupForm').reset();
@@ -1568,7 +1626,7 @@ function signupUser() {
         default:
           errorMessage += error.message;
       }
-      alert(errorMessage);
+      showMessage(errorMessage, false);
     })
     .finally(() => {
       // Reset button state
@@ -1587,24 +1645,24 @@ function resetPassword() {
   const email = document.getElementById('forgotEmail').value;
 
   if (!email) {
-    alert('Please enter your email');
+    showMessage('Please enter your email', false);
     return;
   }
 
   auth.sendPasswordResetEmail(email)
     .then(() => {
-      alert('Password reset email sent! Please check your inbox.');
+      showMessage('Password reset email sent! Please check your inbox.', true);
       backToLogin();
     })
     .catch(error => {
-      alert('Error sending reset email: ' + error.message);
+      showMessage('Error sending reset email: ' + error.message, false);
     });
 }
 
 function logoutUser() {
   auth.signOut().then(() => {
     showSection('home');
-    alert('Logged out successfully');
+    showMessage('Logged out successfully', true);
     // Reset balance to zero when logging out
     balance = 0;
     document.getElementById('balanceAmount').textContent = '0';
@@ -1619,7 +1677,7 @@ function copyReferralCode() {
   const referralCode = document.getElementById('userReferralCode').textContent;
   navigator.clipboard.writeText(referralCode)
     .then(() => {
-      alert('Referral code copied to clipboard!');
+      showMessage('Referral code copied to clipboard!', true);
     })
     .catch(err => {
       console.error('Failed to copy: ', err);
@@ -1662,7 +1720,7 @@ function loadUserData() {
       // Update user display
       document.getElementById('usernameDisplay').textContent = userData.name || userData.email || 'User';
       document.getElementById('phoneDisplay').textContent = userData.phone || '';
-      
+
       // Check if user is verified (cptanil1995@gmail.com or auk5562@gmail.com)
       if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com') {
         document.getElementById('verifiedBadge').style.display = 'inline-block';
@@ -1700,7 +1758,7 @@ function refreshBalance() {
         if (doc.exists) {
           balance = doc.data().balance || 0;
           updateBalanceDisplay();
-          alert('Balance refreshed!');
+          showMessage('Balance refreshed!', true);
         }
       });
   }
@@ -1709,7 +1767,7 @@ function refreshBalance() {
 function refreshAllData() {
   refreshBalance();
   loadTransactionHistory();
-  alert('All data refreshed!');
+  showMessage('All data refreshed!', true);
 }
 
 function updateBalanceDisplay() {
@@ -1719,7 +1777,7 @@ function updateBalanceDisplay() {
 // Transaction functions
 function submitDeposit() {
   if (!currentUser) {
-    alert('Please login to deposit');
+    showMessage('Please login to deposit', false);
     return;
   }
 
@@ -1728,14 +1786,19 @@ function submitDeposit() {
   const transactionId = document.getElementById('transactionId').value;
 
   if (isNaN(amount) || amount < 150) {
-    alert('Minimum deposit amount is Rs. 150');
+    showMessage('Minimum deposit amount is Rs. 150', false);
     return;
   }
 
   if (!transactionId) {
-    alert('Please enter transaction ID');
+    showMessage('Please enter transaction ID', false);
     return;
   }
+
+  // Show loading state
+  const depositBtn = document.querySelector('#depositSection .submit-btn');
+  depositBtn.disabled = true;
+  depositBtn.textContent = 'Processing...';
 
   // Add deposit request
   db.collection('deposit_requests').add({
@@ -1773,19 +1836,24 @@ function submitDeposit() {
       });
   })
   .then(() => {
-    alert('Deposit request submitted successfully! Rs. ' + amount + ' added to your balance.');
+    showMessage(`Deposit request submitted successfully! Rs. ${amount} added to your balance.`, true);
     document.getElementById('depositAmount').value = '';
     document.getElementById('transactionId').value = '';
     loadTransactionHistory();
   })
   .catch(error => {
-    alert('Error submitting deposit: ' + error.message);
+    showMessage('Error submitting deposit: ' + error.message, false);
+  })
+  .finally(() => {
+    // Reset button state
+    depositBtn.disabled = false;
+    depositBtn.textContent = 'Submit Deposit Request';
   });
 }
 
 function submitWithdraw() {
   if (!currentUser) {
-    alert('Please login to withdraw');
+    showMessage('Please login to withdraw', false);
     return;
   }
 
@@ -1795,17 +1863,17 @@ function submitWithdraw() {
   const accountName = document.getElementById('accountName').value;
 
   if (isNaN(amount) || amount < 300) {
-    alert('Minimum withdrawal amount is Rs. 300');
+    showMessage('Minimum withdrawal amount is Rs. 300', false);
     return;
   }
 
   if (amount > balance) {
-    alert('Insufficient balance');
+    showMessage('Insufficient balance', false);
     return;
   }
 
   if (!accountNumber || !accountName) {
-    alert('Please enter account details');
+    showMessage('Please enter account details', false);
     return;
   }
 
@@ -1813,9 +1881,14 @@ function submitWithdraw() {
   const now = Date.now();
   if (now - lastWithdrawRequestTime < 4 * 60 * 60 * 1000) {
     const hoursLeft = Math.ceil((4 * 60 * 60 * 1000 - (now - lastWithdrawRequestTime)) / (60 * 60 * 1000));
-    alert(`You can only submit one withdrawal request every 4 hours. Please wait ${hoursLeft.toFixed(1)} more hours.`);
+    showMessage(`You can only submit one withdrawal request every 4 hours. Please wait ${hoursLeft.toFixed(1)} more hours.`, false);
     return;
   }
+
+  // Show loading state
+  const withdrawBtn = document.querySelector('#withdrawSection .submit-btn');
+  withdrawBtn.disabled = true;
+  withdrawBtn.textContent = 'Processing...';
 
   // Deduct amount from balance immediately
   db.collection('users').doc(currentUser.uid).update({
@@ -1835,12 +1908,12 @@ function submitWithdraw() {
   })
   .then(() => {
     lastWithdrawRequestTime = Date.now();
-    alert('Withdrawal request submitted successfully! It will be processed within 24 hours.');
+    showMessage('Withdrawal request submitted successfully! It will be processed within 24 hours.', true);
     document.getElementById('withdrawAmount').value = '';
     document.getElementById('accountNumber').value = '';
     document.getElementById('accountName').value = '';
     loadTransactionHistory();
-    
+
     // Check if user was referred by someone and give 5% of withdrawal to referrer
     return db.collection('users').doc(currentUser.uid).get()
       .then(doc => {
@@ -1860,7 +1933,12 @@ function submitWithdraw() {
       });
   })
   .catch(error => {
-    alert('Error submitting withdrawal: ' + error.message);
+    showMessage('Error submitting withdrawal: ' + error.message, false);
+  })
+  .finally(() => {
+    // Reset button state
+    withdrawBtn.disabled = false;
+    withdrawBtn.textContent = 'Submit Withdrawal Request';
   });
 }
 
@@ -2128,7 +2206,7 @@ function setupCards() {
   document.getElementById("particles-js").style.display = "none";
   document.getElementById("result").innerText = '';
 
-  // Only 9 cards with 3 sets of identical icons
+  // 9 cards with 3 sets of identical icons
   let allIcons = [];
   for (let i = 0; i < 3; i++) {
     // Select 3 random icons
@@ -2147,9 +2225,20 @@ function setupCards() {
 
 function selectBet(amount) {
   if (gameStarted) return;
+  if (balance < amount) {
+    showMessage('Insufficient balance! Please deposit more to play.', false);
+    return;
+  }
+  
   selectedBet = amount;
   document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
+  
+  // Deduct bet amount immediately
+  balance -= amount;
+  updateUserBalance(balance);
+  updateBalanceDisplay();
+  
   revealAndShuffleCards();
 }
 
@@ -2177,10 +2266,10 @@ function revealAndShuffleCards() {
 
 function flipCard(card) {
   if (!selectedBet) {
-    alert("Please select a bet amount before starting!");
+    showMessage("Please select a bet amount before starting!", false);
     return;
   }
-  if (flippedCards.includes(card) || flippedCards.length >= 3) return;
+  if (flippedCards.includes(card) || flippedCards.length >= 4) return;
   if (!gameStarted) gameStarted = true;
 
   card.classList.add('flipped');
@@ -2189,7 +2278,7 @@ function flipCard(card) {
   flipSound.play().catch(() => {});
   flippedCards.push(card);
 
-  if (flippedCards.length === 3) {
+  if (flippedCards.length === 4) {
     setTimeout(checkWin, 1000);
   }
 }
@@ -2214,15 +2303,7 @@ function checkWin() {
     document.getElementById('winSound').play().catch(() => {});
     setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
   } else {
-    // 15% loss on draw as requested
-    const deduction = selectedBet * 0.15;
-    if (balance - deduction < 0) {
-      result.innerText = `💸 Insufficient balance! Please deposit more to continue.`;
-    } else {
-      balance -= deduction;
-      updateUserBalance(balance);
-      result.innerText = `❌ You lost! Rs. ${deduction} deducted.`;
-    }
+    result.innerText = `❌ You lost! Rs. ${selectedBet} deducted.`;
     grid.classList.add('shake');
     document.getElementById('loseSound').play().catch(() => {});
   }
@@ -2233,7 +2314,7 @@ function checkWin() {
     result.innerText = '';
     setupCards();
     if (balance <= 0) {
-      alert("Your balance is too low. Please deposit to play again.");
+      showMessage("Your balance is too low. Please deposit to play again.", false);
       document.getElementById('scratchGame').style.display = 'none';
     }
   }, 2500);
@@ -2339,7 +2420,7 @@ function spawnFruit() {
 function startFruitRound(amount) {
   if (fruitGameStarted || balance < amount) {
     if (balance < amount) {
-      alert("Insufficient balance! Please deposit more to play.");
+      showMessage("Insufficient balance! Please deposit more to play.", false);
     }
     return;
   }
@@ -2385,10 +2466,10 @@ function startFruitRound(amount) {
       winAmount = fruitSelectedBet * 2;
       balance += winAmount;
       updateUserBalance(balance);
-      alert(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`);
+      showMessage(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou won Rs. ${winAmount}!`, true);
       document.getElementById('winSound').play().catch(() => {});
     } else {
-      alert(`❌ Game Over! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`);
+      showMessage(`❌ Game Over! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou lost your bet of Rs. ${fruitSelectedBet}.`, false);
       document.getElementById('loseSound').play().catch(() => {});
     }
 
@@ -2434,7 +2515,7 @@ function selectTicTacToeBet(amount) {
   if (ticTacToeGameActive) return;
 
   if (balance < amount) {
-    alert("Insufficient balance! Please deposit more to play.");
+    showMessage("Insufficient balance! Please deposit more to play.", false);
     return;
   }
 
@@ -2442,6 +2523,11 @@ function selectTicTacToeBet(amount) {
   document.querySelectorAll('#tictactoeGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
 
+  // Deduct bet amount immediately
+  balance -= amount;
+  updateUserBalance(balance);
+  updateBalanceDisplay();
+  
   startTicTacToeRound();
 }
 
@@ -2450,10 +2536,6 @@ function startTicTacToeRound() {
   currentPlayer = 'X';
   ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
   ticTacToeCountdown = 30;
-
-  balance -= ticTacToeBetAmount;
-  updateUserBalance(balance);
-  updateBalanceDisplay();
 
   document.getElementById('tictactoeCountdown').textContent = `Time: ${ticTacToeCountdown}s`;
   ticTacToeTimer = setInterval(() => {
@@ -2511,21 +2593,29 @@ function makeTicTacToeMove(index) {
           if (ticTacToeBoard[i] === '') emptyCells.push(i);
         }
 
+        // Make the game harder (30% chance to win)
         const smartMoves = [];
         const corners = [0, 2, 6, 8];
-        for (const cell of emptyCells) {
-          if (cell === 4) {
-            move = cell;
-            break;
-          } else if (corners.includes(cell)) {
-            smartMoves.push(cell);
+        const edges = [1, 3, 5, 7];
+        const center = 4;
+        
+        // Prioritize center
+        if (emptyCells.includes(center)) {
+          move = center;
+        } 
+        // Then corners
+        else {
+          const availableCorners = corners.filter(c => emptyCells.includes(c));
+          if (availableCorners.length > 0) {
+            move = availableCorners[Math.floor(Math.random() * availableCorners.length)];
           }
-        }
-
-        if (move === undefined && smartMoves.length > 0) {
-          move = smartMoves[Math.floor(Math.random() * smartMoves.length)];
-        } else if (move === undefined) {
-          move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+          // Then edges
+          else {
+            const availableEdges = edges.filter(e => emptyCells.includes(e));
+            if (availableEdges.length > 0) {
+              move = availableEdges[Math.floor(Math.random() * availableEdges.length)];
+            }
+          }
         }
       }
     }
@@ -2605,7 +2695,7 @@ function endTicTacToeGame(playerWon, message) {
 }
 
 // Find Ace Game
-let findAceCards = [];
+let findAceCards = ['K', 'Q', 'A']; // Only King, Queen, and Ace
 let findAceFlippedCards = [];
 let findAceGameActive = false;
 let findAceBetAmount = 0;
@@ -2613,7 +2703,7 @@ let findAceTimer;
 let findAceCountdown = 15;
 
 function setupFindAceGame() {
-  findAceCards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+  findAceCards = ['K', 'Q', 'A'];
 }
 
 function startFindAceGame() {
@@ -2628,7 +2718,7 @@ function startFindAceGame() {
 function startFindAceRound(amount) {
   if (findAceGameActive || balance < amount) {
     if (balance < amount) {
-      alert("Insufficient balance! Please deposit more to play.");
+      showMessage("Insufficient balance! Please deposit more to play.", false);
     }
     return;
   }
@@ -2637,6 +2727,7 @@ function startFindAceRound(amount) {
   findAceGameActive = true;
   findAceFlippedCards = [];
 
+  // Deduct bet amount immediately
   balance -= amount;
   updateUserBalance(balance);
   updateBalanceDisplay();
@@ -2644,7 +2735,8 @@ function startFindAceRound(amount) {
   document.getElementById('findAceResult').textContent = '';
   document.getElementById('findAceGrid').innerHTML = '';
 
-  const cardsToShow = shuffleArray([...findAceCards]).slice(0, 3);
+  // Shuffle the 3 cards (King, Queen, Ace)
+  const cardsToShow = shuffleArray([...findAceCards]);
   const grid = document.getElementById('findAceGrid');
 
   cardsToShow.forEach((card, index) => {
@@ -2674,6 +2766,7 @@ function startFindAceRound(amount) {
       card.classList.remove('flipped');
     });
 
+    // Shuffle animation
     let shuffleCount = 0;
     const shuffleInterval = setInterval(() => {
       const cards = Array.from(document.querySelectorAll('#findAceGrid .card'));
@@ -2761,7 +2854,8 @@ function setupArcheryGame() {
   const cx = W/2;
   const cy = H/2;
 
-  let boardRadius = Math.min(W,H) * 0.42;
+  // Reduce board size by 35% as requested
+  let boardRadius = Math.min(W,H) * 0.42 * 0.65;
 
   const ringDefs = [
     {score:10, colorInner:'#ffdd66', colorOuter:'#ffcc00', radiusRatio:0.06},
@@ -2777,7 +2871,7 @@ function setupArcheryGame() {
   let sight = {
     x: W - 8,
     y: cy,
-    radius: 14, // Increased size by 2x as requested
+    radius: 14,
     movingLeft: true,
     speed: 6.0,
     active: false,
@@ -2947,7 +3041,7 @@ function setupArcheryGame() {
     if (archeryGameActive) return;
 
     if (balance < amount) {
-      alert("Insufficient balance! Please deposit more to play.");
+      showMessage("Insufficient balance! Please deposit more to play.", false);
       return;
     }
 
@@ -2961,6 +3055,7 @@ function setupArcheryGame() {
     sight.active = true;
     archeryGameActive = true;
 
+    // Deduct bet amount immediately
     balance -= amount;
     updateUserBalance(balance);
     updateBalanceDisplay();
