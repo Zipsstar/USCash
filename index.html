@@ -192,25 +192,25 @@ h1::after {
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
 }
 
-/* Game specific thumbnails */
+/* Game specific thumbnails - UPDATED WITH BETTER IMAGES */
 .scratch-thumbnail {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230A0A0A"/><path d="M50,50 L150,150 M50,150 L150,50" stroke="%23FFD700" stroke-width="10"/><circle cx="100" cy="100" r="30" fill="none" stroke="%231E90FF" stroke-width="8"/></svg>');
+  background-image: url('https://images.unsplash.com/photo-1617854818583-09e7f077a156?q=80&w=2070');
 }
 
 .fruit-thumbnail {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230A0A0A"/><circle cx="100" cy="80" r="40" fill="%23FF6347"/><path d="M100,120 L100,180" stroke="%238B4513" stroke-width="8"/><circle cx="80" cy="70" r="5" fill="%23333"/></svg>');
+  background-image: url('https://images.unsplash.com/photo-1619566636858-adf3ef46400b?q=80&w=2070');
 }
 
 .tictactoe-thumbnail {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230A0A0A"/><path d="M40,40 L160,160 M40,160 L160,40" stroke="%231E90FF" stroke-width="8"/><circle cx="100" cy="100" r="30" fill="none" stroke="%23FF6347" stroke-width="8"/></svg>');
+  background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');
 }
 
 .findace-thumbnail {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230A0A0A"/><rect x="30" y="30" width="140" height="140" rx="10" ry="10" fill="%23FFF"/><path d="M100,50 L120,80 L150,90 L125,115 L130,150 L100,135 L70,150 L75,115 L50,90 L80,80 Z" fill="%23FF0000"/></svg>');
+  background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1973');
 }
 
 .archery-thumbnail {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230A0A0A"/><circle cx="100" cy="100" r="60" fill="none" stroke="%23FFD700" stroke-width="4"/><circle cx="100" cy="100" r="45" fill="none" stroke="%23FF6347" stroke-width="4"/><circle cx="100" cy="100" r="30" fill="none" stroke="%231E90FF" stroke-width="4"/><circle cx="100" cy="100" r="15" fill="%23FFD700"/><path d="M30,100 L50,100 M150,100 L170,100 M100,30 L100,50 M100,150 L100,170" stroke="%23FFF" stroke-width="2"/></svg>');
+  background-image: url('https://images.unsplash.com/photo-1551126825-2c9ae98b61e6?q=80&w=1974');
 }
 
 .card-grid {
@@ -1884,7 +1884,7 @@ function showToast(message, type = 'info') {
   } else if (type === 'error') {
     toast.style.borderColor = 'red';
   } else {
-    toast.style.borderColor = var(--primary);
+    toast.style.borderColor = 'var(--primary)';
   }
   
   toast.classList.add('show');
@@ -2264,7 +2264,7 @@ function loadTransactionHistory() {
 
       let statusClass = 'transaction-pending';
       if (trans.status === 'approved') statusClass = 'transaction-approved';
-      if (trans.status === 'rejected') statusClass = 'transaction-rejected';
+  if (trans.status === 'rejected') statusClass = 'transaction-rejected';
 
       item.innerHTML = `
         <div>Type: ${trans.type === 'deposit' ? 'Deposit' : 'Withdrawal'}</div>
@@ -2824,9 +2824,9 @@ function makeTicTacToeMove(index) {
         }
 
         if (move === undefined && smartMoves.length > 0) {
-          move = smartMoves[Math.floor(Math.random() * smartMoves.length)];
+            move = smartMoves[Math.floor(Math.random() * smartMoves.length)];
         } else if (move === undefined) {
-          move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
         }
       }
     }
@@ -3029,8 +3029,10 @@ function endFindAceRound(won, message) {
     setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
   }
 }
+  <script>
+// ... (previous JavaScript code remains the same until the archery game section)
 
-// Archery Game
+// Archery Game - Complete Implementation
 let archeryBet = 0;
 let archeryShots = [];
 let archeryAutoMode = false;
@@ -3058,7 +3060,7 @@ function setupArcheryGame() {
   const cx = W/2;
   const cy = H/2;
 
-  let boardRadius = Math.min(W,H) * 0.35; // Reduced to 35% as requested
+  let boardRadius = Math.min(W,H) * 0.35;
 
   const ringDefs = [
     {score:10, colorInner:'#ffdd66', colorOuter:'#ffcc00', radiusRatio:0.06},
@@ -3201,12 +3203,12 @@ function setupArcheryGame() {
       let allTen = archeryShots.every(s=> s === 10);
       if(allTen){
         balance += archeryBet * 2;
-        document.getElementById('archeryStatus').textContent = `🎉 PERFECT! All 5 are bullseyes. You doubled your bet to ₨${archeryBet*2}`;
+        document.getElementById('archeryStatus').textContent = `🎉 PERFECT! All 5 are bullseyes. You doubled your bet to Rs.${archeryBet*2}`;
         document.getElementById('winSound').play().catch(() => {});
         document.getElementById("particles-js").style.display = "block";
         setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
       } else {
-        document.getElementById('archeryStatus').textContent = `✖ You lost the bet of ₨${archeryBet}.`;
+        document.getElementById('archeryStatus').textContent = `✖ You lost the bet of Rs.${archeryBet}.`;
         document.getElementById('loseSound').play().catch(() => {});
       }
       updateUserBalance(balance);
@@ -3260,7 +3262,7 @@ function setupArcheryGame() {
     updateUserBalance(balance);
     updateBalanceDisplay();
 
-    document.getElementById('archeryStatus').textContent = `Bet ₨ ${archeryBet} placed — 5 shots. Click canvas to shoot when sight passes.`;
+    document.getElementById('archeryStatus').textContent = `Bet Rs. ${archeryBet} placed — 5 shots. Click canvas to shoot when sight passes.`;
   };
 
   window.resetArcheryGame = function(){
