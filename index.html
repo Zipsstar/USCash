@@ -1,27 +1,26 @@
-<div style="background: linear-gradient(145deg, #000000, #0a1a2f); border: 3px solid #1E90FF; border-radius: 25px; padding: 35px; max-width: 700px; margin: 50px auto; font-family: 'Poppins', sans-serif; color: #87CEFA; text-align: center; box-shadow: 0 0 25px #1E90FF; position: relative;">
+<div style="background: linear-gradient(160deg, #000000, #0b1a30); border: none; border-radius: 20px; padding: 25px; width: 90%; max-width: 600px; margin: 40px auto; font-family: 'Poppins', sans-serif; color: #d0e7ff; text-align: center; box-shadow: 0 0 25px rgba(30,144,255,0.6);">
   
   <!-- Heading -->
-  <div style="font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; text-shadow: 0 0 15px #1E90FF;">
-    ⚠ Website Update In Progress
+  <div style="font-size: 26px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; color: #1E90FF;">
+    Website Maintenance
   </div>
   
   <!-- Message -->
-  <div style="font-size: 18px; font-weight: 500; line-height: 1.9; color: #B0C4DE;">
-    We are upgrading the platform to serve you better. <br>
-    Our team is fixing issues and adding powerful new features. <br><br>
-    🔒 Access will resume <span style="color: #ffffff; font-weight: bold;">once the developer allows it.</span><br><br>
-    🙏 Thanks for your patience & trust in us.
+  <div style="font-size: 16px; font-weight: 400; line-height: 1.7; color: #cfd8e3; padding: 0 5px;">
+    Our platform is undergoing scheduled improvements to enhance performance and security.  
+    During this time, access is temporarily restricted.  
+    Please check back after the countdown below.
   </div>
   
   <!-- Countdown Timer -->
-  <div style="margin-top: 30px; font-size: 26px; font-weight: bold; color: #ffffff; padding: 15px; border: 2px solid #1E90FF; border-radius: 15px; display: inline-block; box-shadow: 0 0 15px #1E90FF; background: rgba(0,0,50,0.4);">
-    ⏳ Resuming In: <span id="countdown" style="color: #00BFFF; text-shadow: 0 0 10px #1E90FF;"></span>
+  <div style="margin-top: 25px; font-size: 22px; font-weight: 600; color: #ffffff; padding: 12px 20px; border: 2px solid #1E90FF; border-radius: 12px; display: inline-block; box-shadow: 0 0 15px #1E90FF; background: rgba(10,30,60,0.5);">
+    ⏳ Resuming In: <span id="countdown" style="color: #00BFFF; text-shadow: 0 0 8px #1E90FF;"></span>
   </div>
 
   <!-- Footer -->
-  <div style="margin-top: 30px; font-size: 16px; font-weight: bold; color: #ffffff; border-top: 2px dashed #1E90FF; padding-top: 15px;">
-    🚀 Project: <span style="color: #87CEFA;">PakCashPlay</span> <br>
-    by Malik Jawad & M. Qamar Ul Zaman
+  <div style="margin-top: 25px; font-size: 14px; font-weight: 500; color: #9ab4d9; border-top: 1px solid rgba(30,144,255,0.3); padding-top: 12px;">
+    Project: <span style="color: #1E90FF; font-weight: 600;">USCash</span>  
+    Developed by <span style="color: #87CEFA;">Team USCash</span>
   </div>
 </div>
 
@@ -38,7 +37,7 @@
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Format with leading zeros (e.g. 08:05:09)
+    // Format with leading zeros (HH:MM:SS)
     hours = hours < 10 ? "0" + hours : hours;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -48,7 +47,7 @@
     // If finished
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById("countdown").innerHTML = "✅ Update Completed";
+      document.getElementById("countdown").innerHTML = "Update Completed";
     }
   }, 1000);
 </script>
