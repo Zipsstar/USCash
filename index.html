@@ -4192,6 +4192,39 @@ winSound.volume = 0.5;
 loseSound.volume = 0.5;
 shotSound.volume = 0.3;
 shuffleSound.volume = 0.3;
+<script>
+// here is where you add the functions
+
+function signupUser() {
+    const email = document.getElementById("signup-email").value;
+    const password = document.getElementById("signup-password").value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+        alert("Signup successful!");
+        hideAuthModal();
+    })
+    .catch((error) => {
+        alert(error.message);
+    });
+}
+
+function loginUser() {
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+        alert("Login successful!");
+        hideAuthModal();
+    })
+    .catch((error) => {
+        alert(error.message);
+    });
+}
 </script>
+</body>
+</html>
+
 </body>
 </html>
