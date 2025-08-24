@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +6,16 @@
 <title>USCash 🎮</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css" />
 <style>
 :root {
---primary: #1E3A8A; /* Changed to dark blue */
---secondary: #2563EB; /* Brighter blue */
+--primary: #1E3A8A;
+--secondary: #2563EB;
 --dark: #0A0A0A;
 --light: #FFFFFF;
 --accent: #FF6347;
---gold: #FFD700; /* Kept for some elements */
+--gold: #FFD700;
 }
-
 body {
 font-family: 'Poppins', sans-serif;
 background-color: var(--dark);
@@ -28,7 +27,6 @@ background-image:
 radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.1) 0%, transparent 20%),
 radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 20%);
 }
-
 h1 {
 font-size: 2.8rem;
 background: linear-gradient(90deg, var(--secondary), var(--primary), var(--secondary));
@@ -40,7 +38,6 @@ letter-spacing: 2px;
 position: relative;
 display: inline-block;
 }
-
 h1::after {
 content: '';
 position: absolute;
@@ -50,7 +47,7 @@ width: 100%;
 height: 3px;
 background: linear-gradient(90deg, transparent, var(--secondary), transparent);
 }
-
+  }
 .nav {
 background: linear-gradient(90deg, var(--dark), var(--primary), var(--dark));
 color: var(--light);
@@ -62,7 +59,6 @@ box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
 position: relative;
 z-index: 100;
 }
-
 .nav a {
 color: var(--light);
 text-decoration: none;
@@ -72,14 +68,12 @@ border-radius: 20px;
 transition: all 0.3s;
 font-size: 1.1rem;
 }
-
 .nav a:hover {
 background-color: var(--primary);
 color: var(--light);
 transform: translateY(-3px);
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 .section {
 margin: 30px auto;
 padding: 25px;
@@ -92,7 +86,6 @@ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 position: relative;
 overflow: hidden;
 }
-
 .section::before {
 content: '';
 position: absolute;
@@ -105,12 +98,10 @@ border-image: linear-gradient(45deg, var(--primary), var(--secondary)) 1;
 z-index: -1;
 animation: borderRotate 8s linear infinite;
 }
-
 @keyframes borderRotate {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
-
 .gold-box {
 display: inline-block;
 background: linear-gradient(145deg, var(--secondary), var(--primary));
@@ -125,20 +116,17 @@ transition: all 0.3s;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 border: none;
 }
-
 .gold-box:hover {
 transform: translateY(-5px);
 box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
 background: linear-gradient(145deg, var(--secondary), var(--primary));
 }
-
 .gold-box.active {
 background: var(--dark);
 color: var(--secondary);
 border: 2px solid var(--secondary);
 box-shadow: 0 0 15px var(--secondary);
 }
-
 .game-options {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
@@ -147,7 +135,6 @@ align-items: center;
 justify-content: center;
 padding: 20px 0;
 }
-
 .game-options .gold-box {
 width: 100%;
 height: 180px;
@@ -165,7 +152,6 @@ background-size: cover;
 background-position: center;
 text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
-
 .game-options .gold-box::before {
 content: '';
 position: absolute;
@@ -176,45 +162,41 @@ bottom: 0;
 background: rgba(0, 0, 0, 0.4);
 z-index: 0;
 }
-
 .game-options .gold-box > * {
 position: relative;
 z-index: 1;
 }
-
 .game-options .gold-box:hover {
 transform: scale(1.05);
 box-shadow: 0 0 30px var(--secondary);
 }
-
 .game-options .gold-box i {
 font-size: 3rem;
 margin-bottom: 15px;
 color: var(--secondary);
 text-shadow: 0 0 10px rgba(37, 99, 235, 0.8);
 }
-
+font-size: 3rem;
+margin-bottom: 15px;
+color: var(--secondary);
+text-shadow: 0 0 10px rgba(37, 99, 235, 0.8);
+}
 /* Game specific thumbnails */
 .scratch-thumbnail {
 background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiBmaWxsPSJub25lIj48cGF0aCBkPSJNNDAgNDBIMTYwVjE2MEg0MFY0MFoiIGZpbGw9IiMxRTNBOEEiIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iNjAiIHk9IjYwIiB3aWR0aD0iODAiIGhlaWdodD0iODAiIGZpbGw9IiMyNTYzRUIiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjMwIiBmaWxsPSIjMUUzQThBIi8+PHBhdGggZD0iTTgwIDgwTDEyMCAxMjBNMTIwIDgwTDgwIDEyMCIgc3Ryb2tlPSIjMjU2M0VCIiBzdHJva2Utd2lkdGg9IjQiLz48L3N2Zz4=');
 }
-
 .fruit-thumbnail {
 background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNMTUwIDEwMEMxNTAgNzIgMTI4IDUwIDEwMCA1MEM3MiA1MCA1MCA3MiA1MCAxMDBTNzIgMTUwIDEwMCAxNTBTMTUwIDEyOCAxNTAgMTAwWiIgZmlsbD0iI0ZGMDAwMCIvPjxwYXRoIGQ9Ik0xMjAgOTBDMTIwIDcyIDEwNiA2MCA5MCA2MEM3NCA2MCA2MCA3MiA2MCA5MFM3NCAxMjAgOTAgMTIwUzEyMCAxMDggMTIwIDkwWiIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik04NSA3NUw3NSA4NUw4NSA4NUw3NSA3NSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMTE1IDk1TDEwNSAxMDVNMTE1IDEwNUwxMDUgOTUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkwIDQwVjYwTTExMCA0MFY2MCIgc3Ryb2tlPSIjMDA4MDAwIiBzdHJva2Utd2lkdGg9IjQiLz48L3N2Zz4=');
 }
-
 .tictactoe-thumbnail {
 background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNNjcgNjdoNjZ2NjZINjdaTTY3IDY3aDY2djY2SDY3WiIgZmlsbD0iIzFFM0E4QSIgZmlsbC1vcGFjaXR5PSIwLjEiLz48cGF0aCBkPSJNMTAwIDMzVjE2N00zMyAxMDBIMTY3IiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik02NyA2N0wxMzMgMTMzTTY3IDEzM0wxMzMgNjciIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSI2Ii8+PC9zdmc+');
 }
-
 .findace-thumbnail {
 background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNNDAgNDBIMTYwVjE2MEg0MFY0MFoiIGZpbGw9IiMxRTNBOEEiLz48cGF0aCBkPSJNNjAgNjBIMTQwVjE0MEg2MFY2MFoiIGZpbGw9IiMyNTYzRUIiLz48cGF0aCBkPSJNODAgODBIMTIwVjEyMEg4MFY4MFoiIGZpbGw9IiMxRTNBOEEiLz48cGF0aCBkPSJNODUgODVIMTE1VjExNUg4NVY4NVoiIGZpbGw9IiMyNTYzRUIiLz48cGF0aCBkPSJNOTAgOTBIMTExVjExMEg5MFY5MFoiIGZpbGw9IiMxRTNBOEEiLz48cGF0aCBkPSJNOTUgOTVIMTA1VjEwNUg5NVY5NVoiIGZpbGw9IiMyNTYzRUIiLz48cGF0aCBkPSJNMTAwIDEwMEgxMDBWMTAwSDEwMFoiIGZpbGw9IiMxRTNBOEEiLz48L3N2Zz4=');
 }
-
 .archery-thumbnail {
 background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjMjU2M0VCIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI2MCIgZmlsbD0iIzFFM0E4QSIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNDAiIGZpbGw9IiMwMDgwMDAiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjIwIiBmaWxsPSIjRkYwMDAwIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSIxMCIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik0xODAgMTAwSDE2ME0xNjAgMTAwSDE0ME0xNDAgMTAwSDEyME0xMjAgMTAwSDEwME0xMDAgMTAwSDgwTTgwIDEwMEg2ME02MCAxMDBINDBNNDAgMTAwSDIwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xODAgMTAwSDE2ME0xNjAgMTAwSDE0ME0xNDAgMTAwSDEyME0xMjAgMTAwSDEwME0xMDAgMTAwSDgwTTgwIDEwMEg2ME02MCAxMDBINDBNNDAgMTAwSDIwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIgdHJhbnNmb3JtPSJyb3RhdGUoOTAgMTAwIDEwMCkiLz48cGF0aCBkPSJNMTcwIDEwMEgxMzBNMzAgMTAwSDcwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgMTAwIDEwMCkiLz48cGF0aCBkPSJNMTcwIDEwMEgxMzBNMzAgMTAwSDcwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTM1IDEwMCAxMDApIi8+PC9zdmc+');
 }
-
 .card-grid {
 display: flex;
 flex-wrap: wrap;
@@ -223,7 +205,6 @@ gap: 15px;
 margin: 20px auto;
 max-width: 450px;
 }
-
 .card {
 width: 90px;
 height: 110px;
@@ -243,7 +224,6 @@ background-position: center;
 position: relative;
 transform-style: preserve-3d;
 }
-
 .card .front, .card .back {
 position: absolute;
 width: 100%;
@@ -254,22 +234,18 @@ align-items: center;
 justify-content: center;
 border-radius: 8px;
 }
-
 .card .front {
 background: linear-gradient(145deg, var(--secondary), var(--primary));
 color: var(--light);
 transform: rotateY(180deg);
 }
-
 .card .back {
 background: white;
 border: 2px solid var(--secondary);
 }
-
 .card.flipped {
 transform: rotateY(180deg);
 }
-
 .bet-amounts {
 margin-top: 20px;
 display: flex;
@@ -277,7 +253,6 @@ justify-content: center;
 flex-wrap: wrap;
 gap: 12px;
 }
-
 #result {
 margin-top: 20px;
 font-size: 1.3rem;
@@ -286,15 +261,12 @@ padding: 10px;
 border-radius: 8px;
 background-color: rgba(0, 0, 0, 0.5);
 }
-
 .shake {
 animation: shake 0.5s;
 }
-
 .glow {
 animation: glow 1s infinite alternate;
 }
-
 @keyframes shake {
 0% { transform: translate(1px, 1px) rotate(0deg); }
 20% { transform: translate(-3px, 0px) rotate(-2deg); }
@@ -303,12 +275,10 @@ animation: glow 1s infinite alternate;
 80% { transform: translate(2px, -1px) rotate(2deg); }
 100% { transform: translate(1px, 1px) rotate(0deg); }
 }
-
 @keyframes glow {
 from { box-shadow: 0 0 10px var(--secondary); }
 to { box-shadow: 0 0 20px var(--light); }
 }
-
 #particles-js {
 position: fixed;
 top: 0;
@@ -319,7 +289,6 @@ pointer-events: none;
 z-index: 999;
 display: none;
 }
-
 #welcomePopup {
 position: fixed;
 top: 0; left: 0;
@@ -330,7 +299,6 @@ justify-content: center;
 align-items: center;
 z-index: 10000;
 }
-
 #welcomePopup .popup-content {
 background: var(--dark);
 border: 2px solid var(--secondary);
@@ -343,18 +311,15 @@ position: relative;
 box-shadow: 0 0 30px var(--secondary);
 animation: popupEnter 0.5s ease-out;
 }
-
 @keyframes popupEnter {
 from { transform: scale(0.8); opacity: 0; }
 to { transform: scale(1); opacity: 1; }
 }
-
 #welcomePopup .popup-content h2 {
 color: var(--secondary);
 margin-top: 0;
 font-size: 1.8rem;
 }
-
 #welcomePopup .popup-content .close {
 position: absolute;
 top: 15px;
@@ -365,16 +330,14 @@ color: var(--accent);
 font-size: 24px;
 transition: transform 0.3s;
 }
-
 #welcomePopup .popup-content .close:hover {
 transform: rotate(90deg);
 }
-
+  }
 /* فروٹ شوٹر گیم کے لیے اضافی سٹائلز */
 #fruitGame {
 display: none;
 }
-
 .shoot-area {
 position: relative;
 height: 400px;
@@ -385,7 +348,6 @@ overflow: hidden;
 margin-top: 20px;
 box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
-
 .fruit {
 position: absolute;
 font-size: 3.5em;
@@ -395,11 +357,9 @@ pointer-events: auto;
 transition: transform 0.1s;
 z-index: 10;
 }
-
 .fruit:hover {
 transform: scale(1.1);
 }
-
 #fruitTargetDisplay {
 font-size: 1.5em;
 margin: 15px 0;
@@ -409,25 +369,21 @@ background-color: rgba(0, 0, 0, 0.5);
 border-radius: 8px;
 display: inline-block;
 }
-
 #fruitScoreDisplay {
 margin-top: 15px;
 font-size: 1.3em;
 font-weight: bold;
 }
-
 #fruitCountdown {
 font-size: 1.4em;
 margin-top: 15px;
 color: var(--secondary);
 font-weight: bold;
 }
-
 /* Tic Tac Toe Styles */
 #tictactoeGame {
 display: none;
 }
-
 .tic-tac-toe-board {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
@@ -440,7 +396,6 @@ background-color: rgba(37, 99, 235, 0.1);
 padding: 15px;
 border-radius: 15px;
 }
-
 .tic-tac-toe-cell {
 background-color: #222;
 border: 2px solid var(--secondary);
@@ -452,22 +407,18 @@ cursor: pointer;
 transition: all 0.3s;
 color: var(--secondary);
 }
-
 .tic-tac-toe-cell:hover {
 background-color: #333;
 transform: scale(1.05);
 }
-
 .tic-tac-toe-cell.x {
 color: var(--secondary);
 text-shadow: 0 0 10px var(--secondary);
 }
-
 .tic-tac-toe-cell.o {
 color: var(--accent);
 text-shadow: 0 0 10px var(--accent);
 }
-
 #tictactoeResult {
 margin-top: 20px;
 font-size: 1.3rem;
@@ -476,25 +427,21 @@ padding: 10px;
 background-color: rgba(0, 0, 0, 0.5);
 border-radius: 8px;
 }
-
 #tictactoeCountdown {
 font-size: 1.4rem;
 color: var(--secondary);
 font-weight: bold;
 }
-
 /* Find Ace Game Styles */
 #findAceGame {
 display: none;
 }
-
 #findAceCountdown {
 font-size: 1.5rem;
 margin: 15px 0;
 color: var(--secondary);
 font-weight: bold;
 }
-
 #findAceResult {
 margin-top: 20px;
 font-size: 1.3rem;
@@ -503,19 +450,16 @@ padding: 10px;
 background-color: rgba(0, 0, 0, 0.5);
 border-radius: 8px;
 }
-
 /* Archery Game Styles */
 #archeryGame {
 display: none;
 }
-
 .archery-container {
 display: flex;
 flex-direction: column;
 align-items: center;
 gap: 20px;
 }
-
 .archery-canvas-container {
 position: relative;
 width: 520px;
@@ -523,7 +467,6 @@ height: 520px;
 max-width: 100%;
 margin: 0 auto;
 }
-
 #archeryCanvas {
 background: transparent;
 border-radius: 12px;
@@ -532,7 +475,6 @@ max-width: 100%;
 height: auto;
 border: 2px solid var(--secondary);
 }
-
 .archery-controls {
 display: flex;
 flex-direction: column;
@@ -540,20 +482,17 @@ gap: 15px;
 width: 100%;
 max-width: 520px;
 }
-
 .archery-bets {
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
 gap: 10px;
 }
-
 .archery-score-row {
 display: flex;
 justify-content: center;
 gap: 10px;
 }
-
 .archery-score-box {
 width: 48px;
 height: 48px;
@@ -566,7 +505,6 @@ justify-content: center;
 font-weight: 800;
 color: var(--secondary);
 }
-
 #archeryStatus {
 font-size: 1.1rem;
 color: var(--light);
@@ -575,7 +513,6 @@ padding: 10px;
 background-color: rgba(0, 0, 0, 0.5);
 border-radius: 8px;
 }
-
 /* Auth Modal Styles */
 .auth-modal {
 display: none;
@@ -589,7 +526,6 @@ z-index: 1000;
 align-items: center;
 justify-content: center;
 }
-
 .auth-content {
 background-color: var(--dark);
 border: 2px solid var(--secondary);
@@ -601,18 +537,15 @@ color: var(--light);
 box-shadow: 0 0 30px var(--secondary);
 animation: modalFadeIn 0.4s ease-out;
 }
-
 @keyframes modalFadeIn {
 from { opacity: 0; transform: translateY(-20px); }
 to { opacity: 1; transform: translateY(0); }
 }
-
 .auth-tabs {
 display: flex;
 margin-bottom: 25px;
 border-bottom: 2px solid var(--secondary);
 }
-
 .auth-tab {
 flex: 1;
 padding: 12px;
@@ -622,24 +555,19 @@ border-bottom: 3px solid transparent;
 font-weight: bold;
 transition: all 0.3s;
 }
-
 .auth-tab.active {
 border-bottom: 3px solid var(--secondary);
 color: var(--secondary);
 }
-
 .auth-tab:hover {
 background-color: rgba(37, 99, 235, 0.1);
 }
-
 .auth-form {
 display: none;
 }
-
 .auth-form.active {
 display: block;
 }
-
 .auth-form input {
 width: 100%;
 padding: 12px;
@@ -651,13 +579,11 @@ color: var(--light);
 font-size: 1rem;
 transition: all 0.3s;
 }
-
 .auth-form input:focus {
 outline: none;
 border-color: var(--secondary);
 box-shadow: 0 0 10px var(--secondary);
 }
-
 .auth-form button {
 width: 100%;
 padding: 12px;
@@ -671,20 +597,17 @@ font-size: 1.1rem;
 transition: all 0.3s;
 margin-top: 10px;
 }
-
 .auth-form button:hover {
 background: linear-gradient(145deg, var(--secondary), var(--primary));
 transform: translateY(-3px);
 box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
 }
-
 .auth-form button:disabled {
 background: #444;
 cursor: not-allowed;
 transform: none;
 box-shadow: none;
 }
-
 .forgot-password {
 text-align: right;
 margin-top: -15px;
@@ -694,12 +617,10 @@ color: var(--secondary);
 cursor: pointer;
 transition: color 0.3s;
 }
-
 .forgot-password:hover {
 color: var(--secondary);
 text-decoration: underline;
 }
-
 /* Balance and User Info Styles */
 .user-info {
 display: flex;
@@ -709,7 +630,6 @@ gap: 20px;
 margin: 20px 0;
 flex-wrap: wrap;
 }
-
 .balance-container {
 display: flex;
 align-items: center;
@@ -720,25 +640,21 @@ border-radius: 30px;
 border: 1px solid var(--secondary);
 box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
 }
-
 #balanceAmount {
 font-weight: bold;
 font-size: 1.2rem;
 color: var(--secondary);
 }
-
 .refresh-balance {
 cursor: pointer;
 color: var(--secondary);
 font-size: 1.3rem;
 transition: transform 0.3s;
 }
-
 .refresh-balance:hover {
 transform: rotate(180deg);
 color: var(--secondary);
 }
-
 #userDisplay {
 display: flex;
 align-items: center;
@@ -749,49 +665,41 @@ border: 1px solid var(--secondary);
 box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
 gap: 10px;
 }
-
 #usernameDisplay {
 font-weight: bold;
 color: var(--secondary);
-font-size: 0.84rem; /* 40% smaller */
+font-size: 0.84rem;
 }
-
 #phoneDisplay {
 font-weight: bold;
 color: var(--secondary);
-font-size: 0.84rem; /* 40% smaller */
+font-size: 0.84rem;
 }
-
 .country-flag {
 width: 24px;
 height: 16px;
 border-radius: 2px;
 box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
-
 .verified-badge {
 color: var(--secondary);
 margin-left: 5px;
-font-size: 0.84rem; /* 40% smaller */
+font-size: 0.84rem;
 }
-
 /* Deposit/Withdraw Styles */
 #depositSection, #withdrawSection, #moreSection, #vipSection {
 display: none;
 }
-
 .form-group {
 margin-bottom: 20px;
 text-align: left;
 }
-
 .form-group label {
 display: block;
 margin-bottom: 8px;
 color: var(--secondary);
 font-weight: bold;
 }
-
 .form-group input, .form-group select {
 width: 100%;
 padding: 12px;
@@ -802,13 +710,11 @@ color: var(--light);
 font-size: 1rem;
 transition: all 0.3s;
 }
-
 .form-group input:focus, .form-group select:focus {
 outline: none;
 border-color: var(--secondary);
 box-shadow: 0 0 10px var(--secondary);
 }
-
 .submit-btn {
 background: linear-gradient(145deg, var(--secondary), var(--primary));
 color: var(--light);
@@ -822,13 +728,11 @@ font-size: 1.1rem;
 transition: all 0.3s;
 display: inline-block;
 }
-
 .submit-btn:hover {
 background: linear-gradient(145deg, var(--secondary), var(--primary));
 transform: translateY(-3px);
 box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
 }
-
 .transaction-history {
 margin-top: 30px;
 max-height: 400px;
@@ -838,7 +742,6 @@ background-color: rgba(0, 0, 0, 0.3);
 border-radius: 10px;
 border: 1px solid rgba(37, 99, 235, 0.3);
 }
-
 .transaction-item {
 background-color: rgba(30, 30, 30, 0.8);
 padding: 15px;
@@ -847,28 +750,22 @@ border-radius: 8px;
 border-left: 4px solid var(--secondary);
 transition: transform 0.3s;
 }
-
 .transaction-item:hover {
 transform: translateX(5px);
 }
-
 .transaction-amount {
 font-weight: bold;
 font-size: 1.1rem;
 }
-
 .transaction-approved {
 color: lime;
 }
-
 .transaction-pending {
 color: var(--secondary);
 }
-
 .transaction-rejected {
 color: var(--accent);
 }
-
 /* VIP Section Styles */
 .referral-code {
 background-color: rgba(0, 0, 0, 0.5);
@@ -882,7 +779,6 @@ font-size: 1.2rem;
 color: var(--secondary);
 position: relative;
 }
-
 .referral-code-copy {
 position: absolute;
 right: 10px;
@@ -891,7 +787,6 @@ color: var(--secondary);
 cursor: pointer;
 font-size: 1rem;
 }
-
 .referral-stats {
 display: flex;
 justify-content: space-around;
@@ -899,7 +794,6 @@ margin: 25px 0;
 flex-wrap: wrap;
 gap: 15px;
 }
-
 .stat-box {
 background-color: rgba(0, 0, 0, 0.5);
 padding: 20px;
@@ -909,24 +803,20 @@ min-width: 120px;
 flex: 1;
 transition: transform 0.3s;
 }
-
 .stat-box:hover {
 transform: translateY(-5px);
 box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
 }
-
 .stat-label {
 color: var(--light);
 margin-bottom: 10px;
 font-size: 0.9rem;
 }
-
 .stat-value {
 font-size: 1.8rem;
 font-weight: bold;
 color: var(--secondary);
 }
-
 /* Announcement Bar */
 .announcement-bar {
 position: relative;
@@ -939,7 +829,6 @@ width: 100%;
 border-top: 1px solid var(--secondary);
 border-bottom: 1px solid var(--secondary);
 }
-
 .announcement-content {
 display: inline-block;
 white-space: nowrap;
@@ -948,17 +837,14 @@ animation: scroll 20s linear infinite;
 font-size: 1.1rem;
 text-shadow: 0 0 5px var(--secondary);
 }
-
 .announcement-content span {
 color: var(--secondary);
 font-weight: bold;
 }
-
 @keyframes scroll {
 0% { transform: translateX(0); }
 100% { transform: translateX(-100%); }
 }
-
 /* Message Box */
 .message-box {
 position: fixed;
@@ -975,16 +861,13 @@ z-index: 10000;
 opacity: 0;
 transition: opacity 0.3s;
 }
-
 .message-box.show {
 opacity: 1;
 }
-
 /* Admin Panel Styles */
 #adminSection {
 display: none;
 }
-
 .admin-controls {
 display: flex;
 flex-wrap: wrap;
@@ -992,7 +875,6 @@ gap: 15px;
 margin-bottom: 20px;
 justify-content: center;
 }
-
 .admin-controls input {
 padding: 10px;
 border-radius: 8px;
@@ -1000,28 +882,23 @@ border: 1px solid #444;
 background-color: #222;
 color: var(--light);
 }
-
 .admin-table {
 width: 100%;
 border-collapse: collapse;
 margin-top: 20px;
 }
-
 .admin-table th, .admin-table td {
 padding: 12px;
 text-align: left;
 border-bottom: 1px solid rgba(37, 99, 235, 0.3);
 }
-
 .admin-table th {
 background-color: rgba(37, 99, 235, 0.1);
 color: var(--secondary);
 }
-
 .admin-table tr:hover {
 background-color: rgba(37, 99, 235, 0.05);
 }
-
 .admin-action {
 background: var(--secondary);
 color: var(--light);
@@ -1032,11 +909,9 @@ cursor: pointer;
 margin: 0 5px;
 font-weight: bold;
 }
-
 .admin-action.reject {
 background: var(--accent);
 }
-
 /* Message Icon */
 .message-icon {
 position: fixed;
@@ -1055,7 +930,6 @@ box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
 z-index: 1000;
 font-size: 1.5rem;
 }
-
 .message-notification {
 position: absolute;
 top: -5px;
@@ -1071,7 +945,6 @@ align-items: center;
 justify-content: center;
 display: none;
 }
-
 .message-popup {
 position: fixed;
 bottom: 80px;
@@ -1085,20 +958,17 @@ box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 z-index: 1000;
 display: none;
 }
-
 .message-popup h3 {
 margin-top: 0;
 color: var(--secondary);
 border-bottom: 1px solid var(--secondary);
 padding-bottom: 10px;
 }
-
 .message-list {
 max-height: 200px;
 overflow-y: auto;
 margin: 10px 0;
 }
-
 .message-item {
 padding: 8px;
 margin-bottom: 8px;
@@ -1106,88 +976,71 @@ background: rgba(37, 99, 235, 0.1);
 border-radius: 5px;
 font-size: 0.9rem;
 }
-
 .message-date {
 font-size: 0.7rem;
 color: #888;
 margin-top: 4px;
 }
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
 h1 {
 font-size: 2.2rem;
 }
-
 .game-options {
 grid-template-columns: 1fr;
 }
-
 .game-options .gold-box {
 width: 100%;
 height: 140px;
 font-size: 1.2rem;
 }
-
 .tic-tac-toe-board {
 width: 280px;
 height: 280px;
 }
-
 .archery-canvas-container {
 width: 100%;
 height: auto;
 }
-
 .nav a {
 padding: 6px 10px;
 font-size: 0.9rem;
 }
-
 .section {
 padding: 20px;
 }
-
 .user-info {
 flex-direction: column;
 gap: 10px;
 }
-
 #usernameDisplay, #phoneDisplay, .verified-badge {
-font-size: 0.7rem; /* Adjusted for mobile */
+font-size: 0.7rem;
 }
 }
-
 @media (max-width: 480px) {
 h1 {
 font-size: 1.8rem;
 }
-
 .game-options .gold-box {
 height: 120px;
 font-size: 1rem;
 }
-
 .game-options .gold-box i {
 font-size: 2rem;
 }
-
 .tic-tac-toe-board {
 width: 240px;
 height: 240px;
 }
-
 .card {
 width: 70px;
 height: 90px;
 font-size: 1.8rem;
 }
-
 #usernameDisplay, #phoneDisplay, .verified-badge {
-font-size: 0.6rem; /* Adjusted for small mobile */
+font-size: 0.6rem;
 }
 }
-
 /* Game Thumbnails (Blue/Black) */
 .games-wrap{--blue:#2563EB;--bg:#0b0b0b;--card:#121212}
 .games-wrap{background:transparent;color:var(--blue);font-family:system-ui,Segoe UI,Arial}
@@ -1201,7 +1054,6 @@ box-shadow:0 8px 24px rgba(0,0,0,.45);transition:transform .25s ease, box-shadow
 radial-gradient(120% 120% at 0% 0%,rgba(37, 99, 235,.12),transparent 40%),
 radial-gradient(120% 120% at 100% 0%,rgba(37, 99, 235,.08),transparent 45%),
 linear-gradient(#1a1a1a,#0f0f0f);}
-/* subtle noise */
 .thumb:after{content:"";position:absolute;inset:0;opacity:.08;pointer-events:none;
 background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");background-size:180px 180px;mix-blend-mode:overlay}
 .badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:var(--blue);
@@ -1210,26 +1062,59 @@ border:1px solid rgba(37, 99, 235,.35);padding:4px 8px;border-radius:999px;font-
 padding:10px 12px;border-top:1px solid rgba(37, 99, 235,.14);color:#d6e9f6}
 .label span{font-size:14px}
 .play{font-size:12px;border:1px solid rgba(37, 99, 235,.35);padding:4px 8px;border-radius:999px}
-/* Icon layer (emoji placeholder) */
 .icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
 font-size:56px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6))}
-/* Optional: replace emoji with your own images */
 .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
 .game-card a{color:inherit;text-decoration:none;display:block}
+/* Game Modal Styles */
+.game-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.88);
+  z-index: 10010;
+  align-items: center;
+  justify-content: center;
+}
+.game-modal-content {
+  background: #181d2a;
+  border-radius: 22px;
+  border: 3px solid var(--secondary);
+  box-shadow: 0 0 40px var(--secondary);
+  padding: 30px 26px;
+  min-width: 350px;
+  min-height: 300px;
+  max-width: 98vw;
+  max-height: 98vh;
+  position: relative;
+  overflow-y: auto;
+}
+.game-modal-content .close {
+  position: absolute; top: 10px; right: 20px;
+  color: var(--accent); font-size: 2rem; cursor: pointer;
+  z-index: 10;
+}
+#chessGameBoard {
+  margin: 0 auto;
+}
+#chessStatus { margin: 16px 0 8px; font-size: 1.1rem; color: var(--secondary);}
+#chessTimer {
+  color: var(--accent);
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
 </style>
-</head>
+  </head>
 <body>
 <div id="particles-js"></div>
-
 <!-- Message Box -->
 <div id="messageBox" class="message-box"></div>
-
 <!-- Message Icon -->
 <div class="message-icon" onclick="toggleMessages()">
 <i class="fas fa-bell"></i>
 <div class="message-notification" id="messageNotification"></div>
 </div>
-
 <div class="message-popup" id="messagePopup">
 <h3>Announcements</h3>
 <div class="message-list" id="messageList">
@@ -1237,14 +1122,12 @@ font-size:56px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6))}
 </div>
 <button class="gold-box" onclick="closeMessages()">Close</button>
 </div>
-
 <!-- Announcement Bar -->
 <div class="announcement-bar">
 <div class="announcement-content">
 <span>📢 Stay connected with us!</span> For deposits, contact VIP users (verified with blue tick) or WhatsApp us at USCash WhatsApp channel
 </div>
 </div>
-
 <div id="welcomePopup" style="display:none;">
 <div class="popup-content">
 <div class="close" onclick="document.getElementById('welcomePopup').style.display='none'">×</div>
@@ -1256,7 +1139,6 @@ Let's Play!
 </button>
 </div>
 </div>
-
 <!-- Auth Modals -->
 <div id="authModal" class="auth-modal">
 <div class="auth-content">
@@ -1264,14 +1146,12 @@ Let's Play!
 <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
 <div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
 </div>
-
 <div id="loginForm" class="auth-form active">
 <input type="email" id="loginEmail" placeholder="Email" required />
 <input type="password" id="loginPassword" placeholder="Password" required />
 <div class="forgot-password" onclick="showForgotPassword()">Forgot Password?</div>
 <button onclick="loginUser()">Login</button>
 </div>
-
 <div id="signupForm" class="auth-form">
 <input type="text" id="signupName" placeholder="Full Name" required />
 <input type="tel" id="signupPhone" placeholder="Phone Number" required />
@@ -1280,7 +1160,6 @@ Let's Play!
 <input type="text" id="referralCode" placeholder="Referral Code (Optional)" />
 <button onclick="signupUser()">Sign Up</button>
 </div>
-
 <div id="forgotPasswordForm" class="auth-form">
 <input type="email" id="forgotEmail" placeholder="Enter your email" required />
 <button onclick="resetPassword()">Reset Password</button>
@@ -1288,9 +1167,7 @@ Let's Play!
 </div>
 </div>
 </div>
-
 <h1>USCash 🎮</h1>
-
 <div class="user-info">
 <div id="userDisplay" style="display:none;">
 <img src="https://flagcdn.com/w20/pk.png" class="country-flag" alt="Country Flag" id="countryFlag">
@@ -1310,7 +1187,6 @@ Let's Play!
 <button class="gold-box" onclick="logoutUser()">Logout</button>
 </div>
 </div>
-
 <div class="nav">
 <a href="#" onclick="showSection('home')"><i class="fas fa-home"></i> Home</a>
 <a href="#" onclick="showSection('deposit')"><i class="fas fa-money-bill-wave"></i> Deposit</a>
@@ -1319,16 +1195,13 @@ Let's Play!
 <a href="#" onclick="showSection('status')" id="statusLink" style="display:none;"><i class="fas fa-info-circle"></i> Status</a>
 <a href="#" onclick="showSection('admin')" id="adminLink" style="display:none;"><i class="fas fa-user-shield"></i> Admin</a>
 </div>
-
 <!-- Home Section -->
 <div class="section" id="homeSection">
 <h2>Select Game</h2>
-
 <!-- Game Thumbnails -->
 <section class="games-wrap">
 <div class="games-title">Select Game</div>
 <div class="game-grid">
-
 <!-- Scratch Match -->
 <article class="game-card">
 <a href="#/scratch-match" onclick="startCardGame(); return false;">
@@ -1339,7 +1212,6 @@ Let's Play!
 <div class="label"><span>Scratch Match</span><span class="play">Play</span></div>
 </a>
 </article>
-
 <!-- Fruit Shooting -->
 <article class="game-card">
 <a href="#/fruit-shooting" onclick="startFruitGame(); return false;">
@@ -1350,7 +1222,6 @@ Let's Play!
 <div class="label"><span>Fruit Shooting</span><span class="play">Play</span></div>
 </a>
 </article>
-
 <!-- Tic Tac Toe -->
 <article class="game-card">
 <a href="#/tic-tac-toe" onclick="startTicTacToeGame(); return false;">
@@ -1361,7 +1232,6 @@ Let's Play!
 <div class="label"><span>Tic Tac Toe</span><span class="play">Play</span></div>
 </a>
 </article>
-
 <!-- Find Ace -->
 <article class="game-card">
 <a href="#/find-ace" onclick="startFindAceGame(); return false;">
@@ -1372,7 +1242,6 @@ Let's Play!
 <div class="label"><span>Find Ace</span><span class="play">Play</span></div>
 </a>
 </article>
-
 <!-- Archery Challenge -->
 <article class="game-card">
 <a href="#/archery-challenge" onclick="startArcheryGame(); return false;">
@@ -1383,11 +1252,19 @@ Let's Play!
 <div class="label"><span>Archery Challenge</span><span class="play">Play</span></div>
 </a>
 </article>
-
+<!-- Chess Game -->
+<article class="game-card">
+<a href="#/chess" onclick="startChessGameModal(); return false;">
+<div class="thumb" aria-label="Chess">
+<div class="badge">Pro</div>
+<div class="icon">♟️</div>
+</div>
+<div class="label"><span>Chess (Hard)</span><span class="play">Play</span></div>
+</a>
+</article>
 </div>
 </section>
 </div>
-
 <!-- Scratch Game -->
 <div class="section" id="scratchGame" style="display:none;">
 <h2><i class="fas fa-scroll"></i> Scratch & Match</h2>
@@ -1402,7 +1279,6 @@ Let's Play!
 <div class="card-grid" id="cardGrid"></div>
 <div id="result"></div>
 </div>
-
 <!-- Fruit Game -->
 <div class="section" id="fruitGame" style="display:none;">
 <h2><i class="fas fa-apple-alt"></i> Fruit Shooting</h2>
@@ -1418,7 +1294,6 @@ Let's Play!
 <div class="shoot-area" id="shootArea"></div>
 <div id="fruitScoreDisplay"></div>
 </div>
-
 <!-- Tic Tac Toe Game -->
 <div class="section" id="tictactoeGame" style="display:none;">
 <h2><i class="fas fa-times"></i> Tic Tac Toe</h2>
@@ -1432,7 +1307,6 @@ Let's Play!
 <div class="tic-tac-toe-board" id="ticTacToeBoard"></div>
 <div id="tictactoeResult"></div>
 </div>
-
 <!-- Find Ace Game -->
 <div class="section" id="findAceGame" style="display:none;">
 <h2><i class="fas fa-search"></i> Find Ace</h2>
@@ -1446,7 +1320,6 @@ Let's Play!
 <div class="card-grid" id="findAceGrid"></div>
 <div id="findAceResult"></div>
 </div>
-
 <!-- Archery Game -->
 <div class="section" id="archeryGame" style="display:none;">
 <h2><i class="fas fa-bullseye"></i> Archery Challenge</h2>
@@ -1454,7 +1327,6 @@ Let's Play!
 <div class="archery-canvas-container">
 <canvas id="archeryCanvas" width="520" height="520"></canvas>
 </div>
-
 <div class="archery-controls">
 <div class="bet-amounts">
 <div class="gold-box" onclick="selectArcheryBet(20)">Rs. 20</div>
@@ -1463,7 +1335,6 @@ Let's Play!
 <div class="gold-box" onclick="selectArcheryBet(150)">Rs. 150</div>
 <div class="gold-box" onclick="selectArcheryBet(200)">Rs. 200</div>
 </div>
-
 <div class="archery-score-row" id="archeryScoreRow">
 <div class="archery-score-box"></div>
 <div class="archery-score-box"></div>
@@ -1471,9 +1342,7 @@ Let's Play!
 <div class="archery-score-box"></div>
 <div class="archery-score-box"></div>
 </div>
-
 <div id="archeryStatus">Pick a bet to start</div>
-
 <div style="display: flex; justify-content: center; gap: 10px;">
 <button class="gold-box" onclick="resetArcheryGame()">Reset</button>
 <button class="gold-box" onclick="toggleArcheryAuto()" id="archeryAutoBtn">Auto: OFF</button>
@@ -1481,7 +1350,6 @@ Let's Play!
 </div>
 </div>
 </div>
-
 <!-- Deposit Section -->
 <div class="section" id="depositSection" style="display:none;">
 <h2><i class="fas fa-money-bill-wave"></i> Deposit</h2>
@@ -1503,13 +1371,11 @@ Let's Play!
 <input type="text" id="transactionId" placeholder="Enter transaction reference" />
 </div>
 <button class="submit-btn" onclick="submitDeposit()">Submit Deposit Request</button>
-
 <div class="transaction-history" id="depositHistory">
 <h3><i class="fas fa-history"></i> Deposit History</h3>
 <!-- Will be populated by JavaScript -->
 </div>
 </div>
-
 <!-- Withdraw Section -->
 <div class="section" id="withdrawSection" style="display:none;">
 <h2><i class="fas fa-wallet"></i> Withdraw</h2>
@@ -1535,18 +1401,15 @@ Let's Play!
 <input type="text" id="accountName" placeholder="Enter account holder name" />
 </div>
 <button class="submit-btn" onclick="submitWithdraw()">Submit Withdrawal Request</button>
-
 <div class="transaction-history" id="withdrawHistory">
 <h3><i class="fas fa-history"></i> Withdrawal History</h3>
 <!-- Will be populated by JavaScript -->
 </div>
 </div>
-
 <!-- VIP Section -->
 <div class="section" id="vipSection" style="display:none;">
 <h2><i class="fas fa-crown"></i> VIP Program</h2>
 <p style="color: var(--secondary);">Earn money by referring friends! When a user refers someone, the referral must make their first deposit. Only then will the referring user receive 5% of the referral's next withdrawal amount.</p>
-
 <div class="referral-stats">
 <div class="stat-box">
 <div class="stat-label">Total Referrals</div>
@@ -1561,13 +1424,11 @@ Let's Play!
 <div class="stat-value" id="vipStatus">Basic</div>
 </div>
 </div>
-
 <h3><i class="fas fa-user-plus"></i> Your Referral Code</h3>
 <div class="referral-code" id="userReferralCode">
 Login to see your code
 <i class="far fa-copy referral-code-copy" onclick="copyReferralCode()" title="Copy to clipboard" style="display:none;"></i>
 </div>
-
 <h3><i class="fas fa-info-circle"></i> How It Works</h3>
 <ol style="text-align: left; padding-left: 20px;">
 <li>Share your unique referral code with friends</li>
@@ -1576,44 +1437,35 @@ Login to see your code
 <li>Withdraw your earnings anytime</li>
 <li>Reach higher VIP levels for more benefits</li>
 </ol>
-
 <button class="submit-btn" onclick="shareReferralCode()" style="margin-top: 20px;">
 <i class="fas fa-share-alt"></i> Share Your Referral Code
 </button>
 </div>
-
 <!-- Status Section (replaces More Section) -->
 <div class="section" id="statusSection" style="display:none;">
 <h2><i class="fas fa-info-circle"></i> Status</h2>
-
 <h3><i class="fas fa-clock"></i> Deposit Request Status</h3>
 <div class="transaction-history" id="depositStatus">
 <!-- Will be populated by JavaScript -->
 </div>
-
 <h3><i class="fas fa-clock"></i> Withdrawal Request Status</h3>
 <div class="transaction-history" id="withdrawStatus">
 <!-- Will be populated by JavaScript -->
 </div>
-
 <h3><i class="fas fa-exchange-alt"></i> Transaction History</h3>
 <div class="transaction-history" id="fullTransactionHistory">
 <!-- Will be populated by JavaScript -->
 </div>
-
 <button class="submit-btn" onclick="refreshAllData()" style="margin-top: 20px;">
 <i class="fas fa-sync-alt"></i> Refresh All Data
 </button>
 </div>
-
 <!-- Admin Section -->
 <div class="section" id="adminSection" style="display:none;">
 <h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
-
 <div class="admin-controls">
 <input type="text" id="searchUser" placeholder="Search by name..." oninput="searchUsers()">
 </div>
-
 <h3>Users</h3>
 <div class="transaction-history">
 <table class="admin-table">
@@ -1631,7 +1483,6 @@ Login to see your code
 </tbody>
 </table>
 </div>
-
 <h3>Deposit Requests</h3>
 <div class="transaction-history">
 <table class="admin-table">
@@ -1651,7 +1502,6 @@ Login to see your code
 </tbody>
 </table>
 </div>
-
 <h3>Withdrawal Requests</h3>
 <div class="transaction-history">
 <table class="admin-table">
@@ -1671,14 +1521,12 @@ Login to see your code
 </tbody>
 </table>
 </div>
-
 <h3>Send Announcement</h3>
 <div class="form-group">
 <textarea id="announcementText" placeholder="Enter announcement message..." rows="3" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background-color: #222; color: var(--light);"></textarea>
 </div>
 <button class="submit-btn" onclick="sendAnnouncement()">Send Announcement</button>
 </div>
-
 <audio id="bgMusic" loop>
 <source src="https://cdn.pixabay.com/audio/2023/03/16/audio_98b541c254.mp3" type="audio/mp3">
 </audio>
@@ -1697,15 +1545,15 @@ Login to see your code
 <audio id="shuffleSound">
 <source src="https://cdn.pixabay.com/download/audio/2022/03/04/audio_6b08f2e9f8.mp3" type="audio/mp3">
 </audio>
-
 <!-- Firebase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-<script>
-// Firebase configuration
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.11.0/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stockfish@16.1.2/dist/stockfish.min.js"></script>
+  // Firebase configuration
 const firebaseConfig = {
 apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
 authDomain: "pakcashplay.firebaseapp.com",
@@ -1714,28 +1562,23 @@ storageBucket: "pakcashplay.appspot.com",
 messagingSenderId: "551195851632",
 appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
 };
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-
 // Game variables
 let balance = 0;
 let selectedBet = null;
 let gameStarted = false;
 let currentUser = null;
 let lastWithdrawRequestTime = 0;
-
 // Initialize games when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
 checkAuthState();
 setupGames();
-
 // Remove welcome popup
 document.getElementById('welcomePopup').style.display = 'none';
 localStorage.setItem('welcomeShown', 'true');
-
 // Start background music
 try {
 document.getElementById('bgMusic').volume = 0.3;
@@ -1744,7 +1587,6 @@ document.getElementById('bgMusic').play();
 console.log("Audio autoplay blocked:", e);
 }
 });
-
 // Authentication functions
 function checkAuthState() {
 auth.onAuthStateChanged(user => {
@@ -1755,7 +1597,6 @@ document.getElementById('logoutButton').style.display = 'block';
 document.getElementById('userDisplay').style.display = 'flex';
 document.getElementById('statusLink').style.display = 'block';
 loadUserData();
-
 // Check if user is admin
 db.collection('users').doc(user.uid).get()
 .then(doc => {
@@ -1763,7 +1604,6 @@ if (doc.exists) {
 const userData = doc.data();
 if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com' || userData.email === 'kafe2999@gmail.com') {
 document.getElementById('adminLink').style.display = 'block';
-
 // Add star icon for admin users
 if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com' || userData.email === 'kafe2999@gmail.com') {
 document.getElementById('verifiedBadge').style.display = 'inline-block';
@@ -1785,20 +1625,16 @@ document.getElementById('balanceAmount').textContent = '0';
 }
 });
 }
-
 function showAuthModal(tab) {
 document.getElementById('authModal').style.display = 'flex';
 switchAuthTab(tab);
 }
-
 function hideAuthModal() {
 document.getElementById('authModal').style.display = 'none';
 }
-
 function switchAuthTab(tab) {
 document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
 document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-
 if (tab === 'login') {
 document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
 document.getElementById('loginForm').classList.add('active');
@@ -1807,35 +1643,28 @@ document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
 document.getElementById('signupForm').classList.add('active');
 }
 }
-
 function showForgotPassword() {
 document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
 document.getElementById('forgotPasswordForm').classList.add('active');
 }
-
 function backToLogin() {
 switchAuthTab('login');
 }
-
 function loginUser() {
 const email = document.getElementById('loginEmail').value;
 const password = document.getElementById('loginPassword').value;
-
 if (!email || !password) {
 showMessage('Please enter both email and password', 'error');
 return;
 }
-
 // Show loading state
 const loginBtn = document.querySelector('#loginForm button');
 loginBtn.disabled = true;
 loginBtn.textContent = 'Logging in...';
-
 auth.signInWithEmailAndPassword(email, password)
 .then(() => {
 hideAuthModal();
 showMessage('Login successful! Welcome back.', 'success');
-
 // Update last login time
 if (currentUser) {
 db.collection('users').doc(currentUser.uid).update({
@@ -1866,37 +1695,31 @@ loginBtn.disabled = false;
 loginBtn.textContent = 'Login';
 });
 }
-
 function signupUser() {
 const email = document.getElementById('signupEmail').value;
 const password = document.getElementById('signupPassword').value;
 const name = document.getElementById('signupName').value;
 const phone = document.getElementById('signupPhone').value;
 const referralCode = document.getElementById('referralCode').value;
-
 // Validate all required fields
 if (!email || !password || !name || !phone) {
 showMessage('Please fill in all required fields', 'error');
 return;
 }
-
 // Validate email format
 if (!validateEmail(email)) {
 showMessage('Please enter a valid email address', 'error');
 return;
 }
-
 // Validate password length
 if (password.length < 6) {
 showMessage('Password should be at least 6 characters', 'error');
 return;
 }
-
 // Show loading state
 const signupBtn = document.querySelector('#signupForm button');
 signupBtn.disabled = true;
 signupBtn.textContent = 'Creating account...';
-
 // Create user with Firebase Auth
 auth.createUserWithEmailAndPassword(email, password)
 .then((userCredential) => {
@@ -1905,8 +1728,8 @@ return db.collection('users').doc(userCredential.user.uid).set({
 name: name,
 phone: phone,
 email: email,
-balance: 0, // No welcome bonus
-startingBalance: 0, // Track starting balance
+balance: 0,
+startingBalance: 0,
 referralCode: generateReferralCode(),
 referredBy: referralCode || null,
 referralCount: 0,
@@ -1934,7 +1757,6 @@ referralCount: firebase.firestore.FieldValue.increment(1)
 // Success - hide modal and show welcome message
 hideAuthModal();
 showMessage('Signup successful! Welcome to USCash.', 'success');
-
 // Reset form
 document.getElementById('signupForm').reset();
 })
@@ -1957,26 +1779,20 @@ errorMessage += error.message;
 showMessage(errorMessage, 'error');
 })
 .finally(() => {
-// Reset button state
 signupBtn.disabled = false;
 signupBtn.textContent = 'Sign Up';
 });
 }
-
-// Helper function to validate email
 function validateEmail(email) {
 const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 return re.test(email);
 }
-
 function resetPassword() {
 const email = document.getElementById('forgotEmail').value;
-
 if (!email) {
 showMessage('Please enter your email', 'error');
 return;
 }
-
 auth.sendPasswordResetEmail(email)
 .then(() => {
 showMessage('Password reset email sent! Please check your inbox.', 'success');
@@ -1986,21 +1802,17 @@ backToLogin();
 showMessage('Error sending reset email: ' + error.message, 'error');
 });
 }
-
 function logoutUser() {
 auth.signOut().then(() => {
 showSection('home');
 showMessage('Logged out successfully', 'success');
-// Reset balance to zero when logging out
 balance = 0;
 document.getElementById('balanceAmount').textContent = '0';
 });
 }
-
 function generateReferralCode() {
 return Math.random().toString(36).substring(2, 8).toUpperCase();
 }
-
 function copyReferralCode() {
 const referralCode = document.getElementById('userReferralCode').textContent;
 navigator.clipboard.writeText(referralCode)
@@ -2011,11 +1823,9 @@ showMessage('Referral code copied to clipboard!', 'success');
 console.error('Failed to copy: ', err);
 });
 }
-
 function shareReferralCode() {
 const referralCode = document.getElementById('userReferralCode').textContent;
 const shareText = `Join USCash and use my referral code: ${referralCode} to get bonus rewards!`;
-
 if (navigator.share) {
 navigator.share({
 title: 'USCash Referral',
@@ -2030,43 +1840,29 @@ fallbackShare(referralCode, shareText);
 fallbackShare(referralCode, shareText);
 }
 }
-
 function fallbackShare(referralCode, shareText) {
 prompt('Copy your referral code to share:', shareText);
 }
-
-// User data functions
 function loadUserData() {
 if (!currentUser) return;
-
 db.collection('users').doc(currentUser.uid).onSnapshot(doc => {
 if (doc.exists) {
 const userData = doc.data();
 balance = userData.balance || 0;
 updateBalanceDisplay();
-
-// Update user display
 document.getElementById('usernameDisplay').textContent = userData.name || userData.email || 'User';
 document.getElementById('phoneDisplay').textContent = userData.phone || '';
-
-// Check if user is verified (cptanil1995@gmail.com, auk5562@gmail.com, or kafe2999@gmail.com)
 if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com' || userData.email === 'kafe2999@gmail.com') {
 document.getElementById('verifiedBadge').style.display = 'inline-block';
 document.getElementById('verifiedBadge').className = 'fas fa-star verified-badge';
 }
-
-// Update VIP section if visible
 if (document.getElementById('vipSection').style.display === 'block') {
 document.getElementById('userReferralCode').textContent = userData.referralCode || 'N/A';
 document.getElementById('referralCount').textContent = userData.referralCount || 0;
 document.getElementById('referralEarnings').textContent = 'Rs. ' + (userData.referralEarnings || 0);
-
-// Show copy button if referral code exists
 if (userData.referralCode) {
 document.querySelector('.referral-code-copy').style.display = 'block';
 }
-
-// Set VIP status
 const earnings = userData.referralEarnings || 0;
 let vipStatus = 'Basic';
 if (earnings >= 5000) vipStatus = 'Gold';
@@ -2075,14 +1871,9 @@ document.getElementById('vipStatus').textContent = vipStatus;
 }
 }
 });
-
-// Load transaction history
 loadTransactionHistory();
-
-// Load announcements
 loadAnnouncements();
 }
-
 function refreshBalance() {
 if (currentUser) {
 db.collection('users').doc(currentUser.uid).get()
@@ -2095,23 +1886,18 @@ showMessage('Balance refreshed!', 'success');
 });
 }
 }
-
 function refreshAllData() {
 refreshBalance();
 loadTransactionHistory();
 showMessage('All data refreshed!', 'success');
 }
-
 function updateBalanceDisplay() {
 document.getElementById('balanceAmount').textContent = Math.floor(balance);
 }
-
-// Message display function
 function showMessage(message, type = 'info') {
 const messageBox = document.getElementById('messageBox');
 messageBox.textContent = message;
 messageBox.className = 'message-box';
-
 if (type === 'error') {
 messageBox.style.borderColor = 'var(--accent)';
 messageBox.style.color = 'var(--accent)';
@@ -2122,35 +1908,28 @@ messageBox.style.color = 'lime';
 messageBox.style.borderColor = 'var(--secondary)';
 messageBox.style.color = 'var(--secondary)';
 }
-
 messageBox.classList.add('show');
-
 setTimeout(() => {
 messageBox.classList.remove('show');
 }, 3000);
 }
-
-// Transaction functions
+  // Transaction functions
 function submitDeposit() {
 if (!currentUser) {
 showMessage('Please login to deposit', 'error');
 return;
 }
-
 const amount = parseFloat(document.getElementById('depositAmount').value);
 const method = document.getElementById('depositMethod').value;
 const transactionId = document.getElementById('transactionId').value;
-
 if (isNaN(amount) || amount < 150) {
 showMessage('Minimum deposit amount is Rs. 150', 'error');
 return;
 }
-
 if (!transactionId) {
 showMessage('Please enter transaction ID', 'error');
 return;
 }
-
 // Add deposit request
 db.collection('deposit_requests').add({
 userId: currentUser.uid,
@@ -2171,33 +1950,27 @@ loadTransactionHistory();
 showMessage('Error submitting deposit: ' + error.message, 'error');
 });
 }
-
 function submitWithdraw() {
 if (!currentUser) {
 showMessage('Please login to withdraw', 'error');
 return;
 }
-
 const amount = parseFloat(document.getElementById('withdrawAmount').value);
 const method = document.getElementById('withdrawMethod').value;
 const accountNumber = document.getElementById('accountNumber').value;
 const accountName = document.getElementById('accountName').value;
-
 if (isNaN(amount) || amount < 300) {
 showMessage('Minimum withdrawal amount is Rs. 300', 'error');
 return;
 }
-
 if (amount > balance) {
 showMessage('Insufficient balance', 'error');
 return;
 }
-
 if (!accountNumber || !accountName) {
 showMessage('Please enter account details', 'error');
 return;
 }
-
 // Add withdrawal request
 db.collection('withdraw_requests').add({
 userId: currentUser.uid,
@@ -2221,10 +1994,8 @@ loadTransactionHistory();
 showMessage('Error submitting withdrawal: ' + error.message, 'error');
 });
 }
-
 function loadTransactionHistory() {
 if (!currentUser) return;
-
 // Load deposit history
 db.collection('deposit_requests')
 .where('userId', '==', currentUser.uid)
@@ -2235,62 +2006,50 @@ db.collection('deposit_requests')
 const depositHistory = document.getElementById('depositHistory');
 if (depositHistory) {
 depositHistory.innerHTML = '<h3><i class="fas fa-history"></i> Deposit History</h3>';
-
 if (querySnapshot.empty) {
 depositHistory.innerHTML += '<p>No deposit history found</p>';
 return;
 }
-
 querySnapshot.forEach(doc => {
 const data = doc.data();
 const item = document.createElement('div');
 item.className = 'transaction-item';
-
 let statusClass = 'transaction-pending';
 if (data.status === 'approved') statusClass = 'transaction-approved';
 if (data.status === 'rejected') statusClass = 'transaction-rejected';
-
 item.innerHTML = `
 <div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
 <div>Method: ${data.method}</div>
 <div>Status: <span class="${statusClass}">${data.status}</span></div>
 <div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
 `;
-
 depositHistory.appendChild(item);
 });
 }
-
 // Also update deposit status in status section
 const depositStatus = document.getElementById('depositStatus');
 if (depositStatus) {
 depositStatus.innerHTML = '';
-
 if (querySnapshot.empty) {
 depositStatus.innerHTML = '<p>No deposit requests found</p>';
 return;
 }
-
 querySnapshot.forEach(doc => {
 const data = doc.data();
 const item = document.createElement('div');
 item.className = 'transaction-item';
-
 let statusClass = 'transaction-pending';
 if (data.status === 'approved') statusClass = 'transaction-approved';
 if (data.status === 'rejected') statusClass = 'transaction-rejected';
-
 item.innerHTML = `
 <div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
 <div>Status: <span class="${statusClass}">${data.status}</span></div>
 <div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
 `;
-
 depositStatus.appendChild(item);
 });
 }
 });
-
 // Load withdrawal history
 db.collection('withdraw_requests')
 .where('userId', '==', currentUser.uid)
@@ -2301,68 +2060,54 @@ db.collection('withdraw_requests')
 const withdrawHistory = document.getElementById('withdrawHistory');
 if (withdrawHistory) {
 withdrawHistory.innerHTML = '<h3><i class="fas fa-history"></i> Withdrawal History</h3>';
-
 if (querySnapshot.empty) {
 withdrawHistory.innerHTML += '<p>No withdrawal history found</p>';
 return;
 }
-
 querySnapshot.forEach(doc => {
 const data = doc.data();
 const item = document.createElement('div');
 item.className = 'transaction-item';
-
 let statusClass = 'transaction-pending';
 if (data.status === 'approved') statusClass = 'transaction-approved';
 if (data.status === 'rejected') statusClass = 'transaction-rejected';
-
 item.innerHTML = `
 <div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
 <div>Method: ${data.method}</div>
 <div>Status: <span class="${statusClass}">${data.status}</span></div>
 <div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
 `;
-
 withdrawHistory.appendChild(item);
 });
 }
-
 // Also update withdrawal status in status section
 const withdrawStatus = document.getElementById('withdrawStatus');
 if (withdrawStatus) {
 withdrawStatus.innerHTML = '';
-
 if (querySnapshot.empty) {
 withdrawStatus.innerHTML = '<p>No withdrawal requests found</p>';
 return;
 }
-
 querySnapshot.forEach(doc => {
 const data = doc.data();
 const item = document.createElement('div');
 item.className = 'transaction-item';
-
 let statusClass = 'transaction-pending';
 if (data.status === 'approved') statusClass = 'transaction-approved';
 if (data.status === 'rejected') statusClass = 'transaction-rejected';
-
 item.innerHTML = `
 <div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
 <div>Status: <span class="${statusClass}">${data.status}</span></div>
 <div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
 `;
-
 withdrawStatus.appendChild(item);
 });
 }
 });
-
 // Load full transaction history
 const fullHistory = document.getElementById('fullTransactionHistory');
 if (fullHistory) {
 fullHistory.innerHTML = '';
-
-// Combine deposits and withdrawals for full history
 Promise.all([
 db.collection('deposit_requests')
 .where('userId', '==', currentUser.uid)
@@ -2377,7 +2122,6 @@ db.collection('withdraw_requests')
 ])
 .then(([deposits, withdrawals]) => {
 const allTransactions = [];
-
 deposits.forEach(doc => {
 const data = doc.data();
 allTransactions.push({
@@ -2388,7 +2132,6 @@ date: data.createdAt,
 method: data.method
 });
 });
-
 withdrawals.forEach(doc => {
 const data = doc.data();
 allTransactions.push({
@@ -2399,23 +2142,17 @@ date: data.createdAt,
 method: data.method
 });
 });
-
-// Sort by date
 allTransactions.sort((a, b) => (b.date?.seconds || 0) - (a.date?.seconds || 0));
-
 if (allTransactions.length === 0) {
 fullHistory.innerHTML = '<p>No transaction history found</p>';
 return;
 }
-
 allTransactions.forEach(trans => {
 const item = document.createElement('div');
 item.className = 'transaction-item';
-
 let statusClass = 'transaction-pending';
 if (trans.status === 'approved') statusClass = 'transaction-approved';
 if (trans.status === 'rejected') statusClass = 'transaction-rejected';
-
 item.innerHTML = `
 <div>Type: ${trans.type === 'deposit' ? 'Deposit' : 'Withdrawal'}</div>
 <div>Amount: <span class="transaction-amount">Rs. ${trans.amount}</span></div>
@@ -2423,19 +2160,16 @@ item.innerHTML = `
 <div>Status: <span class="${statusClass}">${trans.status}</span></div>
 <div>Date: ${trans.date?.toDate().toLocaleString() || 'N/A'}</div>
 `;
-
 fullHistory.appendChild(item);
 });
 });
 }
 }
-
-// Navigation functions
+  // Navigation functions
 function showSection(section) {
 document.querySelectorAll('.section').forEach(sec => {
 sec.style.display = 'none';
 });
-
 switch(section) {
 case 'home':
 document.getElementById('homeSection').style.display = 'block';
@@ -2460,7 +2194,6 @@ showAuthModal('login');
 return;
 }
 document.getElementById('vipSection').style.display = 'block';
-// Load VIP data if not already loaded
 if (document.getElementById('userReferralCode').textContent === 'Login to see your code') {
 loadUserData();
 }
@@ -2478,7 +2211,6 @@ if (!currentUser) {
 showAuthModal('login');
 return;
 }
-// Check if user is admin
 db.collection('users').doc(currentUser.uid).get()
 .then(doc => {
 if (doc.exists) {
@@ -2495,7 +2227,6 @@ showSection('home');
 break;
 }
 }
-
 // Game setup
 function setupGames() {
 setupScratchGame();
@@ -2504,28 +2235,19 @@ setupTicTacToeGame();
 setupFindAceGame();
 setupArcheryGame();
 }
-
 // Scratch Game
 let icons = ['🐄', '🐔', '🐱', '🐶', '🐭'];
 let cardData = [];
 let flippedCards = [];
 let scratchChances = 4;
-
 function setupScratchGame() {
 icons = ['🐄', '🐔', '🐱', '🐶', '🐭'];
 cardData = [];
 flippedCards = [];
 }
-
 function startCardGame() {
-document.getElementById('scratchGame').style.display = 'block';
-document.getElementById('fruitGame').style.display = 'none';
-document.getElementById('tictactoeGame').style.display = 'none';
-document.getElementById('findAceGame').style.display = 'none';
-document.getElementById('archeryGame').style.display = 'none';
-setupCards();
+showGameModal('scratch');
 }
-
 function setupCards() {
 flippedCards = [];
 cardData = [];
@@ -2536,78 +2258,51 @@ grid.classList.remove('shake', 'glow');
 grid.innerHTML = '';
 document.getElementById("particles-js").style.display = "none";
 document.getElementById("result").innerText = '';
-
-// 9 cards with 4 matching pairs and 1 unique
 let allIcons = [];
-for (let i = 0; i < 4; i++) {
-// Select 2 random icons for pairs
-const randomIcons = [...icons].sort(() => 0.5 - Math.random()).slice(0, 2);
-randomIcons.forEach(icon => {
-allIcons.push(icon);
-allIcons.push(icon);
-});
-}
-
-// Add one more random icon to make 9 cards
-allIcons.push(icons[Math.floor(Math.random() * icons.length)]);
-
-// Shuffle the cards
+for(let i=0;i<3;i++) allIcons.push('🐄');
+for(let i=0;i<3;i++) allIcons.push('🐔');
+for(let i=0;i<3;i++) allIcons.push('🐶');
 allIcons = shuffleArray(allIcons);
-
 allIcons.forEach((icon) => {
 const card = document.createElement('div');
 card.className = 'card';
-
 const front = document.createElement('div');
 front.className = 'front';
 front.textContent = icon;
-
 const back = document.createElement('div');
 back.className = 'back';
-
 card.appendChild(front);
 card.appendChild(back);
 card.dataset.icon = icon;
-
 grid.appendChild(card);
 cardData.push({ element: card, icon: icon });
 });
 }
-
 function selectBet(amount) {
 if (gameStarted) return;
-
 if (balance < amount) {
 showMessage('Insufficient balance! Please deposit more to play.', 'error');
 return;
 }
-
 selectedBet = amount;
 document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
 event.target.classList.add('active');
-
-// Deduct bet amount
 balance -= amount;
 updateUserBalance(balance);
 updateBalanceDisplay();
-
 revealAndShuffleCards();
 }
-
 function revealAndShuffleCards() {
 const grid = document.getElementById('cardGrid');
 setupCards();
-
 cardData.forEach(data => {
 data.element.querySelector('.front').style.display = 'flex';
 data.element.classList.add('flipped');
 });
-
 setTimeout(() => {
-// Shuffle with animation
-shuffleCards(cardData.map((data, index) => {
-return { el: data.element, index: index };
-})).then(() => {
+initScratchShuffle();
+if (scratchShuffle) {
+scratchShuffle.shuffle().then(() => {
 grid.innerHTML = '';
 cardData.forEach(data => {
 data.element.querySelector('.front').style.display = 'none';
@@ -2615,56 +2310,11 @@ data.element.classList.remove('flipped');
 data.element.onclick = () => flipCard(data.element);
 grid.appendChild(data.element);
 });
-
 gameStarted = true;
 });
+}
 }, 2000);
 }
-
-// Animate swap between two card elements
-function animateSwap(c1, c2, duration) {
-return new Promise(res => {
-c1.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
-c2.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
-
-// store current positions
-const l1 = c1.el.style.left, t1 = c1.el.style.top;
-const l2 = c2.el.style.left, t2 = c2.el.style.top;
-
-// swap visually
-c1.el.style.left = l2; c1.el.style.top = t2;
-c2.el.style.left = l1; c2.el.style.top = t1;
-
-setTimeout(() => {
-c1.el.style.transition = "";
-c2.el.style.transition = "";
-res();
-}, duration + 10);
-});
-}
-
-// Shuffle cards with visible speed change (7x difference)
-async function shuffleCards(cards) {
-let swaps = 15; // total swaps
-let first = 100; // fastest (ms)
-let last = 700; // slowest (ms) ≈7x slower
-
-// Play shuffle sound
-document.getElementById('shuffleSound').play().catch(() => {});
-
-for (let i = 0; i < swaps; i++) {
-let t = i / (swaps - 1);
-let dur = first + (last - first) * t;
-
-let a = Math.floor(Math.random() * cards.length);
-let b = a;
-while (b === a) b = Math.floor(Math.random() * cards.length);
-
-await animateSwap(cards[a], cards[b], dur);
-[cards[a], cards[b]] = [cards[b], cards[a]];
-}
-}
-
 function flipCard(card) {
 if (!selectedBet) {
 showMessage("Please select a bet amount before starting!", 'error');
@@ -2672,31 +2322,24 @@ return;
 }
 if (flippedCards.includes(card) || flippedCards.length >= 2) return;
 if (!gameStarted) return;
-
 card.classList.add('flipped');
 card.querySelector('.front').style.display = 'flex';
 flipSound.currentTime = 0;
 flipSound.play().catch(() => {});
 flippedCards.push(card);
-
 if (flippedCards.length === 2) {
 scratchChances--;
 setTimeout(checkWin, 1000);
 }
 }
-
 function checkWin() {
 const iconsPicked = flippedCards.map(c => c.dataset.icon);
 const result = document.getElementById('result');
 const grid = document.getElementById('cardGrid');
-
 if (iconsPicked[0] === iconsPicked[1]) {
-// Match found
 flippedCards = [];
-
-// Check if all matches found
 const allFlipped = document.querySelectorAll('.card.flipped');
-if (allFlipped.length >= 8) { // 4 pairs = 8 cards
+if (allFlipped.length >= 8) {
 const winAmount = selectedBet * 2;
 balance += winAmount;
 updateUserBalance(balance);
@@ -2710,19 +2353,16 @@ setupCards();
 }, 2500);
 }
 } else {
-// No match
 setTimeout(() => {
 flippedCards.forEach(card => {
 card.classList.remove('flipped');
 card.querySelector('.front').style.display = 'none';
 });
 flippedCards = [];
-
 if (scratchChances <= 0) {
 result.innerText = `❌ You lost! Rs. ${selectedBet} deducted.`;
 grid.classList.add('shake');
 document.getElementById('loseSound').play().catch(() => {});
-
 setTimeout(() => {
 result.innerText = '';
 setupCards();
@@ -2739,13 +2379,10 @@ result.innerText = '';
 }
 }, 1000);
 }
-
 updateBalanceDisplay();
 }
-
 function updateUserBalance(newBalance) {
 if (!currentUser) return;
-
 db.collection('users').doc(currentUser.uid).update({
 balance: newBalance
 })
@@ -2753,7 +2390,6 @@ balance: newBalance
 console.error('Error updating balance:', error);
 });
 }
-
 // Fruit Game
 const colors = ["red", "green", "yellow", "blue", "purple"];
 const fruits = {
@@ -2770,54 +2406,38 @@ const durations = {
 150: 45000,
 200: 60000
 };
-
 let targetColor = "";
 let fruitScore = 0;
 let fruitGameInterval, fruitGameTimer, fruitCountdownInterval;
 let fruitGameStarted = false;
 let fruitSelectedBet = 0;
-
 function setupFruitGame() {
 setNewFruitTarget();
 }
-
 function startFruitGame() {
-document.getElementById('scratchGame').style.display = 'none';
-document.getElementById('fruitGame').style.display = 'block';
-document.getElementById('tictactoeGame').style.display = 'none';
-document.getElementById('findAceGame').style.display = 'none';
-document.getElementById('archeryGame').style.display = 'none';
-setNewFruitTarget();
+showGameModal('fruit');
 }
-
 function setNewFruitTarget() {
 targetColor = colors[Math.floor(Math.random() * colors.length)];
 document.getElementById("fruitTargetDisplay").innerHTML = `Target: Shoot the <b style="color:${targetColor};">${targetColor.toUpperCase()}</b> Fruit ${fruits[targetColor]}`;
 }
-
 function spawnFruit() {
 const shootArea = document.getElementById("shootArea");
 if (shootArea.childElementCount >= 10) return;
-
 const fruit = document.createElement("div");
 fruit.classList.add("fruit");
-
 const isTarget = Math.random() < 0.40;
 const color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
 fruit.style.color = color;
 fruit.innerText = fruits[color];
-
 const size = Math.random() * 30 + 20;
 fruit.style.fontSize = `${size}px`;
-
 const x = Math.random() * (shootArea.clientWidth - 40);
 fruit.style.left = `${x}px`;
 fruit.style.top = "-30px";
-
 fruit.addEventListener("click", () => {
 if (!fruitGameStarted || fruit.clicked) return;
 fruit.clicked = true;
-
 if (color === targetColor) {
 fruitScore++;
 } else {
@@ -2826,9 +2446,7 @@ fruitScore = Math.max(0, fruitScore - 2);
 document.getElementById("fruitScoreDisplay").textContent = `Score: ${fruitScore}`;
 fruit.remove();
 });
-
 shootArea.appendChild(fruit);
-
 let top = -30;
 const fallSpeed = setInterval(() => {
 top += 15;
@@ -2839,7 +2457,6 @@ fruit.remove();
 }
 }, 50);
 }
-
 function startFruitRound(amount) {
 if (fruitGameStarted || balance < amount) {
 if (balance < amount) {
@@ -2847,11 +2464,9 @@ showMessage("Insufficient balance! Please deposit more to play.", 'error');
 }
 return;
 }
-
 balance -= amount;
 updateUserBalance(balance);
 updateBalanceDisplay();
-
 document.getElementById("shootArea").innerHTML = "";
 clearInterval(fruitGameInterval);
 clearInterval(fruitCountdownInterval);
@@ -2859,31 +2474,24 @@ clearTimeout(fruitGameTimer);
 fruitScore = 0;
 document.getElementById("fruitScoreDisplay").innerText = "Score: 0";
 setNewFruitTarget();
-
 fruitSelectedBet = amount;
 fruitGameStarted = true;
-
 document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
 btn.style.pointerEvents = "none";
 btn.style.opacity = "0.4";
 });
-
 let timeLeft = durations[amount] / 1000;
 document.getElementById("fruitCountdown").innerText = `Time: ${timeLeft}s`;
-
 fruitCountdownInterval = setInterval(() => {
 timeLeft--;
 document.getElementById('fruitCountdown').innerText = `Time: ${timeLeft}s`;
 if (timeLeft <= 0) clearInterval(fruitCountdownInterval);
 }, 1000);
-
 fruitGameInterval = setInterval(spawnFruit, 200);
-
 fruitGameTimer = setTimeout(() => {
 clearInterval(fruitGameInterval);
 clearInterval(fruitCountdownInterval);
 fruitGameStarted = false;
-
 let winAmount = 0;
 if (fruitScore >= Math.floor(fruitSelectedBet * 1.5)) {
 winAmount = fruitSelectedBet * 2;
@@ -2895,613 +2503,477 @@ document.getElementById('winSound').play().catch(() => {});
 showMessage(`❌ Game Over! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`, 'error');
 document.getElementById('loseSound').play().catch(() => {});
 }
-
 updateBalanceDisplay();
-
 document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
 btn.style.pointerEvents = "auto";
 btn.style.opacity = "1";
 });
-
 document.getElementById("shootArea").innerHTML = "";
 document.getElementById("fruitScoreDisplay").innerText = "";
 document.getElementById("fruitCountdown").innerText = "Time: 0s";
 setNewFruitTarget();
-
 }, durations[amount]);
 }
-
-// Tic Tac Toe Game
-let ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
-let currentPlayer = 'X';
-let ticTacToeGameActive = false;
-let ticTacToeBetAmount = 0;
-let ticTacToeCountdown = 30;
-let ticTacToeTimer;
-
+  // Tic Tac Toe Game
+let ticTacToeBet = 0;
+let tttBoard = [];
+let tttPlayer = 'X';
+let tttGameActive = false;
+let tttCountdown = null;
 function setupTicTacToeGame() {
-ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
-currentPlayer = 'X';
+tttBoard = Array(9).fill('');
+tttPlayer = 'X';
+tttGameActive = false;
 }
-
 function startTicTacToeGame() {
-document.getElementById('scratchGame').style.display = 'none';
-document.getElementById('fruitGame').style.display = 'none';
-document.getElementById('tictactoeGame').style.display = 'block';
-document.getElementById('findAceGame').style.display = 'none';
-document.getElementById('archeryGame').style.display = 'none';
-setupTicTacToeGame();
-renderTicTacToeBoard();
+showGameModal('tictactoe');
 }
-
 function selectTicTacToeBet(amount) {
-if (ticTacToeGameActive) return;
-
+if (tttGameActive) return;
 if (balance < amount) {
-showMessage("Insufficient balance! Please deposit more to play.", 'error');
+showMessage('Insufficient balance! Please deposit more to play.', 'error');
 return;
 }
-
-ticTacToeBetAmount = amount;
+ticTacToeBet = amount;
 document.querySelectorAll('#tictactoeGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
 event.target.classList.add('active');
-
+balance -= ticTacToeBet;
+updateUserBalance(balance);
+updateBalanceDisplay();
 startTicTacToeRound();
 }
-
 function startTicTacToeRound() {
-ticTacToeGameActive = true;
-currentPlayer = 'X';
-ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
-ticTacToeCountdown = 30;
-
-balance -= ticTacToeBetAmount;
-updateUserBalance(balance);
-updateBalanceDisplay();
-
-document.getElementById('tictactoeCountdown').textContent = `Time: ${ticTacToeCountdown}s`;
-ticTacToeTimer = setInterval(() => {
-ticTacToeCountdown--;
-document.getElementById('tictactoeCountdown').textContent = `Time: ${ticTacToeCountdown}s`;
-
-if (ticTacToeCountdown <= 0) {
-clearInterval(ticTacToeTimer);
-endTicTacToeGame(false, "Time's up! Game ended in a draw.");
+tttBoard = Array(9).fill('');
+tttPlayer = 'X';
+tttGameActive = true;
+renderTicTacToeBoard();
+let timeLeft = 30;
+document.getElementById('tictactoeCountdown').innerText = `Time: ${timeLeft}s`;
+clearInterval(tttCountdown);
+tttCountdown = setInterval(() => {
+timeLeft--;
+document.getElementById('tictactoeCountdown').innerText = `Time: ${timeLeft}s`;
+if (timeLeft <= 0) {
+clearInterval(tttCountdown);
+tttGameActive = false;
+endTicTacToe('lose', 'Time out! You lost your bet.');
 }
 }, 1000);
-
-renderTicTacToeBoard();
-document.getElementById('tictactoeResult').textContent = "Your turn (X)";
 }
-
 function renderTicTacToeBoard() {
-const boardElement = document.getElementById('ticTacToeBoard');
-boardElement.innerHTML = '';
-
-for (let i = 0; i < 9; i++) {
-const cell = document.createElement('div');
-cell.className = 'tic-tac-toe-cell';
-cell.textContent = ticTacToeBoard[i];
-cell.onclick = () => makeTicTacToeMove(i);
-boardElement.appendChild(cell);
+const board = document.getElementById('ticTacToeBoard');
+board.innerHTML = '';
+tttBoard.forEach((cell, idx) => {
+const div = document.createElement('div');
+div.className = 'tic-tac-toe-cell';
+if (cell === 'X') div.classList.add('x');
+if (cell === 'O') div.classList.add('o');
+div.innerText = cell;
+div.onclick = () => handleTicTacToeClick(idx);
+board.appendChild(div);
+});
 }
-}
-
-function makeTicTacToeMove(index) {
-if (!ticTacToeGameActive || ticTacToeBoard[index] !== '' || currentPlayer !== 'X') return;
-
-ticTacToeBoard[index] = 'X';
+function handleTicTacToeClick(idx) {
+if (!tttGameActive || tttBoard[idx] !== '') return;
+tttBoard[idx] = tttPlayer;
 renderTicTacToeBoard();
-
-if (checkTicTacToeWin('X')) {
-endTicTacToeGame(true, "You won! Rs. " + (ticTacToeBetAmount * 2) + " added to your balance.");
+const winner = checkTicTacToeWinner();
+if (winner) {
+clearInterval(tttCountdown);
+tttGameActive = false;
+if (winner === 'X') {
+endTicTacToe('win', 'You win! Rs. ' + (ticTacToeBet * 2) + ' added.');
+} else if (winner === 'O') {
+endTicTacToe('lose', 'AI wins! You lost your bet.');
+}
 return;
 }
-
-if (!ticTacToeBoard.includes('')) {
-endTicTacToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
+if (tttBoard.every(cell => cell !== '')) {
+clearInterval(tttCountdown);
+tttGameActive = false;
+endTicTacToe('draw', 'Draw! Bet returned.');
 return;
 }
-
-document.getElementById('tictactoeResult').textContent = "Computer thinking...";
-
-setTimeout(() => {
-let move = findBestMove();
-ticTacToeBoard[move] = 'O';
+// AI Move
+setTimeout(aiMoveTicTacToe, 500);
+}
+function aiMoveTicTacToe() {
+let empty = [];
+for (let i = 0; i < 9; i++) if (tttBoard[i] === '') empty.push(i);
+if (empty.length === 0) return;
+const move = empty[Math.floor(Math.random() * empty.length)];
+tttBoard[move] = 'O';
 renderTicTacToeBoard();
-
-if (checkTicTacToeWin('O')) {
-endTicTacToeGame(false, "Computer won! You lost your bet.");
+const winner = checkTicTacToeWinner();
+if (winner) {
+clearInterval(tttCountdown);
+tttGameActive = false;
+if (winner === 'O') {
+endTicTacToe('lose', 'AI wins! You lost your bet.');
+} else if (winner === 'X') {
+endTicTacToe('win', 'You win! Rs. ' + (ticTacToeBet * 2) + ' added.');
+}
 return;
 }
-
-if (!ticTacToeBoard.includes('')) {
-endTicTacToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
-return;
-}
-
-document.getElementById('tictactoeResult').textContent = "Your turn (X)";
-}, 1000);
-}
-
-function findBestMove() {
-// Try to win first
-for (let i = 0; i < 9; i++) {
-if (ticTacToeBoard[i] === '') {
-ticTacToeBoard[i] = 'O';
-if (checkTicTacToeWin('O')) {
-ticTacToeBoard[i] = '';
-return i;
-}
-ticTacToeBoard[i] = '';
+if (tttBoard.every(cell => cell !== '')) {
+clearInterval(tttCountdown);
+tttGameActive = false;
+endTicTacToe('draw', 'Draw! Bet returned.');
 }
 }
-
-// Block player from winning
-for (let i = 0; i < 9; i++) {
-if (ticTacToeBoard[i] === '') {
-ticTacToeBoard[i] = 'X';
-if (checkTicTacToeWin('X')) {
-ticTacToeBoard[i] = '';
-return i;
-}
-ticTacToeBoard[i] = '';
-}
-}
-
-// Take center if available
-if (ticTacToeBoard[4] === '') return 4;
-
-// Take corners if available
-const corners = [0, 2, 6, 8];
-const availableCorners = corners.filter(i => ticTacToeBoard[i] === '');
-if (availableCorners.length > 0) {
-return availableCorners[Math.floor(Math.random() * availableCorners.length)];
-}
-
-// Take any available spot
-const availableSpots = [];
-for (let i = 0; i < 9; i++) {
-if (ticTacToeBoard[i] === '') availableSpots.push(i);
-}
-return availableSpots[Math.floor(Math.random() * availableSpots.length)];
-}
-
-function checkTicTacToeWin(player) {
-const winPatterns = [
-[0, 1, 2], [3, 4, 5], [6, 7, 8],
-[0, 3, 6], [1, 4, 7], [2, 5, 8],
-[0, 4, 8], [2, 4, 6]
+function checkTicTacToeWinner() {
+const combos = [
+[0,1,2],[3,4,5],[6,7,8],
+[0,3,6],[1,4,7],[2,5,8],
+[0,4,8],[2,4,6]
 ];
-
-return winPatterns.some(pattern => {
-return pattern.every(index => ticTacToeBoard[index] === player);
-});
+for (const combo of combos) {
+const [a,b,c] = combo;
+if (tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c]) {
+return tttBoard[a];
 }
-
-function endTicTacToeGame(playerWon, message) {
-clearInterval(ticTacToeTimer);
-ticTacToeGameActive = false;
-
-if (playerWon) {
-const winAmount = ticTacToeBetAmount * 2;
-balance += winAmount;
-document.getElementById('winSound').play().catch(() => {});
-} else {
-const deduction = ticTacToeBetAmount * 0.25;
-balance -= deduction;
-document.getElementById('loseSound').play().catch(() => {});
 }
-
+return null;
+}
+function endTicTacToe(result, msg) {
+const resultDiv = document.getElementById('tictactoeResult');
+if (result === 'win') {
+balance += ticTacToeBet * 2;
 updateUserBalance(balance);
+resultDiv.innerText = msg;
+document.getElementById('winSound').play().catch(()=>{});
+} else if (result === 'draw') {
+balance += ticTacToeBet;
+updateUserBalance(balance);
+resultDiv.innerText = msg;
+} else {
+resultDiv.innerText = msg;
+document.getElementById('loseSound').play().catch(()=>{});
+}
 updateBalanceDisplay();
-
-document.getElementById('tictactoeResult').textContent = message;
-document.querySelectorAll('#tictactoeGame .bet-amounts .gold-box').forEach(btn => {
-btn.classList.remove('active');
-});
-
-if (playerWon) {
-document.getElementById("particles-js").style.display = "block";
-setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+setTimeout(() => {
+resultDiv.innerText = '';
+renderTicTacToeBoard();
+}, 2500);
 }
-}
-
 // Find Ace Game
-let findAceCards = ['K', 'Q', 'A'];
-let findAceFlippedCards = [];
+let findAceBet = 0;
+let findAceChances = 2;
+let aceIndex = 0;
+let findAceFlipped = [];
 let findAceGameActive = false;
-let findAceBetAmount = 0;
-let findAceTimer;
-let findAceCountdown = 15;
-
+let findAceCountdown = null;
 function setupFindAceGame() {
-findAceCards = ['K', 'Q', 'A'];
+findAceFlipped = [];
+findAceGameActive = false;
+findAceChances = 2;
 }
-
 function startFindAceGame() {
-document.getElementById('scratchGame').style.display = 'none';
-document.getElementById('fruitGame').style.display = 'none';
-document.getElementById('tictactoeGame').style.display = 'none';
-document.getElementById('findAceGame').style.display = 'block';
-document.getElementById('archeryGame').style.display = 'none';
-setupFindAceGame();
+showGameModal('findace');
 }
-
 function startFindAceRound(amount) {
 if (findAceGameActive || balance < amount) {
-if (balance < amount) {
-showMessage("Insufficient balance! Please deposit more to play.", 'error');
-}
+if (balance < amount) showMessage("Insufficient balance! Please deposit more to play.", 'error');
 return;
 }
-
-findAceBetAmount = amount;
-findAceGameActive = true;
-findAceFlippedCards = [];
-
+findAceBet = amount;
 balance -= amount;
 updateUserBalance(balance);
 updateBalanceDisplay();
-
-document.getElementById('findAceResult').textContent = '';
-document.getElementById('findAceGrid').innerHTML = '';
-
-const cardsToShow = shuffleArray([...findAceCards]);
+document.querySelectorAll('#findAceGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+event.target.classList.add('active');
+findAceFlipped = [];
+findAceGameActive = true;
+findAceChances = 2;
 const grid = document.getElementById('findAceGrid');
-
-cardsToShow.forEach((card, index) => {
-const cardElement = document.createElement('div');
-cardElement.className = 'card';
-
+grid.innerHTML = '';
+aceIndex = Math.floor(Math.random() * 6);
+for (let i = 0; i < 6; i++) {
+const card = document.createElement('div');
+card.className = 'card';
 const front = document.createElement('div');
 front.className = 'front';
-front.textContent = card;
-
+front.textContent = i === aceIndex ? 'A♠️' : '🃏';
 const back = document.createElement('div');
 back.className = 'back';
-
-cardElement.appendChild(front);
-cardElement.appendChild(back);
-cardElement.dataset.value = card;
-grid.appendChild(cardElement);
-});
-
-findAceCountdown = 15;
-document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
-
-const countdownInterval = setInterval(() => {
-findAceCountdown--;
-document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
-
-if (findAceCountdown <= 0) {
-clearInterval(countdownInterval);
-endFindAceRound(false, "Time's up! You lost your bet.");
+card.appendChild(front);
+card.appendChild(back);
+card.onclick = () => flipFindAceCard(card, i);
+grid.appendChild(card);
+}
+let timeLeft = 15;
+document.getElementById('findAceCountdown').innerText = `Time: ${timeLeft}s`;
+clearInterval(findAceCountdown);
+findAceCountdown = setInterval(() => {
+timeLeft--;
+document.getElementById('findAceCountdown').innerText = `Time: ${timeLeft}s`;
+if (timeLeft <= 0) {
+clearInterval(findAceCountdown);
+findAceGameActive = false;
+endFindAce('lose', 'Time out! You lost your bet.');
 }
 }, 1000);
-
-setTimeout(() => {
-document.querySelectorAll('#findAceGrid .card').forEach(card => {
-card.querySelector('.front').style.display = 'none';
-card.classList.remove('flipped');
-});
-
-// Shuffle with animation
-const cardElements = Array.from(document.querySelectorAll('#findAceGrid .card'));
-shuffleCards(cardElements.map((el, index) => {
-return { el: el, index: index };
-})).then(() => {
-document.querySelectorAll('#findAceGrid .card').forEach(card => {
-card.onclick = () => flipFindAceCard(card);
-});
-});
-}, 3000);
 }
-
-function flipFindAceCard(card) {
-if (!findAceGameActive || card.classList.contains('flipped')) return;
-
+function flipFindAceCard(card, idx) {
+if (!findAceGameActive || findAceFlipped.includes(card) || findAceFlipped.length >= findAceChances) return;
 card.classList.add('flipped');
 card.querySelector('.front').style.display = 'flex';
-flipSound.currentTime = 0;
-flipSound.play().catch(() => {});
-
-if (card.dataset.value === 'A') {
-endFindAceRound(true, "🎉 You found the Ace! You win double your bet.");
-} else {
-endFindAceRound(false, "❌ Wrong card! You lost your bet.");
-}
-}
-
-function endFindAceRound(won, message) {
+findAceFlipped.push(card);
+document.getElementById('flipSound').play().catch(()=>{});
+if (idx === aceIndex) {
+clearInterval(findAceCountdown);
 findAceGameActive = false;
-
-if (won) {
-const winAmount = findAceBetAmount * 2;
-balance += winAmount;
-document.getElementById('winSound').play().catch(() => {});
-} else {
-document.getElementById('loseSound').play().catch(() => {});
+setTimeout(() => {
+endFindAce('win', 'You found the Ace! Rs. ' + (findAceBet * 2) + ' added.');
+}, 700);
+} else if (findAceFlipped.length === findAceChances) {
+clearInterval(findAceCountdown);
+findAceGameActive = false;
+setTimeout(() => {
+endFindAce('lose', 'Not the Ace! You lost your bet.');
+}, 700);
 }
-
+}
+function endFindAce(result, msg) {
+const resultDiv = document.getElementById('findAceResult');
+if (result === 'win') {
+balance += findAceBet * 2;
 updateUserBalance(balance);
+resultDiv.innerText = msg;
+document.getElementById('winSound').play().catch(()=>{});
+} else {
+resultDiv.innerText = msg;
+document.getElementById('loseSound').play().catch(()=>{});
+}
 updateBalanceDisplay();
-
-document.getElementById('findAceResult').textContent = message;
-
-if (won) {
-document.getElementById("particles-js").style.display = "block";
-setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+setTimeout(() => {
+resultDiv.innerText = '';
+setupFindAceGame();
+const grid = document.getElementById('findAceGrid');
+grid.innerHTML = '';
+}, 2500);
 }
-}
-
 // Archery Game
 let archeryBet = 0;
-let archeryShots = [];
-let archeryAutoMode = false;
+let archeryScoreArr = [];
+let archeryShots = 0;
 let archeryGameActive = false;
-
+let archeryAuto = false;
 function setupArcheryGame() {
+archeryScoreArr = [];
+archeryShots = 0;
+archeryGameActive = false;
+archeryAuto = false;
+document.getElementById('archeryAutoBtn').textContent = 'Auto: OFF';
+}
+function startArcheryGame() {
+showGameModal('archery');
+}
+function selectArcheryBet(amount) {
+if (archeryGameActive || balance < amount) {
+if (balance < amount) showMessage("Insufficient balance! Please deposit more to play.", 'error');
+return;
+}
+archeryBet = amount;
+document.querySelectorAll('#archeryGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+event.target.classList.add('active');
+balance -= archeryBet;
+updateUserBalance(balance);
+updateBalanceDisplay();
+archeryScoreArr = [];
+archeryShots = 0;
+archeryGameActive = true;
+renderArchery();
+}
+function renderArchery() {
 const canvas = document.getElementById('archeryCanvas');
 const ctx = canvas.getContext('2d');
-
-let DPR = window.devicePixelRatio || 1;
-function fixCanvas() {
-const cssW = canvas.clientWidth || canvas.width;
-const cssH = canvas.clientHeight || canvas.height;
-canvas.width = Math.round(cssW * DPR);
-canvas.height = Math.round(cssH * DPR);
-canvas.style.width = cssW + 'px';
-canvas.style.height = cssH + 'px';
-ctx.setTransform(DPR,0,0,DPR,0,0);
-}
-fixCanvas();
-window.addEventListener('resize', () => { fixCanvas(); drawArchery(); });
-
-const W = canvas.width / DPR;
-const H = canvas.height / DPR;
-const cx = W/2;
-const cy = H/2;
-
-let boardRadius = Math.min(W,H) * 0.42 * 1.6; // Increased by 60% as requested
-
-const ringDefs = [
-{score:10, colorInner:'#ffdd66', colorOuter:'#ffcc00', radiusRatio:0.06},
-{score:8, colorInner:'#ffb76b', colorOuter:'#ff8f2e', radiusRatio:0.16},
-{score:7, colorInner:'#ff6b6b', colorOuter:'#d6453b', radiusRatio:0.28},
-{score:5, colorInner:'#3aa0ff', colorOuter:'#1475c7', radiusRatio:0.45},
-{score:2, colorInner:'#2e3136', colorOuter:'#0f1112', radiusRatio:0.70},
-{score:1, colorInner:'#f6f6f6', colorOuter:'#e9e9e9', radiusRatio:1.00}
-];
-
-const ringRadius = ringDefs.map(r => boardRadius * r.radiusRatio);
-
-let sight = {
-x: W - 8,
-y: cy,
-radius: 14 * 1.1, // Increased by 10% as requested
-movingLeft: true,
-speed: 6.0,
-active: false,
-auto: false,
-_lastCross: false
-};
-
-function drawBoard(){
-const woodR = boardRadius * 1.08;
-const g = ctx.createLinearGradient(cx, cy-woodR, cx, cy+woodR);
-g.addColorStop(0,'#7a5232'); g.addColorStop(0.5,'#a8764f'); g.addColorStop(1,'#5b391f');
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Draw target
+const colors = ['#FFD700', '#FF6347', '#2563EB', '#1E3A8A', '#111'];
+[200, 150, 100, 60, 30].forEach((r, i) => {
 ctx.beginPath();
-ctx.arc(cx, cy, woodR, 0, Math.PI*2);
-ctx.fillStyle = g; ctx.fill();
-
-ctx.beginPath();
-ctx.arc(cx, cy, boardRadius + 6, 0, Math.PI*2);
-ctx.fillStyle = '#f8f5ee'; ctx.fill();
-
-for(let i = ringDefs.length-1; i >= 0; i--){
-const rd = ringRadii[i];
-const def = ringDefs[i];
-const grad = ctx.createRadialGradient(cx, cy, rd*0.1, cx, cy, rd);
-grad.addColorStop(0, def.colorInner);
-grad.addColorStop(1, def.colorOuter);
-ctx.beginPath();
-ctx.arc(cx, cy, rd, 0, Math.PI*2);
-ctx.fillStyle = grad;
+ctx.arc(260, 260, r, 0, Math.PI * 2);
+ctx.fillStyle = colors[i];
 ctx.fill();
-
-ctx.beginPath();
-ctx.arc(cx, cy, rd, 0, Math.PI*2);
-ctx.lineWidth = 1;
-ctx.strokeStyle = 'rgba(0,0,0,0.18)';
-ctx.stroke();
-}
-
-ctx.beginPath();
-ctx.arc(cx, cy, 2.2, 0, Math.PI*2);
-ctx.fillStyle = 'rgba(255,255,255,0.06)';
-ctx.fill();
-}
-
-function drawSight(){
-if(!sight.active) return;
-ctx.save();
-ctx.translate(sight.x, sight.y);
-ctx.beginPath();
-ctx.arc(0,0, sight.radius+6, 0, Math.PI*2);
-ctx.fillStyle = 'rgba(30,220,120,0.04)';
-ctx.fill();
-ctx.beginPath();
-ctx.arc(0,0, sight.radius, 0, Math.PI*2);
-ctx.lineWidth = 2;
-ctx.strokeStyle = 'rgba(180,255,200,0.95)';
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(-14,0); ctx.lineTo(-6,0);
-ctx.moveTo(6,0); ctx.lineTo(14,0);
-ctx.moveTo(0,-14); ctx.lineTo(0,-6);
-ctx.moveTo(0,6); ctx.lineTo(0,14);
-ctx.strokeStyle = 'rgba(180,255,200,0.9)';
-ctx.lineWidth = 1.6;
-ctx.stroke();
-ctx.restore();
-}
-
-function updateSight(){
-if(!sight.active) return;
-if(sight.movingLeft){
-sight.x -= sight.speed;
-if(sight.x <= 8){
-sight.x = 8;
-sight.movingLeft = false;
-}
-} else {
-sight.x += sight.speed;
-if(sight.x >= W - 8){
-sight.x = W - 8;
-sight.movingLeft = true;
-}
-}
-
-if(sight.auto){
-const centerBand = 8;
-if(!sight._lastCross && Math.abs(sight.x - cx) <= centerBand){
-sight._lastCross = true;
-performShot();
-} else if(Math.abs(sight.x - cx) > centerBand){
-sight._lastCross = false;
-}
-}
-}
-
-function computeScore(px, py){
-const dx = px - cx;
-const dy = py - cy;
-const dist = Math.sqrt(dx*dx + dy*dy);
-for(let i=0;i<ringRadii.length;i++){
-if(dist <= ringRadii[i]) {
-return ringDefs[i].score;
-}
-}
-return 0;
-}
-
-function performShot(){
-if(!sight.active) return;
-if(archeryBet === 0){
-document.getElementById('archeryStatus').textContent = 'You must select a bet first.';
-return;
-}
-if(archeryShots.length >= 5) return;
-
-const score = computeScore(sight.x, sight.y);
-archeryShots.push(score);
-refreshScoreBoxes();
-
-document.getElementById('archeryStatus').textContent = `Shot ${archeryShots.length} → ${score} points`;
-document.getElementById('shotSound').play().catch(() => {});
-
-// Pause for 1 second where the user shoots
-sight.active = false;
-setTimeout(() => {
-sight.active = true;
-}, 1000);
-
-if(archeryShots.length === 5){
-sight.active = false;
-let allTen = archeryShots.every(s=> s === 10);
-if(allTen){
-balance += archeryBet * 2; // Double the bet for perfect score
-document.getElementById('archeryStatus').textContent = `🎉 PERFECT! All 5 are bullseyes. You doubled your bet to ₨${archeryBet*2}`;
-document.getElementById('winSound').play().catch(() => {});
-document.getElementById("particles-js").style.display = "block";
-setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
-} else {
-balance -= archeryBet;
-if(balance < 0) balance = 0;
-document.getElementById('archeryStatus').textContent = `✖ You lost the bet of ₨${archeryBet}.`;
-document.getElementById('loseSound').play().catch(() => {});
-}
-updateUserBalance(balance);
-updateBalanceDisplay();
-}
-}
-
-function refreshScoreBoxes(){
-const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
-for(let i=0;i<5;i++){
-scoreBoxes[i].textContent = archeryShots[i] !== undefined ? archeryShots[i] : '';
-}
-}
-
-canvas.addEventListener('click', ()=> {
-performShot();
 });
-
-function drawArchery(){
-ctx.clearRect(0,0,W,H);
-drawBoard();
-drawSight();
+// Draw shots
+archeryScoreArr.forEach(shot => {
+ctx.beginPath();
+ctx.arc(shot.x, shot.y, 7, 0, Math.PI * 2);
+ctx.fillStyle = 'lime';
+ctx.fill();
+});
 }
-
-function loop(){
-updateSight();
-drawArchery();
-requestAnimationFrame(loop);
+// Handle archery click
+document.getElementById('archeryCanvas').onclick = function(e) {
+if (!archeryGameActive || archeryShots >= 5) return;
+const rect = this.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+archeryScoreArr.push({x, y});
+archeryShots++;
+renderArchery();
+if (archeryShots === 5) {
+endArcheryRound();
 }
-loop();
-
-window.selectArcheryBet = function(amount){
-if (archeryGameActive) return;
-
-if (balance < amount) {
-showMessage("Insufficient balance! Please deposit more to play.", 'error');
-return;
-}
-
-archeryBet = amount;
-archeryShots = [];
-const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
-for(let b of scoreBoxes) b.textContent = '';
-sight.x = W - 8;
-sight.y = cy;
-sight.movingLeft = true;
-sight.active = true;
-archeryGameActive = true;
-
-balance -= amount;
-updateUserBalance(balance);
-updateBalanceDisplay();
-
-document.getElementById('archeryStatus').textContent = `Bet ₨ ${archeryBet} placed — 5 shots. Click canvas to shoot when sight passes.`;
 };
-
-window.resetArcheryGame = function(){
-archeryBet = 0;
-archeryShots = [];
-const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
-for(let b of scoreBoxes) b.textContent = '';
-sight.active = false;
+function endArcheryRound() {
 archeryGameActive = false;
-document.getElementById('archeryStatus').textContent = 'Pick a bet to start';
-};
-
-window.toggleArcheryAuto = function(){
-archeryAutoMode = !archeryAutoMode;
-document.getElementById('archeryAutoBtn').textContent = 'Auto: ' + (archeryAutoMode ? 'ON' : 'OFF');
-sight.auto = archeryAutoMode;
-};
+let totalScore = 0;
+archeryScoreArr.forEach(shot => {
+const dx = shot.x - 260;
+const dy = shot.y - 260;
+const dist = Math.sqrt(dx*dx + dy*dy);
+if (dist <= 30) totalScore += 50;
+else if (dist <= 60) totalScore += 30;
+else if (dist <= 100) totalScore += 20;
+else if (dist <= 150) totalScore += 10;
+else if (dist <= 200) totalScore += 5;
+});
+const winTarget = archeryBet * 2;
+const status = document.getElementById('archeryStatus');
+if (totalScore >= winTarget) {
+const winAmount = archeryBet * 2;
+balance += winAmount;
+updateUserBalance(balance);
+status.textContent = `🎯 You scored ${totalScore}! You win Rs. ${winAmount}.`;
+document.getElementById('winSound').play().catch(()=>{});
+} else {
+status.textContent = `You scored ${totalScore}. You lost your bet.`;
+document.getElementById('loseSound').play().catch(()=>{});
 }
-
-function startArcheryGame() {
-document.getElementById('scratchGame').style.display = 'none';
-document.getElementById('fruitGame').style.display = 'none';
-document.getElementById('tictactoeGame').style.display = 'none';
-document.getElementById('findAceGame').style.display = 'none';
+updateBalanceDisplay();
+setTimeout(() => {
+status.textContent = 'Pick a bet to start';
+setupArcheryGame();
+renderArchery();
+}, 2500);
+}
+function resetArcheryGame() {
+setupArcheryGame();
+renderArchery();
+}
+function toggleArcheryAuto() {
+archeryAuto = !archeryAuto;
+document.getElementById('archeryAutoBtn').textContent = `Auto: ${archeryAuto ? 'ON' : 'OFF'}`;
+if (archeryAuto && archeryGameActive) archeryAutoPlay();
+}
+function archeryAutoPlay() {
+if (!archeryAuto || !archeryGameActive || archeryShots >= 5) return;
+const x = 260 + (Math.random() - 0.5) * 50;
+const y = 260 + (Math.random() - 0.5) * 50;
+archeryScoreArr.push({x, y});
+archeryShots++;
+renderArchery();
+if (archeryShots === 5) {
+endArcheryRound();
+} else {
+setTimeout(archeryAutoPlay, 800);
+}
+}
+// Chess Game Modal
+let chess, board, chessTimer, chessTimeLeft = 60;
+function startChessGameModal() {
+showGameModal('chess');
+}
+function setupChessGame() {
+chess = new Chess();
+board = Chessboard('chessGameBoard', {
+position: 'start',
+draggable: true,
+onDrop: handleChessDrop
+});
+chessTimeLeft = 60;
+document.getElementById('chessTimer').textContent = `Time: ${chessTimeLeft}s`;
+clearInterval(chessTimer);
+chessTimer = setInterval(() => {
+chessTimeLeft--;
+document.getElementById('chessTimer').textContent = `Time: ${chessTimeLeft}s`;
+if (chessTimeLeft <= 0) {
+clearInterval(chessTimer);
+endChessGame('lose');
+}
+}, 1000);
+}
+function handleChessDrop(source, target) {
+const move = chess.move({ from: source, to: target, promotion: 'q' });
+if (move === null) return 'snapback';
+board.position(chess.fen());
+setTimeout(chessAIMove, 400);
+if (chess.game_over()) endChessGame('win');
+}
+function chessAIMove() {
+const moves = chess.moves();
+if (moves.length === 0) return endChessGame('win');
+const move = moves[Math.floor(Math.random() * moves.length)];
+chess.move(move);
+board.position(chess.fen());
+if (chess.game_over()) endChessGame('lose');
+}
+function endChessGame(result) {
+clearInterval(chessTimer);
+const status = document.getElementById('chessStatus');
+if (result === 'win') {
+balance += 200;
+updateUserBalance(balance);
+status.textContent = 'You won! Rs. 200 added.';
+document.getElementById('winSound').play().catch(()=>{});
+} else {
+status.textContent = 'You lost. Try again!';
+document.getElementById('loseSound').play().catch(()=>{});
+}
+updateBalanceDisplay();
+setTimeout(() => {
+status.textContent = '';
+setupChessGame();
+}, 2500);
+}
+// Game Modal logic
+function showGameModal(game) {
+document.getElementById('gameModal').style.display = 'flex';
+const inner = document.getElementById('gameInnerContainer');
+inner.innerHTML = '';
+let content = '';
+if (game === 'scratch') {
+document.getElementById('scratchGame').style.display = 'block';
+setupCards();
+content = document.getElementById('scratchGame').outerHTML;
+} else if (game === 'fruit') {
+document.getElementById('fruitGame').style.display = 'block';
+setupFruitGame();
+content = document.getElementById('fruitGame').outerHTML;
+} else if (game === 'tictactoe') {
+document.getElementById('tictactoeGame').style.display = 'block';
+setupTicTacToeGame();
+renderTicTacToeBoard();
+content = document.getElementById('tictactoeGame').outerHTML;
+} else if (game === 'findace') {
+document.getElementById('findAceGame').style.display = 'block';
+setupFindAceGame();
+content = document.getElementById('findAceGame').outerHTML;
+} else if (game === 'archery') {
 document.getElementById('archeryGame').style.display = 'block';
+setupArcheryGame();
+renderArchery();
+content = document.getElementById('archeryGame').outerHTML;
+} else if (game === 'chess') {
+content = `
+<div id="chessGameBoard" style="width:400px;margin:20px auto;"></div>
+<div id="chessStatus"></div>
+<div id="chessTimer"></div>
+`;
+setTimeout(setupChessGame, 100);
 }
-
-// Helper function to shuffle array
+inner.innerHTML = content;
+}
+function closeGameModal() {
+document.getElementById('gameModal').style.display = 'none';
+['scratchGame', 'fruitGame', 'tictactoeGame', 'findAceGame', 'archeryGame'].forEach(id => {
+document.getElementById(id).style.display = 'none';
+});
+}
+// Utility Functions
 function shuffleArray(array) {
 for (let i = array.length - 1; i > 0; i--) {
 const j = Math.floor(Math.random() * (i + 1));
@@ -3509,479 +2981,231 @@ const j = Math.floor(Math.random() * (i + 1));
 }
 return array;
 }
-
-// Admin functions
-function loadAdminData() {
-if (!currentUser) return;
-
-// Load users
-db.collection('users').get()
+// Announcement and Messaging
+function toggleMessages() {
+const popup = document.getElementById('messagePopup');
+popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+}
+function closeMessages() {
+document.getElementById('messagePopup').style.display = 'none';
+}
+function loadAnnouncements() {
+db.collection('announcements').orderBy('createdAt', 'desc').limit(10).get()
 .then(querySnapshot => {
-const usersTable = document.getElementById('usersTable');
-usersTable.innerHTML = '';
-
+const messageList = document.getElementById('messageList');
+messageList.innerHTML = '';
+let unreadCount = 0;
 querySnapshot.forEach(doc => {
-const user = doc.data();
-const row = document.createElement('tr');
-
-row.innerHTML = `
-<td>${user.name || 'N/A'}</td>
-<td>${user.email || 'N/A'}</td>
-<td>Rs. ${user.startingBalance || 0}</td>
-<td>Rs. ${user.balance || 0}</td>
-<td>
-<button class="admin-action" onclick="editUser('${doc.id}', '${user.name}', ${user.balance}, ${user.startingBalance})">Edit</button>
-</td>
-`;
-
-usersTable.appendChild(row);
+const data = doc.data();
+const item = document.createElement('div');
+item.className = 'message-item';
+item.innerHTML = `<div>${data.message}</div><div class="message-date">${data.createdAt?.toDate().toLocaleString() || ''}</div>`;
+messageList.appendChild(item);
+unreadCount++;
 });
-});
-
-// Load deposit requests
-db.collection('deposit_requests')
-.orderBy('createdAt', 'desc')
-.get()
-.then(querySnapshot => {
-const depositTable = document.getElementById('depositRequestsTable');
-depositTable.innerHTML = '';
-
-querySnapshot.forEach(doc => {
-const request = doc.data();
-const row = document.createElement('tr');
-
-let statusButtons = '';
-if (request.status === 'pending') {
-statusButtons = `
-<button class="admin-action" onclick="updateRequestStatus('deposit_requests', '${doc.id}', 'approved', ${request.amount}, '${request.userId}')">Approve</button>
-<button class="admin-action reject" onclick="updateRequestStatus('deposit_requests', '${doc.id}', 'rejected')">Reject</button>
-`;
+if (unreadCount > 0) {
+document.getElementById('messageNotification').style.display = 'flex';
+document.getElementById('messageNotification').innerText = unreadCount;
 } else {
-statusButtons = request.status;
+document.getElementById('messageNotification').style.display = 'none';
 }
-
-row.innerHTML = `
-<td>${request.userName || request.userId}</td>
-<td>Rs. ${request.amount || 0}</td>
-<td>${request.method || 'N/A'}</td>
-<td>${request.transactionId || 'N/A'}</td>
-<td>${request.status || 'pending'}</td>
-<td>${request.createdAt?.toDate().toLocaleString() || 'N/A'}</td>
-<td>${statusButtons}</td>
-`;
-
-depositTable.appendChild(row);
-});
-});
-
-// Load withdrawal requests
-db.collection('withdraw_requests')
-.orderBy('createdAt', 'desc')
-.get()
-.then(querySnapshot => {
-const withdrawTable = document.getElementById('withdrawRequestsTable');
-withdrawTable.innerHTML = '';
-
-querySnapshot.forEach(doc => {
-const request = doc.data();
-const row = document.createElement('tr');
-
-let statusButtons = '';
-if (request.status === 'pending') {
-statusButtons = `
-<button class="admin-action" onclick="updateRequestStatus('withdraw_requests', '${doc.id}', 'approved', ${request.amount}, '${request.userId}')">Approve</button>
-<button class="admin-action reject" onclick="updateRequestStatus('withdraw_requests', '${doc.id}', 'rejected')">Reject</button>
-`;
-} else {
-statusButtons = request.status;
-}
-
-row.innerHTML = `
-<td>${request.userName || request.userId}</td>
-<td>Rs. ${request.amount || 0}</td>
-<td>${request.method || 'N/A'}</td>
-<td>${request.accountNumber} (${request.accountName})</td>
-<td>${request.status || 'pending'}</td>
-<td>${request.createdAt?.toDate().toLocaleString() || 'N/A'}</td>
-<td>${statusButtons}</td>
-`;
-
-withdrawTable.appendChild(row);
-});
 });
 }
-
-function searchUsers() {
-const searchTerm = document.getElementById('searchUser').value.toLowerCase();
-const rows = document.getElementById('usersTable').getElementsByTagName('tr');
-
-for (let i = 0; i < rows.length; i++) {
-const name = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
-const email = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
-
-if (name.includes(searchTerm) || email.includes(searchTerm)) {
-rows[i].style.display = '';
-} else {
-rows[i].style.display = 'none';
-}
-}
-}
-
-function editUser(userId, userName, currentBalance, startingBalance) {
-const newBalance = prompt(`Edit ${userName}'s balance:`, currentBalance);
-const newStartingBalance = prompt(`Edit ${userName}'s starting balance:`, startingBalance);
-
-if (newBalance !== null && !isNaN(newBalance)) {
-db.collection('users').doc(userId).update({
-balance: parseFloat(newBalance),
-startingBalance: parseFloat(newStartingBalance || startingBalance)
-})
-.then(() => {
-showMessage('User updated successfully', 'success');
-loadAdminData();
-})
-.catch(error => {
-showMessage('Error updating user: ' + error.message, 'error');
-});
-}
-}
-
-function updateRequestStatus(collection, docId, status, amount, userId) {
-if (status === 'approved' && userId) {
-// Update user balance
-db.collection('users').doc(userId).update({
-balance: firebase.firestore.FieldValue.increment(amount)
-})
-.then(() => {
-// Update request status
-return db.collection(collection).doc(docId).update({
-status: status
-});
-})
-.then(() => {
-showMessage('Request approved and balance updated', 'success');
-loadAdminData();
-})
-.catch(error => {
-showMessage('Error updating request: ' + error.message, 'error');
-});
-} else {
-// Just update status for rejected or other cases
-db.collection(collection).doc(docId).update({
-status: status
-})
-.then(() => {
-showMessage('Request status updated', 'success');
-loadAdminData();
-})
-.catch(error => {
-showMessage('Error updating request: ' + error.message, 'error');
-});
-}
-}
-
 function sendAnnouncement() {
-const message = document.getElementById('announcementText').value;
-
-if (!message) {
-showMessage('Please enter a message', 'error');
+const msg = document.getElementById('announcementText').value.trim();
+if (!msg) {
+showMessage('Enter your announcement', 'error');
 return;
 }
-
 db.collection('announcements').add({
-message: message,
-createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-createdBy: currentUser.uid
+message: msg,
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
 })
 .then(() => {
-showMessage('Announcement sent successfully', 'success');
+showMessage('Announcement sent!', 'success');
 document.getElementById('announcementText').value = '';
+loadAnnouncements();
 })
 .catch(error => {
 showMessage('Error sending announcement: ' + error.message, 'error');
 });
 }
-
-// Announcement functions
-function loadAnnouncements() {
-let unreadCount = 0;
-let lastReadTime = localStorage.getItem('lastReadTime') || 0;
-
-db.collection('announcements')
-.orderBy('createdAt', 'desc')
-.limit(10)
-.get()
+// Admin Data
+function loadAdminData() {
+db.collection('users').orderBy('createdAt', 'desc').limit(30).get()
 .then(querySnapshot => {
-const messageList = document.getElementById('messageList');
-messageList.innerHTML = '';
-
-if (querySnapshot.empty) {
-messageList.innerHTML = '<p>No announcements yet</p>';
-return;
-}
-
+const usersTable = document.getElementById('usersTable');
+usersTable.innerHTML = '';
 querySnapshot.forEach(doc => {
-const announcement = doc.data();
-const messageItem = document.createElement('div');
-messageItem.className = 'message-item';
-
-const messageDate = announcement.createdAt?.toDate() || new Date();
-const dateString = messageDate.toLocaleString();
-
-messageItem.innerHTML = `
-<div>${announcement.message}</div>
-<div class="message-date">${dateString}</div>
+const data = doc.data();
+const row = document.createElement('tr');
+row.innerHTML = `
+<td>${data.name || 'N/A'}</td>
+<td>${data.email || 'N/A'}</td>
+<td>${data.startingBalance || 0}</td>
+<td>${data.balance || 0}</td>
+<td>
+<button class="admin-action" onclick="adjustBalance('${doc.id}', 100)">+100</button>
+<button class="admin-action" onclick="adjustBalance('${doc.id}', -100)">-100</button>
+</td>
 `;
-
-messageList.appendChild(messageItem);
-
-// Check if announcement is new
-if (messageDate.getTime() > lastReadTime) {
-unreadCount++;
+usersTable.appendChild(row);
+});
+});
+// Load Deposit Requests
+db.collection('deposit_requests').orderBy('createdAt', 'desc').limit(30).get()
+.then(querySnapshot => {
+const table = document.getElementById('depositRequestsTable');
+table.innerHTML = '';
+querySnapshot.forEach(doc => {
+const data = doc.data();
+const row = document.createElement('tr');
+row.innerHTML = `
+<td>${data.userName || 'N/A'}</td>
+<td>${data.amount}</td>
+<td>${data.method}</td>
+<td>${data.transactionId}</td>
+<td>${data.status}</td>
+<td>${data.createdAt?.toDate().toLocaleString() || ''}</td>
+<td>
+<button class="admin-action" onclick="approveDeposit('${doc.id}')">Approve</button>
+<button class="admin-action reject" onclick="rejectDeposit('${doc.id}')">Reject</button>
+</td>
+`;
+table.appendChild(row);
+});
+});
+// Load Withdrawal Requests
+db.collection('withdraw_requests').orderBy('createdAt', 'desc').limit(30).get()
+.then(querySnapshot => {
+const table = document.getElementById('withdrawRequestsTable');
+table.innerHTML = '';
+querySnapshot.forEach(doc => {
+const data = doc.data();
+const row = document.createElement('tr');
+row.innerHTML = `
+<td>${data.userName || 'N/A'}</td>
+<td>${data.amount}</td>
+<td>${data.method}</td>
+<td>${data.accountNumber} (${data.accountName})</td>
+<td>${data.status}</td>
+<td>${data.createdAt?.toDate().toLocaleString() || ''}</td>
+<td>
+<button class="admin-action" onclick="approveWithdraw('${doc.id}', '${data.userId}', ${data.amount})">Approve</button>
+<button class="admin-action reject" onclick="rejectWithdraw('${doc.id}')">Reject</button>
+</td>
+`;
+table.appendChild(row);
+});
+});
+}
+function adjustBalance(userId, amount) {
+db.collection('users').doc(userId).get()
+.then(doc => {
+if (!doc.exists) return;
+let user = doc.data();
+let newBalance = (user.balance || 0) + amount;
+if (newBalance < 0) newBalance = 0;
+return db.collection('users').doc(userId).update({ balance: newBalance });
+})
+.then(() => {
+showMessage('Balance updated', 'success');
+loadAdminData();
+});
+}
+function approveDeposit(requestId) {
+db.collection('deposit_requests').doc(requestId).get()
+.then(doc => {
+if (!doc.exists) return;
+const data = doc.data();
+db.collection('deposit_requests').doc(requestId).update({ status: 'approved' });
+db.collection('users').doc(data.userId).update({
+balance: firebase.firestore.FieldValue.increment(data.amount),
+depositCount: firebase.firestore.FieldValue.increment(1)
+});
+})
+.then(() => {
+showMessage('Deposit approved', 'success');
+loadAdminData();
+});
+}
+function rejectDeposit(requestId) {
+db.collection('deposit_requests').doc(requestId).update({ status: 'rejected' })
+.then(() => {
+showMessage('Deposit rejected', 'success');
+loadAdminData();
+});
+}
+function approveWithdraw(requestId, userId, amount) {
+db.collection('withdraw_requests').doc(requestId).update({ status: 'approved' })
+.then(() => {
+showMessage('Withdrawal approved', 'success');
+loadAdminData();
+// Deduct balance if not already deducted
+db.collection('users').doc(userId).get().then(doc => {
+if (!doc.exists) return;
+let user = doc.data();
+if ((user.balance || 0) >= amount) {
+db.collection('users').doc(userId).update({ balance: user.balance - amount });
 }
 });
-
-// Update notification badge
-const notificationBadge = document.getElementById('messageNotification');
-if (unreadCount > 0) {
-notificationBadge.style.display = 'flex';
-notificationBadge.textContent = unreadCount > 9 ? '9+' : unreadCount;
-} else {
-notificationBadge.style.display = 'none';
-}
 });
 }
-
-function toggleMessages() {
-const popup = document.getElementById('messagePopup');
-if (popup.style.display === 'block') {
-popup.style.display = 'none';
-} else {
-popup.style.display = 'block';
-loadAnnouncements();
-
-// Mark as read
-localStorage.setItem('lastReadTime', Date.now());
-document.getElementById('messageNotification').style.display = 'none';
+function rejectWithdraw(requestId) {
+db.collection('withdraw_requests').doc(requestId).update({ status: 'rejected' })
+.then(() => {
+showMessage('Withdrawal rejected', 'success');
+loadAdminData();
+});
 }
+function searchUsers() {
+const query = document.getElementById('searchUser').value.trim().toLowerCase();
+db.collection('users').orderBy('createdAt', 'desc').limit(30).get()
+.then(querySnapshot => {
+const usersTable = document.getElementById('usersTable');
+usersTable.innerHTML = '';
+querySnapshot.forEach(doc => {
+const data = doc.data();
+if (
+(data.name && data.name.toLowerCase().includes(query)) ||
+(data.email && data.email.toLowerCase().includes(query))
+) {
+const row = document.createElement('tr');
+row.innerHTML = `
+<td>${data.name || 'N/A'}</td>
+<td>${data.email || 'N/A'}</td>
+<td>${data.startingBalance || 0}</td>
+<td>${data.balance || 0}</td>
+<td>
+<button class="admin-action" onclick="adjustBalance('${doc.id}', 100)">+100</button>
+<button class="admin-action" onclick="adjustBalance('${doc.id}', -100)">-100</button>
+</td>
+`;
+usersTable.appendChild(row);
 }
-
-function closeMessages() {
-document.getElementById('messagePopup').style.display = 'none';
+});
+});
 }
-
-// Particles effect
+// Particles.js for fireworks
 particlesJS("particles-js", {
 "particles": {
-"number": { "value": 100 },
+"number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
 "color": { "value": "#2563EB" },
-"shape": { "type": "star" },
-"opacity": { "value": 0.8 },
-"size": { "value": 5 },
-"move": { "enable": true, "speed": 8 }
+"shape": { "type": "circle" },
+"opacity": { "value": 0.6, "random": true },
+"size": { "value": 4, "random": true },
+"move": { "enable": true, "speed": 8, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
 },
-"interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false } } },
+"interactivity": {
+"detect_on": "canvas",
+"events": {
+"onhover": { "enable": false, "mode": "repulse" },
+"onclick": { "enable": false, "mode": "push" },
+"resize": true
+}
+},
 "retina_detect": true
 });
-
-// ------- Generic visible shuffle (works for 3, 9, ... cards) -------
-
-// Make current layout absolute (so left/top can animate) without breaking grid
-function absolutizeCards(container) {
-const el = typeof container === 'string' ? document.querySelector(container) : container;
-if (!el) return [];
-el.style.position = el.style.position || 'relative';
-
-const cards = Array.from(el.querySelectorAll('.card'));
-const rectContainer = el.getBoundingClientRect();
-
-cards.forEach(card => {
-const r = card.getBoundingClientRect();
-// freeze size so absolute doesn't collapse
-card.style.width = r.width + 'px';
-card.style.height = r.height + 'px';
-// place absolutely at current spot
-card.style.position = 'absolute';
-card.style.left = (r.left - rectContainer.left + el.scrollLeft) + 'px';
-card.style.top = (r.top - rectContainer.top + el.scrollTop) + 'px';
-});
-
-return cards.map(el => ({ el }));
-}
-
-// animate swap between two cards
-function animateSwap(c1, c2, duration) {
-return new Promise(res => {
-c1.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
-c2.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
-
-const l1 = c1.el.style.left, t1 = c1.el.style.top;
-const l2 = c2.el.style.left, t2 = c2.el.style.top;
-
-c1.el.style.left = l2; c1.el.style.top = t2;
-c2.el.style.left = l1; c2.el.style.top = t1;
-
-setTimeout(() => {
-c1.el.style.transition = '';
-c2.el.style.transition = '';
-res();
-}, duration + 15);
-});
-}
-
-// visible shuffle with ~7x speed change (fast -> slow)
-async function shuffleCards(cards, opts = {}) {
-const totalSwaps = opts.swaps ?? 12;
-// 7× speed change: first 80ms, last 560ms
-const first = opts.first ?? 80; // fastest
-const last = opts.last ?? 560; // slowest (~7x slower)
-
-for (let i = 0; i < totalSwaps; i++) {
-const t = i / (totalSwaps - 1);
-const dur = Math.round(first + (last - first) * t);
-
-let a = Math.floor(Math.random() * cards.length);
-let b = a;
-while (b === a) b = Math.floor(Math.random() * cards.length);
-
-await animateSwap(cards[a], cards[b], dur);
-[cards[a], cards[b]] = [cards[b], cards[a]];
-await new Promise(r => setTimeout(r, 20));
-}
-}
-
-// Find Ace shuffle function
-function setupFindAceShuffle() {
-const cards = absolutizeCards('#findAceGrid');
-if (!cards.length) return;
-
-return {
-shuffle: (o) => shuffleCards(cards, o || { swaps: 12, first: 80, last: 560 }),
-cards
-};
-}
-
-// Scratch Match shuffle function
-function setupScratchShuffle() {
-const cards = absolutizeCards('#cardGrid');
-if (!cards.length) return;
-
-return {
-shuffle: (o) => shuffleCards(cards, o || { swaps: 18, first: 80, last: 560 }),
-cards
-};
-}
-
-// Initialize shuffle functions when games start
-let findAceShuffle, scratchShuffle;
-
-function initFindAceShuffle() {
-findAceShuffle = setupFindAceShuffle();
-}
-
-function initScratchShuffle() {
-scratchShuffle = setupScratchShuffle();
-}
-
-// Update the startFindAceRound function to include shuffle
-function startFindAceRound(amount) {
-if (findAceGameActive || balance < amount) {
-if (balance < amount) {
-showMessage("Insufficient balance! Please deposit more to play.", 'error');
-}
-return;
-}
-
-findAceBetAmount = amount;
-findAceGameActive = true;
-findAceFlippedCards = [];
-
-balance -= amount;
-updateUserBalance(balance);
-updateBalanceDisplay();
-
-document.getElementById('findAceResult').textContent = '';
-document.getElementById('findAceGrid').innerHTML = '';
-
-const cardsToShow = shuffleArray([...findAceCards]);
-const grid = document.getElementById('findAceGrid');
-
-cardsToShow.forEach((card, index) => {
-const cardElement = document.createElement('div');
-cardElement.className = 'card';
-
-const front = document.createElement('div');
-front.className = 'front';
-front.textContent = card;
-
-const back = document.createElement('div');
-back.className = 'back';
-
-cardElement.appendChild(front);
-cardElement.appendChild(back);
-cardElement.dataset.value = card;
-grid.appendChild(cardElement);
-});
-
-findAceCountdown = 15;
-document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
-
-const countdownInterval = setInterval(() => {
-findAceCountdown--;
-document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
-
-if (findAceCountdown <= 0) {
-clearInterval(countdownInterval);
-endFindAceRound(false, "Time's up! You lost your bet.");
-}
-}, 1000);
-
-setTimeout(() => {
-document.querySelectorAll('#findAceGrid .card').forEach(card => {
-card.querySelector('.front').style.display = 'none';
-card.classList.remove('flipped');
-});
-
-// Initialize and run shuffle
-initFindAceShuffle();
-if (findAceShuffle) {
-findAceShuffle.shuffle().then(() => {
-document.querySelectorAll('#findAceGrid .card').forEach(card => {
-card.onclick = () => flipFindAceCard(card);
-});
-});
-}
-}, 3000);
-}
-
-// Update the revealAndShuffleCards function to include shuffle
-function revealAndShuffleCards() {
-const grid = document.getElementById('cardGrid');
-setupCards();
-
-cardData.forEach(data => {
-data.element.querySelector('.front').style.display = 'flex';
-data.element.classList.add('flipped');
-});
-
-setTimeout(() => {
-// Initialize and run shuffle
-initScratchShuffle();
-if (scratchShuffle) {
-scratchShuffle.shuffle().then(() => {
-grid.innerHTML = '';
-cardData.forEach(data => {
-data.element.querySelector('.front').style.display = 'none';
-data.element.classList.remove('flipped');
-data.element.onclick = () => flipCard(data.element);
-grid.appendChild(data.element);
-});
-
-gameStarted = true;
-});
-}
-}, 2000);
-}
 </script>
 </body>
 </html>
