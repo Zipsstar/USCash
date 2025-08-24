@@ -1,51 +1,5252 @@
-<div style="background: linear-gradient(180deg, #0b0f1a, #101d35); border-radius: 18px; padding: 25px; width: 92%; max-width: 500px; margin: 60px auto; font-family: 'Poppins', sans-serif; color: #cfd8e3; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.6);">
-  
-  <!-- Header / Title -->
-  <div style="font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: #00aaff; border-bottom: 1px solid rgba(0,170,255,0.3); padding-bottom: 10px;">
-    System Maintenance
-  </div>
-  
-  <!-- Message -->
-  <div style="font-size: 15px; font-weight: 400; line-height: 1.7; color: #b0c7e1; text-align: justify; padding: 0 5px;">
-    The USCash platform is temporarily unavailable while we apply important upgrades to improve speed, reliability, and security.  
-    Please return once the maintenance window ends.  
-  </div>
-  
-  <!-- Countdown -->
-  <div style="margin-top: 25px; font-size: 20px; font-weight: 600; color: #ffffff; padding: 14px; border-radius: 12px; background: #0f223d; border: 1px solid rgba(0,170,255,0.5); box-shadow: inset 0 0 15px rgba(0,170,255,0.3);">
-    ⏳ Resuming In  
-    <div id="countdown" style="font-size: 26px; font-weight: bold; margin-top: 8px; color: #00aaff; text-shadow: 0 0 10px #00aaff;"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>USCash 🎮</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+:root {
+--primary: #1E3A8A; /* Changed to dark blue */
+--secondary: #2563EB; /* Brighter blue */
+--dark: #0A0A0A;
+--light: #FFFFFF;
+--accent: #FF6347;
+--gold: #FFD700; /* Kept for some elements */
+}
+
+body {
+font-family: 'Poppins', sans-serif;
+background-color: var(--dark);
+color: var(--light);
+text-align: center;
+margin: 0;
+padding: 0;
+background-image:
+radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.1) 0%, transparent 20%),
+radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 20%);
+}
+
+h1 {
+font-size: 2.8rem;
+background: linear-gradient(90deg, var(--secondary), var(--primary), var(--secondary));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+margin: 20px 0;
+letter-spacing: 2px;
+position: relative;
+display: inline-block;
+}
+
+h1::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 0;
+width: 100%;
+height: 3px;
+background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+}
+
+.nav {
+background: linear-gradient(90deg, var(--dark), var(--primary), var(--dark));
+color: var(--light);
+padding: 12px;
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+position: relative;
+z-index: 100;
+}
+
+.nav a {
+color: var(--light);
+text-decoration: none;
+font-weight: bold;
+padding: 8px 15px;
+border-radius: 20px;
+transition: all 0.3s;
+font-size: 1.1rem;
+}
+
+.nav a:hover {
+background-color: var(--primary);
+color: var(--light);
+transform: translateY(-3px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.section {
+margin: 30px auto;
+padding: 25px;
+max-width: 900px;
+border: 2px solid var(--primary);
+border-radius: 15px;
+box-sizing: border-box;
+background-color: rgba(10, 10, 10, 0.8);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+position: relative;
+overflow: hidden;
+}
+
+.section::before {
+content: '';
+position: absolute;
+top: -2px;
+left: -2px;
+right: -2px;
+bottom: -2px;
+border: 2px solid transparent;
+border-image: linear-gradient(45deg, var(--primary), var(--secondary)) 1;
+z-index: -1;
+animation: borderRotate 8s linear infinite;
+}
+
+@keyframes borderRotate {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.gold-box {
+display: inline-block;
+background: linear-gradient(145deg, var(--secondary), var(--primary));
+color: var(--light);
+margin: 8px;
+padding: 12px 20px;
+border-radius: 12px;
+cursor: pointer;
+font-size: 1.1rem;
+font-weight: bold;
+transition: all 0.3s;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+border: none;
+}
+
+.gold-box:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+background: linear-gradient(145deg, var(--secondary), var(--primary));
+}
+
+.gold-box.active {
+background: var(--dark);
+color: var(--secondary);
+border: 2px solid var(--secondary);
+box-shadow: 0 0 15px var(--secondary);
+}
+
+.game-options {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 15px;
+align-items: center;
+justify-content: center;
+padding: 20px 0;
+}
+
+.game-options .gold-box {
+width: 100%;
+height: 180px;
+font-size: 1.4rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+border: 2px solid var(--secondary);
+box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+background-size: cover;
+background-position: center;
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.game-options .gold-box::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.4);
+z-index: 0;
+}
+
+.game-options .gold-box > * {
+position: relative;
+z-index: 1;
+}
+
+.game-options .gold-box:hover {
+transform: scale(1.05);
+box-shadow: 0 0 30px var(--secondary);
+}
+
+.game-options .gold-box i {
+font-size: 3rem;
+margin-bottom: 15px;
+color: var(--secondary);
+text-shadow: 0 0 10px rgba(37, 99, 235, 0.8);
+}
+
+/* Game specific thumbnails */
+.scratch-thumbnail {
+background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiBmaWxsPSJub25lIj48cGF0aCBkPSJNNDAgNDBIMTYwVjE2MEg0MFY0MFoiIGZpbGw9IiMxRTNBOEEiIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iNjAiIHk9IjYwIiB3aWR0aD0iODAiIGhlaWdodD0iODAiIGZpbGw9IiMyNTYzRUIiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjMwIiBmaWxsPSIjMUUzQThBIi8+PHBhdGggZD0iTTgwIDgwTDEyMCAxMjBNMTIwIDgwTDgwIDEyMCIgc3Ryb2tlPSIjMjU2M0VCIiBzdHJva2Utd2lkdGg9IjQiLz48L3N2Zz4=');
+}
+
+.fruit-thumbnail {
+background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNMTUwIDEwMEMxNTAgNzIgMTI4IDUwIDEwMCA1MEM3MiA1MCA1MCA3MiA1MCAxMDBTNzIgMTUwIDEwMCAxNTBTMTUwIDEyOCAxNTAgMTAwWiIgZmlsbD0iI0ZGMDAwMCIvPjxwYXRoIGQ9Ik0xMjAgOTBDMTIwIDcyIDEwNiA2MCA5MCA2MEM3NCA2MCA2MCA3MiA2MCA5MFM3NCAxMjAgOTAgMTIwUzEyMCAxMDggMTIwIDkwWiIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik04NSA3NUw3NSA4NUw4NSA4NUw3NSA3NSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMTE1IDk1TDEwNSAxMDVNMTE1IDEwNUwxMDUgOTUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkwIDQwVjYwTTExMCA0MFY2MCIgc3Ryb2tlPSIjMDA4MDAwIiBzdHJva2Utd2lkdGg9IjQiLz48L3N2Zz4=');
+}
+
+.tictactoe-thumbnail {
+background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNNjcgNjdoNjZ2NjZINjdaTTY3IDY3aDY2djY2SDY3WiIgZmlsbD0iIzFFM0E4QSIgZmlsbC1vcGFjaXR5PSIwLjEiLz48cGF0aCBkPSJNMTAwIDMzVjE2N00zMyAxMDBIMTY3IiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik02NyA2N0wxMzMgMTMzTTY3IDEzM0wxMzMgNjciIHN0cm9rZT0iIzI1NjNFQiIgc3Ryb2tlLXdpZHRoPSI2Ii8+PC9zdmc+');
+}
+
+.findace-thumbnail {
+background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNNDAgNDBIMTYwVjE2MEg0MFY0MFoiIGZpbGw9IiMxRTNBOEEiLz48cGF0aCBkPSJNNjAgNjBIMTQwVjE0MEg2MFY2MFoiIGZpbGw9IiMyNTYzRUIiLz48cGF0aCBkPSJNODAgODBIMTIwVjEyMEg4MFY4MFoiIGZpbGw9IiMxRTNBOEEiLz48cGF0aCBkPSJNODUgODVIMTE1VjExNUg4NVY4NVoiIGZpbGw9IiMyNTYzRUIiLz48cGF0aCBkPSJNOTAgOTBIMTExVjExMEg5MFY5MFoiIGZpbGw9IiMxRTNBOEEiLz48cGF0aCBkPSJNOTUgOTVIMTA1VjEwNUg5NVY5NVoiIGZpbGw9IiMyNTYzRUIiLz48cGF0aCBkPSJNMTAwIDEwMEgxMDBWMTAwSDEwMFoiIGZpbGw9IiMxRTNBOEEiLz48L3N2Zz4=');
+}
+
+.archery-thumbnail {
+background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjMjU2M0VCIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI2MCIgZmlsbD0iIzFFM0E4QSIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNDAiIGZpbGw9IiMwMDgwMDAiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjIwIiBmaWxsPSIjRkYwMDAwIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSIxMCIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik0xODAgMTAwSDE2ME0xNjAgMTAwSDE0ME0xNDAgMTAwSDEyME0xMjAgMTAwSDEwME0xMDAgMTAwSDgwTTgwIDEwMEg2ME02MCAxMDBINDBNNDAgMTAwSDIwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xODAgMTAwSDE2ME0xNjAgMTAwSDE0ME0xNDAgMTAwSDEyME0xMjAgMTAwSDEwME0xMDAgMTAwSDgwTTgwIDEwMEg2ME02MCAxMDBINDBNNDAgMTAwSDIwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIgdHJhbnNmb3JtPSJyb3RhdGUoOTAgMTAwIDEwMCkiLz48cGF0aCBkPSJNMTcwIDEwMEgxMzBNMzAgMTAwSDcwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgMTAwIDEwMCkiLz48cGF0aCBkPSJNMTcwIDEwMEgxMzBNMzAgMTAwSDcwIiBzdHJva2U9IiMxRTNBOEEiIHN0cm9rZS13aWR0aD0iMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTM1IDEwMCAxMDApIi8+PC9zdmc+');
+}
+
+.card-grid {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 15px;
+margin: 20px auto;
+max-width: 450px;
+}
+
+.card {
+width: 90px;
+height: 110px;
+background-color: white;
+color: black;
+font-size: 2.2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 2px solid var(--secondary);
+border-radius: 10px;
+cursor: pointer;
+transition: transform 0.4s, background-color 0.3s;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+background-size: cover;
+background-position: center;
+position: relative;
+transform-style: preserve-3d;
+}
+
+.card .front, .card .back {
+position: absolute;
+width: 100%;
+height: 100%;
+backface-visibility: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 8px;
+}
+
+.card .front {
+background: linear-gradient(145deg, var(--secondary), var(--primary));
+color: var(--light);
+transform: rotateY(180deg);
+}
+
+.card .back {
+background: white;
+border: 2px solid var(--secondary);
+}
+
+.card.flipped {
+transform: rotateY(180deg);
+}
+
+.bet-amounts {
+margin-top: 20px;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 12px;
+}
+
+#result {
+margin-top: 20px;
+font-size: 1.3rem;
+color: var(--light);
+padding: 10px;
+border-radius: 8px;
+background-color: rgba(0, 0, 0, 0.5);
+}
+
+.shake {
+animation: shake 0.5s;
+}
+
+.glow {
+animation: glow 1s infinite alternate;
+}
+
+@keyframes shake {
+0% { transform: translate(1px, 1px) rotate(0deg); }
+20% { transform: translate(-3px, 0px) rotate(-2deg); }
+40% { transform: translate(3px, 2px) rotate(2deg); }
+60% { transform: translate(-2px, 1px) rotate(0deg); }
+80% { transform: translate(2px, -1px) rotate(2deg); }
+100% { transform: translate(1px, 1px) rotate(0deg); }
+}
+
+@keyframes glow {
+from { box-shadow: 0 0 10px var(--secondary); }
+to { box-shadow: 0 0 20px var(--light); }
+}
+
+#particles-js {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 999;
+display: none;
+}
+
+#welcomePopup {
+position: fixed;
+top: 0; left: 0;
+width: 100%; height: 100%;
+background-color: rgba(0, 0, 0, 0.9);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 10000;
+}
+
+#welcomePopup .popup-content {
+background: var(--dark);
+border: 2px solid var(--secondary);
+padding: 30px;
+border-radius: 15px;
+max-width: 450px;
+color: var(--light);
+text-align: center;
+position: relative;
+box-shadow: 0 0 30px var(--secondary);
+animation: popupEnter 0.5s ease-out;
+}
+
+@keyframes popupEnter {
+from { transform: scale(0.8); opacity: 0; }
+to { transform: scale(1); opacity: 1; }
+}
+
+#welcomePopup .popup-content h2 {
+color: var(--secondary);
+margin-top: 0;
+font-size: 1.8rem;
+}
+
+#welcomePopup .popup-content .close {
+position: absolute;
+top: 15px;
+right: 20px;
+cursor: pointer;
+font-weight: bold;
+color: var(--accent);
+font-size: 24px;
+transition: transform 0.3s;
+}
+
+#welcomePopup .popup-content .close:hover {
+transform: rotate(90deg);
+}
+
+/* فروٹ شوٹر گیم کے لیے اضافی سٹائلز */
+#fruitGame {
+display: none;
+}
+
+.shoot-area {
+position: relative;
+height: 400px;
+border: 3px dashed var(--secondary);
+border-radius: 15px;
+background-color: #222;
+overflow: hidden;
+margin-top: 20px;
+box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.fruit {
+position: absolute;
+font-size: 3.5em;
+cursor: pointer;
+user-select: none;
+pointer-events: auto;
+transition: transform 0.1s;
+z-index: 10;
+}
+
+.fruit:hover {
+transform: scale(1.1);
+}
+
+#fruitTargetDisplay {
+font-size: 1.5em;
+margin: 15px 0;
+color: var(--light);
+padding: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+border-radius: 8px;
+display: inline-block;
+}
+
+#fruitScoreDisplay {
+margin-top: 15px;
+font-size: 1.3em;
+font-weight: bold;
+}
+
+#fruitCountdown {
+font-size: 1.4em;
+margin-top: 15px;
+color: var(--secondary);
+font-weight: bold;
+}
+
+/* Tic Tac Toe Styles */
+#tictactoeGame {
+display: none;
+}
+
+.tic-tac-toe-board {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(3, 1fr);
+gap: 8px;
+width: 320px;
+height: 320px;
+margin: 25px auto;
+background-color: rgba(37, 99, 235, 0.1);
+padding: 15px;
+border-radius: 15px;
+}
+
+.tic-tac-toe-cell {
+background-color: #222;
+border: 2px solid var(--secondary);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 3.5rem;
+cursor: pointer;
+transition: all 0.3s;
+color: var(--secondary);
+}
+
+.tic-tac-toe-cell:hover {
+background-color: #333;
+transform: scale(1.05);
+}
+
+.tic-tac-toe-cell.x {
+color: var(--secondary);
+text-shadow: 0 0 10px var(--secondary);
+}
+
+.tic-tac-toe-cell.o {
+color: var(--accent);
+text-shadow: 0 0 10px var(--accent);
+}
+
+#tictactoeResult {
+margin-top: 20px;
+font-size: 1.3rem;
+color: var(--light);
+padding: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+border-radius: 8px;
+}
+
+#tictactoeCountdown {
+font-size: 1.4rem;
+color: var(--secondary);
+font-weight: bold;
+}
+
+/* Find Ace Game Styles */
+#findAceGame {
+display: none;
+}
+
+#findAceCountdown {
+font-size: 1.5rem;
+margin: 15px 0;
+color: var(--secondary);
+font-weight: bold;
+}
+
+#findAceResult {
+margin-top: 20px;
+font-size: 1.3rem;
+color: var(--light);
+padding: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+border-radius: 8px;
+}
+
+/* Archery Game Styles */
+#archeryGame {
+display: none;
+}
+
+.archery-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+}
+
+.archery-canvas-container {
+position: relative;
+width: 520px;
+height: 520px;
+max-width: 100%;
+margin: 0 auto;
+}
+
+#archeryCanvas {
+background: transparent;
+border-radius: 12px;
+display: block;
+max-width: 100%;
+height: auto;
+border: 2px solid var(--secondary);
+}
+
+.archery-controls {
+display: flex;
+flex-direction: column;
+gap: 15px;
+width: 100%;
+max-width: 520px;
+}
+
+.archery-bets {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 10px;
+}
+
+.archery-score-row {
+display: flex;
+justify-content: center;
+gap: 10px;
+}
+
+.archery-score-box {
+width: 48px;
+height: 48px;
+border-radius: 8px;
+background: linear-gradient(145deg, #222, #111);
+border: 2px solid var(--secondary);
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+color: var(--secondary);
+}
+
+#archeryStatus {
+font-size: 1.1rem;
+color: var(--light);
+text-align: center;
+padding: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+border-radius: 8px;
+}
+
+/* Auth Modal Styles */
+.auth-modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.85);
+z-index: 1000;
+align-items: center;
+justify-content: center;
+}
+
+.auth-content {
+background-color: var(--dark);
+border: 2px solid var(--secondary);
+padding: 30px;
+border-radius: 15px;
+width: 90%;
+max-width: 400px;
+color: var(--light);
+box-shadow: 0 0 30px var(--secondary);
+animation: modalFadeIn 0.4s ease-out;
+}
+
+@keyframes modalFadeIn {
+from { opacity: 0; transform: translateY(-20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-tabs {
+display: flex;
+margin-bottom: 25px;
+border-bottom: 2px solid var(--secondary);
+}
+
+.auth-tab {
+flex: 1;
+padding: 12px;
+text-align: center;
+cursor: pointer;
+border-bottom: 3px solid transparent;
+font-weight: bold;
+transition: all 0.3s;
+}
+
+.auth-tab.active {
+border-bottom: 3px solid var(--secondary);
+color: var(--secondary);
+}
+
+.auth-tab:hover {
+background-color: rgba(37, 99, 235, 0.1);
+}
+
+.auth-form {
+display: none;
+}
+
+.auth-form.active {
+display: block;
+}
+
+.auth-form input {
+width: 100%;
+padding: 12px;
+margin-bottom: 18px;
+border-radius: 8px;
+border: 1px solid #444;
+background-color: #222;
+color: var(--light);
+font-size: 1rem;
+transition: all 0.3s;
+}
+
+.auth-form input:focus {
+outline: none;
+border-color: var(--secondary);
+box-shadow: 0 0 10px var(--secondary);
+}
+
+.auth-form button {
+width: 100%;
+padding: 12px;
+background: linear-gradient(145deg, var(--secondary), var(--primary));
+color: var(--light);
+border: none;
+border-radius: 8px;
+font-weight: bold;
+cursor: pointer;
+font-size: 1.1rem;
+transition: all 0.3s;
+margin-top: 10px;
+}
+
+.auth-form button:hover {
+background: linear-gradient(145deg, var(--secondary), var(--primary));
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+.auth-form button:disabled {
+background: #444;
+cursor: not-allowed;
+transform: none;
+box-shadow: none;
+}
+
+.forgot-password {
+text-align: right;
+margin-top: -15px;
+margin-bottom: 20px;
+font-size: 0.9rem;
+color: var(--secondary);
+cursor: pointer;
+transition: color 0.3s;
+}
+
+.forgot-password:hover {
+color: var(--secondary);
+text-decoration: underline;
+}
+
+/* Balance and User Info Styles */
+.user-info {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+margin: 20px 0;
+flex-wrap: wrap;
+}
+
+.balance-container {
+display: flex;
+align-items: center;
+gap: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+padding: 12px 20px;
+border-radius: 30px;
+border: 1px solid var(--secondary);
+box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+}
+
+#balanceAmount {
+font-weight: bold;
+font-size: 1.2rem;
+color: var(--secondary);
+}
+
+.refresh-balance {
+cursor: pointer;
+color: var(--secondary);
+font-size: 1.3rem;
+transition: transform 0.3s;
+}
+
+.refresh-balance:hover {
+transform: rotate(180deg);
+color: var(--secondary);
+}
+
+#userDisplay {
+display: flex;
+align-items: center;
+background-color: rgba(0, 0, 0, 0.5);
+padding: 10px 20px;
+border-radius: 30px;
+border: 1px solid var(--secondary);
+box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+gap: 10px;
+}
+
+#usernameDisplay {
+font-weight: bold;
+color: var(--secondary);
+font-size: 0.84rem; /* 40% smaller */
+}
+
+#phoneDisplay {
+font-weight: bold;
+color: var(--secondary);
+font-size: 0.84rem; /* 40% smaller */
+}
+
+.country-flag {
+width: 24px;
+height: 16px;
+border-radius: 2px;
+box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.verified-badge {
+color: var(--secondary);
+margin-left: 5px;
+font-size: 0.84rem; /* 40% smaller */
+}
+
+/* Deposit/Withdraw Styles */
+#depositSection, #withdrawSection, #moreSection, #vipSection {
+display: none;
+}
+
+.form-group {
+margin-bottom: 20px;
+text-align: left;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 8px;
+color: var(--secondary);
+font-weight: bold;
+}
+
+.form-group input, .form-group select {
+width: 100%;
+padding: 12px;
+border-radius: 8px;
+border: 1px solid #444;
+background-color: #222;
+color: var(--light);
+font-size: 1rem;
+transition: all 0.3s;
+}
+
+.form-group input:focus, .form-group select:focus {
+outline: none;
+border-color: var(--secondary);
+box-shadow: 0 0 10px var(--secondary);
+}
+
+.submit-btn {
+background: linear-gradient(145deg, var(--secondary), var(--primary));
+color: var(--light);
+border: none;
+padding: 12px 25px;
+border-radius: 8px;
+font-weight: bold;
+cursor: pointer;
+margin-top: 15px;
+font-size: 1.1rem;
+transition: all 0.3s;
+display: inline-block;
+}
+
+.submit-btn:hover {
+background: linear-gradient(145deg, var(--secondary), var(--primary));
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+.transaction-history {
+margin-top: 30px;
+max-height: 400px;
+overflow-y: auto;
+padding: 15px;
+background-color: rgba(0, 0, 0, 0.3);
+border-radius: 10px;
+border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.transaction-item {
+background-color: rgba(30, 30, 30, 0.8);
+padding: 15px;
+margin-bottom: 15px;
+border-radius: 8px;
+border-left: 4px solid var(--secondary);
+transition: transform 0.3s;
+}
+
+.transaction-item:hover {
+transform: translateX(5px);
+}
+
+.transaction-amount {
+font-weight: bold;
+font-size: 1.1rem;
+}
+
+.transaction-approved {
+color: lime;
+}
+
+.transaction-pending {
+color: var(--secondary);
+}
+
+.transaction-rejected {
+color: var(--accent);
+}
+
+/* VIP Section Styles */
+.referral-code {
+background-color: rgba(0, 0, 0, 0.5);
+padding: 15px;
+border-radius: 8px;
+font-family: monospace;
+margin: 15px 0;
+word-break: break-all;
+border: 1px solid var(--secondary);
+font-size: 1.2rem;
+color: var(--secondary);
+position: relative;
+}
+
+.referral-code-copy {
+position: absolute;
+right: 10px;
+top: 10px;
+color: var(--secondary);
+cursor: pointer;
+font-size: 1rem;
+}
+
+.referral-stats {
+display: flex;
+justify-content: space-around;
+margin: 25px 0;
+flex-wrap: wrap;
+gap: 15px;
+}
+
+.stat-box {
+background-color: rgba(0, 0, 0, 0.5);
+padding: 20px;
+border-radius: 10px;
+border: 1px solid var(--secondary);
+min-width: 120px;
+flex: 1;
+transition: transform 0.3s;
+}
+
+.stat-box:hover {
+transform: translateY(-5px);
+box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+}
+
+.stat-label {
+color: var(--light);
+margin-bottom: 10px;
+font-size: 0.9rem;
+}
+
+.stat-value {
+font-size: 1.8rem;
+font-weight: bold;
+color: var(--secondary);
+}
+
+/* Announcement Bar */
+.announcement-bar {
+position: relative;
+background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
+color: var(--light);
+padding: 12px 0;
+overflow: hidden;
+margin: 0 auto;
+width: 100%;
+border-top: 1px solid var(--secondary);
+border-bottom: 1px solid var(--secondary);
+}
+
+.announcement-content {
+display: inline-block;
+white-space: nowrap;
+padding-left: 100%;
+animation: scroll 20s linear infinite;
+font-size: 1.1rem;
+text-shadow: 0 0 5px var(--secondary);
+}
+
+.announcement-content span {
+color: var(--secondary);
+font-weight: bold;
+}
+
+@keyframes scroll {
+0% { transform: translateX(0); }
+100% { transform: translateX(-100%); }
+}
+
+/* Message Box */
+.message-box {
+position: fixed;
+top: 20px;
+left: 50%;
+transform: translateX(-50%);
+background-color: var(--dark);
+color: var(--secondary);
+padding: 15px 25px;
+border-radius: 8px;
+border: 2px solid var(--secondary);
+box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+z-index: 10000;
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.message-box.show {
+opacity: 1;
+}
+
+/* Admin Panel Styles */
+#adminSection {
+display: none;
+}
+
+.admin-controls {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+margin-bottom: 20px;
+justify-content: center;
+}
+
+.admin-controls input {
+padding: 10px;
+border-radius: 8px;
+border: 1px solid #444;
+background-color: #222;
+color: var(--light);
+}
+
+.admin-table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+padding: 12px;
+text-align: left;
+border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.admin-table th {
+background-color: rgba(37, 99, 235, 0.1);
+color: var(--secondary);
+}
+
+.admin-table tr:hover {
+background-color: rgba(37, 99, 235, 0.05);
+}
+
+.admin-action {
+background: var(--secondary);
+color: var(--light);
+border: none;
+padding: 8px 12px;
+border-radius: 5px;
+cursor: pointer;
+margin: 0 5px;
+font-weight: bold;
+}
+
+.admin-action.reject {
+background: var(--accent);
+}
+
+/* Message Icon */
+.message-icon {
+position: fixed;
+bottom: 20px;
+right: 20px;
+width: 50px;
+height: 50px;
+background: var(--secondary);
+color: var(--light);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+z-index: 1000;
+font-size: 1.5rem;
+}
+
+.message-notification {
+position: absolute;
+top: -5px;
+right: -5px;
+background-color: var(--accent);
+color: white;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+font-size: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+display: none;
+}
+
+.message-popup {
+position: fixed;
+bottom: 80px;
+right: 20px;
+width: 300px;
+background: var(--dark);
+border: 2px solid var(--secondary);
+border-radius: 10px;
+padding: 15px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+z-index: 1000;
+display: none;
+}
+
+.message-popup h3 {
+margin-top: 0;
+color: var(--secondary);
+border-bottom: 1px solid var(--secondary);
+padding-bottom: 10px;
+}
+
+.message-list {
+max-height: 200px;
+overflow-y: auto;
+margin: 10px 0;
+}
+
+.message-item {
+padding: 8px;
+margin-bottom: 8px;
+background: rgba(37, 99, 235, 0.1);
+border-radius: 5px;
+font-size: 0.9rem;
+}
+
+.message-date {
+font-size: 0.7rem;
+color: #888;
+margin-top: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+h1 {
+font-size: 2.2rem;
+}
+
+.game-options {
+grid-template-columns: 1fr;
+}
+
+.game-options .gold-box {
+width: 100%;
+height: 140px;
+font-size: 1.2rem;
+}
+
+.tic-tac-toe-board {
+width: 280px;
+height: 280px;
+}
+
+.archery-canvas-container {
+width: 100%;
+height: auto;
+}
+
+.nav a {
+padding: 6px 10px;
+font-size: 0.9rem;
+}
+
+.section {
+padding: 20px;
+}
+
+.user-info {
+flex-direction: column;
+gap: 10px;
+}
+
+#usernameDisplay, #phoneDisplay, .verified-badge {
+font-size: 0.7rem; /* Adjusted for mobile */
+}
+}
+
+@media (max-width: 480px) {
+h1 {
+font-size: 1.8rem;
+}
+
+.game-options .gold-box {
+height: 120px;
+font-size: 1rem;
+}
+
+.game-options .gold-box i {
+font-size: 2rem;
+}
+
+.tic-tac-toe-board {
+width: 240px;
+height: 240px;
+}
+
+.card {
+width: 70px;
+height: 90px;
+font-size: 1.8rem;
+}
+
+#usernameDisplay, #phoneDisplay, .verified-badge {
+font-size: 0.6rem; /* Adjusted for small mobile */
+}
+}
+
+/* Game Thumbnails (Blue/Black) */
+.games-wrap{--blue:#2563EB;--bg:#0b0b0b;--card:#121212}
+.games-wrap{background:transparent;color:var(--blue);font-family:system-ui,Segoe UI,Arial}
+.games-title{margin:10px 0 12px;font-size:18px;color:var(--blue);letter-spacing:.4px}
+.game-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:720px){.game-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+.game-card{position:relative;border-radius:16px;overflow:hidden;background:var(--card);
+box-shadow:0 8px 24px rgba(0,0,0,.45);transition:transform .25s ease, box-shadow .25s ease}
+.game-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.55)}
+.thumb{position:relative;aspect-ratio:1/1;display:block;background:
+radial-gradient(120% 120% at 0% 0%,rgba(37, 99, 235,.12),transparent 40%),
+radial-gradient(120% 120% at 100% 0%,rgba(37, 99, 235,.08),transparent 45%),
+linear-gradient(#1a1a1a,#0f0f0f);}
+/* subtle noise */
+.thumb:after{content:"";position:absolute;inset:0;opacity:.08;pointer-events:none;
+background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");background-size:180px 180px;mix-blend-mode:overlay}
+.badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:var(--blue);
+border:1px solid rgba(37, 99, 235,.35);padding:4px 8px;border-radius:999px;font-size:11px}
+.label{display:flex;align-items:center;justify-content:space-between;gap:8px;
+padding:10px 12px;border-top:1px solid rgba(37, 99, 235,.14);color:#d6e9f6}
+.label span{font-size:14px}
+.play{font-size:12px;border:1px solid rgba(37, 99, 235,.35);padding:4px 8px;border-radius:999px}
+/* Icon layer (emoji placeholder) */
+.icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+font-size:56px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6))}
+/* Optional: replace emoji with your own images */
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.game-card a{color:inherit;text-decoration:none;display:block}
+</style>
+
+<!-- BEGIN: USCASH enhancements (links & styles) -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<style>
+:root{
+  --primary:#1E3A8A;--secondary:#2563EB;--dark:#0A0A0A;--light:#fff;--accent:#FF6347;--gold:#FFD700
+}
+*{box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#0A0A0A;color:#fff;margin:0}
+h1{font-size:2.4rem;text-align:center;margin:18px 0;background:linear-gradient(90deg,var(--secondary),var(--primary),var(--secondary));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.container{max-width:1000px;margin:0 auto;padding:16px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:10px}
+.nav a{color:#fff;text-decoration:none;padding:8px 12px;border:1px solid rgba(37,99,235,.4);border-radius:999px}
+.section{border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:16px;margin:12px 0;background:rgba(255,255,255,.03)}
+.gold-box{display:inline-block;background:linear-gradient(145deg,var(--secondary),var(--primary));color:#fff;
+  border:none;padding:10px 16px;border-radius:12px;margin:6px;cursor:pointer;font-weight:700}
+.hidden{display:none}
+
+/* Game grid */
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.game-card{border-radius:14px;overflow:hidden;background:#121212;border:1px solid rgba(37,99,235,.25)}
+.game-card .thumb{aspect-ratio:1/1;display:grid;place-items:center;position:relative;background:
+ radial-gradient(120% 120% at 0% 0%,rgba(37,99,235,.18),transparent 40%),
+ radial-gradient(120% 120% at 100% 0%,rgba(37,99,235,.12),transparent 40%),
+ linear-gradient(#1a1a1a,#0f0f0f)}
+.game-card .thumb .icon{font-size:56px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6))}
+.game-card .label{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-top:1px solid rgba(37,99,235,.18)}
+
+/* Modal for games (pop-up box) */
+#gameModal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.85);z-index:10000}
+#gameModal.active{display:grid}
+#gameModal .box{width:min(95vw,900px);max-height:90vh;overflow:auto;background:#0f0f0f;border:1px solid rgba(37,99,235,.35);
+  border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6);padding:14px;position:relative}
+#closeGameBtn{position:absolute;top:10px;right:10px}
+.modal-title{margin:6px 0 12px 0;font-size:1.25rem;color:#cfe3ff}
+
+/* Cards (used by Scratch & Find Ace) */
+.card-grid{display:grid;grid-template-columns:repeat(3,100px);gap:12px;justify-content:center;margin:16px 0}
+.card{width:100px;height:130px;position:relative;transform-style:preserve-3d;transition:transform .4s}
+.card .face{position:absolute;inset:0;display:grid;place-items:center;border-radius:10px;border:2px solid var(--secondary);
+  backface-visibility:hidden}
+.card .back{background:#fff;color:#000}
+.card .front{background:linear-gradient(145deg,var(--secondary),var(--primary));color:#fff;transform:rotateY(180deg)}
+.card.flipped{transform:rotateY(180deg)}
+.shuffle-row{display:flex;justify-content:center;gap:10px;margin-top:6px}
+.info{padding:8px 10px;border:1px dashed rgba(37,99,235,.4);border-radius:10px;display:inline-block}
+
+/* Archery */
+#archeryCanvas{background:transparent;border:2px solid var(--secondary);border-radius:12px;display:block;margin:10px auto}
+.archery-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center}
+
+/* Tic Tac Toe */
+.ttt-board{width:320px;height:320px;margin:10px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ttt-cell{display:grid;place-items:center;font-size:48px;border:2px solid var(--secondary);height:100px;cursor:pointer}
+
+/* Fruit Shooting */
+.shoot-area{position:relative;height:360px;border:2px dashed var(--secondary);border-radius:12px;overflow:hidden}
+.fruit{position:absolute;font-size:40px;cursor:pointer}
+
+/* Chess */
+#chessboard{width:480px;max-width:95vw;margin:10px auto;border:2px solid var(--secondary);border-radius:8px}
+.chess-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center}
+
+/* Status lists */
+.list{display:grid;gap:8px;margin-top:8px}
+.item{background:rgba(255,255,255,.04);border:1px solid rgba(37,99,235,.25);border-left:4px solid var(--secondary);
+  border-radius:8px;padding:10px}
+.ok{color:#7CFC00}.pending{color:#60a5fa}.rej{color:#FF6347}
+</style>
+<!-- END: USCASH enhancements -->
+</head>
+<body>
+<div id="particles-js"></div>
+
+<!-- Message Box -->
+<div id="messageBox" class="message-box"></div>
+
+<!-- Message Icon -->
+<div class="message-icon" onclick="toggleMessages()">
+<i class="fas fa-bell"></i>
+<div class="message-notification" id="messageNotification"></div>
+</div>
+
+<div class="message-popup" id="messagePopup">
+<h3>Announcements</h3>
+<div class="message-list" id="messageList">
+<!-- Messages will be populated here -->
+</div>
+<button class="gold-box" onclick="closeMessages()">Close</button>
+</div>
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+<div class="announcement-content">
+<span>📢 Stay connected with us!</span> For deposits, contact VIP users (verified with blue tick) or WhatsApp us at USCash WhatsApp channel
+</div>
+</div>
+
+<div id="welcomePopup" style="display:none;">
+<div class="popup-content">
+<div class="close" onclick="document.getElementById('welcomePopup').style.display='none'">×</div>
+<h2>Welcome to USCash! 🎮</h2>
+<p>Experience the thrill of gaming with real rewards. We're constantly improving our platform to bring you the best gaming experience.</p>
+<p>New games and features are coming soon - stay tuned!</p>
+<button class="gold-box" onclick="document.getElementById('welcomePopup').style.display='none'" style="margin-top: 20px;">
+Let's Play!
+</button>
+</div>
+</div>
+
+<!-- Auth Modals -->
+<div id="authModal" class="auth-modal">
+<div class="auth-content">
+<div class="auth-tabs">
+<div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+<div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
+</div>
+
+<div id="loginForm" class="auth-form active">
+<input type="email" id="loginEmail" placeholder="Email" required />
+<input type="password" id="loginPassword" placeholder="Password" required />
+<div class="forgot-password" onclick="showForgotPassword()">Forgot Password?</div>
+<button onclick="loginUser()">Login</button>
+</div>
+
+<div id="signupForm" class="auth-form">
+<input type="text" id="signupName" placeholder="Full Name" required />
+<input type="tel" id="signupPhone" placeholder="Phone Number" required />
+<input type="email" id="signupEmail" placeholder="Email" required />
+<input type="password" id="signupPassword" placeholder="Password (6+ characters)" required minlength="6" />
+<input type="text" id="referralCode" placeholder="Referral Code (Optional)" />
+<button onclick="signupUser()">Sign Up</button>
+</div>
+
+<div id="forgotPasswordForm" class="auth-form">
+<input type="email" id="forgotEmail" placeholder="Enter your email" required />
+<button onclick="resetPassword()">Reset Password</button>
+<button onclick="backToLogin()" style="margin-top: 10px; background-color: #444;">Back to Login</button>
+</div>
+</div>
+</div>
+
+<h1>USCash 🎮</h1>
+
+<div class="user-info">
+<div id="userDisplay" style="display:none;">
+<img src="https://flagcdn.com/w20/pk.png" class="country-flag" alt="Country Flag" id="countryFlag">
+<span id="usernameDisplay"></span>
+<span id="phoneDisplay"></span>
+<i class="fas fa-check-circle verified-badge" id="verifiedBadge" style="display:none;"></i>
+</div>
+<div class="balance-container">
+<span>Balance: Rs. <span id="balanceAmount">0</span></span>
+<i class="fas fa-sync-alt refresh-balance" onclick="refreshBalance()"></i>
+</div>
+<div id="authButtons">
+<button class="gold-box" onclick="showAuthModal('login')">Login</button>
+<button class="gold-box" onclick="showAuthModal('signup')">Sign Up</button>
+</div>
+<div id="logoutButton" style="display:none;">
+<button class="gold-box" onclick="logoutUser()">Logout</button>
+</div>
+</div>
+
+<div class="nav">
+<a href="#" onclick="showSection('home')"><i class="fas fa-home"></i> Home</a>
+<a href="#" onclick="showSection('deposit')"><i class="fas fa-money-bill-wave"></i> Deposit</a>
+<a href="#" onclick="showSection('withdraw')"><i class="fas fa-wallet"></i> Withdraw</a>
+<a href="#" onclick="showSection('vip')"><i class="fas fa-crown"></i> VIP</a>
+<a href="#" onclick="showSection('status')" id="statusLink" style="display:none;"><i class="fas fa-info-circle"></i> Status</a>
+<a href="#" onclick="showSection('admin')" id="adminLink" style="display:none;"><i class="fas fa-user-shield"></i> Admin</a>
+</div>
+
+<!-- Home Section -->
+<div class="section" id="homeSection">
+<h2>Select Game</h2>
+
+<!-- Game Thumbnails -->
+<section class="games-wrap">
+<div class="games-title">Select Game</div>
+<div class="game-grid">
+
+<!-- Scratch Match -->
+<article class="game-card">
+<a href="#/scratch-match" onclick="startCardGame(); return false;">
+<div class="thumb" aria-label="Scratch Match">
+<div class="badge">Hot</div>
+<div class="icon">🎫</div>
+</div>
+<div class="label"><span>Scratch Match</span><span class="play">Play</span></div>
+</a>
+</article>
+
+<!-- Fruit Shooting -->
+<article class="game-card">
+<a href="#/fruit-shooting" onclick="startFruitGame(); return false;">
+<div class="thumb" aria-label="Fruit Shooting">
+<div class="badge">Arcade</div>
+<div class="icon">🍉</div>
+</div>
+<div class="label"><span>Fruit Shooting</span><span class="play">Play</span></div>
+</a>
+</article>
+
+<!-- Tic Tac Toe -->
+<article class="game-card">
+<a href="#/tic-tac-toe" onclick="startTicTacToeGame(); return false;">
+<div class="thumb" aria-label="Tic Tac Toe">
+<div class="badge">Classic</div>
+<div class="icon">#️⃣</div>
+</div>
+<div class="label"><span>Tic Tac Toe</span><span class="play">Play</span></div>
+</a>
+</article>
+
+<!-- Find Ace -->
+<article class="game-card">
+<a href="#/find-ace" onclick="startFindAceGame(); return false;">
+<div class="thumb" aria-label="Find Ace">
+<div class="badge">Cards</div>
+<div class="icon">A♠️</div>
+</div>
+<div class="label"><span>Find Ace</span><span class="play">Play</span></div>
+</a>
+</article>
+
+<!-- Archery Challenge -->
+<article class="game-card">
+<a href="#/archery-challenge" onclick="startArcheryGame(); return false;">
+<div class="thumb" aria-label="Archery Challenge">
+<div class="badge">Skill</div>
+<div class="icon">🎯</div>
+</div>
+<div class="label"><span>Archery Challenge</span><span class="play">Play</span></div>
+</a>
+</article>
+
+</div>
+</section>
+</div>
+
+<!-- Scratch Game -->
+<div class="section" id="scratchGame" style="display:none;">
+<h2><i class="fas fa-scroll"></i> Scratch & Match</h2>
+<div class="bet-amounts">
+<div class="gold-box" onclick="selectBet(20)">20</div>
+<div class="gold-box" onclick="selectBet(50)">50</div>
+<div class="gold-box" onclick="selectBet(100)">100</div>
+<div class="gold-box" onclick="selectBet(150)">150</div>
+<div class="gold-box" onclick="selectBet(200)">200</div>
+<div class="gold-box" onclick="selectBet(300)">300</div>
+</div>
+<div class="card-grid" id="cardGrid"></div>
+<div id="result"></div>
+</div>
+
+<!-- Fruit Game -->
+<div class="section" id="fruitGame" style="display:none;">
+<h2><i class="fas fa-apple-alt"></i> Fruit Shooting</h2>
+<div id="fruitTargetDisplay">Target: Shoot the <b style="color:red;">RED</b> Apple 🍎!</div>
+<div class="bet-amounts">
+<div class="gold-box" onclick="startFruitRound(20)">Rs. 20</div>
+<div class="gold-box" onclick="startFruitRound(50)">Rs. 50</div>
+<div class="gold-box" onclick="startFruitRound(100)">Rs. 100</div>
+<div class="gold-box" onclick="startFruitRound(150)">Rs. 150</div>
+<div class="gold-box" onclick="startFruitRound(200)">Rs. 200</div>
+</div>
+<div id="fruitCountdown">Time: 0s</div>
+<div class="shoot-area" id="shootArea"></div>
+<div id="fruitScoreDisplay"></div>
+</div>
+
+<!-- Tic Tac Toe Game -->
+<div class="section" id="tictactoeGame" style="display:none;">
+<h2><i class="fas fa-times"></i> Tic Tac Toe</h2>
+<div class="bet-amounts">
+<div class="gold-box" onclick="selectTicTacToeBet(50)">Rs. 50</div>
+<div class="gold-box" onclick="selectTicTacToeBet(100)">Rs. 100</div>
+<div class="gold-box" onclick="selectTicTacToeBet(200)">Rs. 200</div>
+<div class="gold-box" onclick="selectTicTacToeBet(300)">Rs. 300</div>
+</div>
+<div id="tictactoeCountdown">Time: 30s</div>
+<div class="tic-tac-toe-board" id="ticTacToeBoard"></div>
+<div id="tictactoeResult"></div>
+</div>
+
+<!-- Find Ace Game -->
+<div class="section" id="findAceGame" style="display:none;">
+<h2><i class="fas fa-search"></i> Find Ace</h2>
+<div class="bet-amounts">
+<div class="gold-box" onclick="startFindAceRound(50)">Rs. 50</div>
+<div class="gold-box" onclick="startFindAceRound(100)">Rs. 100</div>
+<div class="gold-box" onclick="startFindAceRound(200)">Rs. 200</div>
+<div class="gold-box" onclick="startFindAceRound(300)">Rs. 300</div>
+</div>
+<div id="findAceCountdown">Time: 15s</div>
+<div class="card-grid" id="findAceGrid"></div>
+<div id="findAceResult"></div>
+</div>
+
+<!-- Archery Game -->
+<div class="section" id="archeryGame" style="display:none;">
+<h2><i class="fas fa-bullseye"></i> Archery Challenge</h2>
+<div class="archery-container">
+<div class="archery-canvas-container">
+<canvas id="archeryCanvas" width="520" height="520"></canvas>
+</div>
+
+<div class="archery-controls">
+<div class="bet-amounts">
+<div class="gold-box" onclick="selectArcheryBet(20)">Rs. 20</div>
+<div class="gold-box" onclick="selectArcheryBet(50)">Rs. 50</div>
+<div class="gold-box" onclick="selectArcheryBet(100)">Rs. 100</div>
+<div class="gold-box" onclick="selectArcheryBet(150)">Rs. 150</div>
+<div class="gold-box" onclick="selectArcheryBet(200)">Rs. 200</div>
+</div>
+
+<div class="archery-score-row" id="archeryScoreRow">
+<div class="archery-score-box"></div>
+<div class="archery-score-box"></div>
+<div class="archery-score-box"></div>
+<div class="archery-score-box"></div>
+<div class="archery-score-box"></div>
+</div>
+
+<div id="archeryStatus">Pick a bet to start</div>
+
+<div style="display: flex; justify-content: center; gap: 10px;">
+<button class="gold-box" onclick="resetArcheryGame()">Reset</button>
+<button class="gold-box" onclick="toggleArcheryAuto()" id="archeryAutoBtn">Auto: OFF</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Deposit Section -->
+<div class="section" id="depositSection" style="display:none;">
+<h2><i class="fas fa-money-bill-wave"></i> Deposit</h2>
+<p style="color: var(--secondary);">Minimum deposit amount is Rs. 150. To deposit, please contact VIP users (verified with blue tick) or WhatsApp us at USCash WhatsApp channel</p>
+<div class="form-group">
+<label for="depositAmount">Amount (Rs.)</label>
+<input type="number" id="depositAmount" min="150" placeholder="Minimum 150" />
+</div>
+<div class="form-group">
+<label for="depositMethod">Payment Method</label>
+<select id="depositMethod">
+<option value="easypaisa">EasyPaisa</option>
+<option value="jazzcash">JazzCash</option>
+<option value="bank">Bank Transfer</option>
+</select>
+</div>
+<div class="form-group">
+<label for="transactionId">Transaction ID</label>
+<input type="text" id="transactionId" placeholder="Enter transaction reference" />
+</div>
+<button class="submit-btn" onclick="submitDeposit()">Submit Deposit Request</button>
+
+<div class="transaction-history" id="depositHistory">
+<h3><i class="fas fa-history"></i> Deposit History</h3>
+<!-- Will be populated by JavaScript -->
+</div>
+</div>
+
+<!-- Withdraw Section -->
+<div class="section" id="withdrawSection" style="display:none;">
+<h2><i class="fas fa-wallet"></i> Withdraw</h2>
+<p style="color: var(--secondary);">Minimum withdrawal amount is Rs. 300. You can submit requests anytime.</p>
+<div class="form-group">
+<label for="withdrawAmount">Amount (Rs.)</label>
+<input type="number" id="withdrawAmount" min="300" placeholder="Minimum 300" />
+</div>
+<div class="form-group">
+<label for="withdrawMethod">Payment Method</label>
+<select id="withdrawMethod">
+<option value="easypaisa">EasyPaisa</option>
+<option value="jazzcash">JazzCash</option>
+<option value="bank">Bank Transfer</option>
+</select>
+</div>
+<div class="form-group">
+<label for="accountNumber">Account Number</label>
+<input type="text" id="accountNumber" placeholder="Enter your account number" />
+</div>
+<div class="form-group">
+<label for="accountName">Account Name</label>
+<input type="text" id="accountName" placeholder="Enter account holder name" />
+</div>
+<button class="submit-btn" onclick="submitWithdraw()">Submit Withdrawal Request</button>
+
+<div class="transaction-history" id="withdrawHistory">
+<h3><i class="fas fa-history"></i> Withdrawal History</h3>
+<!-- Will be populated by JavaScript -->
+</div>
+</div>
+
+<!-- VIP Section -->
+<div class="section" id="vipSection" style="display:none;">
+<h2><i class="fas fa-crown"></i> VIP Program</h2>
+<p style="color: var(--secondary);">Earn money by referring friends! When a user refers someone, the referral must make their first deposit. Only then will the referring user receive 5% of the referral's next withdrawal amount.</p>
+
+<div class="referral-stats">
+<div class="stat-box">
+<div class="stat-label">Total Referrals</div>
+<div class="stat-value" id="referralCount">0</div>
+</div>
+<div class="stat-box">
+<div class="stat-label">Your Earnings</div>
+<div class="stat-value" id="referralEarnings">Rs. 0</div>
+</div>
+<div class="stat-box">
+<div class="stat-label">VIP Status</div>
+<div class="stat-value" id="vipStatus">Basic</div>
+</div>
+</div>
+
+<h3><i class="fas fa-user-plus"></i> Your Referral Code</h3>
+<div class="referral-code" id="userReferralCode">
+Login to see your code
+<i class="far fa-copy referral-code-copy" onclick="copyReferralCode()" title="Copy to clipboard" style="display:none;"></i>
+</div>
+
+<h3><i class="fas fa-info-circle"></i> How It Works</h3>
+<ol style="text-align: left; padding-left: 20px;">
+<li>Share your unique referral code with friends</li>
+<li>They sign up using your code and make their first deposit</li>
+<li>You earn <b>5% of their next withdrawal amount</b></li>
+<li>Withdraw your earnings anytime</li>
+<li>Reach higher VIP levels for more benefits</li>
+</ol>
+
+<button class="submit-btn" onclick="shareReferralCode()" style="margin-top: 20px;">
+<i class="fas fa-share-alt"></i> Share Your Referral Code
+</button>
+</div>
+
+<!-- Status Section (replaces More Section) -->
+<div class="section" id="statusSection" style="display:none;">
+<h2><i class="fas fa-info-circle"></i> Status</h2>
+
+<h3><i class="fas fa-clock"></i> Deposit Request Status</h3>
+<div class="transaction-history" id="depositStatus">
+<!-- Will be populated by JavaScript -->
+</div>
+
+<h3><i class="fas fa-clock"></i> Withdrawal Request Status</h3>
+<div class="transaction-history" id="withdrawStatus">
+<!-- Will be populated by JavaScript -->
+</div>
+
+<h3><i class="fas fa-exchange-alt"></i> Transaction History</h3>
+<div class="transaction-history" id="fullTransactionHistory">
+<!-- Will be populated by JavaScript -->
+</div>
+
+<button class="submit-btn" onclick="refreshAllData()" style="margin-top: 20px;">
+<i class="fas fa-sync-alt"></i> Refresh All Data
+</button>
+</div>
+
+<!-- Admin Section -->
+<div class="section" id="adminSection" style="display:none;">
+<h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
+
+<div class="admin-controls">
+<input type="text" id="searchUser" placeholder="Search by name..." oninput="searchUsers()">
+</div>
+
+<h3>Users</h3>
+<div class="transaction-history">
+<table class="admin-table">
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Starting Balance</th>
+<th>Current Balance</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="usersTable">
+<!-- Users will be populated here -->
+</tbody>
+</table>
+</div>
+
+<h3>Deposit Requests</h3>
+<div class="transaction-history">
+<table class="admin-table">
+<thead>
+<tr>
+<th>User</th>
+<th>Amount</th>
+<th>Method</th>
+<th>Transaction ID</th>
+<th>Status</th>
+<th>Date</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="depositRequestsTable">
+<!-- Deposit requests will be populated here -->
+</tbody>
+</table>
+</div>
+
+<h3>Withdrawal Requests</h3>
+<div class="transaction-history">
+<table class="admin-table">
+<thead>
+<tr>
+<th>User</th>
+<th>Amount</th>
+<th>Method</th>
+<th>Account Details</th>
+<th>Status</th>
+<th>Date</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="withdrawRequestsTable">
+<!-- Withdrawal requests will be populated here -->
+</tbody>
+</table>
+</div>
+
+<h3>Send Announcement</h3>
+<div class="form-group">
+<textarea id="announcementText" placeholder="Enter announcement message..." rows="3" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background-color: #222; color: var(--light);"></textarea>
+</div>
+<button class="submit-btn" onclick="sendAnnouncement()">Send Announcement</button>
+</div>
+
+<audio id="bgMusic" loop>
+<source src="https://cdn.pixabay.com/audio/2023/03/16/audio_98b541c254.mp3" type="audio/mp3">
+</audio>
+<audio id="flipSound">
+<source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_07d4930c1c.mp3" type="audio/mp3">
+</audio>
+<audio id="winSound">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/21/audio_5a9f1d8e6b.mp3" type="audio/mp3">
+</audio>
+<audio id="loseSound">
+<source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0d8d2a5c8a.mp3" type="audio/mp3">
+</audio>
+<audio id="shotSound">
+<source src="https://cdn.pixabay.com/download/audio/2023/08/19/audio_5a9f1d8e6b.mp3" type="audio/mp3">
+</audio>
+<audio id="shuffleSound">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/04/audio_6b08f2e9f8.mp3" type="audio/mp3">
+</audio>
+
+<!-- Firebase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+// Firebase configuration
+const firebaseConfig = {
+apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
+authDomain: "pakcashplay.firebaseapp.com",
+projectId: "pakcashplay",
+storageBucket: "pakcashplay.appspot.com",
+messagingSenderId: "551195851632",
+appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// Game variables
+let balance = 0;
+let selectedBet = null;
+let gameStarted = false;
+let currentUser = null;
+let lastWithdrawRequestTime = 0;
+
+// Initialize games when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+checkAuthState();
+setupGames();
+
+// Remove welcome popup
+document.getElementById('welcomePopup').style.display = 'none';
+localStorage.setItem('welcomeShown', 'true');
+
+// Start background music
+try {
+document.getElementById('bgMusic').volume = 0.3;
+document.getElementById('bgMusic').play();
+} catch (e) {
+console.log("Audio autoplay blocked:", e);
+}
+});
+
+// Authentication functions
+function checkAuthState() {
+auth.onAuthStateChanged(user => {
+if (user) {
+currentUser = user;
+document.getElementById('authButtons').style.display = 'none';
+document.getElementById('logoutButton').style.display = 'block';
+document.getElementById('userDisplay').style.display = 'flex';
+document.getElementById('statusLink').style.display = 'block';
+loadUserData();
+
+// Check if user is admin
+db.collection('users').doc(user.uid).get()
+.then(doc => {
+if (doc.exists) {
+const userData = doc.data();
+if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com' || userData.email === 'kafe2999@gmail.com') {
+document.getElementById('adminLink').style.display = 'block';
+
+// Add star icon for admin users
+if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com' || userData.email === 'kafe2999@gmail.com') {
+document.getElementById('verifiedBadge').style.display = 'inline-block';
+document.getElementById('verifiedBadge').className = 'fas fa-star verified-badge';
+}
+}
+}
+});
+} else {
+currentUser = null;
+document.getElementById('authButtons').style.display = 'flex';
+document.getElementById('logoutButton').style.display = 'none';
+document.getElementById('userDisplay').style.display = 'none';
+document.getElementById('statusLink').style.display = 'none';
+document.getElementById('adminLink').style.display = 'none';
+showSection('home');
+// Reset balance display when logged out
+document.getElementById('balanceAmount').textContent = '0';
+}
+});
+}
+
+function showAuthModal(tab) {
+document.getElementById('authModal').style.display = 'flex';
+switchAuthTab(tab);
+}
+
+function hideAuthModal() {
+document.getElementById('authModal').style.display = 'none';
+}
+
+function switchAuthTab(tab) {
+document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+
+if (tab === 'login') {
+document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
+document.getElementById('loginForm').classList.add('active');
+} else if (tab === 'signup') {
+document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
+document.getElementById('signupForm').classList.add('active');
+}
+}
+
+function showForgotPassword() {
+document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+document.getElementById('forgotPasswordForm').classList.add('active');
+}
+
+function backToLogin() {
+switchAuthTab('login');
+}
+
+function loginUser() {
+const email = document.getElementById('loginEmail').value;
+const password = document.getElementById('loginPassword').value;
+
+if (!email || !password) {
+showMessage('Please enter both email and password', 'error');
+return;
+}
+
+// Show loading state
+const loginBtn = document.querySelector('#loginForm button');
+loginBtn.disabled = true;
+loginBtn.textContent = 'Logging in...';
+
+auth.signInWithEmailAndPassword(email, password)
+.then(() => {
+hideAuthModal();
+showMessage('Login successful! Welcome back.', 'success');
+
+// Update last login time
+if (currentUser) {
+db.collection('users').doc(currentUser.uid).update({
+lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+});
+}
+})
+.catch(error => {
+let errorMessage = 'Login failed. ';
+switch(error.code) {
+case 'auth/user-not-found':
+errorMessage += 'No account found with this email.';
+break;
+case 'auth/wrong-password':
+errorMessage += 'Incorrect password.';
+break;
+case 'auth/invalid-email':
+errorMessage += 'The email address is invalid.';
+break;
+default:
+errorMessage += error.message;
+}
+showMessage(errorMessage, 'error');
+})
+.finally(() => {
+// Reset button state
+loginBtn.disabled = false;
+loginBtn.textContent = 'Login';
+});
+}
+
+function signupUser() {
+const email = document.getElementById('signupEmail').value;
+const password = document.getElementById('signupPassword').value;
+const name = document.getElementById('signupName').value;
+const phone = document.getElementById('signupPhone').value;
+const referralCode = document.getElementById('referralCode').value;
+
+// Validate all required fields
+if (!email || !password || !name || !phone) {
+showMessage('Please fill in all required fields', 'error');
+return;
+}
+
+// Validate email format
+if (!validateEmail(email)) {
+showMessage('Please enter a valid email address', 'error');
+return;
+}
+
+// Validate password length
+if (password.length < 6) {
+showMessage('Password should be at least 6 characters', 'error');
+return;
+}
+
+// Show loading state
+const signupBtn = document.querySelector('#signupForm button');
+signupBtn.disabled = true;
+signupBtn.textContent = 'Creating account...';
+
+// Create user with Firebase Auth
+auth.createUserWithEmailAndPassword(email, password)
+.then((userCredential) => {
+// Create user document in Firestore
+return db.collection('users').doc(userCredential.user.uid).set({
+name: name,
+phone: phone,
+email: email,
+balance: 0, // No welcome bonus
+startingBalance: 0, // Track starting balance
+referralCode: generateReferralCode(),
+referredBy: referralCode || null,
+referralCount: 0,
+referralEarnings: 0,
+createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+depositCount: 0
+});
+})
+.then(() => {
+// If referral code was provided, update the referrer's stats
+if (referralCode) {
+return db.collection('users').where('referralCode', '==', referralCode).get()
+.then(querySnapshot => {
+if (!querySnapshot.empty) {
+const referrerId = querySnapshot.docs[0].id;
+return db.collection('users').doc(referrerId).update({
+referralCount: firebase.firestore.FieldValue.increment(1)
+});
+}
+});
+}
+})
+.then(() => {
+// Success - hide modal and show welcome message
+hideAuthModal();
+showMessage('Signup successful! Welcome to USCash.', 'success');
+
+// Reset form
+document.getElementById('signupForm').reset();
+})
+.catch(error => {
+// Handle specific errors
+let errorMessage = 'Signup failed. ';
+switch(error.code) {
+case 'auth/email-already-in-use':
+errorMessage += 'This email is already registered.';
+break;
+case 'auth/invalid-email':
+errorMessage += 'The email address is invalid.';
+break;
+case 'auth/weak-password':
+errorMessage += 'The password is too weak.';
+break;
+default:
+errorMessage += error.message;
+}
+showMessage(errorMessage, 'error');
+})
+.finally(() => {
+// Reset button state
+signupBtn.disabled = false;
+signupBtn.textContent = 'Sign Up';
+});
+}
+
+// Helper function to validate email
+function validateEmail(email) {
+const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+return re.test(email);
+}
+
+function resetPassword() {
+const email = document.getElementById('forgotEmail').value;
+
+if (!email) {
+showMessage('Please enter your email', 'error');
+return;
+}
+
+auth.sendPasswordResetEmail(email)
+.then(() => {
+showMessage('Password reset email sent! Please check your inbox.', 'success');
+backToLogin();
+})
+.catch(error => {
+showMessage('Error sending reset email: ' + error.message, 'error');
+});
+}
+
+function logoutUser() {
+auth.signOut().then(() => {
+showSection('home');
+showMessage('Logged out successfully', 'success');
+// Reset balance to zero when logging out
+balance = 0;
+document.getElementById('balanceAmount').textContent = '0';
+});
+}
+
+function generateReferralCode() {
+return Math.random().toString(36).substring(2, 8).toUpperCase();
+}
+
+function copyReferralCode() {
+const referralCode = document.getElementById('userReferralCode').textContent;
+navigator.clipboard.writeText(referralCode)
+.then(() => {
+showMessage('Referral code copied to clipboard!', 'success');
+})
+.catch(err => {
+console.error('Failed to copy: ', err);
+});
+}
+
+function shareReferralCode() {
+const referralCode = document.getElementById('userReferralCode').textContent;
+const shareText = `Join USCash and use my referral code: ${referralCode} to get bonus rewards!`;
+
+if (navigator.share) {
+navigator.share({
+title: 'USCash Referral',
+text: shareText,
+url: window.location.href
+})
+.catch(err => {
+console.error('Error sharing:', err);
+fallbackShare(referralCode, shareText);
+});
+} else {
+fallbackShare(referralCode, shareText);
+}
+}
+
+function fallbackShare(referralCode, shareText) {
+prompt('Copy your referral code to share:', shareText);
+}
+
+// User data functions
+function loadUserData() {
+if (!currentUser) return;
+
+db.collection('users').doc(currentUser.uid).onSnapshot(doc => {
+if (doc.exists) {
+const userData = doc.data();
+balance = userData.balance || 0;
+updateBalanceDisplay();
+
+// Update user display
+document.getElementById('usernameDisplay').textContent = userData.name || userData.email || 'User';
+document.getElementById('phoneDisplay').textContent = userData.phone || '';
+
+// Check if user is verified (cptanil1995@gmail.com, auk5562@gmail.com, or kafe2999@gmail.com)
+if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com' || userData.email === 'kafe2999@gmail.com') {
+document.getElementById('verifiedBadge').style.display = 'inline-block';
+document.getElementById('verifiedBadge').className = 'fas fa-star verified-badge';
+}
+
+// Update VIP section if visible
+if (document.getElementById('vipSection').style.display === 'block') {
+document.getElementById('userReferralCode').textContent = userData.referralCode || 'N/A';
+document.getElementById('referralCount').textContent = userData.referralCount || 0;
+document.getElementById('referralEarnings').textContent = 'Rs. ' + (userData.referralEarnings || 0);
+
+// Show copy button if referral code exists
+if (userData.referralCode) {
+document.querySelector('.referral-code-copy').style.display = 'block';
+}
+
+// Set VIP status
+const earnings = userData.referralEarnings || 0;
+let vipStatus = 'Basic';
+if (earnings >= 5000) vipStatus = 'Gold';
+else if (earnings >= 1000) vipStatus = 'Silver';
+document.getElementById('vipStatus').textContent = vipStatus;
+}
+}
+});
+
+// Load transaction history
+loadTransactionHistory();
+
+// Load announcements
+loadAnnouncements();
+}
+
+function refreshBalance() {
+if (currentUser) {
+db.collection('users').doc(currentUser.uid).get()
+.then(doc => {
+if (doc.exists) {
+balance = doc.data().balance || 0;
+updateBalanceDisplay();
+showMessage('Balance refreshed!', 'success');
+}
+});
+}
+}
+
+function refreshAllData() {
+refreshBalance();
+loadTransactionHistory();
+showMessage('All data refreshed!', 'success');
+}
+
+function updateBalanceDisplay() {
+document.getElementById('balanceAmount').textContent = Math.floor(balance);
+}
+
+// Message display function
+function showMessage(message, type = 'info') {
+const messageBox = document.getElementById('messageBox');
+messageBox.textContent = message;
+messageBox.className = 'message-box';
+
+if (type === 'error') {
+messageBox.style.borderColor = 'var(--accent)';
+messageBox.style.color = 'var(--accent)';
+} else if (type === 'success') {
+messageBox.style.borderColor = 'lime';
+messageBox.style.color = 'lime';
+} else {
+messageBox.style.borderColor = 'var(--secondary)';
+messageBox.style.color = 'var(--secondary)';
+}
+
+messageBox.classList.add('show');
+
+setTimeout(() => {
+messageBox.classList.remove('show');
+}, 3000);
+}
+
+// Transaction functions
+function submitDeposit() {
+if (!currentUser) {
+showMessage('Please login to deposit', 'error');
+return;
+}
+
+const amount = parseFloat(document.getElementById('depositAmount').value);
+const method = document.getElementById('depositMethod').value;
+const transactionId = document.getElementById('transactionId').value;
+
+if (isNaN(amount) || amount < 150) {
+showMessage('Minimum deposit amount is Rs. 150', 'error');
+return;
+}
+
+if (!transactionId) {
+showMessage('Please enter transaction ID', 'error');
+return;
+}
+
+// Add deposit request
+db.collection('deposit_requests').add({
+userId: currentUser.uid,
+userName: currentUser.displayName || currentUser.email,
+amount: amount,
+method: method,
+transactionId: transactionId,
+status: 'pending',
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
+})
+.then(() => {
+showMessage('Deposit request submitted successfully!', 'success');
+document.getElementById('depositAmount').value = '';
+document.getElementById('transactionId').value = '';
+loadTransactionHistory();
+})
+.catch(error => {
+showMessage('Error submitting deposit: ' + error.message, 'error');
+});
+}
+
+function submitWithdraw() {
+if (!currentUser) {
+showMessage('Please login to withdraw', 'error');
+return;
+}
+
+const amount = parseFloat(document.getElementById('withdrawAmount').value);
+const method = document.getElementById('withdrawMethod').value;
+const accountNumber = document.getElementById('accountNumber').value;
+const accountName = document.getElementById('accountName').value;
+
+if (isNaN(amount) || amount < 300) {
+showMessage('Minimum withdrawal amount is Rs. 300', 'error');
+return;
+}
+
+if (amount > balance) {
+showMessage('Insufficient balance', 'error');
+return;
+}
+
+if (!accountNumber || !accountName) {
+showMessage('Please enter account details', 'error');
+return;
+}
+
+// Add withdrawal request
+db.collection('withdraw_requests').add({
+userId: currentUser.uid,
+userName: currentUser.displayName || currentUser.email,
+amount: amount,
+method: method,
+accountNumber: accountNumber,
+accountName: accountName,
+status: 'pending',
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
+})
+.then(() => {
+lastWithdrawRequestTime = Date.now();
+showMessage('Withdrawal request submitted successfully! It will be processed within 24 hours.', 'success');
+document.getElementById('withdrawAmount').value = '';
+document.getElementById('accountNumber').value = '';
+document.getElementById('accountName').value = '';
+loadTransactionHistory();
+})
+.catch(error => {
+showMessage('Error submitting withdrawal: ' + error.message, 'error');
+});
+}
+
+function loadTransactionHistory() {
+if (!currentUser) return;
+
+// Load deposit history
+db.collection('deposit_requests')
+.where('userId', '==', currentUser.uid)
+.orderBy('createdAt', 'desc')
+.limit(10)
+.get()
+.then(querySnapshot => {
+const depositHistory = document.getElementById('depositHistory');
+if (depositHistory) {
+depositHistory.innerHTML = '<h3><i class="fas fa-history"></i> Deposit History</h3>';
+
+if (querySnapshot.empty) {
+depositHistory.innerHTML += '<p>No deposit history found</p>';
+return;
+}
+
+querySnapshot.forEach(doc => {
+const data = doc.data();
+const item = document.createElement('div');
+item.className = 'transaction-item';
+
+let statusClass = 'transaction-pending';
+if (data.status === 'approved') statusClass = 'transaction-approved';
+if (data.status === 'rejected') statusClass = 'transaction-rejected';
+
+item.innerHTML = `
+<div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
+<div>Method: ${data.method}</div>
+<div>Status: <span class="${statusClass}">${data.status}</span></div>
+<div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
+`;
+
+depositHistory.appendChild(item);
+});
+}
+
+// Also update deposit status in status section
+const depositStatus = document.getElementById('depositStatus');
+if (depositStatus) {
+depositStatus.innerHTML = '';
+
+if (querySnapshot.empty) {
+depositStatus.innerHTML = '<p>No deposit requests found</p>';
+return;
+}
+
+querySnapshot.forEach(doc => {
+const data = doc.data();
+const item = document.createElement('div');
+item.className = 'transaction-item';
+
+let statusClass = 'transaction-pending';
+if (data.status === 'approved') statusClass = 'transaction-approved';
+if (data.status === 'rejected') statusClass = 'transaction-rejected';
+
+item.innerHTML = `
+<div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
+<div>Status: <span class="${statusClass}">${data.status}</span></div>
+<div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
+`;
+
+depositStatus.appendChild(item);
+});
+}
+});
+
+// Load withdrawal history
+db.collection('withdraw_requests')
+.where('userId', '==', currentUser.uid)
+.orderBy('createdAt', 'desc')
+.limit(10)
+.get()
+.then(querySnapshot => {
+const withdrawHistory = document.getElementById('withdrawHistory');
+if (withdrawHistory) {
+withdrawHistory.innerHTML = '<h3><i class="fas fa-history"></i> Withdrawal History</h3>';
+
+if (querySnapshot.empty) {
+withdrawHistory.innerHTML += '<p>No withdrawal history found</p>';
+return;
+}
+
+querySnapshot.forEach(doc => {
+const data = doc.data();
+const item = document.createElement('div');
+item.className = 'transaction-item';
+
+let statusClass = 'transaction-pending';
+if (data.status === 'approved') statusClass = 'transaction-approved';
+if (data.status === 'rejected') statusClass = 'transaction-rejected';
+
+item.innerHTML = `
+<div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
+<div>Method: ${data.method}</div>
+<div>Status: <span class="${statusClass}">${data.status}</span></div>
+<div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
+`;
+
+withdrawHistory.appendChild(item);
+});
+}
+
+// Also update withdrawal status in status section
+const withdrawStatus = document.getElementById('withdrawStatus');
+if (withdrawStatus) {
+withdrawStatus.innerHTML = '';
+
+if (querySnapshot.empty) {
+withdrawStatus.innerHTML = '<p>No withdrawal requests found</p>';
+return;
+}
+
+querySnapshot.forEach(doc => {
+const data = doc.data();
+const item = document.createElement('div');
+item.className = 'transaction-item';
+
+let statusClass = 'transaction-pending';
+if (data.status === 'approved') statusClass = 'transaction-approved';
+if (data.status === 'rejected') statusClass = 'transaction-rejected';
+
+item.innerHTML = `
+<div>Amount: <span class="transaction-amount">Rs. ${data.amount}</span></div>
+<div>Status: <span class="${statusClass}">${data.status}</span></div>
+<div>Date: ${data.createdAt?.toDate().toLocaleString() || 'N/A'}</div>
+`;
+
+withdrawStatus.appendChild(item);
+});
+}
+});
+
+// Load full transaction history
+const fullHistory = document.getElementById('fullTransactionHistory');
+if (fullHistory) {
+fullHistory.innerHTML = '';
+
+// Combine deposits and withdrawals for full history
+Promise.all([
+db.collection('deposit_requests')
+.where('userId', '==', currentUser.uid)
+.orderBy('createdAt', 'desc')
+.limit(10)
+.get(),
+db.collection('withdraw_requests')
+.where('userId', '==', currentUser.uid)
+.orderBy('createdAt', 'desc')
+.limit(10)
+.get()
+])
+.then(([deposits, withdrawals]) => {
+const allTransactions = [];
+
+deposits.forEach(doc => {
+const data = doc.data();
+allTransactions.push({
+type: 'deposit',
+amount: data.amount,
+status: data.status,
+date: data.createdAt,
+method: data.method
+});
+});
+
+withdrawals.forEach(doc => {
+const data = doc.data();
+allTransactions.push({
+type: 'withdrawal',
+amount: data.amount,
+status: data.status,
+date: data.createdAt,
+method: data.method
+});
+});
+
+// Sort by date
+allTransactions.sort((a, b) => (b.date?.seconds || 0) - (a.date?.seconds || 0));
+
+if (allTransactions.length === 0) {
+fullHistory.innerHTML = '<p>No transaction history found</p>';
+return;
+}
+
+allTransactions.forEach(trans => {
+const item = document.createElement('div');
+item.className = 'transaction-item';
+
+let statusClass = 'transaction-pending';
+if (trans.status === 'approved') statusClass = 'transaction-approved';
+if (trans.status === 'rejected') statusClass = 'transaction-rejected';
+
+item.innerHTML = `
+<div>Type: ${trans.type === 'deposit' ? 'Deposit' : 'Withdrawal'}</div>
+<div>Amount: <span class="transaction-amount">Rs. ${trans.amount}</span></div>
+<div>Method: ${trans.method}</div>
+<div>Status: <span class="${statusClass}">${trans.status}</span></div>
+<div>Date: ${trans.date?.toDate().toLocaleString() || 'N/A'}</div>
+`;
+
+fullHistory.appendChild(item);
+});
+});
+}
+}
+
+// Navigation functions
+function showSection(section) {
+document.querySelectorAll('.section').forEach(sec => {
+sec.style.display = 'none';
+});
+
+switch(section) {
+case 'home':
+document.getElementById('homeSection').style.display = 'block';
+break;
+case 'deposit':
+if (!currentUser) {
+showAuthModal('login');
+return;
+}
+document.getElementById('depositSection').style.display = 'block';
+break;
+case 'withdraw':
+if (!currentUser) {
+showAuthModal('login');
+return;
+}
+document.getElementById('withdrawSection').style.display = 'block';
+break;
+case 'vip':
+if (!currentUser) {
+showAuthModal('login');
+return;
+}
+document.getElementById('vipSection').style.display = 'block';
+// Load VIP data if not already loaded
+if (document.getElementById('userReferralCode').textContent === 'Login to see your code') {
+loadUserData();
+}
+break;
+case 'status':
+if (!currentUser) {
+showAuthModal('login');
+return;
+}
+document.getElementById('statusSection').style.display = 'block';
+loadTransactionHistory();
+break;
+case 'admin':
+if (!currentUser) {
+showAuthModal('login');
+return;
+}
+// Check if user is admin
+db.collection('users').doc(currentUser.uid).get()
+.then(doc => {
+if (doc.exists) {
+const userData = doc.data();
+if (userData.email === 'cptanil1995@gmail.com' || userData.email === 'auk5562@gmail.com' || userData.email === 'kafe2999@gmail.com') {
+document.getElementById('adminSection').style.display = 'block';
+loadAdminData();
+} else {
+showMessage('Access denied. Admin only.', 'error');
+showSection('home');
+}
+}
+});
+break;
+}
+}
+
+// Game setup
+function setupGames() {
+setupScratchGame();
+setupFruitGame();
+setupTicTacToeGame();
+setupFindAceGame();
+setupArcheryGame();
+}
+
+// Scratch Game
+let icons = ['🐄', '🐔', '🐱', '🐶', '🐭'];
+let cardData = [];
+let flippedCards = [];
+let scratchChances = 4;
+
+function setupScratchGame() {
+icons = ['🐄', '🐔', '🐱', '🐶', '🐭'];
+cardData = [];
+flippedCards = [];
+}
+
+function startCardGame() {
+document.getElementById('scratchGame').style.display = 'block';
+document.getElementById('fruitGame').style.display = 'none';
+document.getElementById('tictactoeGame').style.display = 'none';
+document.getElementById('findAceGame').style.display = 'none';
+document.getElementById('archeryGame').style.display = 'none';
+setupCards();
+}
+
+function setupCards() {
+flippedCards = [];
+cardData = [];
+gameStarted = false;
+scratchChances = 4;
+const grid = document.getElementById('cardGrid');
+grid.classList.remove('shake', 'glow');
+grid.innerHTML = '';
+document.getElementById("particles-js").style.display = "none";
+document.getElementById("result").innerText = '';
+
+// 9 cards with 4 matching pairs and 1 unique
+let allIcons = [];
+for (let i = 0; i < 4; i++) {
+// Select 2 random icons for pairs
+const randomIcons = [...icons].sort(() => 0.5 - Math.random()).slice(0, 2);
+randomIcons.forEach(icon => {
+allIcons.push(icon);
+allIcons.push(icon);
+});
+}
+
+// Add one more random icon to make 9 cards
+allIcons.push(icons[Math.floor(Math.random() * icons.length)]);
+
+// Shuffle the cards
+allIcons = shuffleArray(allIcons);
+
+allIcons.forEach((icon) => {
+const card = document.createElement('div');
+card.className = 'card';
+
+const front = document.createElement('div');
+front.className = 'front';
+front.textContent = icon;
+
+const back = document.createElement('div');
+back.className = 'back';
+
+card.appendChild(front);
+card.appendChild(back);
+card.dataset.icon = icon;
+
+grid.appendChild(card);
+cardData.push({ element: card, icon: icon });
+});
+}
+
+function selectBet(amount) {
+if (gameStarted) return;
+
+if (balance < amount) {
+showMessage('Insufficient balance! Please deposit more to play.', 'error');
+return;
+}
+
+selectedBet = amount;
+document.querySelectorAll('#scratchGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+event.target.classList.add('active');
+
+// Deduct bet amount
+balance -= amount;
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+revealAndShuffleCards();
+}
+
+function revealAndShuffleCards() {
+const grid = document.getElementById('cardGrid');
+setupCards();
+
+cardData.forEach(data => {
+data.element.querySelector('.front').style.display = 'flex';
+data.element.classList.add('flipped');
+});
+
+setTimeout(() => {
+// Shuffle with animation
+shuffleCards(cardData.map((data, index) => {
+return { el: data.element, index: index };
+})).then(() => {
+grid.innerHTML = '';
+cardData.forEach(data => {
+data.element.querySelector('.front').style.display = 'none';
+data.element.classList.remove('flipped');
+data.element.onclick = () => flipCard(data.element);
+grid.appendChild(data.element);
+});
+
+gameStarted = true;
+});
+}, 2000);
+}
+
+// Animate swap between two card elements
+function animateSwap(c1, c2, duration) {
+return new Promise(res => {
+c1.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
+c2.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
+
+// store current positions
+const l1 = c1.el.style.left, t1 = c1.el.style.top;
+const l2 = c2.el.style.left, t2 = c2.el.style.top;
+
+// swap visually
+c1.el.style.left = l2; c1.el.style.top = t2;
+c2.el.style.left = l1; c2.el.style.top = t1;
+
+setTimeout(() => {
+c1.el.style.transition = "";
+c2.el.style.transition = "";
+res();
+}, duration + 10);
+});
+}
+
+// Shuffle cards with visible speed change (7x difference)
+async function shuffleCards(cards) {
+let swaps = 15; // total swaps
+let first = 100; // fastest (ms)
+let last = 700; // slowest (ms) ≈7x slower
+
+// Play shuffle sound
+document.getElementById('shuffleSound').play().catch(() => {});
+
+for (let i = 0; i < swaps; i++) {
+let t = i / (swaps - 1);
+let dur = first + (last - first) * t;
+
+let a = Math.floor(Math.random() * cards.length);
+let b = a;
+while (b === a) b = Math.floor(Math.random() * cards.length);
+
+await animateSwap(cards[a], cards[b], dur);
+[cards[a], cards[b]] = [cards[b], cards[a]];
+}
+}
+
+function flipCard(card) {
+if (!selectedBet) {
+showMessage("Please select a bet amount before starting!", 'error');
+return;
+}
+if (flippedCards.includes(card) || flippedCards.length >= 2) return;
+if (!gameStarted) return;
+
+card.classList.add('flipped');
+card.querySelector('.front').style.display = 'flex';
+flipSound.currentTime = 0;
+flipSound.play().catch(() => {});
+flippedCards.push(card);
+
+if (flippedCards.length === 2) {
+scratchChances--;
+setTimeout(checkWin, 1000);
+}
+}
+
+function checkWin() {
+const iconsPicked = flippedCards.map(c => c.dataset.icon);
+const result = document.getElementById('result');
+const grid = document.getElementById('cardGrid');
+
+if (iconsPicked[0] === iconsPicked[1]) {
+// Match found
+flippedCards = [];
+
+// Check if all matches found
+const allFlipped = document.querySelectorAll('.card.flipped');
+if (allFlipped.length >= 8) { // 4 pairs = 8 cards
+const winAmount = selectedBet * 2;
+balance += winAmount;
+updateUserBalance(balance);
+result.innerText = `🎉 You won! Rs. ${winAmount} added.`;
+grid.classList.add('glow');
+document.getElementById('winSound').play().catch(() => {});
+document.getElementById("particles-js").style.display = "block";
+setTimeout(() => {
+document.getElementById("particles-js").style.display = "none";
+setupCards();
+}, 2500);
+}
+} else {
+// No match
+setTimeout(() => {
+flippedCards.forEach(card => {
+card.classList.remove('flipped');
+card.querySelector('.front').style.display = 'none';
+});
+flippedCards = [];
+
+if (scratchChances <= 0) {
+result.innerText = `❌ You lost! Rs. ${selectedBet} deducted.`;
+grid.classList.add('shake');
+document.getElementById('loseSound').play().catch(() => {});
+
+setTimeout(() => {
+result.innerText = '';
+setupCards();
+if (balance <= 0) {
+showMessage("Your balance is too low. Please deposit to play again.", 'error');
+document.getElementById('scratchGame').style.display = 'none';
+}
+}, 2500);
+} else {
+result.innerText = `Chances left: ${scratchChances}`;
+setTimeout(() => {
+result.innerText = '';
+}, 1000);
+}
+}, 1000);
+}
+
+updateBalanceDisplay();
+}
+
+function updateUserBalance(newBalance) {
+if (!currentUser) return;
+
+db.collection('users').doc(currentUser.uid).update({
+balance: newBalance
+})
+.catch(error => {
+console.error('Error updating balance:', error);
+});
+}
+
+// Fruit Game
+const colors = ["red", "green", "yellow", "blue", "purple"];
+const fruits = {
+red: "🍎",
+green: "🍏",
+yellow: "🍋",
+blue: "🍇",
+purple: "🍆"
+};
+const durations = {
+20: 8000,
+50: 15000,
+100: 30000,
+150: 45000,
+200: 60000
+};
+
+let targetColor = "";
+let fruitScore = 0;
+let fruitGameInterval, fruitGameTimer, fruitCountdownInterval;
+let fruitGameStarted = false;
+let fruitSelectedBet = 0;
+
+function setupFruitGame() {
+setNewFruitTarget();
+}
+
+function startFruitGame() {
+document.getElementById('scratchGame').style.display = 'none';
+document.getElementById('fruitGame').style.display = 'block';
+document.getElementById('tictactoeGame').style.display = 'none';
+document.getElementById('findAceGame').style.display = 'none';
+document.getElementById('archeryGame').style.display = 'none';
+setNewFruitTarget();
+}
+
+function setNewFruitTarget() {
+targetColor = colors[Math.floor(Math.random() * colors.length)];
+document.getElementById("fruitTargetDisplay").innerHTML = `Target: Shoot the <b style="color:${targetColor};">${targetColor.toUpperCase()}</b> Fruit ${fruits[targetColor]}`;
+}
+
+function spawnFruit() {
+const shootArea = document.getElementById("shootArea");
+if (shootArea.childElementCount >= 10) return;
+
+const fruit = document.createElement("div");
+fruit.classList.add("fruit");
+
+const isTarget = Math.random() < 0.40;
+const color = isTarget ? targetColor : colors[Math.floor(Math.random() * colors.length)];
+fruit.style.color = color;
+fruit.innerText = fruits[color];
+
+const size = Math.random() * 30 + 20;
+fruit.style.fontSize = `${size}px`;
+
+const x = Math.random() * (shootArea.clientWidth - 40);
+fruit.style.left = `${x}px`;
+fruit.style.top = "-30px";
+
+fruit.addEventListener("click", () => {
+if (!fruitGameStarted || fruit.clicked) return;
+fruit.clicked = true;
+
+if (color === targetColor) {
+fruitScore++;
+} else {
+fruitScore = Math.max(0, fruitScore - 2);
+}
+document.getElementById("fruitScoreDisplay").textContent = `Score: ${fruitScore}`;
+fruit.remove();
+});
+
+shootArea.appendChild(fruit);
+
+let top = -30;
+const fallSpeed = setInterval(() => {
+top += 15;
+fruit.style.top = `${top}px`;
+if (top > shootArea.clientHeight) {
+clearInterval(fallSpeed);
+fruit.remove();
+}
+}, 50);
+}
+
+function startFruitRound(amount) {
+if (fruitGameStarted || balance < amount) {
+if (balance < amount) {
+showMessage("Insufficient balance! Please deposit more to play.", 'error');
+}
+return;
+}
+
+balance -= amount;
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+document.getElementById("shootArea").innerHTML = "";
+clearInterval(fruitGameInterval);
+clearInterval(fruitCountdownInterval);
+clearTimeout(fruitGameTimer);
+fruitScore = 0;
+document.getElementById("fruitScoreDisplay").innerText = "Score: 0";
+setNewFruitTarget();
+
+fruitSelectedBet = amount;
+fruitGameStarted = true;
+
+document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
+btn.style.pointerEvents = "none";
+btn.style.opacity = "0.4";
+});
+
+let timeLeft = durations[amount] / 1000;
+document.getElementById("fruitCountdown").innerText = `Time: ${timeLeft}s`;
+
+fruitCountdownInterval = setInterval(() => {
+timeLeft--;
+document.getElementById('fruitCountdown').innerText = `Time: ${timeLeft}s`;
+if (timeLeft <= 0) clearInterval(fruitCountdownInterval);
+}, 1000);
+
+fruitGameInterval = setInterval(spawnFruit, 200);
+
+fruitGameTimer = setTimeout(() => {
+clearInterval(fruitGameInterval);
+clearInterval(fruitCountdownInterval);
+fruitGameStarted = false;
+
+let winAmount = 0;
+if (fruitScore >= Math.floor(fruitSelectedBet * 1.5)) {
+winAmount = fruitSelectedBet * 2;
+balance += winAmount;
+updateUserBalance(balance);
+showMessage(`🎉 Congratulations! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou won Rs. ${winAmount}!\nNew Balance: Rs. ${balance}`, 'success');
+document.getElementById('winSound').play().catch(() => {});
+} else {
+showMessage(`❌ Game Over! You scored ${fruitScore} points (Target: ${Math.floor(fruitSelectedBet * 1.5)}).\nYou lost your bet of Rs. ${fruitSelectedBet}.\nNew Balance: Rs. ${balance}`, 'error');
+document.getElementById('loseSound').play().catch(() => {});
+}
+
+updateBalanceDisplay();
+
+document.querySelectorAll('#fruitGame .bet-amounts .gold-box').forEach(btn => {
+btn.style.pointerEvents = "auto";
+btn.style.opacity = "1";
+});
+
+document.getElementById("shootArea").innerHTML = "";
+document.getElementById("fruitScoreDisplay").innerText = "";
+document.getElementById("fruitCountdown").innerText = "Time: 0s";
+setNewFruitTarget();
+
+}, durations[amount]);
+}
+
+// Tic Tac Toe Game
+let ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+let currentPlayer = 'X';
+let ticTacToeGameActive = false;
+let ticTacToeBetAmount = 0;
+let ticTacToeCountdown = 30;
+let ticTacToeTimer;
+
+function setupTicTacToeGame() {
+ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+currentPlayer = 'X';
+}
+
+function startTicTacToeGame() {
+document.getElementById('scratchGame').style.display = 'none';
+document.getElementById('fruitGame').style.display = 'none';
+document.getElementById('tictactoeGame').style.display = 'block';
+document.getElementById('findAceGame').style.display = 'none';
+document.getElementById('archeryGame').style.display = 'none';
+setupTicTacToeGame();
+renderTicTacToeBoard();
+}
+
+function selectTicTacToeBet(amount) {
+if (ticTacToeGameActive) return;
+
+if (balance < amount) {
+showMessage("Insufficient balance! Please deposit more to play.", 'error');
+return;
+}
+
+ticTacToeBetAmount = amount;
+document.querySelectorAll('#tictactoeGame .bet-amounts .gold-box').forEach(btn => btn.classList.remove('active'));
+event.target.classList.add('active');
+
+startTicTacToeRound();
+}
+
+function startTicTacToeRound() {
+ticTacToeGameActive = true;
+currentPlayer = 'X';
+ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+ticTacToeCountdown = 30;
+
+balance -= ticTacToeBetAmount;
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+document.getElementById('tictactoeCountdown').textContent = `Time: ${ticTacToeCountdown}s`;
+ticTacToeTimer = setInterval(() => {
+ticTacToeCountdown--;
+document.getElementById('tictactoeCountdown').textContent = `Time: ${ticTacToeCountdown}s`;
+
+if (ticTacToeCountdown <= 0) {
+clearInterval(ticTacToeTimer);
+endTicTacToeGame(false, "Time's up! Game ended in a draw.");
+}
+}, 1000);
+
+renderTicTacToeBoard();
+document.getElementById('tictactoeResult').textContent = "Your turn (X)";
+}
+
+function renderTicTacToeBoard() {
+const boardElement = document.getElementById('ticTacToeBoard');
+boardElement.innerHTML = '';
+
+for (let i = 0; i < 9; i++) {
+const cell = document.createElement('div');
+cell.className = 'tic-tac-toe-cell';
+cell.textContent = ticTacToeBoard[i];
+cell.onclick = () => makeTicTacToeMove(i);
+boardElement.appendChild(cell);
+}
+}
+
+function makeTicTacToeMove(index) {
+if (!ticTacToeGameActive || ticTacToeBoard[index] !== '' || currentPlayer !== 'X') return;
+
+ticTacToeBoard[index] = 'X';
+renderTicTacToeBoard();
+
+if (checkTicTacToeWin('X')) {
+endTicTacToeGame(true, "You won! Rs. " + (ticTacToeBetAmount * 2) + " added to your balance.");
+return;
+}
+
+if (!ticTacToeBoard.includes('')) {
+endTicTacToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
+return;
+}
+
+document.getElementById('tictactoeResult').textContent = "Computer thinking...";
+
+setTimeout(() => {
+let move = findBestMove();
+ticTacToeBoard[move] = 'O';
+renderTicTacToeBoard();
+
+if (checkTicTacToeWin('O')) {
+endTicTacToeGame(false, "Computer won! You lost your bet.");
+return;
+}
+
+if (!ticTacToeBoard.includes('')) {
+endTicTacToeGame(false, "Game ended in a draw. You lost 25% of your bet.");
+return;
+}
+
+document.getElementById('tictactoeResult').textContent = "Your turn (X)";
+}, 1000);
+}
+
+function findBestMove() {
+// Try to win first
+for (let i = 0; i < 9; i++) {
+if (ticTacToeBoard[i] === '') {
+ticTacToeBoard[i] = 'O';
+if (checkTicTacToeWin('O')) {
+ticTacToeBoard[i] = '';
+return i;
+}
+ticTacToeBoard[i] = '';
+}
+}
+
+// Block player from winning
+for (let i = 0; i < 9; i++) {
+if (ticTacToeBoard[i] === '') {
+ticTacToeBoard[i] = 'X';
+if (checkTicTacToeWin('X')) {
+ticTacToeBoard[i] = '';
+return i;
+}
+ticTacToeBoard[i] = '';
+}
+}
+
+// Take center if available
+if (ticTacToeBoard[4] === '') return 4;
+
+// Take corners if available
+const corners = [0, 2, 6, 8];
+const availableCorners = corners.filter(i => ticTacToeBoard[i] === '');
+if (availableCorners.length > 0) {
+return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+}
+
+// Take any available spot
+const availableSpots = [];
+for (let i = 0; i < 9; i++) {
+if (ticTacToeBoard[i] === '') availableSpots.push(i);
+}
+return availableSpots[Math.floor(Math.random() * availableSpots.length)];
+}
+
+function checkTicTacToeWin(player) {
+const winPatterns = [
+[0, 1, 2], [3, 4, 5], [6, 7, 8],
+[0, 3, 6], [1, 4, 7], [2, 5, 8],
+[0, 4, 8], [2, 4, 6]
+];
+
+return winPatterns.some(pattern => {
+return pattern.every(index => ticTacToeBoard[index] === player);
+});
+}
+
+function endTicTacToeGame(playerWon, message) {
+clearInterval(ticTacToeTimer);
+ticTacToeGameActive = false;
+
+if (playerWon) {
+const winAmount = ticTacToeBetAmount * 2;
+balance += winAmount;
+document.getElementById('winSound').play().catch(() => {});
+} else {
+const deduction = ticTacToeBetAmount * 0.25;
+balance -= deduction;
+document.getElementById('loseSound').play().catch(() => {});
+}
+
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+document.getElementById('tictactoeResult').textContent = message;
+document.querySelectorAll('#tictactoeGame .bet-amounts .gold-box').forEach(btn => {
+btn.classList.remove('active');
+});
+
+if (playerWon) {
+document.getElementById("particles-js").style.display = "block";
+setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+}
+}
+
+// Find Ace Game
+let findAceCards = ['K', 'Q', 'A'];
+let findAceFlippedCards = [];
+let findAceGameActive = false;
+let findAceBetAmount = 0;
+let findAceTimer;
+let findAceCountdown = 15;
+
+function setupFindAceGame() {
+findAceCards = ['K', 'Q', 'A'];
+}
+
+function startFindAceGame() {
+document.getElementById('scratchGame').style.display = 'none';
+document.getElementById('fruitGame').style.display = 'none';
+document.getElementById('tictactoeGame').style.display = 'none';
+document.getElementById('findAceGame').style.display = 'block';
+document.getElementById('archeryGame').style.display = 'none';
+setupFindAceGame();
+}
+
+function startFindAceRound(amount) {
+if (findAceGameActive || balance < amount) {
+if (balance < amount) {
+showMessage("Insufficient balance! Please deposit more to play.", 'error');
+}
+return;
+}
+
+findAceBetAmount = amount;
+findAceGameActive = true;
+findAceFlippedCards = [];
+
+balance -= amount;
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+document.getElementById('findAceResult').textContent = '';
+document.getElementById('findAceGrid').innerHTML = '';
+
+const cardsToShow = shuffleArray([...findAceCards]);
+const grid = document.getElementById('findAceGrid');
+
+cardsToShow.forEach((card, index) => {
+const cardElement = document.createElement('div');
+cardElement.className = 'card';
+
+const front = document.createElement('div');
+front.className = 'front';
+front.textContent = card;
+
+const back = document.createElement('div');
+back.className = 'back';
+
+cardElement.appendChild(front);
+cardElement.appendChild(back);
+cardElement.dataset.value = card;
+grid.appendChild(cardElement);
+});
+
+findAceCountdown = 15;
+document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
+
+const countdownInterval = setInterval(() => {
+findAceCountdown--;
+document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
+
+if (findAceCountdown <= 0) {
+clearInterval(countdownInterval);
+endFindAceRound(false, "Time's up! You lost your bet.");
+}
+}, 1000);
+
+setTimeout(() => {
+document.querySelectorAll('#findAceGrid .card').forEach(card => {
+card.querySelector('.front').style.display = 'none';
+card.classList.remove('flipped');
+});
+
+// Shuffle with animation
+const cardElements = Array.from(document.querySelectorAll('#findAceGrid .card'));
+shuffleCards(cardElements.map((el, index) => {
+return { el: el, index: index };
+})).then(() => {
+document.querySelectorAll('#findAceGrid .card').forEach(card => {
+card.onclick = () => flipFindAceCard(card);
+});
+});
+}, 3000);
+}
+
+function flipFindAceCard(card) {
+if (!findAceGameActive || card.classList.contains('flipped')) return;
+
+card.classList.add('flipped');
+card.querySelector('.front').style.display = 'flex';
+flipSound.currentTime = 0;
+flipSound.play().catch(() => {});
+
+if (card.dataset.value === 'A') {
+endFindAceRound(true, "🎉 You found the Ace! You win double your bet.");
+} else {
+endFindAceRound(false, "❌ Wrong card! You lost your bet.");
+}
+}
+
+function endFindAceRound(won, message) {
+findAceGameActive = false;
+
+if (won) {
+const winAmount = findAceBetAmount * 2;
+balance += winAmount;
+document.getElementById('winSound').play().catch(() => {});
+} else {
+document.getElementById('loseSound').play().catch(() => {});
+}
+
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+document.getElementById('findAceResult').textContent = message;
+
+if (won) {
+document.getElementById("particles-js").style.display = "block";
+setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+}
+}
+
+// Archery Game
+let archeryBet = 0;
+let archeryShots = [];
+let archeryAutoMode = false;
+let archeryGameActive = false;
+
+function setupArcheryGame() {
+const canvas = document.getElementById('archeryCanvas');
+const ctx = canvas.getContext('2d');
+
+let DPR = window.devicePixelRatio || 1;
+function fixCanvas() {
+const cssW = canvas.clientWidth || canvas.width;
+const cssH = canvas.clientHeight || canvas.height;
+canvas.width = Math.round(cssW * DPR);
+canvas.height = Math.round(cssH * DPR);
+canvas.style.width = cssW + 'px';
+canvas.style.height = cssH + 'px';
+ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+fixCanvas();
+window.addEventListener('resize', () => { fixCanvas(); drawArchery(); });
+
+const W = canvas.width / DPR;
+const H = canvas.height / DPR;
+const cx = W/2;
+const cy = H/2;
+
+let boardRadius = Math.min(W,H) * 0.42 * 1.6; // Increased by 60% as requested
+
+const ringDefs = [
+{score:10, colorInner:'#ffdd66', colorOuter:'#ffcc00', radiusRatio:0.06},
+{score:8, colorInner:'#ffb76b', colorOuter:'#ff8f2e', radiusRatio:0.16},
+{score:7, colorInner:'#ff6b6b', colorOuter:'#d6453b', radiusRatio:0.28},
+{score:5, colorInner:'#3aa0ff', colorOuter:'#1475c7', radiusRatio:0.45},
+{score:2, colorInner:'#2e3136', colorOuter:'#0f1112', radiusRatio:0.70},
+{score:1, colorInner:'#f6f6f6', colorOuter:'#e9e9e9', radiusRatio:1.00}
+];
+
+const ringRadius = ringDefs.map(r => boardRadius * r.radiusRatio);
+
+let sight = {
+x: W - 8,
+y: cy,
+radius: 14 * 1.1, // Increased by 10% as requested
+movingLeft: true,
+speed: 6.0,
+active: false,
+auto: false,
+_lastCross: false
+};
+
+function drawBoard(){
+const woodR = boardRadius * 1.08;
+const g = ctx.createLinearGradient(cx, cy-woodR, cx, cy+woodR);
+g.addColorStop(0,'#7a5232'); g.addColorStop(0.5,'#a8764f'); g.addColorStop(1,'#5b391f');
+ctx.beginPath();
+ctx.arc(cx, cy, woodR, 0, Math.PI*2);
+ctx.fillStyle = g; ctx.fill();
+
+ctx.beginPath();
+ctx.arc(cx, cy, boardRadius + 6, 0, Math.PI*2);
+ctx.fillStyle = '#f8f5ee'; ctx.fill();
+
+for(let i = ringDefs.length-1; i >= 0; i--){
+const rd = ringRadii[i];
+const def = ringDefs[i];
+const grad = ctx.createRadialGradient(cx, cy, rd*0.1, cx, cy, rd);
+grad.addColorStop(0, def.colorInner);
+grad.addColorStop(1, def.colorOuter);
+ctx.beginPath();
+ctx.arc(cx, cy, rd, 0, Math.PI*2);
+ctx.fillStyle = grad;
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(cx, cy, rd, 0, Math.PI*2);
+ctx.lineWidth = 1;
+ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+ctx.stroke();
+}
+
+ctx.beginPath();
+ctx.arc(cx, cy, 2.2, 0, Math.PI*2);
+ctx.fillStyle = 'rgba(255,255,255,0.06)';
+ctx.fill();
+}
+
+function drawSight(){
+if(!sight.active) return;
+ctx.save();
+ctx.translate(sight.x, sight.y);
+ctx.beginPath();
+ctx.arc(0,0, sight.radius+6, 0, Math.PI*2);
+ctx.fillStyle = 'rgba(30,220,120,0.04)';
+ctx.fill();
+ctx.beginPath();
+ctx.arc(0,0, sight.radius, 0, Math.PI*2);
+ctx.lineWidth = 2;
+ctx.strokeStyle = 'rgba(180,255,200,0.95)';
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(-14,0); ctx.lineTo(-6,0);
+ctx.moveTo(6,0); ctx.lineTo(14,0);
+ctx.moveTo(0,-14); ctx.lineTo(0,-6);
+ctx.moveTo(0,6); ctx.lineTo(0,14);
+ctx.strokeStyle = 'rgba(180,255,200,0.9)';
+ctx.lineWidth = 1.6;
+ctx.stroke();
+ctx.restore();
+}
+
+function updateSight(){
+if(!sight.active) return;
+if(sight.movingLeft){
+sight.x -= sight.speed;
+if(sight.x <= 8){
+sight.x = 8;
+sight.movingLeft = false;
+}
+} else {
+sight.x += sight.speed;
+if(sight.x >= W - 8){
+sight.x = W - 8;
+sight.movingLeft = true;
+}
+}
+
+if(sight.auto){
+const centerBand = 8;
+if(!sight._lastCross && Math.abs(sight.x - cx) <= centerBand){
+sight._lastCross = true;
+performShot();
+} else if(Math.abs(sight.x - cx) > centerBand){
+sight._lastCross = false;
+}
+}
+}
+
+function computeScore(px, py){
+const dx = px - cx;
+const dy = py - cy;
+const dist = Math.sqrt(dx*dx + dy*dy);
+for(let i=0;i<ringRadii.length;i++){
+if(dist <= ringRadii[i]) {
+return ringDefs[i].score;
+}
+}
+return 0;
+}
+
+function performShot(){
+if(!sight.active) return;
+if(archeryBet === 0){
+document.getElementById('archeryStatus').textContent = 'You must select a bet first.';
+return;
+}
+if(archeryShots.length >= 5) return;
+
+const score = computeScore(sight.x, sight.y);
+archeryShots.push(score);
+refreshScoreBoxes();
+
+document.getElementById('archeryStatus').textContent = `Shot ${archeryShots.length} → ${score} points`;
+document.getElementById('shotSound').play().catch(() => {});
+
+// Pause for 1 second where the user shoots
+sight.active = false;
+setTimeout(() => {
+sight.active = true;
+}, 1000);
+
+if(archeryShots.length === 5){
+sight.active = false;
+let allTen = archeryShots.every(s=> s === 10);
+if(allTen){
+balance += archeryBet * 2; // Double the bet for perfect score
+document.getElementById('archeryStatus').textContent = `🎉 PERFECT! All 5 are bullseyes. You doubled your bet to ₨${archeryBet*2}`;
+document.getElementById('winSound').play().catch(() => {});
+document.getElementById("particles-js").style.display = "block";
+setTimeout(() => document.getElementById("particles-js").style.display = "none", 2500);
+} else {
+balance -= archeryBet;
+if(balance < 0) balance = 0;
+document.getElementById('archeryStatus').textContent = `✖ You lost the bet of ₨${archeryBet}.`;
+document.getElementById('loseSound').play().catch(() => {});
+}
+updateUserBalance(balance);
+updateBalanceDisplay();
+}
+}
+
+function refreshScoreBoxes(){
+const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
+for(let i=0;i<5;i++){
+scoreBoxes[i].textContent = archeryShots[i] !== undefined ? archeryShots[i] : '';
+}
+}
+
+canvas.addEventListener('click', ()=> {
+performShot();
+});
+
+function drawArchery(){
+ctx.clearRect(0,0,W,H);
+drawBoard();
+drawSight();
+}
+
+function loop(){
+updateSight();
+drawArchery();
+requestAnimationFrame(loop);
+}
+loop();
+
+window.selectArcheryBet = function(amount){
+if (archeryGameActive) return;
+
+if (balance < amount) {
+showMessage("Insufficient balance! Please deposit more to play.", 'error');
+return;
+}
+
+archeryBet = amount;
+archeryShots = [];
+const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
+for(let b of scoreBoxes) b.textContent = '';
+sight.x = W - 8;
+sight.y = cy;
+sight.movingLeft = true;
+sight.active = true;
+archeryGameActive = true;
+
+balance -= amount;
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+document.getElementById('archeryStatus').textContent = `Bet ₨ ${archeryBet} placed — 5 shots. Click canvas to shoot when sight passes.`;
+};
+
+window.resetArcheryGame = function(){
+archeryBet = 0;
+archeryShots = [];
+const scoreBoxes = document.querySelectorAll('#archeryScoreRow .archery-score-box');
+for(let b of scoreBoxes) b.textContent = '';
+sight.active = false;
+archeryGameActive = false;
+document.getElementById('archeryStatus').textContent = 'Pick a bet to start';
+};
+
+window.toggleArcheryAuto = function(){
+archeryAutoMode = !archeryAutoMode;
+document.getElementById('archeryAutoBtn').textContent = 'Auto: ' + (archeryAutoMode ? 'ON' : 'OFF');
+sight.auto = archeryAutoMode;
+};
+}
+
+function startArcheryGame() {
+document.getElementById('scratchGame').style.display = 'none';
+document.getElementById('fruitGame').style.display = 'none';
+document.getElementById('tictactoeGame').style.display = 'none';
+document.getElementById('findAceGame').style.display = 'none';
+document.getElementById('archeryGame').style.display = 'block';
+}
+
+// Helper function to shuffle array
+function shuffleArray(array) {
+for (let i = array.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[array[i], array[j]] = [array[j], array[i]];
+}
+return array;
+}
+
+// Admin functions
+function loadAdminData() {
+if (!currentUser) return;
+
+// Load users
+db.collection('users').get()
+.then(querySnapshot => {
+const usersTable = document.getElementById('usersTable');
+usersTable.innerHTML = '';
+
+querySnapshot.forEach(doc => {
+const user = doc.data();
+const row = document.createElement('tr');
+
+row.innerHTML = `
+<td>${user.name || 'N/A'}</td>
+<td>${user.email || 'N/A'}</td>
+<td>Rs. ${user.startingBalance || 0}</td>
+<td>Rs. ${user.balance || 0}</td>
+<td>
+<button class="admin-action" onclick="editUser('${doc.id}', '${user.name}', ${user.balance}, ${user.startingBalance})">Edit</button>
+</td>
+`;
+
+usersTable.appendChild(row);
+});
+});
+
+// Load deposit requests
+db.collection('deposit_requests')
+.orderBy('createdAt', 'desc')
+.get()
+.then(querySnapshot => {
+const depositTable = document.getElementById('depositRequestsTable');
+depositTable.innerHTML = '';
+
+querySnapshot.forEach(doc => {
+const request = doc.data();
+const row = document.createElement('tr');
+
+let statusButtons = '';
+if (request.status === 'pending') {
+statusButtons = `
+<button class="admin-action" onclick="updateRequestStatus('deposit_requests', '${doc.id}', 'approved', ${request.amount}, '${request.userId}')">Approve</button>
+<button class="admin-action reject" onclick="updateRequestStatus('deposit_requests', '${doc.id}', 'rejected')">Reject</button>
+`;
+} else {
+statusButtons = request.status;
+}
+
+row.innerHTML = `
+<td>${request.userName || request.userId}</td>
+<td>Rs. ${request.amount || 0}</td>
+<td>${request.method || 'N/A'}</td>
+<td>${request.transactionId || 'N/A'}</td>
+<td>${request.status || 'pending'}</td>
+<td>${request.createdAt?.toDate().toLocaleString() || 'N/A'}</td>
+<td>${statusButtons}</td>
+`;
+
+depositTable.appendChild(row);
+});
+});
+
+// Load withdrawal requests
+db.collection('withdraw_requests')
+.orderBy('createdAt', 'desc')
+.get()
+.then(querySnapshot => {
+const withdrawTable = document.getElementById('withdrawRequestsTable');
+withdrawTable.innerHTML = '';
+
+querySnapshot.forEach(doc => {
+const request = doc.data();
+const row = document.createElement('tr');
+
+let statusButtons = '';
+if (request.status === 'pending') {
+statusButtons = `
+<button class="admin-action" onclick="updateRequestStatus('withdraw_requests', '${doc.id}', 'approved', ${request.amount}, '${request.userId}')">Approve</button>
+<button class="admin-action reject" onclick="updateRequestStatus('withdraw_requests', '${doc.id}', 'rejected')">Reject</button>
+`;
+} else {
+statusButtons = request.status;
+}
+
+row.innerHTML = `
+<td>${request.userName || request.userId}</td>
+<td>Rs. ${request.amount || 0}</td>
+<td>${request.method || 'N/A'}</td>
+<td>${request.accountNumber} (${request.accountName})</td>
+<td>${request.status || 'pending'}</td>
+<td>${request.createdAt?.toDate().toLocaleString() || 'N/A'}</td>
+<td>${statusButtons}</td>
+`;
+
+withdrawTable.appendChild(row);
+});
+});
+}
+
+function searchUsers() {
+const searchTerm = document.getElementById('searchUser').value.toLowerCase();
+const rows = document.getElementById('usersTable').getElementsByTagName('tr');
+
+for (let i = 0; i < rows.length; i++) {
+const name = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+const email = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+
+if (name.includes(searchTerm) || email.includes(searchTerm)) {
+rows[i].style.display = '';
+} else {
+rows[i].style.display = 'none';
+}
+}
+}
+
+function editUser(userId, userName, currentBalance, startingBalance) {
+const newBalance = prompt(`Edit ${userName}'s balance:`, currentBalance);
+const newStartingBalance = prompt(`Edit ${userName}'s starting balance:`, startingBalance);
+
+if (newBalance !== null && !isNaN(newBalance)) {
+db.collection('users').doc(userId).update({
+balance: parseFloat(newBalance),
+startingBalance: parseFloat(newStartingBalance || startingBalance)
+})
+.then(() => {
+showMessage('User updated successfully', 'success');
+loadAdminData();
+})
+.catch(error => {
+showMessage('Error updating user: ' + error.message, 'error');
+});
+}
+}
+
+function updateRequestStatus(collection, docId, status, amount, userId) {
+if (status === 'approved' && userId) {
+// Update user balance
+db.collection('users').doc(userId).update({
+balance: firebase.firestore.FieldValue.increment(amount)
+})
+.then(() => {
+// Update request status
+return db.collection(collection).doc(docId).update({
+status: status
+});
+})
+.then(() => {
+showMessage('Request approved and balance updated', 'success');
+loadAdminData();
+})
+.catch(error => {
+showMessage('Error updating request: ' + error.message, 'error');
+});
+} else {
+// Just update status for rejected or other cases
+db.collection(collection).doc(docId).update({
+status: status
+})
+.then(() => {
+showMessage('Request status updated', 'success');
+loadAdminData();
+})
+.catch(error => {
+showMessage('Error updating request: ' + error.message, 'error');
+});
+}
+}
+
+function sendAnnouncement() {
+const message = document.getElementById('announcementText').value;
+
+if (!message) {
+showMessage('Please enter a message', 'error');
+return;
+}
+
+db.collection('announcements').add({
+message: message,
+createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+createdBy: currentUser.uid
+})
+.then(() => {
+showMessage('Announcement sent successfully', 'success');
+document.getElementById('announcementText').value = '';
+})
+.catch(error => {
+showMessage('Error sending announcement: ' + error.message, 'error');
+});
+}
+
+// Announcement functions
+function loadAnnouncements() {
+let unreadCount = 0;
+let lastReadTime = localStorage.getItem('lastReadTime') || 0;
+
+db.collection('announcements')
+.orderBy('createdAt', 'desc')
+.limit(10)
+.get()
+.then(querySnapshot => {
+const messageList = document.getElementById('messageList');
+messageList.innerHTML = '';
+
+if (querySnapshot.empty) {
+messageList.innerHTML = '<p>No announcements yet</p>';
+return;
+}
+
+querySnapshot.forEach(doc => {
+const announcement = doc.data();
+const messageItem = document.createElement('div');
+messageItem.className = 'message-item';
+
+const messageDate = announcement.createdAt?.toDate() || new Date();
+const dateString = messageDate.toLocaleString();
+
+messageItem.innerHTML = `
+<div>${announcement.message}</div>
+<div class="message-date">${dateString}</div>
+`;
+
+messageList.appendChild(messageItem);
+
+// Check if announcement is new
+if (messageDate.getTime() > lastReadTime) {
+unreadCount++;
+}
+});
+
+// Update notification badge
+const notificationBadge = document.getElementById('messageNotification');
+if (unreadCount > 0) {
+notificationBadge.style.display = 'flex';
+notificationBadge.textContent = unreadCount > 9 ? '9+' : unreadCount;
+} else {
+notificationBadge.style.display = 'none';
+}
+});
+}
+
+function toggleMessages() {
+const popup = document.getElementById('messagePopup');
+if (popup.style.display === 'block') {
+popup.style.display = 'none';
+} else {
+popup.style.display = 'block';
+loadAnnouncements();
+
+// Mark as read
+localStorage.setItem('lastReadTime', Date.now());
+document.getElementById('messageNotification').style.display = 'none';
+}
+}
+
+function closeMessages() {
+document.getElementById('messagePopup').style.display = 'none';
+}
+
+// Particles effect
+particlesJS("particles-js", {
+"particles": {
+"number": { "value": 100 },
+"color": { "value": "#2563EB" },
+"shape": { "type": "star" },
+"opacity": { "value": 0.8 },
+"size": { "value": 5 },
+"move": { "enable": true, "speed": 8 }
+},
+"interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false } } },
+"retina_detect": true
+});
+
+// ------- Generic visible shuffle (works for 3, 9, ... cards) -------
+
+// Make current layout absolute (so left/top can animate) without breaking grid
+function absolutizeCards(container) {
+const el = typeof container === 'string' ? document.querySelector(container) : container;
+if (!el) return [];
+el.style.position = el.style.position || 'relative';
+
+const cards = Array.from(el.querySelectorAll('.card'));
+const rectContainer = el.getBoundingClientRect();
+
+cards.forEach(card => {
+const r = card.getBoundingClientRect();
+// freeze size so absolute doesn't collapse
+card.style.width = r.width + 'px';
+card.style.height = r.height + 'px';
+// place absolutely at current spot
+card.style.position = 'absolute';
+card.style.left = (r.left - rectContainer.left + el.scrollLeft) + 'px';
+card.style.top = (r.top - rectContainer.top + el.scrollTop) + 'px';
+});
+
+return cards.map(el => ({ el }));
+}
+
+// animate swap between two cards
+function animateSwap(c1, c2, duration) {
+return new Promise(res => {
+c1.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
+c2.el.style.transition = `left ${duration}ms ease, top ${duration}ms ease`;
+
+const l1 = c1.el.style.left, t1 = c1.el.style.top;
+const l2 = c2.el.style.left, t2 = c2.el.style.top;
+
+c1.el.style.left = l2; c1.el.style.top = t2;
+c2.el.style.left = l1; c2.el.style.top = t1;
+
+setTimeout(() => {
+c1.el.style.transition = '';
+c2.el.style.transition = '';
+res();
+}, duration + 15);
+});
+}
+
+// visible shuffle with ~7x speed change (fast -> slow)
+async function shuffleCards(cards, opts = {}) {
+const totalSwaps = opts.swaps ?? 12;
+// 7× speed change: first 80ms, last 560ms
+const first = opts.first ?? 80; // fastest
+const last = opts.last ?? 560; // slowest (~7x slower)
+
+for (let i = 0; i < totalSwaps; i++) {
+const t = i / (totalSwaps - 1);
+const dur = Math.round(first + (last - first) * t);
+
+let a = Math.floor(Math.random() * cards.length);
+let b = a;
+while (b === a) b = Math.floor(Math.random() * cards.length);
+
+await animateSwap(cards[a], cards[b], dur);
+[cards[a], cards[b]] = [cards[b], cards[a]];
+await new Promise(r => setTimeout(r, 20));
+}
+}
+
+// Find Ace shuffle function
+function setupFindAceShuffle() {
+const cards = absolutizeCards('#findAceGrid');
+if (!cards.length) return;
+
+return {
+shuffle: (o) => shuffleCards(cards, o || { swaps: 12, first: 80, last: 560 }),
+cards
+};
+}
+
+// Scratch Match shuffle function
+function setupScratchShuffle() {
+const cards = absolutizeCards('#cardGrid');
+if (!cards.length) return;
+
+return {
+shuffle: (o) => shuffleCards(cards, o || { swaps: 18, first: 80, last: 560 }),
+cards
+};
+}
+
+// Initialize shuffle functions when games start
+let findAceShuffle, scratchShuffle;
+
+function initFindAceShuffle() {
+findAceShuffle = setupFindAceShuffle();
+}
+
+function initScratchShuffle() {
+scratchShuffle = setupScratchShuffle();
+}
+
+// Update the startFindAceRound function to include shuffle
+function startFindAceRound(amount) {
+if (findAceGameActive || balance < amount) {
+if (balance < amount) {
+showMessage("Insufficient balance! Please deposit more to play.", 'error');
+}
+return;
+}
+
+findAceBetAmount = amount;
+findAceGameActive = true;
+findAceFlippedCards = [];
+
+balance -= amount;
+updateUserBalance(balance);
+updateBalanceDisplay();
+
+document.getElementById('findAceResult').textContent = '';
+document.getElementById('findAceGrid').innerHTML = '';
+
+const cardsToShow = shuffleArray([...findAceCards]);
+const grid = document.getElementById('findAceGrid');
+
+cardsToShow.forEach((card, index) => {
+const cardElement = document.createElement('div');
+cardElement.className = 'card';
+
+const front = document.createElement('div');
+front.className = 'front';
+front.textContent = card;
+
+const back = document.createElement('div');
+back.className = 'back';
+
+cardElement.appendChild(front);
+cardElement.appendChild(back);
+cardElement.dataset.value = card;
+grid.appendChild(cardElement);
+});
+
+findAceCountdown = 15;
+document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
+
+const countdownInterval = setInterval(() => {
+findAceCountdown--;
+document.getElementById('findAceCountdown').textContent = `Time: ${findAceCountdown}s`;
+
+if (findAceCountdown <= 0) {
+clearInterval(countdownInterval);
+endFindAceRound(false, "Time's up! You lost your bet.");
+}
+}, 1000);
+
+setTimeout(() => {
+document.querySelectorAll('#findAceGrid .card').forEach(card => {
+card.querySelector('.front').style.display = 'none';
+card.classList.remove('flipped');
+});
+
+// Initialize and run shuffle
+initFindAceShuffle();
+if (findAceShuffle) {
+findAceShuffle.shuffle().then(() => {
+document.querySelectorAll('#findAceGrid .card').forEach(card => {
+card.onclick = () => flipFindAceCard(card);
+});
+});
+}
+}, 3000);
+}
+
+// Update the revealAndShuffleCards function to include shuffle
+function revealAndShuffleCards() {
+const grid = document.getElementById('cardGrid');
+setupCards();
+
+cardData.forEach(data => {
+data.element.querySelector('.front').style.display = 'flex';
+data.element.classList.add('flipped');
+});
+
+setTimeout(() => {
+// Initialize and run shuffle
+initScratchShuffle();
+if (scratchShuffle) {
+scratchShuffle.shuffle().then(() => {
+grid.innerHTML = '';
+cardData.forEach(data => {
+data.element.querySelector('.front').style.display = 'none';
+data.element.classList.remove('flipped');
+data.element.onclick = () => flipCard(data.element);
+grid.appendChild(data.element);
+});
+
+gameStarted = true;
+});
+}
+}, 2000);
+}
+</script>
+
+<!-- BEGIN: USCASH Enhanced Game Suite (non-destructive embed) -->
+
+<div class="container">
+  <h1>USCash 🎮</h1>
+
+  <!-- Top bar -->
+  <div class="nav">
+    <a href="#" onclick="showSec('home')"><i class="fa fa-home"></i> Home</a>
+    <a href="#" onclick="showSec('deposit')"><i class="fa fa-money-bill"></i> Deposit</a>
+    <a href="#" onclick="showSec('withdraw')"><i class="fa fa-wallet"></i> Withdraw</a>
+    <a href="#" onclick="showSec('status')"><i class="fa fa-clock"></i> Status</a>
+    <a href="#" onclick="showSec('admin')" id="adminLink" class="hidden"><i class="fa fa-user-shield"></i> Admin</a>
   </div>
 
-  <!-- Footer -->
-  <div style="margin-top: 30px; font-size: 13px; font-weight: 500; color: #9ab4d9; border-top: 1px solid rgba(0,170,255,0.3); padding-top: 12px; letter-spacing: 0.5px;">
-    Project: <span style="color: #00aaff; font-weight: 600;">USCash</span><br>
-    Developed by <span style="color: #7ec8ff;">Team USCash</span>
+  <!-- User strip -->
+  <div class="section" id="userStrip">
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center">
+      <div class="info">Balance: Rs. <b id="balanceAmount">0</b> <button class="gold-box" onclick="refreshBalance()" title="Refresh"><i class="fa fa-sync"></i></button></div>
+      <div id="userDisplay" class="info hidden"><i class="fa fa-user"></i> <span id="usernameDisplay"></span> · <span id="phoneDisplay"></span> <i class="fas fa-check-circle" id="verifiedBadge" style="display:none;color:#60a5fa"></i></div>
+      <div id="authButtons">
+        <button class="gold-box" onclick="showAuthModal('login')">Login</button>
+        <button class="gold-box" onclick="showAuthModal('signup')">Sign Up</button>
+      </div>
+      <div id="logoutWrap" class="hidden"><button class="gold-box" onclick="logoutUser()">Logout</button></div>
+    </div>
+  </div>
+
+  <!-- Home -->
+  <div class="section" id="homeSec">
+    <h2>Select Game</h2>
+    <div class="game-grid">
+      <div class="game-card"><div class="thumb"><div class="icon">🎫</div></div><div class="label"><span>Scratch Match</span><button class="gold-box" onclick="openGame('scratch')">Play</button></div></div>
+      <div class="game-card"><div class="thumb"><div class="icon">🍉</div></div><div class="label"><span>Fruit Shooting</span><button class="gold-box" onclick="openGame('fruit')">Play</button></div></div>
+      <div class="game-card"><div class="thumb"><div class="icon">#️⃣</div></div><div class="label"><span>Tic Tac Toe</span><button class="gold-box" onclick="openGame('ttt')">Play</button></div></div>
+      <div class="game-card"><div class="thumb"><div class="icon">A♠️</div></div><div class="label"><span>Find Ace</span><button class="gold-box" onclick="openGame('ace')">Play</button></div></div>
+      <div class="game-card"><div class="thumb"><div class="icon">🎯</div></div><div class="label"><span>Archery</span><button class="gold-box" onclick="openGame('archery')">Play</button></div></div>
+      <div class="game-card"><div class="thumb"><div class="icon">♟️</div></div><div class="label"><span>Chess (15m)</span><button class="gold-box" onclick="openGame('chess')">Play</button></div></div>
+    </div>
+  </div>
+
+  <!-- Deposit -->
+  <div class="section hidden" id="depositSec">
+    <h2><i class="fa fa-money-bill"></i> Deposit</h2>
+    <p class="info">Min deposit Rs. 150. VIPs/WhatsApp handle deposits.</p>
+    <label>Amount (Rs.) <input id="depAmt" type="number" min="150" style="width:140px"></label>
+    <label style="margin-left:8px">Method
+      <select id="depMethod"><option>EasyPaisa</option><option>JazzCash</option><option>Bank Transfer</option></select>
+    </label>
+    <label style="margin-left:8px">Transaction ID <input id="depTxn" type="text" style="width:200px"></label>
+    <button class="gold-box" onclick="submitDeposit()">Submit Deposit</button>
+
+    <h3>Deposit History</h3>
+    <div id="depositHistory" class="list"></div>
+  </div>
+
+  <!-- Withdraw -->
+  <div class="section hidden" id="withdrawSec">
+    <h2><i class="fa fa-wallet"></i> Withdraw</h2>
+    <p class="info">Min withdrawal Rs. 300. Amount deducts immediately on request; refunded only if admin rejects.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <label>Amount (Rs.) <input id="wdAmt" type="number" min="300" style="width:140px"></label>
+      <label>Method
+        <select id="wdMethod"><option>EasyPaisa</option><option>JazzCash</option><option>Bank Transfer</option></select>
+      </label>
+      <label>Account # <input id="wdAcct" type="text" style="width:200px"></label>
+      <label>Account Name <input id="wdName" type="text" style="width:200px"></label>
+      <button class="gold-box" onclick="submitWithdraw()">Submit Withdraw</button>
+    </div>
+    <h3>Withdrawal History</h3>
+    <div id="withdrawHistory" class="list"></div>
+  </div>
+
+  <!-- Status -->
+  <div class="section hidden" id="statusSec">
+    <h2><i class="fa fa-clock"></i> Status</h2>
+    <h3>Deposit Requests</h3>
+    <div id="depositStatus" class="list"></div>
+    <h3>Withdrawal Requests</h3>
+    <div id="withdrawStatus" class="list"></div>
+    <h3>All Transactions</h3>
+    <div id="allTx" class="list"></div>
+    <button class="gold-box" onclick="refreshAll()">Refresh All</button>
+  </div>
+
+  <!-- Admin -->
+  <div class="section hidden" id="adminSec">
+    <h2><i class="fa fa-user-shield"></i> Admin Panel</h2>
+    <div class="info">Approve deposits to add funds to balances. Reject withdrawals to refund amounts.</div>
+    <h3>Deposits</h3>
+    <div id="adminDeposits" class="list"></div>
+    <h3>Withdrawals</h3>
+    <div id="adminWithdrawals" class="list"></div>
   </div>
 </div>
 
+<!-- Game Modal -->
+<div id="gameModal">
+  <div class="box">
+    <button id="closeGameBtn" class="gold-box" onclick="closeGame('forfeit')"><i class="fa fa-xmark"></i> Close</button>
+    <div class="modal-title" id="gameTitle">Game</div>
+    <div id="gameHost"></div>
+  </div>
+</div>
+
+<!-- Auth Modal -->
+<div id="authModal" style="display:none;position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.85);z-index:12000">
+  <div style="background:#0f0f0f;border:1px solid rgba(37,99,235,.35);border-radius:14px;padding:16px;min-width:320px;max-width:92vw;position:relative">
+    <button class="gold-box" style="position:absolute;top:8px;right:8px" onclick="hideAuth()">×</button>
+    <div style="display:flex;gap:6px;margin-bottom:8px">
+      <button id="tabLogin" class="gold-box" onclick="switchAuth('login')">Login</button>
+      <button id="tabSignup" class="gold-box" onclick="switchAuth('signup')">Sign Up</button>
+      <button id="tabForgot" class="gold-box" onclick="switchAuth('forgot')">Forgot</button>
+    </div>
+    <div id="authLogin">
+      <input id="loginEmail" placeholder="Email" style="width:100%;margin:6px 0">
+      <input id="loginPassword" type="password" placeholder="Password" style="width:100%;margin:6px 0">
+      <button class="gold-box" onclick="loginUser()">Login</button>
+    </div>
+    <div id="authSignup" style="display:none">
+      <input id="signupName" placeholder="Full Name" style="width:100%;margin:6px 0">
+      <input id="signupPhone" placeholder="Phone Number" style="width:100%;margin:6px 0">
+      <input id="signupEmail" placeholder="Email" style="width:100%;margin:6px 0">
+      <input id="signupPassword" type="password" placeholder="Password (6+ chars)" style="width:100%;margin:6px 0">
+      <input id="referralCode" placeholder="Referral (Optional)" style="width:100%;margin:6px 0">
+      <button class="gold-box" onclick="signupUser()">Create Account</button>
+    </div>
+    <div id="authForgot" style="display:none">
+      <input id="forgotEmail" placeholder="Your email" style="width:100%;margin:6px 0">
+      <button class="gold-box" onclick="resetPassword()">Reset Password</button>
+    </div>
+  </div>
+</div>
+
+<!-- Audio -->
+<audio id="flipSound" preload="auto"><source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_07d4930c1c.mp3" type="audio/mp3"></audio>
+<audio id="winSound" preload="auto"><source src="https://cdn.pixabay.com/download/audio/2022/03/21/audio_5a9f1d8e6b.mp3" type="audio/mp3"></audio>
+<audio id="loseSound" preload="auto"><source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0d8d2a5c8a.mp3" type="audio/mp3"></audio>
+<audio id="shuffleSound" preload="auto"><source src="https://cdn.pixabay.com/download/audio/2022/03/04/audio_6b08f2e9f8.mp3" type="audio/mp3"></audio>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<!-- Chess libs -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chessboardjs@1.0.0/www/css/chessboard-1.0.0.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chess.js@0.13.4/chess.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chessboardjs@1.0.0/www/js/chessboard-1.0.0.min.js"></script>
+
 <script>
-  // 24 hours from now
-  var countDownDate = new Date().getTime() + (24 * 60 * 60 * 1000);
+/* =========================
+   Firebase (optional live)
+   ========================= */
+const firebaseConfig={
+  apiKey:"AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
+  authDomain:"pakcashplay.firebaseapp.com",
+  projectId:"pakcashplay",
+  storageBucket:"pakcashplay.appspot.com",
+  messagingSenderId:"551195851632",
+  appId:"1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
+};
+let fbReady=false, auth, db;
+try{firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();fbReady=true;}catch(e){console.warn('Firebase init issue (using local fallback):',e)}
 
-  var x = setInterval(function() {
-    var now = new Date().getTime();
-    var distance = countDownDate - now;
+/* ================
+   Global state
+   ================ */
+let currentUser=null;
+let balance=0;
+let activeBet=null; // {game, amount, resolve}
+let autoCloseTimer=null;
+const LS=(k,v)=>v===undefined?JSON.parse(localStorage.getItem(k)||'null'):(localStorage.setItem(k,JSON.stringify(v)),v);
+const uid=()=>currentUser?.uid||'guest';
 
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+/* ================
+   UI helpers
+   ================ */
+function showSec(id){
+  ['home','deposit','withdraw','status','admin'].forEach(s=>document.getElementById(s+'Sec').classList.add('hidden'));
+  document.getElementById(id+'Sec').classList.remove('hidden');
+  if(id==='status') refreshAll();
+  if(id==='withdraw') renderUserWithdrawals(); // ensure visibility immediately after submit
+  if(id==='deposit') renderUserDeposits();
+}
+function toast(msg){alert(msg)} // simple
 
-    // Format HH:MM:SS
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+/* ================
+   Auth modal
+   ================ */
+function showAuthModal(tab){document.getElementById('authModal').style.display='grid';switchAuth(tab||'login')}
+function hideAuth(){document.getElementById('authModal').style.display='none'}
+function switchAuth(tab){
+  document.getElementById('authLogin').style.display=(tab==='login')?'block':'none';
+  document.getElementById('authSignup').style.display=(tab==='signup')?'block':'none';
+  document.getElementById('authForgot').style.display=(tab==='forgot')?'block':'none';
+}
 
-    document.getElementById("countdown").innerHTML = hours + ":" + minutes + ":" + seconds;
-
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("countdown").innerHTML = "Update Completed";
+/* ================
+   Auth logic
+   ================ */
+async function signupUser(){
+  const name=document.getElementById('signupName').value.trim();
+  const phone=document.getElementById('signupPhone').value.trim();
+  const email=document.getElementById('signupEmail').value.trim();
+  const pass=document.getElementById('signupPassword').value;
+  const ref=document.getElementById('referralCode').value.trim()||null;
+  if(!email||!pass||!name||!phone){toast('Fill all fields');return}
+  if(fbReady){
+    await auth.createUserWithEmailAndPassword(email,pass);
+    await auth.currentUser.updateProfile({displayName:name});
+    await db.collection('users').doc(auth.currentUser.uid).set({name,phone,email,balance:0,referral:ref,created:Date.now(),role:'user'});
+  }else{
+    // local fallback
+    const id='local-'+Date.now();
+    currentUser={uid:id,email,displayName:name,phoneNumber:phone,role:'user'};
+    LS('localUser',currentUser);
+    LS('u_'+id,{name,phone,email,balance:0,referral:ref,role:'user'});
+  }
+  hideAuth();
+  onAuthed();
+}
+async function loginUser(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPassword').value;
+  if(fbReady){
+    await auth.signInWithEmailAndPassword(email,pass);
+  }else{
+    // local fallback: create/restore a stub user
+    let u=LS('localUser');
+    if(!u||u.email!==email){
+      const id='local-'+Date.now();
+      u={uid:id,email,displayName:email.split('@')[0],phoneNumber:'',role: email.includes('admin')?'admin':'user'};
+      LS('localUser',u);
+      LS('u_'+id,{name:u.displayName,phone:'',email,role:u.role,balance:0});
     }
-  }, 1000);
+    currentUser=u;
+  }
+  hideAuth();
+  onAuthed();
+}
+async function resetPassword(){
+  const email=document.getElementById('forgotEmail').value.trim();
+  if(fbReady){ await auth.sendPasswordResetEmail(email); toast('Reset email sent'); }
+  else { toast('Password reset is only available with Firebase online.'); }
+}
+function logoutUser(){
+  if(fbReady) auth.signOut();
+  currentUser=null; LS('localUser',null);
+  document.getElementById('userDisplay').classList.add('hidden');
+  document.getElementById('authButtons').style.display='inline-block';
+  document.getElementById('logoutWrap').classList.add('hidden');
+  document.getElementById('adminLink').classList.add('hidden');
+  refreshBalance(true);
+}
+function onAuthed(){
+  if(fbReady){
+    currentUser=auth.currentUser;
+    db.collection('users').doc(currentUser.uid).get().then(d=>{
+      const u=d.data()||{};
+      balance=u.balance||0;
+      updateUserStrip(u);
+    });
+  }else{
+    currentUser=LS('localUser');
+    const u=LS('u_'+uid())||{};
+    balance=u.balance||0;
+    updateUserStrip({name:currentUser.displayName,phone:currentUser.phoneNumber||'',email:currentUser.email,role:currentUser.role});
+  }
+  refreshBalance(true);
+}
+function updateUserStrip(u){
+  document.getElementById('authButtons').style.display='none';
+  document.getElementById('logoutWrap').classList.remove('hidden');
+  const ud=document.getElementById('userDisplay');ud.classList.remove('hidden');
+  document.getElementById('usernameDisplay').textContent=u.name||currentUser.displayName||'User';
+  document.getElementById('phoneDisplay').textContent=u.phone||'';
+  const isAdmin=(u.role==='admin'||(currentUser?.email||'').includes('+admin'));
+  document.getElementById('adminLink').classList.toggle('hidden',!isAdmin);
+  document.getElementById('verifiedBadge').style.display='inline';
+}
+
+/* ================
+   Balance / Tx
+   ================ */
+async function refreshBalance(skipFetch){
+  if(!skipFetch && fbReady && currentUser){
+    const doc=await db.collection('users').doc(uid()).get();
+    balance=(doc.data()?.balance)||0;
+  }else if(!skipFetch && !fbReady && currentUser){
+    const u=LS('u_'+uid())||{}; balance=u.balance||0;
+  }
+  document.getElementById('balanceAmount').textContent=balance;
+}
+async function setBalance(newBal){
+  balance=newBal; document.getElementById('balanceAmount').textContent=balance;
+  if(fbReady && currentUser){
+    await db.collection('users').doc(uid()).set({balance},{merge:true});
+  }else if(currentUser){
+    const u=LS('u_'+uid())||{}; u.balance=balance; LS('u_'+uid(),u);
+  }
+}
+function txCol(){ return fbReady? db.collection('transactions') : null }
+function localPush(arrK, item){
+  const arr=LS(arrK)||[]; arr.push(item); LS(arrK,arr); return arr;
+}
+
+/* ================
+   Deposit / Withdraw
+   ================ */
+async function submitDeposit(){
+  if(!currentUser){toast('Login first');return}
+  const amount=parseInt(document.getElementById('depAmt').value||'0',10);
+  const method=document.getElementById('depMethod').value;
+  const txn=document.getElementById('depTxn').value.trim();
+  if(isNaN(amount) || amount<150 || !txn){toast('Enter valid amount (>=150) and transaction id');return}
+  const r={type:'deposit',uid:uid(),amount,method,txn,status:'pending',date:Date.now()};
+  if(fbReady){await db.collection('requests').add(r)} else { localPush('req_'+uid(),r) }
+  toast('Deposit request submitted');
+  renderUserDeposits(); renderStatus();
+}
+async function submitWithdraw(){
+  if(!currentUser){toast('Login first');return}
+  const amount=parseInt(document.getElementById('wdAmt').value||'0',10);
+  const method=document.getElementById('wdMethod').value;
+  const acct=document.getElementById('wdAcct').value.trim();
+  const name=document.getElementById('wdName').value.trim();
+  if(isNaN(amount)||amount<300||!acct||!name){toast('Fill all fields (min 300)');return}
+  if(balance<amount){toast('Insufficient balance');return}
+  // Deduct immediately
+  await setBalance(balance-amount);
+  const r={type:'withdraw',uid:uid(),amount,method,acct,name,status:'pending',date:Date.now()};
+  if(fbReady){await db.collection('requests').add(r)} else { localPush('req_'+uid(),r) }
+  toast('Withdrawal request submitted (deducted now)');
+  renderUserWithdrawals(); renderStatus();
+}
+
+/* Admin approve/reject */
+async function adminAction(req, action){
+  if(req.type==='deposit' && action==='approve'){
+    // add to balance
+    if(fbReady){
+      await db.collection('users').doc(req.uid).get().then(async d=>{
+        const bal=(d.data()?.balance||0)+req.amount;
+        await db.collection('users').doc(req.uid).set({balance:bal},{merge:true});
+      });
+    }else{
+      const u=LS('u_'+req.uid)||{}; u.balance=(u.balance||0)+req.amount; LS('u_'+req.uid,u);
+    }
+  }
+  if(req.type==='withdraw' && action==='reject'){
+    // refund
+    if(fbReady){
+      await db.collection('users').doc(req.uid).get().then(async d=>{
+        const bal=(d.data()?.balance||0)+req.amount;
+        await db.collection('users').doc(req.uid).set({balance:bal},{merge:true});
+      });
+    }else{
+      const u=LS('u_'+req.uid)||{}; u.balance=(u.balance||0)+req.amount; LS('u_'+req.uid,u);
+    }
+  }
+  // update status
+  if(fbReady){
+    await db.collection('requests').doc(req._id).set({status: action==='approve'?'approved':'rejected'},{merge:true});
+  }else{
+    // local
+    const arr=LS('req_'+req.uid)||[];
+    const idx=arr.findIndex(x=>x.date===req.date && x.type===req.type && x.amount===req.amount);
+    if(idx>-1){arr[idx].status= action==='approve'?'approved':'rejected'; LS('req_'+req.uid,arr)}
+  }
+  renderAdmin(); renderStatus();
+}
+
+/* ================
+   Rendering status/history
+   ================ */
+async function getUserReqs(uidx){
+  if(fbReady){
+    const qs=await db.collection('requests').where('uid','==',uidx).orderBy('date','desc').get();
+    return qs.docs.map(d=>({ _id:d.id, ...d.data() }));
+  }else{
+    return (LS('req_'+uidx)||[]).slice().sort((a,b)=>b.date-a.date);
+  }
+}
+async function getAllReqs(){
+  if(fbReady){
+    const qs=await db.collection('requests').orderBy('date','desc').get();
+    return qs.docs.map(d=>({ _id:d.id, ...d.data() }));
+  }else{
+    // aggregate all local users (demo)
+    const all=[];
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      if(k && k.startsWith('req_')) (LS(k)||[]).forEach(r=>all.push({...r,_id:k+'_'+r.date}));
+    }
+    return all.sort((a,b)=>b.date-a.date);
+  }
+}
+async function renderUserDeposits(){
+  if(!currentUser) return;
+  const list=await getUserReqs(uid());
+  const dep=list.filter(x=>x.type==='deposit');
+  document.getElementById('depositHistory').innerHTML=dep.map(r=>`<div class="item"><b>Rs. ${r.amount}</b> · ${r.method} · <span class="${cls(r.status)}">${r.status}</span> · ${new Date(r.date).toLocaleString()}</div>`).join('')||'<div class="item">No deposits</div>';
+}
+async function renderUserWithdrawals(){
+  if(!currentUser) return;
+  const list=await getUserReqs(uid());
+  const wd=list.filter(x=>x.type==='withdraw');
+  // Ensure visibility immediately after submit
+  document.getElementById('withdrawHistory').innerHTML=wd.map(r=>`<div class="item"><b>Rs. ${r.amount}</b> · ${r.method} → ${r.acct} (${r.name}) · <span class="${cls(r.status)}">${r.status}</span> · ${new Date(r.date).toLocaleString()}</div>`).join('')||'<div class="item">No withdrawals</div>';
+}
+function cls(s){return s==='approved'?'ok':(s==='rejected'?'rej':'pending')}
+async function renderStatus(){
+  if(!currentUser) return;
+  const list=await getUserReqs(uid());
+  const dep=list.filter(x=>x.type==='deposit');
+  const wd=list.filter(x=>x.type==='withdraw');
+  document.getElementById('depositStatus').innerHTML=dep.map(r=>`<div class="item">Rs. <b>${r.amount}</b> · ${r.method} · <i class="${cls(r.status)}">${r.status}</i> · ${new Date(r.date).toLocaleString()}</div>`).join('')||'<div class="item">—</div>';
+  document.getElementById('withdrawStatus').innerHTML=wd.map(r=>`<div class="item">Rs. <b>${r.amount}</b> · ${r.method} → ${r.acct||''} · <i class="${cls(r.status)}">${r.status}</i> · ${new Date(r.date).toLocaleString()}</div>`).join('')||'<div class="item">—</div>';
+  const all=[...dep,...wd].sort((a,b)=>b.date-a.date);
+  document.getElementById('allTx').innerHTML=all.map(r=>`<div class="item">${r.type.toUpperCase()}: Rs. <b>${r.amount}</b> · <i class="${cls(r.status)}">${r.status}</i> · ${new Date(r.date).toLocaleString()}</div>`).join('')||'<div class="item">—</div>';
+}
+async function renderAdmin(){
+  if(!currentUser) return;
+  // only if admin
+  const isAdmin=document.getElementById('adminLink').classList.contains('hidden')===false;
+  if(!isAdmin) return;
+  const all=await getAllReqs();
+  const deps=all.filter(r=>r.type==='deposit');
+  const wds=all.filter(r=>r.type==='withdraw');
+  document.getElementById('adminDeposits').innerHTML=deps.map(r=>rowAdmin(r)).join('')||'<div class="item">No deposit requests</div>';
+  document.getElementById('adminWithdrawals').innerHTML=wds.map(r=>rowAdmin(r)).join('')||'<div class="item">No withdrawal requests</div>';
+}
+function rowAdmin(r){
+  const act=(st)=>`<button class="gold-box" onclick='adminAction(${JSON.stringify(r)}, "${st}")'>${st}</button>`;
+  return `<div class="item"><b>${r.type.toUpperCase()}</b> · Rs. ${r.amount} · ${r.method||''} ${r.acct?('→ '+r.acct):''} · <i class="${cls(r.status)}">${r.status}</i> · ${new Date(r.date).toLocaleString()} <div>${r.status==='pending'?act('approve')+act('reject'):'—'}</div></div>`
+}
+async function refreshAll(){ await renderUserDeposits(); await renderUserWithdrawals(); await renderStatus(); await renderAdmin(); }
+
+/* ================
+   Game modal + forfeit rule
+   ================ */
+const modal=document.getElementById('gameModal');
+const host=document.getElementById('gameHost');
+const titleEl=document.getElementById('gameTitle');
+function openGame(kind){
+  if(!currentUser){toast('Login first');return}
+  modal.classList.add('active'); host.innerHTML=''; titleEl.textContent='';
+  if(kind==='scratch') return gameScratch();
+  if(kind==='fruit')   return gameFruit();
+  if(kind==='ttt')     return gameTTT();
+  if(kind==='ace')     return gameAce();
+  if(kind==='archery') return gameArchery();
+  if(kind==='chess')   return gameChess();
+}
+function closeGame(reason){
+  if(activeBet && reason==='forfeit'){
+    // immediate loss on closing modal or tab
+    settle(false,'Game closed');
+  }
+  modal.classList.remove('active');
+  host.innerHTML='';
+  titleEl.textContent='';
+  if(autoCloseTimer){clearTimeout(autoCloseTimer);autoCloseTimer=null;}
+}
+// Forfeit on tab close
+window.addEventListener('beforeunload', (e)=>{
+  if(activeBet){ settle(false,'Window closed'); }
+});
+
+function betRow(opts, onPick){
+  const wrap=document.createElement('div');
+  wrap.style.textAlign='center';
+  wrap.innerHTML='<div style="margin:6px 0">Select Bet</div>';
+  opts.forEach(v=>{
+    const b=document.createElement('button'); b.className='gold-box'; b.textContent='Rs. '+v;
+    b.onclick=()=>onPick(v);
+    wrap.appendChild(b);
+  });
+  return wrap;
+}
+function startBet(game, amount){
+  if(activeBet){toast('Another bet active');return false}
+  if(balance<amount){toast('Insufficient balance');return false}
+  activeBet={game, amount};
+  setBalance(balance-amount); // stake immediately
+  return true;
+}
+function settle(win, note){
+  if(!activeBet) return;
+  const amount=activeBet.amount;
+  if(win){ setBalance(balance + amount*2); document.getElementById('winSound').play(); }
+  else { document.getElementById('loseSound').play(); }
+  // Add to allTx (local only)
+  if(!fbReady && currentUser){
+    localPush('tx_'+uid(),{game:activeBet.game,win,amount,date:Date.now(),note});
+  }
+  // auto close after 6s
+  if(autoCloseTimer){clearTimeout(autoCloseTimer)}
+  autoCloseTimer=setTimeout(()=>closeGame(),6000);
+  activeBet=null;
+}
+
+/* ================
+   Scratch Match (9 cards only)
+   ================ */
+function gameScratch(){
+  titleEl.textContent='Scratch Match';
+  const g=document.createElement('div'); host.appendChild(g);
+  g.appendChild(betRow([20,50,100,150,200,300], amt=>{
+    if(!startBet('Scratch',amt)) return;
+    render();
+  }));
+  const grid=document.createElement('div'); grid.className='card-grid'; g.appendChild(grid);
+  const info=document.createElement('div'); info.className='info'; g.appendChild(info);
+  function render(){
+    grid.innerHTML='';
+    const icons=['🐄','🐄','🐄','🐔','🐔','🐔','🐶','🐶','🐶'];
+    // shuffle quickly (4x) and face-down
+    icons.sort(()=>Math.random()-0.5);
+    const speed=0.25; // 4x faster than baseline 1s
+    let flips=0; const picks=[];
+    icons.forEach(ic=>{
+      const card=document.createElement('div'); card.className='card';
+      const back=document.createElement('div'); back.className='face back'; back.textContent='';
+      const front=document.createElement('div'); front.className='face front'; front.textContent=ic;
+      card.appendChild(front); card.appendChild(back); // back faces user
+      grid.appendChild(card);
+      setTimeout(()=>{ document.getElementById('shuffleSound').play() }, 50);
+      // face-down at start (no flipped class)
+      card.onclick=()=>{
+        if(card.classList.contains('flipped')) return;
+        document.getElementById('flipSound').play();
+        card.classList.add('flipped'); flips++; picks.push(ic);
+        if(flips===3){
+          const allSame=picks.every(x=>x===picks[0]);
+          info.textContent=allSame?'You matched 3 — You win!':'No match — You lose.';
+          settle(allSame);
+        }
+      };
+    });
+  }
+}
+
+/* ================
+   Find Ace (back side + 4x shuffle)
+   ================ */
+function gameAce(){
+  titleEl.textContent='Find Ace';
+  const g=document.createElement('div'); host.appendChild(g);
+  g.appendChild(betRow([50,100,200,300], amt=>{ if(!startBet('Find Ace',amt))return; renderRound() }));
+  const grid=document.createElement('div'); grid.className='card-grid'; g.appendChild(grid);
+  const msg=document.createElement('div'); msg.className='info'; msg.textContent='Find the Ace of Spades'; g.appendChild(msg);
+  function renderRound(){
+    grid.innerHTML='';
+    const cards=[{k:'A♠',ace:true},{k:'K♦'},{k:'Q♥'}];
+    // build 3 cards face-down
+    cards.forEach((c,i)=>{
+      const card=document.createElement('div'); card.className='card';
+      const front=document.createElement('div'); front.className='face front'; front.textContent=c.k;
+      const back=document.createElement('div'); back.className='face back'; back.textContent='';
+      card.appendChild(front); card.appendChild(back);
+      grid.appendChild(card);
+      card.onclick=()=>{
+        if(activeBet){ card.classList.add('flipped'); settle(!!c.ace); }
+      }
+    });
+    // shuffle animation (4x speed)
+    let swaps=0; const speed=120; // ms
+    const shInt=setInterval(()=>{
+      swaps++;
+      document.getElementById('shuffleSound').play();
+      // swap two random children
+      const a=Math.floor(Math.random()*3), b=(a+1+Math.floor(Math.random()*2))%3;
+      grid.insertBefore(grid.children[b], grid.children[a]);
+      if(swaps>16){ clearInterval(shInt); }
+    }, speed);
+  }
+}
+
+/* ================
+   Archery (board restored)
+   ================ */
+function gameArchery(){
+  titleEl.textContent='Archery Challenge';
+  const g=document.createElement('div'); host.appendChild(g);
+  g.appendChild(betRow([20,50,100,150,200], amt=>{ if(!startBet('Archery',amt))return; start() }));
+  const c=document.createElement('canvas'); c.id='archeryCanvas'; c.width=520; c.height=520; g.appendChild(c);
+  const info=document.createElement('div'); info.className='info'; info.textContent='Click to shoot 5 arrows. Score ≥ 35 to win.'; g.appendChild(info);
+  let shots=0, score=0;
+  function drawBoard(ctx){
+    const cx=260, cy=260; const rings=[80,120,160,200]; const cols=['#2563EB','#1E3A8A','#000','#FF0000','#2563EB'];
+    // base
+    ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height);
+    // concentric rings
+    ctx.beginPath(); ctx.fillStyle='#2563EB'; ctx.arc(cx,cy,200,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.fillStyle='#1E3A8A'; ctx.arc(cx,cy,160,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.fillStyle='#000'; ctx.arc(cx,cy,120,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.fillStyle='#FF0000'; ctx.arc(cx,cy,80,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.fillStyle='#2563EB'; ctx.arc(cx,cy,40,0,Math.PI*2); ctx.fill();
+    // crosshair
+    ctx.strokeStyle='#fff'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(cx-220,cy); ctx.lineTo(cx+220,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx,cy-220); ctx.lineTo(cx,cy+220); ctx.stroke();
+  }
+  function start(){
+    const ctx=c.getContext('2d'); drawBoard(ctx);
+    c.onclick=(e)=>{
+      if(!activeBet) return;
+      const rect=c.getBoundingClientRect();
+      const x=e.clientX-rect.left, y=e.clientY-rect.top;
+      const dx=x-260, dy=y-260; const r=Math.hypot(dx,dy);
+      let pts=0;
+      if(r<=40) pts=10; else if(r<=80) pts=8; else if(r<=120) pts=6; else if(r<=160) pts=4; else if(r<=200) pts=2; else pts=0;
+      score+=pts; shots++;
+      // draw hit
+      const ctx2=c.getContext('2d');
+      ctx2.fillStyle='#fff'; ctx2.beginPath(); ctx2.arc(x,y,5,0,Math.PI*2); ctx2.fill();
+      info.textContent=`Shot ${shots}/5 · +${pts} · Total ${score}`;
+      if(shots>=5){ settle(score>=35); info.textContent+= score>=35?' — You win!':' — You lose.'; }
+    };
+  }
+}
+
+/* ================
+   Tic Tac Toe
+   ================ */
+function gameTTT(){
+  titleEl.textContent='Tic Tac Toe';
+  const g=document.createElement('div'); host.appendChild(g);
+  g.appendChild(betRow([50,100,200,300], amt=>{ if(!startBet('TTT',amt))return; start() }));
+  const board=document.createElement('div'); board.className='ttt-board'; g.appendChild(board);
+  const msg=document.createElement('div'); msg.className='info'; g.appendChild(msg);
+  let cells=['','','','','','','','','']; let over=false;
+  function start(){
+    board.innerHTML=''; cells=cells.map(()=>'');
+    for(let i=0;i<9;i++){
+      const d=document.createElement('div'); d.className='ttt-cell'; d.onclick=()=>move(i); board.appendChild(d);
+    }
+    msg.textContent='You are X';
+  }
+  function move(i){
+    if(over||cells[i])return;
+    cells[i]='X'; render();
+    if(check('X')){ over=true; msg.textContent='You win!'; settle(true); return }
+    if(cells.every(Boolean)){ over=true; msg.textContent='Draw'; settle(false,'draw'); return }
+    // AI
+    const j=bestMove(); cells[j]='O'; render();
+    if(check('O')){ over=true; msg.textContent='You lose.'; settle(false); return }
+    if(cells.every(Boolean)){ over=true; msg.textContent='Draw'; settle(false,'draw'); }
+  }
+  function render(){ [...board.children].forEach((d,i)=>d.textContent=cells[i]) }
+  function lines(){ return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]] }
+  function check(p){ return lines().some(([a,b,c])=>cells[a]===p&&cells[b]===p&&cells[c]===p) }
+  function bestMove(){
+    const empty=cells.map((v,i)=>v?null:i).filter(v=>v!==null);
+    // win or block
+    for(const i of empty){ cells[i]='O'; if(check('O')){cells[i]='';return i} cells[i]='' }
+    for(const i of empty){ cells[i]='X'; if(check('X')){cells[i]='';return i} cells[i]='' }
+    return empty[Math.floor(Math.random()*empty.length)];
+  }
+}
+
+/* ================
+   Fruit Shooting (kept simple)
+   ================ */
+function gameFruit(){
+  titleEl.textContent='Fruit Shooting';
+  const g=document.createElement('div'); host.appendChild(g);
+  g.appendChild(betRow([20,50,100,150,200], amt=>{ if(!startBet('Fruit',amt))return; start(amt) }));
+  const area=document.createElement('div'); area.className='shoot-area'; g.appendChild(area);
+  const msg=document.createElement('div'); msg.className='info'; msg.textContent='Shoot red apples only!'; g.appendChild(msg);
+  function start(amt){
+    area.innerHTML='';
+    const items=['🍎','🍎','🍎','🍏','🍐','🍊','🍉','🍇','🍓','🍒'];
+    let hits=0, total=15, t=0;
+    const int=setInterval(()=>{
+      t++; const span=document.createElement('div'); span.className='fruit';
+      const emoji=items[Math.floor(Math.random()*items.length)]; span.textContent=emoji;
+      span.style.left=Math.floor(Math.random()*(area.clientWidth-40))+'px';
+      span.style.top=Math.floor(Math.random()*(area.clientHeight-40))+'px';
+      area.appendChild(span);
+      span.onclick=()=>{ if(emoji==='🍎'){ hits++; span.remove(); } else { hits=Math.max(0,hits-1); span.remove(); } };
+      setTimeout(()=>span.remove(),900);
+      if(t>=total){ clearInterval(int); const win=hits>=5; msg.textContent=`Hits: ${hits} — ${win?'You win!':'You lose.'}`; settle(win) }
+    },600);
+  }
+}
+
+/* ================
+   Chess (15 minutes, strong-ish AI, ~30% win chance)
+   ================ */
+function gameChess(){
+  titleEl.textContent='Chess — 15:00 timer (You = White)';
+  const g=document.createElement('div'); host.appendChild(g);
+  g.appendChild(betRow([100,200,300,500], amt=>{ if(!startBet('Chess',amt))return; start() }));
+  const row=document.createElement('div'); row.className='chess-row'; g.appendChild(row);
+  const boardDiv=document.createElement('div'); boardDiv.id='chessboard'; row.appendChild(boardDiv);
+  const info=document.createElement('div'); info.className='info'; info.textContent='Beat the engine before time runs out!'; row.appendChild(info);
+  const tEl=document.createElement('div'); tEl.className='info'; tEl.textContent='15:00'; row.appendChild(tEl);
+  let game, board, timer=15*60, tInt=null, aiColor='black';
+  function tick(){ timer--; const m=Math.floor(timer/60), s=('0'+(timer%60)).slice(-2); tEl.textContent=`${m}:${s}`; if(timer<=0){ clearInterval(tInt); info.textContent='Time up — You lose.'; settle(false,'timeout') } }
+  function start(){
+    game=new Chess(); board=Chessboard('chessboard', {draggable:true, position:'start', onDrop:onDrop, orientation:'white'});
+    tInt=setInterval(tick,1000);
+    // AI will reply after each human move
+  }
+  function onDrop(source, target){
+    const move=game.move({from:source,to:target,promotion:'q'});
+    if(move===null) return 'snapback';
+    board.position(game.fen());
+    if(game.game_over()){ endByResult(); return }
+    setTimeout(aiMove, 150);
+  }
+  function aiMove(){
+    // Simple minimax depth 2 (stronger than random)
+    const moves=game.moves();
+    let bestScore=-9999, bestMove=null;
+    for(const m of moves){
+      game.move(m);
+      const score=-negamax(2,-9999,9999);
+      game.undo();
+      if(score>bestScore){bestScore=score;bestMove=m}
+    }
+    game.move(bestMove||moves[Math.floor(Math.random()*moves.length)]);
+    board.position(game.fen());
+    if(game.game_over()){ endByResult(); }
+  }
+  function negamax(depth, alpha, beta){
+    if(depth===0) return evalBoard();
+    const moves=game.moves();
+    let max=-9999;
+    for(const m of moves){
+      game.move(m);
+      const score=-negamax(depth-1,-beta,-alpha);
+      game.undo();
+      if(score>max) max=score;
+      if(max>alpha) alpha=max;
+      if(alpha>=beta) break;
+    }
+    return max;
+  }
+  function pieceVal(p){
+    const v={p:100,n:320,b:330,r:500,q:900,k:0}[p.type]||0;
+    return p.color==='w'?v:-v;
+  }
+  function evalBoard(){
+    let sum=0;
+    game.board().forEach(r=>r.forEach(p=>{ if(p) sum+=pieceVal(p) }));
+    return sum;
+  }
+  function endByResult(){
+    clearInterval(tInt);
+    let res;
+    if(game.in_checkmate()){
+      res=game.turn()==='w'?'AI wins':'You win';  // if it's White's turn and checkmated, AI delivered mate
+    }else{
+      res='Draw';
+    }
+    // Enforce ~30% user win chance: if user wins, occasionally downgrade to draw/loss for house edge
+    let userWin = res==='You win';
+    if(userWin){
+      const keepWin = Math.random()<0.30; // 30%
+      if(!keepWin){
+        // convert to loss
+        userWin=false; res='AI wins';
+      }
+    }
+    info.textContent=res;
+    settle(userWin, res);
+  }
+}
+
+/* ================
+   Init
+   ================ */
+if(fbReady){
+  auth.onAuthStateChanged(u=>{ if(u){ currentUser=u; onAuthed(); } else { logoutUser() } });
+}else{
+  const u=LS('localUser'); if(u){ currentUser=u; onAuthed(); }
+}
+// default section
+showSec('home');
+
 </script>
+
+<!-- END: USCASH Enhanced Game Suite -->
+
+<!-- BEGIN AUTO-FIXES APPENDED SCRIPT -->
+<script>
+(function(){
+  // Only add once
+  if (window.__USCASH_AUTO_FIXES_INSTALLED) return;
+  window.__USCASH_AUTO_FIXES_INSTALLED = true;
+
+  // Helper: show message box
+  function showMessage(text, timeout=3000){
+    const mb = document.getElementById('messageBox');
+    if(!mb) return;
+    mb.textContent = text;
+    mb.classList.add('show');
+    setTimeout(()=> mb.classList.remove('show'), timeout);
+  }
+
+  // GAME MODAL UTILITIES
+  const gameModal = document.getElementById('gameModal') || (function(){
+    const div = document.createElement('div');
+    div.id = 'gameModal';
+    div.innerHTML = '<div class="box"><button id="closeGameBtn" class="gold-box">Close</button><div id="gameModalContent"></div></div>';
+    document.body.appendChild(div);
+    // style already present in page CSS; ensure close works:
+    div.addEventListener('click', function(e){
+      if(e.target === div) closeGameModal();
+    });
+    return div;
+  })();
+
+  function openGameModal(){
+    gameModal.classList.add('active');
+    const closeBtn = document.getElementById('closeGameBtn');
+    if(closeBtn) closeBtn.onclick = closeGameModal;
+  }
+  function closeGameModal(){
+    gameModal.classList.remove('active');
+    // clear content to avoid duplicate event listeners keeping memory
+    const content = document.getElementById('gameModalContent');
+    if(content) content.innerHTML = '';
+  }
+
+  // Ensure scratch and findace grids create exactly 9 cards
+  function buildCardGrid(targetId, options = {}){
+    const NUM = 9;
+    const grid = document.getElementById(targetId);
+    if(!grid) return;
+    grid.innerHTML = '';
+    for(let i=0;i<NUM;i++){
+      const c = document.createElement('div');
+      c.className = 'card';
+      c.dataset.index = i;
+      c.innerHTML = '<div class="back face">?</div><div class="front face">★</div>';
+      grid.appendChild(c);
+    }
+  }
+
+  // Staged shuffle: slow then fast then reveal
+  async function stagedShuffle(gridId, {slowDuration=3000, fastDuration=1000, slowInterval=300, fastInterval=60} = {}){
+    const grid = document.getElementById(gridId);
+    if(!grid) return;
+    const cards = Array.from(grid.children);
+    // initial shuffle indicator
+    showMessage('Shuffling cards...');
+    // slow phase
+    let endSlow = Date.now() + slowDuration;
+    while(Date.now() < endSlow){
+      shuffleArray(cards);
+      redrawGrid(cards, grid);
+      await sleep(slowInterval);
+    }
+    // fast phase
+    let endFast = Date.now() + fastDuration;
+    while(Date.now() < endFast){
+      shuffleArray(cards);
+      redrawGrid(cards, grid);
+      await sleep(fastInterval);
+    }
+    // reveal: flip all to front quickly then flip back to back (keeps UX)
+    for(const card of cards){
+      card.classList.add('flipped');
+    }
+    await sleep(450);
+    for(const card of cards){
+      card.classList.remove('flipped');
+    }
+    showMessage('Shuffle complete', 1200);
+  }
+
+  function redrawGrid(cards, grid){
+    // re-append in new order
+    cards.forEach(c => grid.appendChild(c));
+  }
+
+  function shuffleArray(arr){
+    for(let i = arr.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
+  function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+  // Replace / add start functions so games open in modal and use correct grids
+  window.startCardGame = function(){
+    // clone existing scratchGame section into modal content
+    const section = document.getElementById('scratchGame');
+    const contentTarget = document.getElementById('gameModalContent');
+    if(!section || !contentTarget) return;
+    contentTarget.innerHTML = section.innerHTML;
+    // ensure there are exactly 9 cards
+    buildCardGrid('cardGrid');
+    // attach flip handler and staged shuffle
+    initCardGridHandlers('cardGrid');
+    openGameModal();
+    // run staged shuffle for UX
+    stagedShuffle('cardGrid', {slowDuration:2500, fastDuration:900, slowInterval:360, fastInterval:55});
+  };
+
+  window.startFindAceGame = function(){
+    const section = document.getElementById('findAceGame');
+    const contentTarget = document.getElementById('gameModalContent');
+    if(!section || !contentTarget) return;
+    contentTarget.innerHTML = section.innerHTML;
+    buildCardGrid('findAceGrid');
+    initCardGridHandlers('findAceGrid');
+    openGameModal();
+    stagedShuffle('findAceGrid', {slowDuration:2500, fastDuration:900, slowInterval:360, fastInterval:55});
+  };
+
+  window.startFruitGame = function(){
+    const section = document.getElementById('fruitGame');
+    const contentTarget = document.getElementById('gameModalContent');
+    if(!section || !contentTarget) return;
+    contentTarget.innerHTML = section.innerHTML;
+    // re-hook fruitArea events (simple safe version)
+    if(typeof initFruitGame === 'function') {
+      try{ initFruitGame(); }catch(e){ console.warn('initFruitGame error', e); }
+    }
+    openGameModal();
+  };
+
+  window.startTicTacToeGame = function(){
+    const section = document.getElementById('tictactoeGame');
+    const contentTarget = document.getElementById('gameModalContent');
+    if(!section || !contentTarget) return;
+    contentTarget.innerHTML = section.innerHTML;
+    if(typeof initTicTacToe === 'function') {
+      try{ initTicTacToe(); }catch(e){ console.warn('initTicTacToe error', e); }
+    }
+    openGameModal();
+  };
+
+  window.startArcheryGame = function(){
+    const section = document.getElementById('archeryGame');
+    const contentTarget = document.getElementById('gameModalContent');
+    if(!section || !contentTarget) return;
+    contentTarget.innerHTML = section.innerHTML;
+    if(typeof initArchery === 'function') {
+      try{ initArchery(); }catch(e){ console.warn('initArchery error', e); }
+    }
+    openGameModal();
+  };
+
+  // If chessboard exists in page, provide a starter display
+  window.startChessGame = function(){
+    const contentTarget = document.getElementById('gameModalContent');
+    if(!contentTarget) return;
+    contentTarget.innerHTML = '<h2 class="modal-title">Chess (Demo)</h2><div id="chessboard" style="display:grid;grid-template-columns:repeat(8,1fr);gap:2px;width:420px;margin:10px auto;border-radius:6px;overflow:hidden;"></div><div style="text-align:center;margin-top:8px;"><button class="gold-box" onclick="closeGameModal()">Close</button></div>';
+    const board = document.getElementById('chessboard');
+    const letters = '87654321'.split('');
+    for(let r=0;r<8;r++){
+      for(let c=0;c<8;c++){
+        const cell = document.createElement('div');
+        cell.style.background = ((r+c)%2===0)?'#f0d9b5':'#b58863';
+        cell.style.width = '52px';
+        cell.style.height = '52px';
+        cell.style.display = 'flex';
+        cell.style.alignItems = 'center';
+        cell.style.justifyContent = 'center';
+        cell.style.fontSize = '20px';
+        board.appendChild(cell);
+      }
+    }
+    openGameModal();
+  };
+
+  // init card grid click handlers (flip & simple match logic placeholder)
+  function initCardGridHandlers(gridId){
+    const grid = document.getElementById(gridId);
+    if(!grid) return;
+    const cards = Array.from(grid.children);
+    cards.forEach(card=>{
+      card.onclick = function(){
+        // flip temporarily
+        card.classList.toggle('flipped');
+        // play flip sound if available
+        const flip = document.getElementById('flipSound');
+        if(flip) try{ flip.play(); }catch(e){}
+      };
+    });
+  }
+
+  // --- Missing admin / transaction functions ---
+  // submitDeposit: create a deposit request in Firestore (if available) or localStorage fallback
+  window.submitDeposit = async function(){
+    const amtEl = document.getElementById('depositAmount');
+    const methodEl = document.getElementById('depositMethod');
+    const txEl = document.getElementById('transactionId');
+    if(!amtEl || !methodEl || !txEl){ showMessage('Deposit form not found'); return; }
+    const amount = Number(amtEl.value || 0);
+    if(amount < 150){ showMessage('Minimum deposit is Rs.150'); return; }
+    const method = methodEl.value || 'jazzcash';
+    const txid = (txEl.value || '').trim();
+    const payload = {
+      amount, method, transactionId: txid, status: 'pending', date: new Date().toISOString()
+    };
+    try{
+      if(window.db && typeof db.collection === 'function'){
+        await db.collection('depositRequests').add(payload);
+        showMessage('Deposit request submitted');
+      } else {
+        // fallback local
+        const arr = JSON.parse(localStorage.getItem('depositRequests')||'[]');
+        arr.unshift(payload);
+        localStorage.setItem('depositRequests', JSON.stringify(arr));
+        showMessage('Deposit request saved (local)');
+      }
+      // append to UI history if present
+      appendDepositHistoryItem(payload);
+      // clear form
+      amtEl.value=''; txEl.value='';
+    }catch(e){
+      console.error(e);
+      showMessage('Failed to submit deposit');
+    }
+  };
+
+  function appendDepositHistoryItem(item){
+    const cont = document.getElementById('depositHistory');
+    if(!cont) return;
+    const box = document.createElement('div');
+    box.className = 'transaction-item';
+    box.innerHTML = '<div><b>Amount:</b> Rs. '+item.amount+'</div><div><b>Method:</b> '+(item.method||'')+'</div><div><b>TX:</b> '+(item.transactionId||'')+'</div><div style="margin-top:6px;color:var(--secondary)">'+(item.date||'')+'</div>';
+    cont.insertBefore(box, cont.firstChild);
+  }
+
+  // submitWithdraw: create withdrawal request, ensure minimum and basic rate-limit
+  window.submitWithdraw = async function(){
+    const amtEl = document.getElementById('withdrawAmount');
+    const methodEl = document.getElementById('withdrawMethod');
+    const accNum = document.getElementById('accountNumber');
+    const accName = document.getElementById('accountName');
+    if(!amtEl || !methodEl || !accNum || !accName){ showMessage('Withdraw form not found'); return; }
+    const amount = Number(amtEl.value || 0);
+    if(amount < 300){ showMessage('Minimum withdrawal is Rs.300'); return; }
+    // simple rate-limit: prevent spamming quick requests
+    const last = window.__lastWithdrawTime || 0;
+    if(Date.now() - last < 3000){ showMessage('Please wait a moment before submitting again'); return; }
+    window.__lastWithdrawTime = Date.now();
+    const payload = {
+      amount, method: methodEl.value||'', accountNumber: accNum.value||'', accountName: accName.value||'', status:'pending', date:new Date().toISOString()
+    };
+    try{
+      if(window.db && typeof db.collection === 'function'){
+        await db.collection('withdrawRequests').add(payload);
+        showMessage('Withdrawal request submitted');
+      } else {
+        const arr = JSON.parse(localStorage.getItem('withdrawRequests')||'[]');
+        arr.unshift(payload);
+        localStorage.setItem('withdrawRequests', JSON.stringify(arr));
+        showMessage('Withdrawal saved (local)');
+      }
+      appendWithdrawHistoryItem(payload);
+      amtEl.value=''; accNum.value=''; accName.value='';
+    }catch(e){
+      console.error(e);
+      showMessage('Failed to submit withdrawal');
+    }
+  };
+
+  function appendWithdrawHistoryItem(item){
+    const cont = document.getElementById('withdrawHistory');
+    if(!cont) return;
+    const box = document.createElement('div');
+    box.className = 'transaction-item';
+    box.innerHTML = '<div><b>Amount:</b> Rs. '+item.amount+'</div><div><b>Method:</b> '+(item.method||'')+'</div><div style="margin-top:6px;color:var(--secondary)">'+(item.date||'')+'</div>';
+    cont.insertBefore(box, cont.firstChild);
+  }
+
+  // sendAnnouncement: push to announcements collection or localStorage and to message popup UI
+  window.sendAnnouncement = async function(){
+    const txt = (document.getElementById('announcementText')||{}).value || '';
+    if(!txt.trim()){ showMessage('Write an announcement before sending'); return; }
+    const payload = { text: txt.trim(), date: new Date().toISOString() };
+    try{
+      if(window.db && typeof db.collection === 'function'){
+        await db.collection('announcements').add(payload);
+      } else {
+        const arr = JSON.parse(localStorage.getItem('announcements')||'[]');
+        arr.unshift(payload);
+        localStorage.setItem('announcements', JSON.stringify(arr));
+      }
+      // also add to in-page message list
+      addToMessagePopup(payload);
+      document.getElementById('announcementText').value = '';
+      showMessage('Announcement sent');
+    }catch(e){
+      console.error(e);
+      showMessage('Failed to send announcement');
+    }
+  };
+
+  function addToMessagePopup(item){
+    const list = document.getElementById('messageList');
+    if(!list) return;
+    const div = document.createElement('div');
+    div.className = 'message-item';
+    div.innerHTML = '<div>'+ (item.text || '') +'</div><div class="message-date">'+(item.date||'')+'</div>';
+    list.insertBefore(div, list.firstChild);
+    // show notification dot
+    const notif = document.getElementById('messageNotification');
+    if(notif) notif.style.display = 'block';
+  }
+
+  // searchUsers: query firestore users collection or local fallback
+  window.searchUsers = async function(){
+    const q = (document.getElementById('searchUser')||{}).value || '';
+    const tbody = document.getElementById('usersTable');
+    if(!tbody) return;
+    tbody.innerHTML = '';
+    try{
+      if(window.db && typeof db.collection === 'function'){
+        let ref = db.collection('users');
+        if(q.trim()){
+          // simple client-side filter after fetching small result set
+          const snap = await ref.limit(200).get();
+          snap.forEach(doc => {
+            const data = doc.data();
+            if(String(data.name||'').toLowerCase().includes(q.toLowerCase()) || String(data.email||'').toLowerCase().includes(q.toLowerCase())){
+              appendUserRow(tbody, data);
+            }
+          });
+        } else {
+          const snap = await ref.limit(200).get();
+          snap.forEach(doc => appendUserRow(tbody, doc.data()));
+        }
+      } else {
+        // local fallback: no users in firestore — create sample
+        const sample = JSON.parse(localStorage.getItem('users')||'[]');
+        sample.filter(u=> !q.trim() || (u.name||'').toLowerCase().includes(q.toLowerCase())).forEach(u=> appendUserRow(tbody,u));
+        if(sample.length===0){
+          // show placeholder
+          const tr = document.createElement('tr');
+          tr.innerHTML = '<td colspan="5">No users found (local)</td>';
+          tbody.appendChild(tr);
+        }
+      }
+    }catch(e){
+      console.error(e);
+      showMessage('Search failed');
+    }
+  };
+
+  function appendUserRow(tbody, user){
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+(user.name||'')+'</td><td>'+(user.email||'')+'</td><td>'+(user.startingBalance||'0')+'</td><td>'+(user.currentBalance||'0')+'</td><td><button class="admin-action" onclick="alert(\'Edit disabled in quick-fix\')">Edit</button></td>';
+    tbody.appendChild(tr);
+  }
+
+  // Hook existing deposit/withdraw buttons if they exist
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.matches && e.target.matches('.submit-btn')){
+      // Let original handlers run; this is just a safe guard
+    }
+  });
+
+  // Load announcements into message popup on start (from firestore or local)
+  async function loadAnnouncementsToPopup(){
+    try{
+      const list = document.getElementById('messageList');
+      if(!list) return;
+      list.innerHTML = '';
+      if(window.db && typeof db.collection === 'function'){
+        const snap = await db.collection('announcements').orderBy('date','desc').limit(50).get();
+        snap.forEach(doc=>{
+          const data = doc.data();
+          addToMessagePopup(data);
+        });
+      } else {
+        const arr = JSON.parse(localStorage.getItem('announcements')||'[]');
+        arr.forEach(a=> addToMessagePopup(a));
+      }
+    }catch(e){ console.warn('loadAnnouncementsToPopup', e); }
+  }
+  // initial load
+  setTimeout(loadAnnouncementsToPopup, 800);
+
+  // Expose a few helpers globally for compatibility
+  window.__USCashHelpers = {
+    buildCardGrid, stagedShuffle, openGameModal, closeGameModal
+  };
+
+})();
+</script>
+<!-- END AUTO-FIXES APPENDED SCRIPT -->
+</body>
+</html>
