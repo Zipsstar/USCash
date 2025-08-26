@@ -3,33 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USCASH - Premium Gaming Platform</title>
+    <title>USCash - Premium Gaming Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
-            authDomain: "pakcashplay.firebaseapp.com",
-            projectId: "pakcashplay",
-            storageBucket: "pakcashplay.firebasestorage.app",
-            messagingSenderId: "551195851632",
-            appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        
-        // Make Firebase available globally
-        window.firebase = { db, auth, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc };
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <style>
         :root {
             --primary: #0a0a1a;
@@ -45,22 +24,6 @@
             --grid-item-2: #16213e;
             --grid-item-3: #0f3460;
             --neon-glow: 0 0 10px var(--secondary), 0 0 20px var(--secondary), 0 0 30px var(--secondary);
-        }
-
-        .theme-day2 {
-            --primary: #f8f9fa;
-            --secondary: #1e88e5;
-            --accent: #ff5252;
-            --text: #212529;
-            --card-bg: rgba(225, 235, 255, 0.9);
-            --modal-bg: rgba(240, 245, 255, 0.97);
-            --success: #00c853;
-            --danger: #ff1744;
-            --warning: #ff9100;
-            --grid-item-1: #bbdefb;
-            --grid-item-2: #90caf9;
-            --grid-item-3: #64b5f6;
-            --neon-glow: 0 0 10px var(--secondary), 0 0 20px var(--secondary);
         }
 
         * {
@@ -82,6 +45,134 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Auth Pages */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--secondary-rgb), 0.2);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .auth-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--secondary);
+            text-shadow: var(--neon-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .auth-logo span {
+            color: var(--accent);
+            margin-left: 5px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            background: var(--secondary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0077b6 0%, #005a8f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 168, 255, 0.4);
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--secondary);
+            cursor: pointer;
         }
 
         /* Header Styles */
@@ -197,6 +288,7 @@
         /* Main Content */
         .main-content {
             padding: 40px 0;
+            display: none;
         }
 
         .section-title {
@@ -215,9 +307,9 @@
         /* Games Grid */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
         .game-card {
@@ -237,7 +329,7 @@
         }
 
         .game-thumb {
-            height: 180px;
+            height: 120px;
             overflow: hidden;
             position: relative;
         }
@@ -271,7 +363,7 @@
 
         .game-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 8px;
             color: var(--secondary);
             display: flex;
@@ -280,7 +372,7 @@
         }
 
         .game-desc {
-            font-size: 14px;
+            font-size: 12px;
             opacity: 0.8;
             margin-bottom: 15px;
         }
@@ -299,6 +391,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            font-size: 14px;
         }
 
         .play-btn:hover {
@@ -311,20 +404,20 @@
         .actions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 20px;
         }
 
         .action-card {
             background: var(--card-bg);
             border-radius: 15px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(var(--secondary-rgb), 0.2);
         }
 
         .action-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 15px;
             color: var(--secondary);
             display: flex;
@@ -332,58 +425,27 @@
             gap: 10px;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
+        /* Betting Amounts */
+        .bet-options {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
         }
 
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .bet-option {
+            padding: 8px 12px;
             background: rgba(0, 0, 0, 0.2);
-            color: var(--text);
-            font-family: inherit;
-        }
-
-        .theme-day2 .form-control {
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            background: rgba(255, 255, 255, 0.8);
-            color: #212529;
-        }
-
-        .btn {
-            padding: 12px 20px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
+        .bet-option.selected {
+            background: var(--secondary);
             color: white;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #0077b6 0%, #005a8f 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
 
         /* Modal Styles */
@@ -424,7 +486,7 @@
 
         .modal-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
+            font-size: 20px;
             color: var(--secondary);
             display: flex;
             align-items: center;
@@ -457,233 +519,10 @@
         /* Game-specific modals */
         .game-container {
             text-align: center;
-            padding: 20px;
-        }
-
-        .wheel {
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 20px;
-            position: relative;
-        }
-
-        .wheel-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(
-                #ff3860 0deg 60deg, 
-                #ffdd57 60deg 120deg, 
-                #00ff8c 120deg 180deg, 
-                #00a8ff 180deg 240deg, 
-                #9c27b0 240deg 300deg, 
-                #ff9800 300deg 360deg
-            );
-            position: relative;
-            overflow: hidden;
-            transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .wheel-center {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-        }
-
-        .wheel-pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 40px;
-            background: var(--accent);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 3;
-            filter: drop-shadow(0 0 5px var(--accent));
-        }
-
-        /* Scratch Game Styles */
-        .scratch-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .scratch-card {
-            height: 80px;
-            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .scratch-card:hover {
-            transform: scale(1.05);
-        }
-
-        .scratch-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            transition: opacity 0.3s ease;
-        }
-
-        .scratch-card.scratched::before {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* History Section */
-        .history-section {
-            margin-top: 50px;
-        }
-
-        .history-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-
-        .history-tab {
-            padding: 10px 20px;
-            border-radius: 8px;
-            background: var(--card-bg);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .history-tab.active {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .history-content {
-            display: none;
-        }
-
-        .history-content.active {
-            display: block;
-        }
-
-        .history-list {
-            display: grid;
-            gap: 15px;
-        }
-
-        .history-item {
-            background: var(--card-bg);
             padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .history-info {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .history-amount {
-            font-weight: 600;
-        }
-
-        .history-status {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-approved {
-            background: var(--success);
-            color: black;
-        }
-
-        .status-pending {
-            background: var(--warning);
-            color: black;
-        }
-
-        .status-rejected {
-            background: var(--danger);
-            color: white;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(10, 15, 30, 0.9);
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 1px solid rgba(var(--secondary-rgb), 0.3);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .copyright {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            color: var(--text);
-            font-size: 18px;
-            transition: color 0.3s ease;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .social-links a:hover {
-            color: var(--secondary);
-            background: rgba(var(--secondary-rgb), 0.2);
-        }
-
-        /* Notification Toast */
+        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -701,6 +540,7 @@
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
             border-left: 4px solid var(--success);
+            max-width: 300px;
         }
 
         .toast.show {
@@ -716,6 +556,75 @@
             border-left-color: var(--warning);
         }
 
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 15, 30, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 90;
+            border-top: 1px solid rgba(var(--secondary-rgb), 0.3);
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .menu-item.active {
+            color: var(--secondary);
+        }
+
+        /* Side Menu */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: var(--modal-bg);
+            z-index: 1000;
+            padding: 20px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .side-menu-item {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .side-menu-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -724,196 +633,29 @@
             }
             
             .games-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
             
             .actions-grid {
                 grid-template-columns: 1fr;
             }
             
-            .footer-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .wheel {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .history-tabs {
+            .user-info {
                 flex-wrap: wrap;
+                justify-content: center;
             }
-        }
-
-        /* Animation for elements */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--secondary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0077b6;
-        }
-
-        /* New Game Styles */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .card {
-            width: 80px;
-            height: 120px;
-            background: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-            margin: 0 auto;
-        }
-
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .card .front, .card .back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-        }
-
-        .card .front {
-            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
-            color: white;
-        }
-
-        .card .back {
-            background: white;
-            color: black;
-            transform: rotateY(180deg);
-            border: 2px solid var(--secondary);
-        }
-
-        .timer-display {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 15px 0;
-            color: var(--accent);
-        }
-
-        .archery-board {
-            width: 300px;
-            height: 300px;
-            background: #f0f0f0;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            position: relative;
-            overflow: hidden;
-            border: 10px solid #8B4513;
-        }
-
-        .archery-target {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-        }
-
-        .target-10 { width: 60px; height: 60px; background: gold; z-index: 10; }
-        .target-9 { width: 100px; height: 100px; background: red; z-index: 9; }
-        .target-8 { width: 140px; height: 140px; background: blue; z-index: 8; }
-        .target-7 { width: 180px; height: 180px; background: black; z-index: 7; }
-        .target-6 { width: 220px; height: 220px; background: white; z-index: 6; border: 1px solid #ccc; }
-
-        .archery-pointer {
-            position: absolute;
-            width: 5px;
-            height: 40px;
-            background: #333;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: all 0.1s;
-        }
-
-        .archery-controls {
-            margin: 20px 0;
-        }
-
-        .chess-board {
-            width: 400px;
-            height: 400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-template-rows: repeat(8, 1fr);
-            border: 2px solid #333;
-        }
-
-        .chess-square {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            cursor: pointer;
-        }
-
-        .chess-square.white {
-            background: #f0d9b5;
-        }
-
-        .chess-square.black {
-            background: #b58863;
-        }
-
-        .tower-game {
-            width: 300px;
-            height: 400px;
-            margin: 0 auto;
-            position: relative;
-            background: #f0f0f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .tower-block {
-            position: absolute;
-            background: #8B4513;
-            border-radius: 5px;
-            transition: all 0.3s;
+            
+            .game-thumb {
+                height: 100px;
+            }
+            
+            .game-title {
+                font-size: 14px;
+            }
+            
+            .action-card {
+                padding: 15px;
+            }
         }
 
         /* Terms Modal */
@@ -954,63 +696,281 @@
             text-align: left;
         }
 
-        .announcement-icon {
-            position: relative;
-            cursor: pointer;
+        /* Game specific styles */
+        .scratch-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 15px 0;
         }
 
-        .announcement-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--danger);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 12px;
+        .scratch-card {
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .announcement-modal {
-            max-width: 800px;
+        .scratch-card.scratched {
+            background: transparent;
         }
 
-        .announcement-list {
-            max-height: 400px;
-            overflow-y: auto;
+        .archery-board {
+            width: 250px;
+            height: 250px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #8B4513;
         }
 
-        .announcement-item {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .archery-target {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
         }
 
-        .announcement-item:last-child {
-            border-bottom: none;
+        .target-10 { width: 40px; height: 40px; background: gold; z-index: 10; }
+        .target-9 { width: 70px; height: 70px; background: red; z-index: 9; }
+        .target-8 { width: 100px; height: 100px; background: blue; z-index: 8; }
+        .target-7 { width: 130px; height: 130px; background: black; z-index: 7; }
+        .target-6 { width: 160px; height: 160px; background: white; z-index: 6; border: 1px solid #ccc; }
+
+        .archery-pointer {
+            position: absolute;
+            width: 4px;
+            height: 30px;
+            background: #333;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.1s;
         }
 
-        .announcement-date {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-bottom: 5px;
+        .tower-game {
+            width: 250px;
+            height: 350px;
+            margin: 0 auto;
+            position: relative;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tower-block {
+            position: absolute;
+            background: #8B4513;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .timer-display {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--accent);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .card {
+            width: 70px;
+            height: 100px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            margin: 0 auto;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .card .front {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
+            color: white;
+        }
+
+        .card .back {
+            background: white;
+            color: black;
+            transform: rotateY(180deg);
+            border: 2px solid var(--secondary);
+        }
+
+        .tictactoe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 5px;
+            margin: 15px auto;
+            width: fit-content;
+        }
+
+        .tictactoe-cell {
+            width: 70px;
+            height: 70px;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        .fruit-game-area {
+            width: 100%;
+            height: 300px;
+            background: skyblue;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .fruit {
+            position: absolute;
+            font-size: 30px;
+            transition: top 0.5s linear;
+        }
+
+        .target-fruit {
+            margin: 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
+    <!-- Authentication Section -->
+    <div class="auth-container" id="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-coins logo-icon"></i>
+                    US<span>CASH</span>
+                </div>
+                <p>Premium Gaming Experience</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="auth-form active" id="login-form">
+                <div class="form-group">
+                    <label for="login-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Enter your password">
+                </div>
+                <button class="btn btn-primary" onclick="login()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div class="forgot-link" onclick="switchAuthTab('forgot')">
+                    Forgot Password?
+                </div>
+            </div>
+            
+            <!-- Signup Form -->
+            <div class="auth-form" id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signup-name" class="form-control" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="signup-email" class="form-control" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="signup-phone"><i class="fas fa-phone"></i> Phone Number</label>
+                    <input type="tel" id="signup-phone" class="form-control" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="signup-password" class="form-control" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm"><i class="fas fa-lock"></i> Confirm Password</label>
+                    <input type="password" id="signup-confirm" class="form-control" placeholder="Confirm your password">
+                </div>
+                <div class="form-group">
+                    <label for="signup-referral"><i class="fas fa-users"></i> Referral Code (Optional)</label>
+                    <input type="text" id="signup-referral" class="form-control" placeholder="Enter referral code if any">
+                </div>
+                <button class="btn btn-primary" onclick="signup()">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </div>
+            
+            <!-- Forgot Password Form -->
+            <div class="auth-form" id="forgot-form">
+                <div class="form-group">
+                    <label for="forgot-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="forgot-email" class="form-control" placeholder="Enter your email">
+                </div>
+                <button class="btn btn-primary" onclick="resetPassword()">
+                    <i class="fas fa-key"></i> Reset Password
+                </button>
+                <div class="forgot-link" onclick="switchAuthTab('login')">
+                    Back to Login
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Terms and Conditions Modal -->
     <div class="terms-modal" id="terms-modal">
         <div class="terms-content">
-            <h2 class="terms-title"><i class="fas fa-exclamation-circle"></i> Important Notice</h2>
+            <h2 class="terms-title"><i class="fas fa-exclamation-circle"></i> Terms & Conditions</h2>
             <div class="terms-text">
                 <p>Welcome to USCASH Gaming Platform. Please read the following terms carefully:</p>
                 <p>1. This platform is not responsible for abandoned accounts.</p>
                 <p>2. If a user leaves their account inactive for more than 15 days, the platform reserves the right not to return the deposited money.</p>
-                <p>3. All games have a winning probability of approximately 20%.</p>
-                <p>4. The minimum withdrawal amount is ₹300 (350 PKR).</p>
-                <p>5. By using this platform, you agree to these terms and conditions.</p>
+                <p>3. All games have a winning probability determined by the system.</p>
+                <p>4. The minimum deposit amount is ₹150.</p>
+                <p>5. The minimum withdrawal amount is ₹300.</p>
+                <p>6. Users must be at least 18 years old to use this platform.</p>
+                <p>7. The platform reserves the right to modify these terms at any time.</p>
+                <p>8. By using this platform, you agree to these terms and conditions.</p>
             </div>
             <button class="btn btn-primary" onclick="acceptTerms()">
                 <i class="fas fa-check"></i> I Accept
@@ -1018,499 +978,340 @@
         </div>
     </div>
 
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-coins logo-icon"></i>
-                    US<span>CASH</span>
-                </div>
-                <div class="user-info">
-                    <div class="balance">
-                        <i class="fas fa-wallet"></i> ₹5,750.00
+    <!-- Main Application (Hidden until login) -->
+    <div id="app-container" style="display: none;">
+        <!-- Header Section -->
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <i class="fas fa-coins logo-icon"></i>
+                        US<span>CASH</span>
                     </div>
-                    <div class="vip-badge">
-                        <i class="fas fa-crown"></i> VIP 3
+                    <div class="user-info">
+                        <div class="balance" onclick="refreshBalance()">
+                            <i class="fas fa-wallet"></i> ₹<span id="user-balance">0.00</span>
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="vip-badge">
+                            <i class="fas fa-crown"></i> VIP <span id="user-vip">0</span>
+                        </div>
+                        <div class="status">
+                            <div class="status-dot"></div>
+                            <span id="user-name">User</span>
+                            <img src="https://flagcdn.com/w40/pk.png" height="15" alt="Pakistan Flag" style="margin-left: 5px;">
+                        </div>
+                        <div class="announcement-icon" onclick="openModal('announcement-modal')">
+                            <i class="fas fa-bell"></i>
+                            <div class="announcement-badge" id="announcement-count">0</div>
+                        </div>
+                        <div class="menu-icon" onclick="toggleSideMenu()">
+                            <i class="fas fa-bars"></i>
+                        </div>
                     </div>
-                    <div class="status">
-                        <div class="status-dot"></div>
-                        <span>Online</span>
-                    </div>
-                    <div class="announcement-icon" onclick="openModal('announcement-modal')">
-                        <i class="fas fa-bell"></i>
-                        <div class="announcement-badge">3</div>
-                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Ticker Section -->
-    <div class="ticker-container">
-        <div class="ticker">
-            <div class="ticker-item">
-                <i class="fas fa-gift"></i> Welcome to USCASH - Premium Gaming Experience!
-            </div>
-            <div class="ticker-item">
-                <i class="fas fa-bullhorn"></i> New Game Released - Archery Challenge!
-            </div>
-            <div class="ticker-item">
-                <i class="fas fa-users"></i> Refer friends and earn 5% from their first withdrawal!
-            </div>
-            <div class="ticker-item">
-                <i class="fas fa-exclamation-circle"></i> Minimum deposit ₹150, withdrawal ₹300
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container main-content">
-        <h2 class="section-title">
-            <i class="fas fa-gamepad"></i> Premium Games
-        </h2>
-        
-        <!-- Games Grid -->
-        <div class="games-grid">
-            <!-- Spin Wheel Game -->
-            <div class="game-card" onclick="openModal('spin-wheel-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Spin Wheel">
-                    <div class="game-badge">2x WIN</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-compass"></i> Spin Wheel
-                    </h3>
-                    <p class="game-desc">Bet on numbers 0-5. Correct guess wins 2x your bet!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Scratch Match Game -->
-            <div class="game-card" onclick="openModal('scratch-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1613360413566-749b32d82a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Scratch Match">
-                    <div class="game-badge">2x WIN</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-border-style"></i> Scratch Match
-                    </h3>
-                    <p class="game-desc">Match symbols from 9 cards to win 2x your bet!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Find Ace Game -->
-            <div class="game-card" onclick="openModal('find-ace-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1510082502543-0be156ea1d2f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Find Ace">
-                    <div class="game-badge">2x WIN</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-search"></i> Find Ace
-                    </h3>
-                    <p class="game-desc">Find the Ace card among 9 to win 2x your bet!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Fruit Game -->
-            <div class="game-card" onclick="openModal('fruit-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1600334089648-b0d9d302feb2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Fruit Game">
-                    <div class="game-badge">3x WIN</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-apple-alt"></i> Fruit Game
-                    </h3>
-                    <p class="game-desc">Match 3 same fruits to win 3x your bet!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Tic-Tac-Toe Game -->
-            <div class="game-card" onclick="openModal('tictactoe-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1529699310859-b163e33e4556?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Tic-Tac-Toe">
-                    <div class="game-badge">VS MODE</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-times"></i> Tic-Tac-Toe
-                    </h3>
-                    <p class="game-desc">Challenge AI. Winner takes the bet!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Archery Game -->
-            <div class="game-card" onclick="openModal('archery-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1553545985-1e0d8781d5db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Archery">
-                    <div class="game-badge">SKILL</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-bullseye"></i> Archery
-                    </h3>
-                    <p class="game-desc">Test your accuracy. Hit the center 5 times to win!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Chess Game -->
-            <div class="game-card" onclick="openModal('chess-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1528199886455-14d30f0fd2c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Chess">
-                    <div class="game-badge">STRATEGY</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-chess"></i> Chess
-                    </h3>
-                    <p class="game-desc">Challenge our AI in a game of strategic chess!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Impossible Tower Game -->
-            <div class="game-card" onclick="openModal('tower-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1612489846076-ef8f35d63139?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Impossible Tower">
-                    <div class="game-badge">SKILL</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-building"></i> Impossible Tower
-                    </h3>
-                    <p class="game-desc">Build the tallest tower without letting it collapse!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Number Match Game -->
-            <div class="game-card" onclick="openModal('number-match-modal')">
-                <div class="game-thumb">
-                    <img src="https://images.unsplash.com/photo-1586892472172-1249afd49e0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Number Match">
-                    <div class="game-badge">2x WIN</div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">
-                        <i class="fas fa-sort-numeric-up"></i> Number Match
-                    </h3>
-                    <p class="game-desc">Match cards to reach the target number and win!</p>
-                    <button class="play-btn">
-                        <i class="fas fa-play"></i> Play Now
-                    </button>
+        <!-- Ticker Section -->
+        <div class="ticker-container">
+            <div class="ticker">
+                <div class="ticker-item">
+                    <i class="fas fa-info-circle"></i> For deposits contact VIP 2 users. We are working on deposit methods and will update you soon. Thanks for your patience.
                 </div>
             </div>
         </div>
 
-        <h2 class="section-title">
-            <i class="fas fa-cogs"></i> Account Actions
-        </h2>
-        
-        <!-- Actions Grid -->
-        <div class="actions-grid">
-            <!-- Deposit Card -->
-            <div class="action-card">
-                <h3 class="action-title">
-                    <i class="fas fa-money-bill-wave"></i> Deposit Funds
-                </h3>
-                <p>Minimum deposit: ₹150. Admin approval required.</p>
-                <div class="form-group">
-                    <label for="deposit-amount">
-                        <i class="fas fa-rupee-sign"></i> Amount (₹)
-                    </label>
-                    <input type="number" id="deposit-amount" class="form-control" min="150" placeholder="Enter amount">
-                </div>
-                <div class="form-group">
-                    <label for="deposit-method">
-                        <i class="fas fa-credit-card"></i> Payment Method
-                    </label>
-                    <select id="deposit-method" class="form-control">
-                        <option value="">Select method</option>
-                        <option value="upi">UPI</option>
-                        <option value="bank">Bank Transfer</option>
-                        <option value="paytm">PayTM</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="transaction-id">
-                        <i class="fas fa-receipt"></i> Transaction ID
-                    </label>
-                    <input type="text" id="transaction-id" class="form-control" placeholder="Enter transaction ID">
-                </div>
-                <button class="btn btn-primary" style="width: 100%;" onclick="submitDeposit()">
-                    <i class="fas fa-paper-plane"></i> Submit Deposit Request
-                </button>
-            </div>
-
-            <!-- Withdrawal Card -->
-            <div class="action-card">
-                <h3 class="action-title">
-                    <i class="fas fa-wallet"></i> Withdraw Funds
-                </h3>
-                <p>Minimum withdrawal: ₹300. Balance deducted immediately.</p>
-                <div class="form-group">
-                    <label for="withdraw-amount">
-                        <i class="fas fa-rupee-sign"></i> Amount (₹)
-                    </label>
-                    <input type="number" id="withdraw-amount" class="form-control" min="300" placeholder="Enter amount">
-                </div>
-                <div class="form-group">
-                    <label for="withdraw-method">
-                        <i class="fas fa-university"></i> Withdrawal Method
-                    </label>
-                    <select id="withdraw-method" class="form-control">
-                        <option value="">Select method</option>
-                        <option value="bank">Bank Transfer</option>
-                        <option value="upi">UPI</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="account-number">
-                        <i class="fas fa-file-invoice"></i> Account Number
-                    </label>
-                    <input type="text" id="account-number" class="form-control" placeholder="Enter account number">
-                </div>
-                <div class="form-group">
-                    <label for="account-name">
-                        <i class="fas fa-user"></i> Account Holder Name
-                    </label>
-                    <input type="text" id="account-name" class="form-control" placeholder="Enter account name">
-                </div>
-                <button class="btn btn-primary" style="width: 100%;" onclick="submitWithdrawal()">
-                    <i class="fas fa-paper-plane"></i> Submit Withdrawal Request
-                </button>
-            </div>
-
-            <!-- Referral Card -->
-            <div class="action-card">
-                <h3 class="action-title">
-                    <i class="fas fa-users"></i> Refer & Earn
-                </h3>
-                <p>Earn 5% from your referral's first withdrawal!</p>
-                <div class="form-group">
-                    <label for="referral-link">
-                        <i class="fas fa-link"></i> Your Referral Link
-                    </label>
-                    <input type="text" id="referral-link" class="form-control" value="https://uscash.com/ref/ak47" readonly>
-                </div>
-                <button class="btn btn-primary" style="width: 100%;" onclick="copyReferralLink()">
-                    <i class="fas fa-copy"></i> Copy Link
-                </button>
-                <div class="form-group" style="margin-top: 15px;">
-                    <label>
-                        <i class="fas fa-user-friends"></i> Your Referrals: 12 users
-                    </label>
-                    <label>
-                        <i class="fas fa-coins"></i> Earned from referrals: ₹1,250.00
-                    </label>
-                </div>
-            </div>
-
-            <!-- Watch & Earn Card -->
-            <div class="action-card">
-                <h3 class="action-title">
-                    <i class="fas fa-tv"></i> Watch & Earn
-                </h3>
-                <p>Watch ads to earn rewards! 10 ads per day for 4 days after each deposit.</p>
-                <div class="form-group">
-                    <label>
-                        <i class="fas fa-ad"></i> Ads Watched Today: 3/10
-                    </label>
-                    <label>
-                        <i class="fas fa-calendar"></i> Days Remaining: 2/4
-                    </label>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;" onclick="watchAd()">
-                    <i class="fas fa-play-circle"></i> Watch Ad & Earn
-                </button>
-                <button class="btn" style="width: 100%; background: var(--accent); color: black;" onclick="unlockWatchAndEarn()">
-                    <i class="fas fa-unlock"></i> Unlock for 12 Days (₹200)
-                </button>
-            </div>
-        </div>
-
-        <!-- History Section -->
-        <div class="history-section">
+        <!-- Main Content -->
+        <div class="container main-content">
             <h2 class="section-title">
-                <i class="fas fa-history"></i> Transaction History
+                <i class="fas fa-gamepad"></i> Premium Games
             </h2>
             
-            <div class="history-tabs">
-                <div class="history-tab active" onclick="switchHistoryTab('deposit')">
-                    <i class="fas fa-money-bill-wave"></i> Deposits
-                </div>
-                <div class="history-tab" onclick="switchHistoryTab('withdrawal')">
-                    <i class="fas fa-wallet"></i> Withdrawals
-                </div>
-                <div class="history-tab" onclick="switchHistoryTab('game')">
-                    <i class="fas fa-gamepad"></i> Game History
-                </div>
-            </div>
-            
-            <div class="history-content active" id="deposit-history">
-                <div class="history-list">
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Deposit #DEP001</div>
-                            <div>15 Aug 2023, 14:30</div>
-                        </div>
-                        <div class="history-amount">₹500.00</div>
-                        <div class="history-status status-approved">Approved</div>
+            <!-- Games Grid -->
+            <div class="games-grid">
+                <!-- Scratch Match Game -->
+                <div class="game-card" onclick="openGameModal('scratch-modal')">
+                    <div class="game-thumb">
+                        <img src="https://images.unsplash.com/photo-1613360413566-749b32d82a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Scratch Match">
+                        <div class="game-badge">2x WIN</div>
                     </div>
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Deposit #DEP002</div>
-                            <div>16 Aug 2023, 10:15</div>
-                        </div>
-                        <div class="history-amount">₹1,000.00</div>
-                        <div class="history-status status-pending">Pending</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Deposit #DEP003</div>
-                            <div>17 Aug 2023, 16:45</div>
-                        </div>
-                        <div class="history-amount">₹750.00</div>
-                        <div class="history-status status-rejected">Rejected</div>
+                    <div class="game-info">
+                        <h3 class="game-title">
+                            <i class="fas fa-border-style"></i> Scratch Match
+                        </h3>
+                        <p class="game-desc">Match 3 same animals to win 2x your bet!</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
                     </div>
                 </div>
-            </div>
-            
-            <div class="history-content" id="withdrawal-history">
-                <div class="history-list">
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Withdrawal #WD001</div>
-                            <div>18 Aug 2023, 11:20</div>
-                        </div>
-                        <div class="history-amount">₹1,200.00</div>
-                        <div class="history-status status-approved">Approved</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Withdrawal #WD002</div>
-                            <div>19 Aug 2023, 14:50</div>
-                        </div>
-                        <div class="history-amount">₹800.00</div>
-                        <div class="history-status status-pending">Pending</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="history-content" id="game-history">
-                <div class="history-list">
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Spin Wheel - Win</div>
-                            <div>20 Aug 2023, 09:30</div>
-                        </div>
-                        <div class="history-amount" style="color: var(--success);">+₹200.00</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Fruit Game - Loss</div>
-                            <div>20 Aug 2023, 10:45</div>
-                        </div>
-                        <div class="history-amount" style="color: var(--danger);">-₹100.00</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div>Scratch Match - Win</div>
-                            <div>20 Aug 2023, 12:15</div>
-                        </div>
-                        <div class="history-amount" style="color: var(--success);">+₹180.00</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="copyright">© 2023 USCASH Gaming System. All rights reserved.</div>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
+                <!-- Perfect Aim Game -->
+                <div class="game-card" onclick="openGameModal('archery-modal')">
+                    <div class="game-thumb">
+                        <img src="https://images.unsplash.com/photo-1553545985-1e0d8781d5db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Perfect Aim">
+                        <div class="game-badge">2x WIN</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">
+                            <i class="fas fa-bullseye"></i> Perfect Aim
+                        </h3>
+                        <p class="game-desc">Hit the targets to score points and win!</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Impossible Tower Game -->
+                <div class="game-card" onclick="openGameModal('tower-modal')">
+                    <div class="game-thumb">
+                        <img src="https://images.unsplash.com/photo-1612489846076-ef8f35d63139?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Impossible Tower">
+                        <div class="game-badge">2x WIN</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">
+                            <i class="fas fa-building"></i> Impossible Tower
+                        </h3>
+                        <p class="game-desc">Build a tower without letting it collapse!</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fruit Shooting Game -->
+                <div class="game-card" onclick="openGameModal('fruit-modal')">
+                    <div class="game-thumb">
+                        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d302feb2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Fruit Shooting">
+                        <div class="game-badge">2x WIN</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">
+                            <i class="fas fa-apple-alt"></i> Fruit Shooting
+                        </h3>
+                        <p class="game-desc">Shoot the target fruits before they fall!</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tic-Tac-Toe Game -->
+                <div class="game-card" onclick="openGameModal('tictactoe-modal')">
+                    <div class="game-thumb">
+                        <img src="https://images.unsplash.com/photo-1529699310859-b163e33e4556?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Tic-Tac-Toe">
+                        <div class="game-badge">VS AI</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">
+                            <i class="fas fa-times"></i> Tic-Tac-Toe
+                        </h3>
+                        <p class="game-desc">Challenge AI in this classic game!</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Find Ace Game -->
+                <div class="game-card" onclick="openGameModal('find-ace-modal')">
+                    <div class="game-thumb">
+                        <img src="https://images.unsplash.com/photo-1510082502543-0be156ea1d2f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Find Ace">
+                        <div class="game-badge">2x WIN</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">
+                            <i class="fas fa-search"></i> Find Ace
+                        </h3>
+                        <p class="game-desc">Find the Ace card among the three!</p>
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
 
-    <!-- Spin Wheel Modal -->
-    <div class="modal" id="spin-wheel-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-compass"></i> Spin Wheel
-                </h3>
-                <button class="close-modal" onclick="closeModal('spin-wheel-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <div class="wheel">
-                        <div class="wheel-pointer"></div>
-                        <div class="wheel-inner" id="wheel">
-                            <div class="wheel-center"></div>
-                        </div>
+            <h2 class="section-title">
+                <i class="fas fa-cogs"></i> Account Actions
+            </h2>
+            
+            <!-- Actions Grid -->
+            <div class="actions-grid">
+                <!-- Deposit Card -->
+                <div class="action-card">
+                    <h3 class="action-title">
+                        <i class="fas fa-money-bill-wave"></i> Deposit Funds
+                    </h3>
+                    <p>Minimum deposit: ₹150. Admin approval required.</p>
+                    <div class="form-group">
+                        <label for="deposit-account-name">
+                            <i class="fas fa-user"></i> Account Name
+                        </label>
+                        <input type="text" id="deposit-account-name" class="form-control" placeholder="Enter account name">
                     </div>
                     <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
+                        <label for="deposit-method">
+                            <i class="fas fa-wallet"></i> Payment Method
                         </label>
-                        <input type="number" class="form-control" value="100" min="10">
+                        <select id="deposit-method" class="form-control">
+                            <option value="">Select method</option>
+                            <option value="jazzcash">JazzCash</option>
+                            <option value="easypaisa">EasyPaisa</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>
-                            <i class="fas fa-dice"></i> Select a number (0-5)
+                        <label for="deposit-amount">
+                            <i class="fas fa-rupee-sign"></i> Amount (₹)
                         </label>
-                        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
-                            <button class="btn" style="min-width: 40px;">0</button>
-                            <button class="btn" style="min-width: 40px;">1</button>
-                            <button class="btn" style="min-width: 40px;">2</button>
-                            <button class="btn" style="min-width: 40px;">3</button>
-                            <button class="btn" style="min-width: 40px;">4</button>
-                            <button class="btn" style="min-width: 40px;">5</button>
-                        </div>
+                        <input type="number" id="deposit-amount" class="form-control" min="150" placeholder="Enter amount">
                     </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="spinWheel()">
-                        <i class="fas fa-play"></i> Spin to Win (2x)
+                    <div class="form-group">
+                        <label for="deposit-transaction-id">
+                            <i class="fas fa-receipt"></i> Transaction ID
+                        </label>
+                        <input type="text" id="deposit-transaction-id" class="form-control" placeholder="Enter transaction ID">
+                    </div>
+                    <button class="btn btn-primary" onclick="submitDeposit()">
+                        <i class="fas fa-paper-plane"></i> Submit Deposit Request
                     </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
                 </div>
+
+                <!-- Withdrawal Card -->
+                <div class="action-card">
+                    <h3 class="action-title">
+                        <i class="fas fa-wallet"></i> Withdraw Funds
+                    </h3>
+                    <p>Minimum withdrawal: ₹300. Balance deducted immediately.</p>
+                    <div class="form-group">
+                        <label for="withdraw-name">
+                            <i class="fas fa-user"></i> Account Holder Name
+                        </label>
+                        <input type="text" id="withdraw-name" class="form-control" placeholder="Enter account name">
+                    </div>
+                    <div class="form-group">
+                        <label for="withdraw-account-number">
+                            <i class="fas fa-file-invoice"></i> Account Number
+                        </label>
+                        <input type="text" id="withdraw-account-number" class="form-control" placeholder="Enter account number">
+                    </div>
+                    <div class="form-group">
+                        <label for="withdraw-method">
+                            <i class="fas fa-university"></i> Payment Method
+                        </label>
+                        <select id="withdraw-method" class="form-control">
+                            <option value="">Select method</option>
+                            <option value="jazzcash">JazzCash</option>
+                            <option value="nayapay">NayaPay</option>
+                            <option value="easypaisa">EasyPaisa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="withdraw-amount">
+                            <i class="fas fa-rupee-sign"></i> Amount (₹)
+                        </label>
+                        <input type="number" id="withdraw-amount" class="form-control" min="300" placeholder="Enter amount">
+                    </div>
+                    <button class="btn btn-primary" onclick="submitWithdrawal()">
+                        <i class="fas fa-paper-plane"></i> Submit Withdrawal Request
+                    </button>
+                </div>
+
+                <!-- Watch & Earn Card -->
+                <div class="action-card">
+                    <h3 class="action-title">
+                        <i class="fas fa-tv"></i> Watch & Earn
+                    </h3>
+                    <p>Watch ads to earn rewards! Unlock for ₹150.</p>
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-ad"></i> Ads Watched Today: <span id="ads-watched">0</span>/10
+                        </label>
+                        <label>
+                            <i class="fas fa-calendar"></i> Days Remaining: <span id="ads-days">0</span>/4
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" id="watch-ad-btn" onclick="watchAd()" disabled>
+                        <i class="fas fa-play-circle"></i> Watch Ad & Earn
+                    </button>
+                    <button class="btn" style="background: var(--accent); color: black; margin-top: 10px;" onclick="unlockWatchAndEarn()">
+                        <i class="fas fa-unlock"></i> Unlock for ₹150
+                    </button>
+                </div>
+
+                <!-- Referral Card -->
+                <div class="action-card">
+                    <h3 class="action-title">
+                        <i class="fas fa-users"></i> Refer & Earn
+                    </h3>
+                    <p>Earn 5% from your referral's first withdrawal!</p>
+                    <div class="form-group">
+                        <label for="referral-link">
+                            <i class="fas fa-link"></i> Your Referral Link
+                        </label>
+                        <input type="text" id="referral-link" class="form-control" value="Loading..." readonly>
+                    </div>
+                    <button class="btn btn-primary" onclick="copyReferralLink()">
+                        <i class="fas fa-copy"></i> Copy Link
+                    </button>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>
+                            <i class="fas fa-user-friends"></i> Your Referrals: <span id="referrals-count">0</span> users
+                        </label>
+                        <label>
+                            <i class="fas fa-coins"></i> Earned from referrals: ₹<span id="referrals-earnings">0.00</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="menu-item active" onclick="scrollToTop()">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="menu-item" onclick="openModal('deposit-modal')">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Deposit</span>
+            </div>
+            <div class="menu-item" onclick="openModal('withdraw-modal')">
+                <i class="fas fa-wallet"></i>
+                <span>Withdraw</span>
+            </div>
+            <div class="menu-item" onclick="toggleSideMenu()">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </div>
+        </div>
+
+        <!-- Side Menu -->
+        <div class="side-menu" id="side-menu">
+            <div class="side-menu-header">
+                <h3>Menu</h3>
+                <div class="close-modal" onclick="toggleSideMenu()">&times;</div>
+            </div>
+            <div class="side-menu-item" onclick="openModal('contact-modal')">
+                <i class="fas fa-headset"></i> Contact Customer Service
+            </div>
+            <div class="side-menu-item" onclick="openModal('history-modal')">
+                <i class="fas fa-history"></i> Game History
+            </div>
+            <div class="side-menu-item" onclick="openModal('updates-modal')">
+                <i class="fas fa-newspaper"></i> Upcoming Updates
+            </div>
+            <div class="side-menu-item" onclick="openSocialMedia()">
+                <i class="fab fa-whatsapp"></i> WhatsApp Channel
+            </div>
+            <div class="side-menu-item" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </div>
         </div>
     </div>
 
+    <!-- Game Modals -->
     <!-- Scratch Match Modal -->
     <div class="modal" id="scratch-modal">
         <div class="modal-content">
@@ -1522,180 +1323,60 @@
             </div>
             <div class="modal-body">
                 <div class="game-container">
-                    <p>Scratch to reveal symbols and find matches!</p>
-                    <div class="scratch-container">
-                        <div class="scratch-card" data-symbol="🍒">🍒</div>
-                        <div class="scratch-card" data-symbol="🍋">🍋</div>
-                        <div class="scratch-card" data-symbol="🍇">🍇</div>
-                        <div class="scratch-card" data-symbol="🍊">🍊</div>
-                        <div class="scratch-card" data-symbol="⭐">⭐</div>
-                        <div class="scratch-card" data-symbol="🍀">🍀</div>
-                        <div class="scratch-card" data-symbol="🍉">🍉</div>
-                        <div class="scratch-card" data-symbol="🔔">🔔</div>
-                        <div class="scratch-card" data-symbol="💎">💎</div>
+                    <p>Find 3 matching animals to win 2x your bet!</p>
+                    <div class="bet-options">
+                        <div class="bet-option" data-bet="20">₹20</div>
+                        <div class="bet-option" data-bet="50">₹50</div>
+                        <div class="bet-option" data-bet="70">₹70</div>
+                        <div class="bet-option" data-bet="100">₹100</div>
+                        <div class="bet-option" data-bet="150">₹150</div>
+                        <div class="bet-option" data-bet="180">₹180</div>
+                        <div class="bet-option" data-bet="200">₹200</div>
+                        <div class="bet-option" data-bet="300">₹300</div>
                     </div>
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
-                        </label>
-                        <input type="number" class="form-control" value="100" min="10">
+                    <div class="timer-display" id="scratch-timer">15</div>
+                    <div class="scratch-container" id="scratch-cards">
+                        <div class="scratch-card" data-animal="cow">🐄</div>
+                        <div class="scratch-card" data-animal="hen">🐔</div>
+                        <div class="scratch-card" data-animal="duck">🦆</div>
+                        <div class="scratch-card" data-animal="cow">🐄</div>
+                        <div class="scratch-card" data-animal="hen">🐔</div>
+                        <div class="scratch-card" data-animal="duck">🦆</div>
+                        <div class="scratch-card" data-animal="cow">🐄</div>
+                        <div class="scratch-card" data-animal="hen">🐔</div>
+                        <div class="scratch-card" data-animal="duck">🦆</div>
                     </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startScratchGame()">
+                    <button class="btn btn-primary" onclick="startScratchGame()">
                         <i class="fas fa-play"></i> Start Game (2x)
                     </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Find Ace Modal -->
-    <div class="modal" id="find-ace-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-search"></i> Find Ace
-                </h3>
-                <button class="close-modal" onclick="closeModal('find-ace-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Find the Ace card among these cards. You have 4 flips and 15 seconds!</p>
-                    <div class="timer-display" id="find-ace-timer">15</div>
-                    <div class="card-grid" id="find-ace-grid">
-                        <div class="card" data-value="A">
-                            <div class="front">?</div>
-                            <div class="back">A</div>
-                        </div>
-                        <div class="card" data-value="K">
-                            <div class="front">?</div>
-                            <div class="back">K</div>
-                        </div>
-                        <div class="card" data-value="Q">
-                            <div class="front">?</div>
-                            <div class="back">Q</div>
-                        </div>
-                        <div class="card" data-value="J">
-                            <div class="front">?</div>
-                            <div class="back">J</div>
-                        </div>
-                        <div class="card" data-value="10">
-                            <div class="front">?</div>
-                            <div class="back">10</div>
-                        </div>
-                        <div class="card" data-value="9">
-                            <div class="front">?</div>
-                            <div class="back">9</div>
-                        </div>
-                        <div class="card" data-value="8">
-                            <div class="front">?</div>
-                            <div class="back">8</div>
-                        </div>
-                        <div class="card" data-value="7">
-                            <div class="front">?</div>
-                            <div class="back">7</div>
-                        </div>
-                        <div class="card" data-value="6">
-                            <div class="front">?</div>
-                            <div class="back">6</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
-                        </label>
-                        <input type="number" class="form-control" value="100" min="10">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startFindAceGame()">
-                        <i class="fas fa-play"></i> Start Game (2x)
-                    </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fruit Game Modal -->
-    <div class="modal" id="fruit-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-apple-alt"></i> Fruit Game
-                </h3>
-                <button class="close-modal" onclick="closeModal('fruit-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Match 3 fruits to win 3x your bet!</p>
-                    <!-- Game content would go here -->
-                    <button class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-play"></i> Play Fruit Game (3x)
-                    </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tic-Tac-Toe Modal -->
-    <div class="modal" id="tictactoe-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-times"></i> Tic-Tac-Toe
-                </h3>
-                <button class="close-modal" onclick="closeModal('tictactoe-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Play against our AI. Make a line of 3 to win!</p>
-                    <div style="display: grid; grid-template-columns: repeat(3, 80px); grid-template-rows: repeat(3, 80px); gap: 5px; margin: 20px auto; width: fit-content;">
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
-                        </label>
-                        <input type="number" class="form-control" value="100" min="10">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startTicTacToe()">
-                        <i class="fas fa-play"></i> Start Game (2x)
-                    </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Archery Modal -->
+    <!-- Perfect Aim Modal -->
     <div class="modal" id="archery-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">
-                    <i class="fas fa-bullseye"></i> Archery Challenge
+                    <i class="fas fa-bullseye"></i> Perfect Aim
                 </h3>
                 <button class="close-modal" onclick="closeModal('archery-modal')">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="game-container">
-                    <p>Hit the center 5 times to win! You have 10 arrows.</p>
-                    <div class="archery-board">
+                    <p>Score 28 points in 3 shots to win 2x your bet!</p>
+                    <div class="bet-options">
+                        <div class="bet-option" data-bet="20">₹20</div>
+                        <div class="bet-option" data-bet="50">₹50</div>
+                        <div class="bet-option" data-bet="70">₹70</div>
+                        <div class="bet-option" data-bet="100">₹100</div>
+                        <div class="bet-option" data-bet="150">₹150</div>
+                        <div class="bet-option" data-bet="180">₹180</div>
+                        <div class="bet-option" data-bet="200">₹200</div>
+                        <div class="bet-option" data-bet="300">₹300</div>
+                    </div>
+                    <div class="archery-board" id="archery-game">
                         <div class="archery-target target-6"></div>
                         <div class="archery-target target-7"></div>
                         <div class="archery-target target-8"></div>
@@ -1704,167 +1385,29 @@
                         <div class="archery-pointer" id="archery-pointer"></div>
                     </div>
                     <div class="archery-controls">
-                        <button class="btn btn-primary" id="archery-shoot" style="width: 100%;">Aim and Shoot!</button>
+                        <button class="btn btn-primary" id="archery-shoot">Aim and Shoot!</button>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin: 15px 0;">
-                        <div>Score: <span id="archery-score">0</span>/50</div>
-                        <div>Shots: <span id="archery-shots">0</span>/10</div>
+                        <div>Score: <span id="archery-score">0</span>/28</div>
+                        <div>Shots: <span id="archery-shots">0</span>/3</div>
                     </div>
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
-                        </label>
-                        <input type="number" class="form-control" value="100" min="10">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startArcheryGame()">
+                    <button class="btn btn-primary" onclick="startArcheryGame()">
                         <i class="fas fa-play"></i> Start Game (2x)
                     </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Chess Modal -->
-    <div class="modal" id="chess-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-chess"></i> Chess Challenge
-                </h3>
-                <button class="close-modal" onclick="closeModal('chess-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Play against our AI in a game of chess. Checkmate to win!</p>
-                    <div class="chess-board" id="chess-board">
-                        <!-- Chess board will be generated by JavaScript -->
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
-                        </label>
-                        <input type="number" class="form-control" value="100" min="10">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startChessGame()">
-                        <i class="fas fa-play"></i> Start Game (2x)
-                    </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Impossible Tower Modal -->
-    <div class="modal" id="tower-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-building"></i> Impossible Tower
-                </h3>
-                <button class="close-modal" onclick="closeModal('tower-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Build the tallest tower without letting it collapse! Tap at the right moment to place blocks.</p>
-                    <div class="tower-game" id="tower-game">
-                        <!-- Tower game will be rendered by JavaScript -->
-                    </div>
-                    <div style="margin: 15px 0;">
-                        <div>Height: <span id="tower-height">0</span> blocks</div>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
-                        </label>
-                        <input type="number" class="form-control" value="100" min="10">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startTowerGame()">
-                        <i class="fas fa-play"></i> Start Game (2x)
-                    </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Number Match Modal -->
-    <div class="modal" id="number-match-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-sort-numeric-up"></i> Number Match
-                </h3>
-                <button class="close-modal" onclick="closeModal('number-match-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Match cards to reach the target number: <span id="target-number" style="font-weight: bold; color: var(--accent);">50</span></p>
-                    <div class="timer-display" id="number-match-timer">10</div>
-                    <div class="card-grid" id="number-match-grid">
-                        <!-- Cards will be generated by JavaScript -->
-                    </div>
-                    <div style="margin: 15px 0;">
-                        <div>Current Sum: <span id="current-sum">0</span></div>
-                        <div>Flips Left: <span id="flips-left">4</span></div>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-coins"></i> Select your bet amount (₹)
-                        </label>
-                        <input type="number" class="form-control" value="100" min="10">
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="startNumberMatchGame()">
-                        <i class="fas fa-play"></i> Start Game (2x)
-                    </button>
-                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
-                        <i class="fas fa-info-circle"></i> Win chance: 20%
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Announcement Modal -->
-    <div class="modal" id="announcement-modal">
-        <div class="modal-content announcement-modal">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-bullhorn"></i> Announcements
-                </h3>
-                <button class="close-modal" onclick="closeModal('announcement-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="announcement-list">
-                    <div class="announcement-item">
-                        <div class="announcement-date">25 Aug 2023, 14:30</div>
-                        <div>Welcome to USCASH! New users get a 100% bonus on their first deposit.</div>
-                    </div>
-                    <div class="announcement-item">
-                        <div class="announcement-date">24 Aug 2023, 10:15</div>
-                        <div>Maintenance scheduled for tomorrow from 2:00 AM to 4:00 AM. The platform will be unavailable during this time.</div>
-                    </div>
-                    <div class="announcement-item">
-                        <div class="announcement-date">22 Aug 2023, 16:45</div>
-                        <div>New game added: Archery Challenge! Test your skills and win big.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Other game modals would follow similar structure -->
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-check-circle" id="toast-icon"></i>
         <span id="toast-message">Operation completed successfully!</span>
     </div>
 
+    <!-- Firebase initialization -->
     <script>
         // Firebase configuration
         const firebaseConfig = {
@@ -1876,54 +1419,180 @@
             appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
         };
 
-        // Check if terms accepted
-        window.addEventListener('DOMContentLoaded', function() {
-            if (!localStorage.getItem('termsAccepted')) {
-                document.getElementById('terms-modal').style.display = 'flex';
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Global variables
+        let currentUser = null;
+        let userData = null;
+        const bettingOptions = [20, 50, 70, 100, 150, 180, 200, 300];
+
+        // Check authentication state
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                currentUser = user;
+                // Check if user has accepted terms
+                if (!localStorage.getItem('termsAccepted')) {
+                    document.getElementById('terms-modal').style.display = 'flex';
+                } else {
+                    loadUserData();
+                }
+            } else {
+                // Show auth container if not logged in
+                document.getElementById('auth-container').style.display = 'flex';
+                document.getElementById('app-container').style.display = 'none';
             }
-            
-            // Set daily theme
-            setDailyTheme();
-            
-            // Check device type and adjust layout
-            checkDeviceType();
         });
 
-        // Daily theme rotation
-        function setDailyTheme() {
-            const today = new Date();
-            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        // Auth functions
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
             
-            if (dayOfYear % 2 === 0) {
-                document.body.classList.add('theme-day2');
-            } else {
-                document.body.classList.remove('theme-day2');
-            }
+            document.querySelector(`.auth-tab:nth-child(${tab === 'login' ? 1 : 2})`).classList.add('active');
+            document.getElementById(`${tab}-form`).classList.add('active');
         }
 
-        // Check device type and adjust layout
-        function checkDeviceType() {
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            if (isAndroid) {
-                document.body.classList.add('android-device');
-                // Adjust layout for Android
-                const gamesGrid = document.querySelector('.games-grid');
-                if (gamesGrid) {
-                    gamesGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
-                }
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (!email || !password) {
+                showToast('Please enter email and password', 'error');
+                return;
             }
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    showToast('Login successful!');
+                })
+                .catch((error) => {
+                    showToast(error.message, 'error');
+                });
         }
 
-        // Accept terms and conditions
+        function signup() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const phone = document.getElementById('signup-phone').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            const referral = document.getElementById('signup-referral').value;
+            
+            if (!name || !email || !phone || !password || !confirm) {
+                showToast('Please fill all required fields', 'error');
+                return;
+            }
+            
+            if (password !== confirm) {
+                showToast('Passwords do not match', 'error');
+                return;
+            }
+            
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Save user data to Firestore
+                    return db.collection('users').doc(userCredential.user.uid).set({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        balance: 0,
+                        vip: 0,
+                        referrals: 0,
+                        referralEarnings: 0,
+                        watchAndEarn: {
+                            unlocked: false,
+                            adsWatched: 0,
+                            daysRemaining: 0
+                        },
+                        referralCode: generateReferralCode(),
+                        referredBy: referral || null,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    showToast('Account created successfully!');
+                    switchAuthTab('login');
+                })
+                .catch((error) => {
+                    showToast(error.message, 'error');
+                });
+        }
+
+        function resetPassword() {
+            const email = document.getElementById('forgot-email').value;
+            
+            if (!email) {
+                showToast('Please enter your email', 'error');
+                return;
+            }
+            
+            auth.sendPasswordResetEmail(email)
+                .then(() => {
+                    showToast('Password reset email sent!');
+                })
+                .catch((error) => {
+                    showToast(error.message, 'error');
+                });
+        }
+
         function acceptTerms() {
             localStorage.setItem('termsAccepted', 'true');
             document.getElementById('terms-modal').style.display = 'none';
-            showToast('Terms accepted. Enjoy gaming!');
+            loadUserData();
         }
 
-        // Show toast notification
+        function loadUserData() {
+            if (!currentUser) return;
+            
+            db.collection('users').doc(currentUser.uid).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        userData = doc.data();
+                        updateUI();
+                    }
+                })
+                .catch((error) => {
+                    showToast('Error loading user data', 'error');
+                });
+        }
+
+        function updateUI() {
+            if (!userData) return;
+            
+            document.getElementById('user-balance').textContent = userData.balance.toFixed(2);
+            document.getElementById('user-name').textContent = userData.name;
+            document.getElementById('user-vip').textContent = userData.vip;
+            document.getElementById('referral-link').value = `https://uscash.com/ref/${userData.referralCode}`;
+            document.getElementById('referrals-count').textContent = userData.referrals;
+            document.getElementById('referrals-earnings').textContent = userData.referralEarnings.toFixed(2);
+            
+            if (userData.watchAndEarn.unlocked) {
+                document.getElementById('ads-watched').textContent = userData.watchAndEarn.adsWatched;
+                document.getElementById('ads-days').textContent = userData.watchAndEarn.daysRemaining;
+                document.getElementById('watch-ad-btn').disabled = userData.watchAndEarn.adsWatched >= 10;
+            }
+            
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+        }
+
+        function refreshBalance() {
+            loadUserData();
+            showToast('Balance refreshed');
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                showToast('Logged out successfully');
+            });
+        }
+
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toast-icon');
             const toastMessage = document.getElementById('toast-message');
             
             toastMessage.textContent = message;
@@ -1931,8 +1600,12 @@
             
             if (type === 'error') {
                 toast.classList.add('error');
+                toastIcon.className = 'fas fa-exclamation-circle';
             } else if (type === 'warning') {
                 toast.classList.add('warning');
+                toastIcon.className = 'fas fa-exclamation-triangle';
+            } else {
+                toastIcon.className = 'fas fa-check-circle';
             }
             
             setTimeout(() => {
@@ -1940,7 +1613,6 @@
             }, 3000);
         }
 
-        // Modal functions
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
         }
@@ -1949,17 +1621,23 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modals = document.getElementsByClassName('modal');
-            for (let i = 0; i < modals.length; i++) {
-                if (event.target === modals[i]) {
-                    modals[i].style.display = 'none';
-                }
-            }
+        function openGameModal(modalId) {
+            // Initialize betting options
+            const betOptions = document.querySelectorAll(`#${modalId} .bet-option`);
+            betOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    betOptions.forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            openModal(modalId);
         }
 
-        // Copy referral link
+        function toggleSideMenu() {
+            document.getElementById('side-menu').classList.toggle('open');
+        }
+
         function copyReferralLink() {
             const copyText = document.getElementById("referral-link");
             copyText.select();
@@ -1969,526 +1647,215 @@
             showToast("Referral link copied to clipboard!");
         }
 
-        // Spin wheel animation
-        function spinWheel() {
-            const wheel = document.getElementById('wheel');
-            const degrees = 1080 + Math.floor(Math.random() * 360); // 3 full rotations plus random
-            wheel.style.transform = `rotate(${degrees}deg)`;
+        function submitDeposit() {
+            const accountName = document.getElementById('deposit-account-name').value;
+            const method = document.getElementById('deposit-method').value;
+            const amount = parseInt(document.getElementById('deposit-amount').value);
+            const transactionId = document.getElementById('deposit-transaction-id').value;
             
-            // Simulate win/loss with 20% chance
+            if (!accountName || !method || !amount || !transactionId) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+            
+            if (amount < 150) {
+                showToast('Minimum deposit is ₹150', 'error');
+                return;
+            }
+            
+            // Save deposit request to Firestore
+            db.collection('deposits').add({
+                userId: currentUser.uid,
+                accountName: accountName,
+                method: method,
+                amount: amount,
+                transactionId: transactionId,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                showToast('Deposit request submitted for approval');
+                // Clear form
+                document.getElementById('deposit-account-name').value = '';
+                document.getElementById('deposit-method').value = '';
+                document.getElementById('deposit-amount').value = '';
+                document.getElementById('deposit-transaction-id').value = '';
+                closeModal('deposit-modal');
+            })
+            .catch((error) => {
+                showToast('Error submitting deposit request', 'error');
+            });
+        }
+
+        function submitWithdrawal() {
+            const name = document.getElementById('withdraw-name').value;
+            const accountNumber = document.getElementById('withdraw-account-number').value;
+            const method = document.getElementById('withdraw-method').value;
+            const amount = parseInt(document.getElementById('withdraw-amount').value);
+            
+            if (!name || !accountNumber || !method || !amount) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+            
+            if (amount < 300) {
+                showToast('Minimum withdrawal is ₹300', 'error');
+                return;
+            }
+            
+            if (amount > userData.balance) {
+                showToast('Insufficient balance', 'error');
+                return;
+            }
+            
+            // Save withdrawal request to Firestore
+            db.collection('withdrawals').add({
+                userId: currentUser.uid,
+                name: name,
+                accountNumber: accountNumber,
+                method: method,
+                amount: amount,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                // Deduct amount from user balance
+                return db.collection('users').doc(currentUser.uid).update({
+                    balance: firebase.firestore.FieldValue.increment(-amount)
+                });
+            })
+            .then(() => {
+                showToast('Withdrawal request submitted');
+                // Clear form
+                document.getElementById('withdraw-name').value = '';
+                document.getElementById('withdraw-account-number').value = '';
+                document.getElementById('withdraw-method').value = '';
+                document.getElementById('withdraw-amount').value = '';
+                closeModal('withdraw-modal');
+                // Refresh user data
+                loadUserData();
+            })
+            .catch((error) => {
+                showToast('Error submitting withdrawal request', 'error');
+            });
+        }
+
+        function unlockWatchAndEarn() {
+            if (userData.balance < 150) {
+                showToast('Insufficient balance', 'error');
+                return;
+            }
+            
+            // Deduct ₹150 from balance
+            db.collection('users').doc(currentUser.uid).update({
+                balance: firebase.firestore.FieldValue.increment(-150),
+                'watchAndEarn.unlocked': true,
+                'watchAndEarn.adsWatched': 0,
+                'watchAndEarn.daysRemaining': 4
+            })
+            .then(() => {
+                showToast('Watch & Earn unlocked for 4 days!');
+                loadUserData();
+            })
+            .catch((error) => {
+                showToast('Error unlocking feature', 'error');
+            });
+        }
+
+        function watchAd() {
+            if (!userData.watchAndEarn.unlocked) {
+                showToast('Please unlock Watch & Earn first', 'error');
+                return;
+            }
+            
+            if (userData.watchAndEarn.adsWatched >= 10) {
+                showToast('You have watched all ads for today', 'info');
+                return;
+            }
+            
+            // Show ad simulation
+            showToast('Playing ad...', 'info');
+            
             setTimeout(() => {
+                // Add ₹1.25 to balance and update ads watched
+                db.collection('users').doc(currentUser.uid).update({
+                    balance: firebase.firestore.FieldValue.increment(1.25),
+                    'watchAndEarn.adsWatched': firebase.firestore.FieldValue.increment(1)
+                })
+                .then(() => {
+                    showToast('Ad completed! ₹1.25 added to your balance');
+                    loadUserData();
+                })
+                .catch((error) => {
+                    showToast('Error processing ad reward', 'error');
+                });
+            }, 3000);
+        }
+
+        function generateReferralCode() {
+            return Math.random().toString(36).substring(2, 8).toUpperCase();
+        }
+
+        // Game functions would be implemented here
+        function startScratchGame() {
+            const selectedBet = document.querySelector('#scratch-modal .bet-option.selected');
+            if (!selectedBet) {
+                showToast('Please select a bet amount', 'error');
+                return;
+            }
+            
+            const betAmount = parseInt(selectedBet.dataset.bet);
+            if (userData.balance < betAmount) {
+                showToast('Insufficient balance', 'error');
+                return;
+            }
+            
+            // Deduct bet amount
+            db.collection('users').doc(currentUser.uid).update({
+                balance: firebase.firestore.FieldValue.increment(-betAmount)
+            })
+            .then(() => {
+                // Start the game
+                showToast('Game started! Find matching animals');
+                // Game logic would be implemented here
+                
+                // 20% chance to win
                 if (Math.random() < 0.2) {
-                    showToast('Congratulations! You won 2x your bet!');
+                    // Win 2x bet amount
+                    const winAmount = betAmount * 2;
+                    db.collection('users').doc(currentUser.uid).update({
+                        balance: firebase.firestore.FieldValue.increment(winAmount)
+                    })
+                    .then(() => {
+                        showToast(`Congratulations! You won ₹${winAmount}`);
+                        loadUserData();
+                    });
                 } else {
                     showToast('Sorry, better luck next time!', 'warning');
                 }
-                wheel.style.transform = 'rotate(0deg)';
-            }, 3000);
+            })
+            .catch((error) => {
+                showToast('Error starting game', 'error');
+            });
         }
 
-        // Start scratch game
-        function startScratchGame() {
-            const cards = document.querySelectorAll('.scratch-card');
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    this.classList.add('scratched');
-                    
-                    // Check for win condition after a delay
-                    setTimeout(() => {
-                        const scratched = document.querySelectorAll('.scratch-card.scratched');
-                        if (scratched.length >= 3) {
-                            // 20% chance to win
-                            if (Math.random() < 0.2) {
-                                showToast('Congratulations! You found a match!');
-                            }
-                        }
-                    }, 500);
+        // Other game functions would follow similar patterns
+
+        // Initialize the app
+        window.addEventListener('DOMContentLoaded', function() {
+            // Set up betting options
+            const betContainers = document.querySelectorAll('.bet-options');
+            betContainers.forEach(container => {
+                container.innerHTML = '';
+                bettingOptions.forEach(bet => {
+                    const option = document.createElement('div');
+                    option.className = 'bet-option';
+                    option.dataset.bet = bet;
+                    option.textContent = `₹${bet}`;
+                    container.appendChild(option);
                 });
             });
-            
-            showToast('Scratch the cards to find matching symbols!');
-        }
-
-        // Start Find Ace game
-        function startFindAceGame() {
-            showToast('Find Ace game started! Cards will be shown for 3 seconds.');
-            
-            // Show all cards
-            const cards = document.querySelectorAll('#find-ace-grid .card');
-            cards.forEach(card => {
-                card.classList.add('flipped');
-            });
-            
-            // Set timer
-            let timeLeft = 15;
-            const timerElement = document.getElementById('find-ace-timer');
-            timerElement.textContent = timeLeft;
-            
-            const timer = setInterval(() => {
-                timeLeft--;
-                timerElement.textContent = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    // Hide cards after 3 seconds
-                    setTimeout(() => {
-                        cards.forEach(card => {
-                            card.classList.remove('flipped');
-                        });
-                        showToast('Cards hidden! Find the Ace!');
-                    }, 3000);
-                }
-            }, 1000);
-            
-            // Add click event to cards
-            let flips = 0;
-            const maxFlips = 4;
-            
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    if (flips < maxFlips && !this.classList.contains('flipped')) {
-                        this.classList.add('flipped');
-                        flips++;
-                        
-                        if (this.dataset.value === 'A') {
-                            // 20% chance to win
-                            if (Math.random() < 0.2) {
-                                showToast('Congratulations! You found the Ace and won 2x your bet!');
-                            } else {
-                                showToast('Sorry, better luck next time!', 'warning');
-                            }
-                            clearInterval(timer);
-                        }
-                        
-                        if (flips >= maxFlips) {
-                            showToast('No more flips left!', 'warning');
-                            clearInterval(timer);
-                        }
-                    }
-                });
-            });
-        }
-
-        // Start Tic-Tac-Toe game
-        function startTicTacToe() {
-            showToast('Tic-Tac-Toe game started! You are X, AI is O.');
-            
-            // Add game logic here
-            const cells = document.querySelectorAll('.tictactoe-cell');
-            cells.forEach(cell => {
-                cell.addEventListener('click', function() {
-                    if (!this.textContent) {
-                        this.textContent = 'X';
-                        // Check for win or draw
-                        // Then AI move
-                        setTimeout(() => {
-                            // AI logic here
-                            const emptyCells = Array.from(cells).filter(cell => !cell.textContent);
-                            if (emptyCells.length > 0) {
-                                const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-                                randomCell.textContent = 'O';
-                                
-                                // Check for win or draw again
-                            }
-                        }, 500);
-                    }
-                });
-            });
-        }
-
-        // Start Archery game
-        function startArcheryGame() {
-            showToast('Archery game started! Hit the center 5 times to win.');
-            
-            // Initialize archery game
-            const pointer = document.getElementById('archery-pointer');
-            let pointerX = 50;
-            let pointerY = 50;
-            let movingRight = true;
-            let movingDown = true;
-            
-            // Move pointer animation
-            const movePointer = setInterval(() => {
-                if (movingRight) {
-                    pointerX += 2;
-                    if (pointerX >= 90) movingRight = false;
-                } else {
-                    pointerX -= 2;
-                    if (pointerX <= 10) movingRight = true;
-                }
-                
-                if (movingDown) {
-                    pointerY += 1;
-                    if (pointerY >= 90) movingDown = false;
-                } else {
-                    pointerY -= 1;
-                    if (pointerY <= 10) movingDown = true;
-                }
-                
-                pointer.style.left = pointerX + '%';
-                pointer.style.bottom = pointerY + '%';
-            }, 50);
-            
-            // Shoot button event
-            let score = 0;
-            let shots = 0;
-            const maxShots = 10;
-            
-            document.getElementById('archery-shoot').addEventListener('click', function() {
-                if (shots < maxShots) {
-                    shots++;
-                    document.getElementById('archery-shots').textContent = shots;
-                    
-                    // Calculate score based on pointer position
-                    const distanceFromCenter = Math.sqrt(Math.pow(pointerX - 50, 2) + Math.pow(pointerY - 50, 2));
-                    let points = 0;
-                    
-                    if (distanceFromCenter < 10) points = 10;
-                    else if (distanceFromCenter < 20) points = 9;
-                    else if (distanceFromCenter < 30) points = 8;
-                    else if (distanceFromCenter < 40) points = 7;
-                    else if (distanceFromCenter < 50) points = 6;
-                    
-                    score += points;
-                    document.getElementById('archery-score').textContent = score;
-                    
-                    // Play sound
-                    const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO+9iJNwgZaLvt6siIMwgUXrPp8M2NNgoWVqzo89KYPAwVU6fj9NWhQRAVTaPh99ipRBMVSp/g+dyvSBcWTp3e+OC2ThwYUZrc9+O9VB8bU5ja9+XEWiIdVZbY9ujKYCQfV5XV9+zQZCchVpPU9/DUaCsjWJHS9/PabDAlWpDQ9/XgcDUnW4/O9/bldDopXI3N9/nreT8rXozM9/zwfEMsX4vL+P/1gEgvYIvK+AD6hEwyYYrJ+AL9hk80YorI+AT/iFI2Y4rH+AbBi1Q4ZInG+AnEjVY5ZYjF+AvHkFk7ZofE+A3Kkls9Z4bD+A/MlF0/aIXC+BHPlmBBaYTB+BPSmGJDaIO/+BXUm2REaYK++BfWnmZGa4G9+BnYoGlIbYC8+BvaomtKboC7+B3cpG1LcH+6+B/epm9Ncn65+CHgqHFQdH24+CPiqnNTdn23+CThrHZWeXy2+CbjrnhZfHy1+CjksHtcf3y0+Cvlsn5fgnyz+C3mtIBihH2y+C/otYJkh3+x+DHpt4RniYCw+DPquIZqi4Kv+DXruohsjYSu+DfsvIqHkIet+DjtvYyKkoiv+Druvo6NlIqv+DzvwJCRl42v+D7wwpKUmpCv+EDxxJWYnZKv+ELyxpeboJWv+ETzyJqepJiv+Eb0yp2hp5uv+Ej1zKClraCv+Er2zaOqsKSv+Ez3z6Wws6iw+E740Ki0trKx+E/50qu4ubi0+FD61K6+vL23+FL71rHBwcK6+FT82LPDxca9+Fb92rbHyMrA+Vf+27nKzM7E+ln/3LvN0NPJ+1v/3b3Q09bP/F3/3r/S2NrU/l//38HU3ODZ/2EA4MLW4eTfAmQB4cTY5erjBWYC4sba6O7pB2cD5Mjc7PLvCWgE5crd7/b1C2kF5szf8vn6DWsG587g9fz+D20H6c/h9///EHAJ6tHi+QARE3IK69Pk/AMTFXQL7NXm/gUVFnUM7dfpAAcXGHcO7trrAgkZGngP793tBAobHHkQ8d/wBgwdfhLy4fIIDx+AE/Pj9AoRIYIU9OX2DBMjhBX15/gOFiaGF/bo+RAYKYgZ+Or8Ehosihv57P8UHC6LHfrvAhcfMY0f/PMFGiI0jyH+9QccJDaRJAD4CR4mOJMlAvoMICg6lCcE/A4iKjyWKgX+ECQsPpgsBwASJi5AmS4JAhQoMEOcMQoDFSoyRZ40DAUXLDRIoTYPBhkuNkqkOREHGzA4TKc8EgkdMjpPqj8UCx80PFOtQhYNIQ==');
-                    audio.play();
-                    
-                    if (shots >= maxShots) {
-                        clearInterval(movePointer);
-                        // Check win condition
-                        if (score >= 25) {
-                            // 20% chance to win
-                            if (Math.random() < 0.2) {
-                                showToast('Congratulations! You scored ' + score + ' points and won 2x your bet!');
-                            } else {
-                                showToast('You scored ' + score + ' points but didn\'t reach the target. Better luck next time!', 'warning');
-                            }
-                        } else {
-                            showToast('You scored ' + score + ' points. Better luck next time!', 'warning');
-                        }
-                    }
-                }
-            });
-        }
-
-        // Start Chess game
-        function startChessGame() {
-            showToast('Chess game started! Make your move.');
-            
-            // Initialize chess board
-            const chessBoard = document.getElementById('chess-board');
-            chessBoard.innerHTML = '';
-            
-            // Create chess board squares
-            for (let i = 0; i < 8; i++) {
-                for (let j = 0; j < 8; j++) {
-                    const square = document.createElement('div');
-                    square.className = `chess-square ${(i + j) % 2 === 0 ? 'white' : 'black'}`;
-                    chessBoard.appendChild(square);
-                    
-                    // Add pieces (simplified for example)
-                    if (i === 1) square.innerHTML = '♟'; // Black pawns
-                    if (i === 6) square.innerHTML = '♙'; // White pawns
-                    if (i === 0) {
-                        if (j === 0 || j === 7) square.innerHTML = '♜'; // Black rooks
-                        if (j === 1 || j === 6) square.innerHTML = '♞'; // Black knights
-                        if (j === 2 || j === 5) square.innerHTML = '♝'; // Black bishops
-                        if (j === 3) square.innerHTML = '♛'; // Black queen
-                        if (j === 4) square.innerHTML = '♚'; // Black king
-                    }
-                    if (i === 7) {
-                        if (j === 0 || j === 7) square.innerHTML = '♖'; // White rooks
-                        if (j === 1 || j === 6) square.innerHTML = '♘'; // White knights
-                        if (j === 2 || j === 5) square.innerHTML = '♗'; // White bishops
-                        if (j === 3) square.innerHTML = '♕'; // White queen
-                        if (j === 4) square.innerHTML = '♔'; // White king
-                    }
-                    
-                    // Add click event for moves
-                    square.addEventListener('click', function() {
-                        // Chess move logic would go here
-                        // This is a simplified example
-                        showToast('Move made. AI thinking...');
-                        
-                        // Simulate AI move after delay
-                        setTimeout(() => {
-                            // AI would make a move here
-                            showToast('AI moved.');
-                        }, 1000);
-                    });
-                }
-            }
-        }
-
-        // Start Tower game
-        function startTowerGame() {
-            showToast('Impossible Tower game started! Tap at the right moment to place blocks.');
-            
-            // Initialize tower game
-            const towerGame = document.getElementById('tower-game');
-            towerGame.innerHTML = '';
-            
-            // Tower game logic would go here
-            // This is a simplified example
-            let height = 0;
-            let blockWidth = 100;
-            let blockPosition = 150;
-            
-            // Add initial block
-            addBlock();
-            
-            function addBlock() {
-                const block = document.createElement('div');
-                block.className = 'tower-block';
-                block.style.width = blockWidth + 'px';
-                block.style.height = '20px';
-                block.style.left = blockPosition + 'px';
-                block.style.bottom = (height * 20) + 'px';
-                towerGame.appendChild(block);
-                
-                height++;
-                document.getElementById('tower-height').textContent = height;
-                
-                // Gradually make the game harder
-                blockWidth -= 2;
-                
-                // Move block left and right
-                let movingRight = true;
-                const moveBlock = setInterval(() => {
-                    if (movingRight) {
-                        blockPosition += 2;
-                        if (blockPosition >= 300 - blockWidth) movingRight = false;
-                    } else {
-                        blockPosition -= 2;
-                        if (blockPosition <= 0) movingRight = true;
-                    }
-                    
-                    block.style.left = blockPosition + 'px';
-                }, 50);
-                
-                // Add click event to place block
-                towerGame.addEventListener('click', function placeBlock() {
-                    clearInterval(moveBlock);
-                    
-                    // Check if block is placed correctly
-                    const placementError = Math.abs(blockPosition - 150);
-                    
-                    if (placementError > 30) {
-                        // Tower collapses
-                        showToast('Tower collapsed! You reached height ' + height, 'warning');
-                        towerGame.removeEventListener('click', placeBlock);
-                        
-                        // 20% chance to win if height is sufficient
-                        if (height > 15 && Math.random() < 0.2) {
-                            showToast('Congratulations! You built a tower of ' + height + ' blocks and won 2x your bet!');
-                        }
-                    } else {
-                        // Continue building
-                        addBlock();
-                    }
-                }, { once: true });
-            }
-        }
-
-        // Start Number Match game
-        function startNumberMatchGame() {
-            showToast('Number Match game started! Match cards to reach the target.');
-            
-            // Initialize number match game
-            const targetNumber = 50;
-            document.getElementById('target-number').textContent = targetNumber;
-            
-            // Generate cards with numbers
-            const numbers = [0, 1, 2, 3, 4, 5, 6, 9, 0, 1, 2, 3, 4, 5, 6, 9]; // 16 cards with repetitions
-            const numberGrid = document.getElementById('number-match-grid');
-            numberGrid.innerHTML = '';
-            
-            // Shuffle numbers
-            for (let i = numbers.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-            }
-            
-            // Create cards
-            numbers.forEach((number, index) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="front">?</div>
-                    <div class="back">${number}</div>
-                `;
-                card.dataset.value = number;
-                numberGrid.appendChild(card);
-            });
-            
-            // Show cards for 3 seconds
-            const cards = document.querySelectorAll('#number-match-grid .card');
-            cards.forEach(card => {
-                card.classList.add('flipped');
-            });
-            
-            // Set timer
-            let timeLeft = 10;
-            const timerElement = document.getElementById('number-match-timer');
-            timerElement.textContent = timeLeft;
-            
-            const timer = setInterval(() => {
-                timeLeft--;
-                timerElement.textContent = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    // Hide cards after 3 seconds
-                    setTimeout(() => {
-                        cards.forEach(card => {
-                            card.classList.remove('flipped');
-                        });
-                        showToast('Cards hidden! Find the numbers that sum to ' + targetNumber);
-                    }, 3000);
-                }
-            }, 1000);
-            
-            // Add click event to cards
-            let currentSum = 0;
-            let flipsLeft = 4;
-            document.getElementById('current-sum').textContent = currentSum;
-            document.getElementById('flips-left').textContent = flipsLeft;
-            
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    if (flipsLeft > 0 && !this.classList.contains('flipped')) {
-                        this.classList.add('flipped');
-                        flipsLeft--;
-                        currentSum += parseInt(this.dataset.value);
-                        
-                        document.getElementById('current-sum').textContent = currentSum;
-                        document.getElementById('flips-left').textContent = flipsLeft;
-                        
-                        if (currentSum === targetNumber) {
-                            // 20% chance to win
-                            if (Math.random() < 0.2) {
-                                showToast('Congratulations! You reached the target and won 2x your bet!');
-                            } else {
-                                showToast('Sorry, better luck next time!', 'warning');
-                            }
-                            clearInterval(timer);
-                        } else if (flipsLeft <= 0) {
-                            showToast('No more flips left! Your sum was ' + currentSum, 'warning');
-                            clearInterval(timer);
-                        }
-                    }
-                });
-            });
-        }
-
-        // Watch ad function
-        function watchAd() {
-            showToast('Playing ad...');
-            
-            // Simulate ad playback
-            setTimeout(() => {
-                // 20% chance to get reward
-                if (Math.random() < 0.2) {
-                    showToast('Ad completed! You earned ₹10.');
-                } else {
-                    showToast('Ad completed! No reward this time.', 'warning');
-                }
-            }, 3000);
-        }
-
-        // Unlock Watch & Earn
-        function unlockWatchAndEarn() {
-            showToast('Watch & Earn feature unlocked for 12 days! ₹200 deducted from your balance.');
-        }
-
-        // Switch history tabs
-        function switchHistoryTab(tabName) {
-            // Hide all content
-            document.querySelectorAll('.history-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Deactivate all tabs
-            document.querySelectorAll('.history-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Activate selected tab
-            document.getElementById(tabName + '-history').classList.add('active');
-            
-            // Activate tab button
-            event.target.classList.add('active');
-        }
-
-        // Submit deposit request
-        function submitDeposit() {
-            const amount = document.getElementById('deposit-amount').value;
-            const method = document.getElementById('deposit-method').value;
-            const transactionId = document.getElementById('transaction-id').value;
-            
-            if (amount < 150) {
-                showToast('Minimum deposit amount is ₹150', 'error');
-                return;
-            }
-            
-            if (!method) {
-                showToast('Please select a payment method', 'error');
-                return;
-            }
-            
-            if (!transactionId) {
-                showToast('Please enter a transaction ID', 'error');
-                return;
-            }
-            
-            // In a real application, this would be saved to Firebase
-            showToast('Deposit request submitted for approval!');
-            
-            // Reset form
-            document.getElementById('deposit-amount').value = '';
-            document.getElementById('deposit-method').value = '';
-            document.getElementById('transaction-id').value = '';
-        }
-
-        // Submit withdrawal request
-        function submitWithdrawal() {
-            const amount = document.getElementById('withdraw-amount').value;
-            const method = document.getElementById('withdraw-method').value;
-            const accountNumber = document.getElementById('account-number').value;
-            const accountName = document.getElementById('account-name').value;
-            
-            if (amount < 300) {
-                showToast('Minimum withdrawal amount is ₹300', 'error');
-                return;
-            }
-            
-            if (!method) {
-                showToast('Please select a withdrawal method', 'error');
-                return;
-            }
-            
-            if (!accountNumber) {
-                showToast('Please enter an account number', 'error');
-                return;
-            }
-            
-            if (!accountName) {
-                showToast('Please enter an account name', 'error');
-                return;
-            }
-            
-            // In a real application, this would be saved to Firebase
-            showToast('Withdrawal request submitted! Amount will be deducted immediately.');
-            
-            // Reset form
-            document.getElementById('withdraw-amount').value = '';
-            document.getElementById('withdraw-method').value = '';
-            document.getElementById('account-number').value = '';
-            document.getElementById('account-name').value = '';
-        }
+        });
     </script>
 </body>
 </html>
