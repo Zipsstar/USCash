@@ -63,7 +63,7 @@
             width: 100%;
             max-width: 450px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(var(--secondary-rgb), 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .auth-header {
@@ -184,7 +184,7 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-bottom: 1px solid rgba(var(--secondary-rgb), 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-content {
@@ -228,6 +228,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
         }
 
         .vip-badge {
@@ -260,6 +261,7 @@
         .announcement-icon {
             position: relative;
             cursor: pointer;
+            font-size: 20px;
         }
 
         .announcement-badge {
@@ -268,10 +270,10 @@
             right: -5px;
             background: var(--danger);
             color: white;
-            font-size: 10px;
-            width: 16px;
-            height: 16px;
             border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -340,7 +342,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             position: relative;
-            border: 1px solid rgba(var(--secondary-rgb), 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .game-card:hover {
@@ -432,7 +434,7 @@
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(var(--secondary-rgb), 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .action-title {
@@ -493,7 +495,7 @@
             overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             position: relative;
-            border: 1px solid rgba(var(--secondary-rgb), 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .modal-header {
@@ -588,7 +590,7 @@
             display: flex;
             justify-content: space-around;
             z-index: 90;
-            border-top: 1px solid rgba(var(--secondary-rgb), 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .menu-item {
@@ -892,78 +894,6 @@
             font-size: 24px;
             font-weight: bold;
             color: var(--accent);
-        }
-        
-        /* Admin Panel Styles */
-        .admin-panel {
-            display: none;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            margin-top: 20px;
-        }
-        
-        .admin-section {
-            margin-bottom: 30px;
-        }
-        
-        .admin-section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-        }
-        
-        .admin-table th, .admin-table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .admin-table th {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .admin-action-btn {
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            margin-right: 5px;
-        }
-        
-        .btn-approve {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn-reject {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .search-box {
-            margin-bottom: 15px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.2);
-            color: var(--text);
         }
     </style>
 </head>
@@ -1357,85 +1287,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Admin Panel (Visible only to admins) -->
-            <div class="admin-panel" id="admin-panel">
-                <h2 class="section-title">
-                    <i class="fas fa-cog"></i> Admin Panel
-                </h2>
-                
-                <div class="admin-section">
-                    <h3 class="admin-section-title">
-                        <i class="fas fa-users"></i> User Management
-                    </h3>
-                    <div class="search-box">
-                        <input type="text" id="user-search" class="search-input" placeholder="Search users by name...">
-                        <button class="btn btn-primary" onclick="searchUsers()">
-                            <i class="fas fa-search"></i> Search
-                        </button>
-                    </div>
-                    <div class="search-results" id="user-search-results"></div>
-                </div>
-                
-                <div class="admin-section">
-                    <h3 class="admin-section-title">
-                        <i class="fas fa-money-bill-wave"></i> Deposit Requests
-                    </h3>
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Amount</th>
-                                <th>Method</th>
-                                <th>Transaction ID</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="deposit-requests-list">
-                            <!-- Will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="admin-section">
-                    <h3 class="admin-section-title">
-                        <i class="fas fa-wallet"></i> Withdrawal Requests
-                    </h3>
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Amount</th>
-                                <th>Method</th>
-                                <th>Account Number</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="withdrawal-requests-list">
-                            <!-- Will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="admin-section">
-                    <h3 class="admin-section-title">
-                        <i class="fas fa-bullhorn"></i> Send Announcement
-                    </h3>
-                    <div class="form-group">
-                        <label for="announcement-title">Title</label>
-                        <input type="text" id="announcement-title" class="form-control" placeholder="Announcement title">
-                    </div>
-                    <div class="form-group">
-                        <label for="announcement-content">Content</label>
-                        <textarea id="announcement-content" class="form-control" rows="3" placeholder="Announcement content"></textarea>
-                    </div>
-                    <button class="btn btn-primary" onclick="sendAnnouncement()">
-                        <i class="fas fa-paper-plane"></i> Send Announcement
-                    </button>
-                </div>
-            </div>
         </div>
 
         <!-- Mobile Menu -->
@@ -1599,7 +1450,6 @@
         let currentUser = null;
         let userData = null;
         const bettingOptions = [20, 50, 70, 100, 150, 180, 200, 300];
-        const adminEmails = ['cptanil1995@gmail.com', 'auk5562@gmail.com', 'kafe2999@gmail.com'];
 
         // Check authentication state
         auth.onAuthStateChanged((user) => {
@@ -1610,12 +1460,6 @@
                     document.getElementById('terms-modal').style.display = 'flex';
                 } else {
                     loadUserData();
-                }
-                
-                // Check if user is admin
-                if (adminEmails.includes(user.email)) {
-                    document.getElementById('admin-panel').style.display = 'block';
-                    loadAdminData();
                 }
             } else {
                 // Show auth container if not logged in
@@ -1629,8 +1473,15 @@
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
             
-            document.querySelector(`.auth-tab:nth-child(${tab === 'login' ? 1 : 2})`).classList.add('active');
-            document.getElementById(`${tab}-form`).classList.add('active');
+            if (tab === 'login') {
+                document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+            } else if (tab === 'signup') {
+                document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
+                document.getElementById('signup-form').classList.add('active');
+            } else if (tab === 'forgot') {
+                document.getElementById('forgot-form').classList.add('active');
+            }
         }
 
         function login() {
@@ -1669,15 +1520,26 @@
                 return;
             }
             
-            // Check if email is already in use
-            auth.fetchSignInMethodsForEmail(email)
-                .then((signInMethods) => {
-                    if (signInMethods.length > 0) {
-                        showToast('Email is already in use', 'error');
-                        return;
+            // Check if email or phone already exists
+            db.collection('users')
+                .where('email', '==', email)
+                .get()
+                .then((emailQuery) => {
+                    if (!emailQuery.empty) {
+                        showToast('Email already registered', 'error');
+                        throw new Error('Email already exists');
                     }
                     
-                    // Create user with email and password
+                    return db.collection('users')
+                        .where('phone', '==', phone)
+                        .get();
+                })
+                .then((phoneQuery) => {
+                    if (!phoneQuery.empty) {
+                        showToast('Phone number already registered', 'error');
+                        throw new Error('Phone already exists');
+                    }
+                    
                     return auth.createUserWithEmailAndPassword(email, password);
                 })
                 .then((userCredential) => {
@@ -1697,7 +1559,8 @@
                         },
                         referralCode: generateReferralCode(),
                         referredBy: referral || null,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        lastLogin: firebase.firestore.FieldValue.serverTimestamp()
                     });
                 })
                 .then(() => {
@@ -1705,7 +1568,9 @@
                     switchAuthTab('login');
                 })
                 .catch((error) => {
-                    showToast(error.message, 'error');
+                    if (error.code !== 'auth/email-already-in-use') {
+                        showToast(error.message, 'error');
+                    }
                 });
         }
 
@@ -1740,10 +1605,14 @@
                     if (doc.exists) {
                         userData = doc.data();
                         updateUI();
+                    } else {
+                        showToast('User data not found', 'error');
+                        auth.signOut();
                     }
                 })
                 .catch((error) => {
-                    showToast('Error loading user data', 'error');
+                    console.error('Error loading user data:', error);
+                    showToast('Error loading user data. Please refresh.', 'error');
                 });
         }
 
@@ -1753,11 +1622,11 @@
             document.getElementById('user-balance').textContent = userData.balance.toFixed(2);
             document.getElementById('user-name').textContent = userData.name;
             document.getElementById('user-vip').textContent = userData.vip;
-            document.getElementById('referral-link').value = `https://uscash.com/ref/${userData.referralCode}`;
+            document.getElementById('referral-link').value = `${window.location.origin}?ref=${userData.referralCode}`;
             document.getElementById('referrals-count').textContent = userData.referrals;
             document.getElementById('referrals-earnings').textContent = userData.referralEarnings.toFixed(2);
             
-            if (userData.watchAndEarn.unlocked) {
+            if (userData.watchAndEarn && userData.watchAndEarn.unlocked) {
                 document.getElementById('ads-watched').textContent = userData.watchAndEarn.adsWatched;
                 document.getElementById('ads-days').textContent = userData.watchAndEarn.daysRemaining;
                 document.getElementById('watch-ad-btn').disabled = userData.watchAndEarn.adsWatched >= 10;
@@ -1765,6 +1634,11 @@
             
             document.getElementById('auth-container').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
+            
+            // Update last login
+            db.collection('users').doc(currentUser.uid).update({
+                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+            });
         }
 
         function refreshBalance() {
@@ -1830,7 +1704,7 @@
             const copyText = document.getElementById("referral-link");
             copyText.select();
             copyText.setSelectionRange(0, 99999);
-            document.execCommand("copy");
+            navigator.clipboard.writeText(copyText.value);
             
             showToast("Referral link copied to clipboard!");
         }
@@ -1852,7 +1726,7 @@
             }
             
             // Save deposit request to Firestore
-            db.collection('deposit_requests').add({
+            db.collection('deposits').add({
                 userId: currentUser.uid,
                 accountName: accountName,
                 method: method,
@@ -1868,6 +1742,7 @@
                 document.getElementById('deposit-method').value = '';
                 document.getElementById('deposit-amount').value = '';
                 document.getElementById('deposit-transaction-id').value = '';
+                closeModal('deposit-modal');
             })
             .catch((error) => {
                 showToast('Error submitting deposit request', 'error');
@@ -1896,7 +1771,7 @@
             }
             
             // Save withdrawal request to Firestore
-            db.collection('withdraw_requests').add({
+            db.collection('withdrawals').add({
                 userId: currentUser.uid,
                 name: name,
                 accountNumber: accountNumber,
@@ -1918,6 +1793,7 @@
                 document.getElementById('withdraw-account-number').value = '';
                 document.getElementById('withdraw-method').value = '';
                 document.getElementById('withdraw-amount').value = '';
+                closeModal('withdraw-modal');
                 // Refresh user data
                 loadUserData();
             })
@@ -1982,194 +1858,6 @@
             return Math.random().toString(36).substring(2, 8).toUpperCase();
         }
 
-        // Admin functions
-        function loadAdminData() {
-            if (!currentUser || !adminEmails.includes(currentUser.email)) return;
-            
-            // Load deposit requests
-            db.collection('deposit_requests').where('status', '==', 'pending').get()
-                .then((querySnapshot) => {
-                    const depositList = document.getElementById('deposit-requests-list');
-                    depositList.innerHTML = '';
-                    
-                    querySnapshot.forEach((doc) => {
-                        const request = doc.data();
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${request.accountName}</td>
-                            <td>₹${request.amount}</td>
-                            <td>${request.method}</td>
-                            <td>${request.transactionId}</td>
-                            <td>${request.status}</td>
-                            <td>
-                                <button class="admin-action-btn btn-approve" onclick="approveDeposit('${doc.id}', ${request.amount}, '${request.userId}')">Approve</button>
-                                <button class="admin-action-btn btn-reject" onclick="rejectDeposit('${doc.id}')">Reject</button>
-                            </td>
-                        `;
-                        depositList.appendChild(row);
-                    });
-                });
-            
-            // Load withdrawal requests
-            db.collection('withdraw_requests').where('status', '==', 'pending').get()
-                .then((querySnapshot) => {
-                    const withdrawalList = document.getElementById('withdrawal-requests-list');
-                    withdrawalList.innerHTML = '';
-                    
-                    querySnapshot.forEach((doc) => {
-                        const request = doc.data();
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${request.name}</td>
-                            <td>₹${request.amount}</td>
-                            <td>${request.method}</td>
-                            <td>${request.accountNumber}</td>
-                            <td>${request.status}</td>
-                            <td>
-                                <button class="admin-action-btn btn-approve" onclick="approveWithdrawal('${doc.id}', ${request.amount}, '${request.userId}')">Approve</button>
-                                <button class="admin-action-btn btn-reject" onclick="rejectWithdrawal('${doc.id}', ${request.amount}, '${request.userId}')">Reject</button>
-                            </td>
-                        `;
-                        withdrawalList.appendChild(row);
-                    });
-                });
-        }
-
-        function searchUsers() {
-            const searchTerm = document.getElementById('user-search').value.toLowerCase();
-            const resultsContainer = document.getElementById('user-search-results');
-            
-            db.collection('users').get()
-                .then((querySnapshot) => {
-                    resultsContainer.innerHTML = '';
-                    
-                    querySnapshot.forEach((doc) => {
-                        const user = doc.data();
-                        if (user.name.toLowerCase().includes(searchTerm)) {
-                            const userCard = document.createElement('div');
-                            userCard.className = 'action-card';
-                            userCard.innerHTML = `
-                                <h3>${user.name}</h3>
-                                <p>Email: ${user.email}</p>
-                                <p>Phone: ${user.phone}</p>
-                                <p>Balance: ₹${user.balance}</p>
-                                <p>VIP Level: ${user.vip}</p>
-                                <div class="form-group">
-                                    <label>Adjust Balance</label>
-                                    <input type="number" id="adjust-balance-${doc.id}" class="form-control" value="${user.balance}">
-                                </div>
-                                <button class="btn btn-primary" onclick="updateUserBalance('${doc.id}')">Update Balance</button>
-                            `;
-                            resultsContainer.appendChild(userCard);
-                        }
-                    });
-                });
-        }
-
-        function updateUserBalance(userId) {
-            const newBalance = parseFloat(document.getElementById(`adjust-balance-${userId}`).value);
-            
-            db.collection('users').doc(userId).update({
-                balance: newBalance
-            })
-            .then(() => {
-                showToast('Balance updated successfully');
-            })
-            .catch((error) => {
-                showToast('Error updating balance', 'error');
-            });
-        }
-
-        function approveDeposit(requestId, amount, userId) {
-            // Update request status
-            db.collection('deposit_requests').doc(requestId).update({
-                status: 'approved'
-            })
-            .then(() => {
-                // Add amount to user's balance
-                return db.collection('users').doc(userId).update({
-                    balance: firebase.firestore.FieldValue.increment(amount)
-                });
-            })
-            .then(() => {
-                showToast('Deposit approved');
-                loadAdminData();
-            })
-            .catch((error) => {
-                showToast('Error approving deposit', 'error');
-            });
-        }
-
-        function rejectDeposit(requestId) {
-            db.collection('deposit_requests').doc(requestId).update({
-                status: 'rejected'
-            })
-            .then(() => {
-                showToast('Deposit rejected');
-                loadAdminData();
-            })
-            .catch((error) => {
-                showToast('Error rejecting deposit', 'error');
-            });
-        }
-
-        function approveWithdrawal(requestId, amount, userId) {
-            db.collection('withdraw_requests').doc(requestId).update({
-                status: 'approved'
-            })
-            .then(() => {
-                showToast('Withdrawal approved');
-                loadAdminData();
-            })
-            .catch((error) => {
-                showToast('Error approving withdrawal', 'error');
-            });
-        }
-
-        function rejectWithdrawal(requestId, amount, userId) {
-            // Update request status
-            db.collection('withdraw_requests').doc(requestId).update({
-                status: 'rejected'
-            })
-            .then(() => {
-                // Return amount to user's balance
-                return db.collection('users').doc(userId).update({
-                    balance: firebase.firestore.FieldValue.increment(amount)
-                });
-            })
-            .then(() => {
-                showToast('Withdrawal rejected and amount returned');
-                loadAdminData();
-            })
-            .catch((error) => {
-                showToast('Error rejecting withdrawal', 'error');
-            });
-        }
-
-        function sendAnnouncement() {
-            const title = document.getElementById('announcement-title').value;
-            const content = document.getElementById('announcement-content').value;
-            
-            if (!title || !content) {
-                showToast('Please fill all fields', 'error');
-                return;
-            }
-            
-            db.collection('announcements').add({
-                title: title,
-                content: content,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                showToast('Announcement sent');
-                document.getElementById('announcement-title').value = '';
-                document.getElementById('announcement-content').value = '';
-            })
-            .catch((error) => {
-                showToast('Error sending announcement', 'error');
-            });
-        }
-
         // Game functions
         function startScratchGame() {
             const selectedBet = document.querySelector('#scratch-modal .bet-option.selected');
@@ -2192,7 +1880,16 @@
                 // Start the game
                 showToast('Game started! Find matching animals');
                 
-                // Game logic with 20% win chance
+                // Save game history
+                db.collection('game_history').add({
+                    userId: currentUser.uid,
+                    game: 'Scratch Match',
+                    bet: betAmount,
+                    result: 'pending',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // 20% chance to win
                 if (Math.random() < 0.2) {
                     // Win 2x bet amount
                     const winAmount = betAmount * 2;
@@ -2200,10 +1897,118 @@
                         balance: firebase.firestore.FieldValue.increment(winAmount)
                     })
                     .then(() => {
+                        // Update game history
+                        db.collection('game_history')
+                            .where('userId', '==', currentUser.uid)
+                            .orderBy('createdAt', 'desc')
+                            .limit(1)
+                            .get()
+                            .then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    db.collection('game_history').doc(doc.id).update({
+                                        result: 'win',
+                                        winAmount: winAmount
+                                    });
+                                });
+                            });
+                            
                         showToast(`Congratulations! You won ₹${winAmount}`);
                         loadUserData();
                     });
                 } else {
+                    // Update game history
+                    db.collection('game_history')
+                        .where('userId', '==', currentUser.uid)
+                        .orderBy('createdAt', 'desc')
+                        .limit(1)
+                        .get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                db.collection('game_history').doc(doc.id).update({
+                                    result: 'loss'
+                                });
+                            });
+                        });
+                        
+                    showToast('Sorry, better luck next time!', 'warning');
+                }
+            })
+            .catch((error) => {
+                showToast('Error starting game', 'error');
+            });
+        }
+
+        function startArcheryGame() {
+            const selectedBet = document.querySelector('#archery-modal .bet-option.selected');
+            if (!selectedBet) {
+                showToast('Please select a bet amount', 'error');
+                return;
+            }
+            
+            const betAmount = parseInt(selectedBet.dataset.bet);
+            if (userData.balance < betAmount) {
+                showToast('Insufficient balance', 'error');
+                return;
+            }
+            
+            // Deduct bet amount
+            db.collection('users').doc(currentUser.uid).update({
+                balance: firebase.firestore.FieldValue.increment(-betAmount)
+            })
+            .then(() => {
+                // Start the game
+                showToast('Game started! Aim and shoot!');
+                
+                // Save game history
+                db.collection('game_history').add({
+                    userId: currentUser.uid,
+                    game: 'Perfect Aim',
+                    bet: betAmount,
+                    result: 'pending',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // 20% chance to win
+                if (Math.random() < 0.2) {
+                    // Win 2x bet amount
+                    const winAmount = betAmount * 2;
+                    db.collection('users').doc(currentUser.uid).update({
+                        balance: firebase.firestore.FieldValue.increment(winAmount)
+                    })
+                    .then(() => {
+                        // Update game history
+                        db.collection('game_history')
+                            .where('userId', '==', currentUser.uid)
+                            .orderBy('createdAt', 'desc')
+                            .limit(1)
+                            .get()
+                            .then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    db.collection('game_history').doc(doc.id).update({
+                                        result: 'win',
+                                        winAmount: winAmount
+                                    });
+                                });
+                            });
+                            
+                        showToast(`Congratulations! You won ₹${winAmount}`);
+                        loadUserData();
+                    });
+                } else {
+                    // Update game history
+                    db.collection('game_history')
+                        .where('userId', '==', currentUser.uid)
+                        .orderBy('createdAt', 'desc')
+                        .limit(1)
+                        .get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                db.collection('game_history').doc(doc.id).update({
+                                    result: 'loss'
+                                });
+                            });
+                        });
+                        
                     showToast('Sorry, better luck next time!', 'warning');
                 }
             })
@@ -2228,6 +2033,13 @@
                     container.appendChild(option);
                 });
             });
+            
+            // Check for referral code in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            if (refCode) {
+                document.getElementById('signup-referral').value = refCode;
+            }
         });
     </script>
 </body>
