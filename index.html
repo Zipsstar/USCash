@@ -24,7 +24,6 @@
             --grid-item-2: #16213e;
             --grid-item-3: #0f3460;
             --neon-glow: 0 0 10px var(--secondary), 0 0 20px var(--secondary), 0 0 30px var(--secondary);
-            --secondary-rgb: 0, 168, 255;
         }
 
         * {
@@ -55,20 +54,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
-            background-size: cover;
-            position: relative;
-        }
-
-        .auth-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 26, 0.85);
-            backdrop-filter: blur(5px);
         }
 
         .auth-card {
@@ -77,11 +62,8 @@
             padding: 30px;
             width: 100%;
             max-width: 450px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(var(--secondary-rgb), 0.3);
-            position: relative;
-            z-index: 1;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--secondary-rgb), 0.2);
         }
 
         .auth-header {
@@ -157,13 +139,6 @@
             background: rgba(0, 0, 0, 0.2);
             color: var(--text);
             font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
 
         .btn {
@@ -253,13 +228,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .balance:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0, 168, 255, 0.5);
         }
 
         .vip-badge {
@@ -292,14 +260,6 @@
         .announcement-icon {
             position: relative;
             cursor: pointer;
-            font-size: 20px;
-            padding: 8px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .announcement-icon:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
 
         .announcement-badge {
@@ -308,25 +268,13 @@
             right: -5px;
             background: var(--danger);
             color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .menu-icon {
-            cursor: pointer;
-            font-size: 20px;
-            padding: 8px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .menu-icon:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Ticker Styles */
@@ -380,7 +328,7 @@
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 30px;
         }
 
@@ -651,12 +599,10 @@
             font-size: 12px;
             color: var(--text);
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .menu-item:hover, .menu-item.active {
+        .menu-item.active {
             color: var(--secondary);
-            transform: translateY(-2px);
         }
 
         /* Side Menu */
@@ -693,14 +639,10 @@
             background: rgba(255, 255, 255, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .side-menu-item:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-5px);
         }
 
         /* Responsive Design */
@@ -793,12 +735,10 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
         .scratch-card.scratched {
             background: transparent;
-            transform: rotateY(180deg);
         }
 
         .archery-board {
@@ -859,7 +799,6 @@
             font-weight: bold;
             margin: 15px 0;
             color: var(--accent);
-            text-shadow: 0 0 10px rgba(255, 206, 0, 0.5);
         }
 
         .card-grid {
@@ -930,11 +869,6 @@
             justify-content: center;
             font-size: 32px;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tictactoe-cell:hover {
-            background: rgba(var(--secondary-rgb), 0.2);
         }
 
         .fruit-game-area {
@@ -959,271 +893,77 @@
             font-weight: bold;
             color: var(--accent);
         }
-
-        /* New Game: Lucky Wheel */
-        .wheel-container {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            margin: 0 auto;
+        
+        /* Admin Panel Styles */
+        .admin-panel {
+            display: none;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin-top: 20px;
         }
-
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(
-                #ff6b6b 0deg 45deg, 
-                #4ecdc4 45deg 90deg,
-                #ffd166 90deg 135deg,
-                #06d6a0 135deg 180deg,
-                #118ab2 180deg 225deg,
-                #073b4c 225deg 270deg,
-                #f72585 270deg 315deg,
-                #7209b7 315deg 360deg
-            );
-            position: relative;
-            transition: transform 4s cubic-bezier(0.3, 0.1, 0.1, 1);
-            transform: rotate(0deg);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        
+        .admin-section {
+            margin-bottom: 30px;
         }
-
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 50%;
-            z-index: 10;
+        
+        .admin-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent);
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .wheel-pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 40px;
-            background: var(--accent);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 11;
-        }
-
-        /* New Game: Dice Roll */
-        .dice-container {
-            perspective: 1000px;
-            width: 100px;
-            height: 100px;
-            margin: 20px auto;
-        }
-
-        .dice {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s;
-        }
-
-        .dice-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: white;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: black;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .dice-face-1 { transform: rotateY(0deg) translateZ(50px); }
-        .dice-face-2 { transform: rotateY(90deg) translateZ(50px); }
-        .dice-face-3 { transform: rotateX(90deg) translateZ(50px); }
-        .dice-face-4 { transform: rotateX(-90deg) translateZ(50px); }
-        .dice-face-5 { transform: rotateY(-90deg) translateZ(50px); }
-        .dice-face-6 { transform: rotateY(180deg) translateZ(50px); }
-
-        .dice-dot {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: black;
-            position: absolute;
-        }
-
-        /* New Game: Memory Cards */
-        .memory-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin: 15px 0;
         }
-
-        .memory-card {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-        }
-
-        .memory-card.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .memory-card .front, .memory-card .back {
-            position: absolute;
+        
+        .admin-table {
             width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
+            border-collapse: collapse;
+            margin-bottom: 15px;
         }
-
-        .memory-card .front {
-            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
+        
+        .admin-table th, .admin-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-table th {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .admin-action-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .btn-approve {
+            background: var(--success);
             color: white;
         }
-
-        .memory-card .back {
-            background: white;
-            color: black;
-            transform: rotateY(180deg);
-            border: 2px solid var(--secondary);
+        
+        .btn-reject {
+            background: var(--danger);
+            color: white;
         }
-
-        /* Enhanced Game Graphics */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--secondary);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 10s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100vw) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
-            opacity: 0;
-            z-index: 1000;
-            animation: confetti-fall 5s linear forwards;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Enhanced UI Elements */
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary) 0%, #0077b6 100%);
-            border-radius: 5px;
-            transition: width 0.5s ease;
-        }
-
-        .stats-container {
+        
+        .search-box {
+            margin-bottom: 15px;
             display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
+            gap: 10px;
         }
-
-        .stat-item {
-            text-align: center;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+        
+        .search-input {
             flex: 1;
-            margin: 0 5px;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--accent);
-        }
-
-        .stat-label {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        /* Enhanced animations */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        .shake {
-            animation: shake 0.5s;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text);
         }
     </style>
 </head>
@@ -1483,57 +1223,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- New Game: Lucky Wheel -->
-                <div class="game-card" onclick="openGameModal('wheel-modal')">
-                    <div class="game-thumb">
-                        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Lucky Wheel">
-                        <div class="game-badge">SPIN TO WIN</div>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">
-                            <i class="fas fa-dharmachakra"></i> Lucky Wheel
-                        </h3>
-                        <p class="game-desc">Spin the wheel for a chance to win big!</p>
-                        <button class="play-btn">
-                            <i class="fas fa-play"></i> Play Now
-                        </button>
-                    </div>
-                </div>
-
-                <!-- New Game: Dice Roll -->
-                <div class="game-card" onclick="openGameModal('dice-modal')">
-                    <div class="game-thumb">
-                        <img src="https://images.unsplash.com/photo-1610359588664-d6d6efcd5b6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Dice Roll">
-                        <div class="game-badge">LUCKY ROLL</div>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">
-                            <i class="fas fa-dice"></i> Dice Roll
-                        </h3>
-                        <p class="game-desc">Roll the dice and test your luck!</p>
-                        <button class="play-btn">
-                            <i class="fas fa-play"></i> Play Now
-                        </button>
-                    </div>
-                </div>
-
-                <!-- New Game: Memory Match -->
-                <div class="game-card" onclick="openGameModal('memory-modal')">
-                    <div class="game-thumb">
-                        <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Memory Match">
-                        <div class="game-badge">MEMORY TEST</div>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">
-                            <i class="fas fa-brain"></i> Memory Match
-                        </h3>
-                        <p class="game-desc">Find matching pairs in this memory game!</p>
-                        <button class="play-btn">
-                            <i class="fas fa-play"></i> Play Now
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <h2 class="section-title">
@@ -1668,28 +1357,83 @@
                     </div>
                 </div>
             </div>
-
-            <!-- User Stats Section -->
-            <h2 class="section-title">
-                <i class="fas fa-chart-line"></i> Your Statistics
-            </h2>
             
-            <div class="stats-container">
-                <div class="stat-item">
-                    <div class="stat-value" id="games-played">0</div>
-                    <div class="stat-label">Games Played</div>
+            <!-- Admin Panel (Visible only to admins) -->
+            <div class="admin-panel" id="admin-panel">
+                <h2 class="section-title">
+                    <i class="fas fa-cog"></i> Admin Panel
+                </h2>
+                
+                <div class="admin-section">
+                    <h3 class="admin-section-title">
+                        <i class="fas fa-users"></i> User Management
+                    </h3>
+                    <div class="search-box">
+                        <input type="text" id="user-search" class="search-input" placeholder="Search users by name...">
+                        <button class="btn btn-primary" onclick="searchUsers()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                    <div class="search-results" id="user-search-results"></div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="games-won">0</div>
-                    <div class="stat-label">Games Won</div>
+                
+                <div class="admin-section">
+                    <h3 class="admin-section-title">
+                        <i class="fas fa-money-bill-wave"></i> Deposit Requests
+                    </h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Transaction ID</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="deposit-requests-list">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="win-rate">0%</div>
-                    <div class="stat-label">Win Rate</div>
+                
+                <div class="admin-section">
+                    <h3 class="admin-section-title">
+                        <i class="fas fa-wallet"></i> Withdrawal Requests
+                    </h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Account Number</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="withdrawal-requests-list">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value">₹<span id="total-won">0</span></div>
-                    <div class="stat-label">Total Won</div>
+                
+                <div class="admin-section">
+                    <h3 class="admin-section-title">
+                        <i class="fas fa-bullhorn"></i> Send Announcement
+                    </h3>
+                    <div class="form-group">
+                        <label for="announcement-title">Title</label>
+                        <input type="text" id="announcement-title" class="form-control" placeholder="Announcement title">
+                    </div>
+                    <div class="form-group">
+                        <label for="announcement-content">Content</label>
+                        <textarea id="announcement-content" class="form-control" rows="3" placeholder="Announcement content"></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="sendAnnouncement()">
+                        <i class="fas fa-paper-plane"></i> Send Announcement
+                    </button>
                 </div>
             </div>
         </div>
@@ -1826,123 +1570,7 @@
         </div>
     </div>
 
-    <!-- Lucky Wheel Modal -->
-    <div class="modal" id="wheel-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-dharmachakra"></i> Lucky Wheel
-                </h3>
-                <button class="close-modal" onclick="closeModal('wheel-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Spin the wheel for a chance to win up to 10x your bet!</p>
-                    <div class="bet-options">
-                        <div class="bet-option" data-bet="20">₹20</div>
-                        <div class="bet-option" data-bet="50">₹50</div>
-                        <div class="bet-option" data-bet="70">₹70</div>
-                        <div class="bet-option" data-bet="100">₹100</div>
-                        <div class="bet-option" data-bet="150">₹150</div>
-                        <div class="bet-option" data-bet="180">₹180</div>
-                        <div class="bet-option" data-bet="200">₹200</div>
-                        <div class="bet-option" data-bet="300">₹300</div>
-                    </div>
-                    <div class="wheel-container">
-                        <div class="wheel" id="wheel">
-                            <div class="wheel-center">
-                                <i class="fas fa-gem" style="color: var(--accent);"></i>
-                            </div>
-                        </div>
-                        <div class="wheel-pointer"></div>
-                    </div>
-                    <div class="timer-display" id="wheel-result">Spin to win!</div>
-                    <button class="btn btn-primary" onclick="spinWheel()">
-                        <i class="fas fa-play"></i> Spin Wheel (1x-10x)
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dice Roll Modal -->
-    <div class="modal" id="dice-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-dice"></i> Dice Roll
-                </h3>
-                <button class="close-modal" onclick="closeModal('dice-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Predict if the dice will roll high (4-6) or low (1-3) to win 2x your bet!</p>
-                    <div class="bet-options">
-                        <div class="bet-option" data-bet="20">₹20</div>
-                        <div class="bet-option" data-bet="50">₹50</div>
-                        <div class="bet-option" data-bet="70">₹70</div>
-                        <div class="bet-option" data-bet="100">₹100</div>
-                        <div class="bet-option" data-bet="150">₹150</div>
-                        <div class="bet-option" data-bet="180">₹180</div>
-                        <div class="bet-option" data-bet="200">₹200</div>
-                        <div class="bet-option" data-bet="300">₹300</div>
-                    </div>
-                    <div class="dice-container">
-                        <div class="dice" id="dice">
-                            <div class="dice-face dice-face-1">⚀</div>
-                            <div class="dice-face dice-face-2">⚁</div>
-                            <div class="dice-face dice-face-3">⚂</div>
-                            <div class="dice-face dice-face-4">⚃</div>
-                            <div class="dice-face dice-face-5">⚄</div>
-                            <div class="dice-face dice-face-6">⚅</div>
-                        </div>
-                    </div>
-                    <div class="bet-options" style="margin: 20px 0;">
-                        <div class="bet-option" data-choice="high">High (4-6)</div>
-                        <div class="bet-option" data-choice="low">Low (1-3)</div>
-                    </div>
-                    <div class="timer-display" id="dice-result">Roll the dice!</div>
-                    <button class="btn btn-primary" onclick="rollDice()">
-                        <i class="fas fa-play"></i> Roll Dice (2x)
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Memory Match Modal -->
-    <div class="modal" id="memory-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-brain"></i> Memory Match
-                </h3>
-                <button class="close-modal" onclick="closeModal('memory-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <p>Find all matching pairs before time runs out to win 3x your bet!</p>
-                    <div class="bet-options">
-                        <div class="bet-option" data-bet="20">₹20</div>
-                        <div class="bet-option" data-bet="50">₹50</div>
-                        <div class="bet-option" data-bet="70">₹70</div>
-                        <div class="bet-option" data-bet="100">₹100</div>
-                        <div class="bet-option" data-bet="150">₹150</div>
-                        <div class="bet-option" data-bet="180">₹180</div>
-                        <div class="bet-option" data-bet="200">₹200</div>
-                        <div class="bet-option" data-bet="300">₹300</div>
-                    </div>
-                    <div class="timer-display" id="memory-timer">60</div>
-                    <div class="memory-grid" id="memory-grid">
-                        <!-- Cards will be generated here -->
-                    </div>
-                    <button class="btn btn-primary" onclick="startMemoryGame()">
-                        <i class="fas fa-play"></i> Start Game (3x)
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Other game modals would follow similar structure -->
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">
@@ -1951,13 +1579,8 @@
     </div>
 
     <!-- Firebase initialization -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, increment, serverTimestamp, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-        // Your web app's Firebase configuration
+    <script>
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
             authDomain: "pakcashplay.firebaseapp.com",
@@ -1968,17 +1591,18 @@
         };
 
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
 
         // Global variables
         let currentUser = null;
         let userData = null;
         const bettingOptions = [20, 50, 70, 100, 150, 180, 200, 300];
+        const adminEmails = ['cptanil1995@gmail.com', 'auk5562@gmail.com', 'kafe2999@gmail.com'];
 
         // Check authentication state
-        onAuthStateChanged(auth, (user) => {
+        auth.onAuthStateChanged((user) => {
             if (user) {
                 currentUser = user;
                 // Check if user has accepted terms
@@ -1986,6 +1610,12 @@
                     document.getElementById('terms-modal').style.display = 'flex';
                 } else {
                     loadUserData();
+                }
+                
+                // Check if user is admin
+                if (adminEmails.includes(user.email)) {
+                    document.getElementById('admin-panel').style.display = 'block';
+                    loadAdminData();
                 }
             } else {
                 // Show auth container if not logged in
@@ -1999,18 +1629,11 @@
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
             
-            if (tab === 'login') {
-                document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
-                document.getElementById('login-form').classList.add('active');
-            } else if (tab === 'signup') {
-                document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
-                document.getElementById('signup-form').classList.add('active');
-            } else if (tab === 'forgot') {
-                document.getElementById('forgot-form').classList.add('active');
-            }
+            document.querySelector(`.auth-tab:nth-child(${tab === 'login' ? 1 : 2})`).classList.add('active');
+            document.getElementById(`${tab}-form`).classList.add('active');
         }
 
-        async function login() {
+        function login() {
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             
@@ -2019,15 +1642,16 @@
                 return;
             }
             
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                showToast('Login successful!');
-            } catch (error) {
-                showToast(error.message, 'error');
-            }
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    showToast('Login successful!');
+                })
+                .catch((error) => {
+                    showToast(error.message, 'error');
+                });
         }
 
-        async function signup() {
+        function signup() {
             const name = document.getElementById('signup-name').value;
             const email = document.getElementById('signup-email').value;
             const phone = document.getElementById('signup-phone').value;
@@ -2045,39 +1669,47 @@
                 return;
             }
             
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                
-                // Save user data to Firestore
-                await setDoc(doc(db, 'users', userCredential.user.uid), {
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    balance: 0,
-                    vip: 0,
-                    referrals: 0,
-                    referralEarnings: 0,
-                    gamesPlayed: 0,
-                    gamesWon: 0,
-                    totalWon: 0,
-                    watchAndEarn: {
-                        unlocked: false,
-                        adsWatched: 0,
-                        daysRemaining: 0
-                    },
-                    referralCode: generateReferralCode(),
-                    referredBy: referral || null,
-                    createdAt: serverTimestamp()
+            // Check if email is already in use
+            auth.fetchSignInMethodsForEmail(email)
+                .then((signInMethods) => {
+                    if (signInMethods.length > 0) {
+                        showToast('Email is already in use', 'error');
+                        return;
+                    }
+                    
+                    // Create user with email and password
+                    return auth.createUserWithEmailAndPassword(email, password);
+                })
+                .then((userCredential) => {
+                    // Save user data to Firestore
+                    return db.collection('users').doc(userCredential.user.uid).set({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        balance: 0,
+                        vip: 0,
+                        referrals: 0,
+                        referralEarnings: 0,
+                        watchAndEarn: {
+                            unlocked: false,
+                            adsWatched: 0,
+                            daysRemaining: 0
+                        },
+                        referralCode: generateReferralCode(),
+                        referredBy: referral || null,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    showToast('Account created successfully!');
+                    switchAuthTab('login');
+                })
+                .catch((error) => {
+                    showToast(error.message, 'error');
                 });
-                
-                showToast('Account created successfully!');
-                switchAuthTab('login');
-            } catch (error) {
-                showToast(error.message, 'error');
-            }
         }
 
-        async function resetPassword() {
+        function resetPassword() {
             const email = document.getElementById('forgot-email').value;
             
             if (!email) {
@@ -2085,12 +1717,13 @@
                 return;
             }
             
-            try {
-                await sendPasswordResetEmail(auth, email);
-                showToast('Password reset email sent!');
-            } catch (error) {
-                showToast(error.message, 'error');
-            }
+            auth.sendPasswordResetEmail(email)
+                .then(() => {
+                    showToast('Password reset email sent!');
+                })
+                .catch((error) => {
+                    showToast(error.message, 'error');
+                });
         }
 
         function acceptTerms() {
@@ -2099,47 +1732,19 @@
             loadUserData();
         }
 
-        async function loadUserData() {
+        function loadUserData() {
             if (!currentUser) return;
             
-            try {
-                const docSnap = await getDoc(doc(db, 'users', currentUser.uid));
-                
-                if (docSnap.exists()) {
-                    userData = docSnap.data();
-                    updateUI();
-                } else {
-                    // Create user document if it doesn't exist
-                    await setDoc(doc(db, 'users', currentUser.uid), {
-                        name: currentUser.displayName || 'User',
-                        email: currentUser.email,
-                        phone: '',
-                        balance: 0,
-                        vip: 0,
-                        referrals: 0,
-                        referralEarnings: 0,
-                        gamesPlayed: 0,
-                        gamesWon: 0,
-                        totalWon: 0,
-                        watchAndEarn: {
-                            unlocked: false,
-                            adsWatched: 0,
-                            daysRemaining: 0
-                        },
-                        referralCode: generateReferralCode(),
-                        referredBy: null,
-                        createdAt: serverTimestamp()
-                    });
-                    
-                    // Reload user data
-                    const newDocSnap = await getDoc(doc(db, 'users', currentUser.uid));
-                    userData = newDocSnap.data();
-                    updateUI();
-                }
-            } catch (error) {
-                console.error('Error loading user data:', error);
-                showToast('Error loading user data', 'error');
-            }
+            db.collection('users').doc(currentUser.uid).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        userData = doc.data();
+                        updateUI();
+                    }
+                })
+                .catch((error) => {
+                    showToast('Error loading user data', 'error');
+                });
         }
 
         function updateUI() {
@@ -2151,15 +1756,8 @@
             document.getElementById('referral-link').value = `https://uscash.com/ref/${userData.referralCode}`;
             document.getElementById('referrals-count').textContent = userData.referrals;
             document.getElementById('referrals-earnings').textContent = userData.referralEarnings.toFixed(2);
-            document.getElementById('games-played').textContent = userData.gamesPlayed || 0;
-            document.getElementById('games-won').textContent = userData.gamesWon || 0;
-            document.getElementById('total-won').textContent = userData.totalWon || 0;
             
-            // Calculate win rate
-            const winRate = userData.gamesPlayed > 0 ? Math.round((userData.gamesWon / userData.gamesPlayed) * 100) : 0;
-            document.getElementById('win-rate').textContent = `${winRate}%`;
-            
-            if (userData.watchAndEarn && userData.watchAndEarn.unlocked) {
+            if (userData.watchAndEarn.unlocked) {
                 document.getElementById('ads-watched').textContent = userData.watchAndEarn.adsWatched;
                 document.getElementById('ads-days').textContent = userData.watchAndEarn.daysRemaining;
                 document.getElementById('watch-ad-btn').disabled = userData.watchAndEarn.adsWatched >= 10;
@@ -2167,9 +1765,6 @@
             
             document.getElementById('auth-container').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
-            
-            // Create background particles
-            createParticles();
         }
 
         function refreshBalance() {
@@ -2177,13 +1772,10 @@
             showToast('Balance refreshed');
         }
 
-        async function logout() {
-            try {
-                await signOut(auth);
+        function logout() {
+            auth.signOut().then(() => {
                 showToast('Logged out successfully');
-            } catch (error) {
-                showToast('Error logging out', 'error');
-            }
+            });
         }
 
         function showToast(message, type = 'success') {
@@ -2238,12 +1830,12 @@
             const copyText = document.getElementById("referral-link");
             copyText.select();
             copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value);
+            document.execCommand("copy");
             
             showToast("Referral link copied to clipboard!");
         }
 
-        async function submitDeposit() {
+        function submitDeposit() {
             const accountName = document.getElementById('deposit-account-name').value;
             const method = document.getElementById('deposit-method').value;
             const amount = parseInt(document.getElementById('deposit-amount').value);
@@ -2259,31 +1851,30 @@
                 return;
             }
             
-            try {
-                // Save deposit request to Firestore
-                await addDoc(collection(db, 'deposits'), {
-                    userId: currentUser.uid,
-                    accountName: accountName,
-                    method: method,
-                    amount: amount,
-                    transactionId: transactionId,
-                    status: 'pending',
-                    createdAt: serverTimestamp()
-                });
-                
+            // Save deposit request to Firestore
+            db.collection('deposit_requests').add({
+                userId: currentUser.uid,
+                accountName: accountName,
+                method: method,
+                amount: amount,
+                transactionId: transactionId,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
                 showToast('Deposit request submitted for approval');
                 // Clear form
                 document.getElementById('deposit-account-name').value = '';
                 document.getElementById('deposit-method').value = '';
                 document.getElementById('deposit-amount').value = '';
                 document.getElementById('deposit-transaction-id').value = '';
-                closeModal('deposit-modal');
-            } catch (error) {
+            })
+            .catch((error) => {
                 showToast('Error submitting deposit request', 'error');
-            }
+            });
         }
 
-        async function submitWithdrawal() {
+        function submitWithdrawal() {
             const name = document.getElementById('withdraw-name').value;
             const accountNumber = document.getElementById('withdraw-account-number').value;
             const method = document.getElementById('withdraw-method').value;
@@ -2304,60 +1895,60 @@
                 return;
             }
             
-            try {
-                // Save withdrawal request to Firestore
-                await addDoc(collection(db, 'withdrawals'), {
-                    userId: currentUser.uid,
-                    name: name,
-                    accountNumber: accountNumber,
-                    method: method,
-                    amount: amount,
-                    status: 'pending',
-                    createdAt: serverTimestamp()
-                });
-                
+            // Save withdrawal request to Firestore
+            db.collection('withdraw_requests').add({
+                userId: currentUser.uid,
+                name: name,
+                accountNumber: accountNumber,
+                method: method,
+                amount: amount,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
                 // Deduct amount from user balance
-                await updateDoc(doc(db, 'users', currentUser.uid), {
-                    balance: increment(-amount)
+                return db.collection('users').doc(currentUser.uid).update({
+                    balance: firebase.firestore.FieldValue.increment(-amount)
                 });
-                
+            })
+            .then(() => {
                 showToast('Withdrawal request submitted');
                 // Clear form
                 document.getElementById('withdraw-name').value = '';
                 document.getElementById('withdraw-account-number').value = '';
                 document.getElementById('withdraw-method').value = '';
                 document.getElementById('withdraw-amount').value = '';
-                closeModal('withdraw-modal');
                 // Refresh user data
                 loadUserData();
-            } catch (error) {
+            })
+            .catch((error) => {
                 showToast('Error submitting withdrawal request', 'error');
-            }
+            });
         }
 
-        async function unlockWatchAndEarn() {
+        function unlockWatchAndEarn() {
             if (userData.balance < 150) {
                 showToast('Insufficient balance', 'error');
                 return;
             }
             
-            try {
-                // Deduct ₹150 from balance
-                await updateDoc(doc(db, 'users', currentUser.uid), {
-                    balance: increment(-150),
-                    'watchAndEarn.unlocked': true,
-                    'watchAndEarn.adsWatched': 0,
-                    'watchAndEarn.daysRemaining': 4
-                });
-                
+            // Deduct ₹150 from balance
+            db.collection('users').doc(currentUser.uid).update({
+                balance: firebase.firestore.FieldValue.increment(-150),
+                'watchAndEarn.unlocked': true,
+                'watchAndEarn.adsWatched': 0,
+                'watchAndEarn.daysRemaining': 4
+            })
+            .then(() => {
                 showToast('Watch & Earn unlocked for 4 days!');
                 loadUserData();
-            } catch (error) {
+            })
+            .catch((error) => {
                 showToast('Error unlocking feature', 'error');
-            }
+            });
         }
 
-        async function watchAd() {
+        function watchAd() {
             if (!userData.watchAndEarn.unlocked) {
                 showToast('Please unlock Watch & Earn first', 'error');
                 return;
@@ -2371,19 +1962,19 @@
             // Show ad simulation
             showToast('Playing ad...', 'info');
             
-            setTimeout(async () => {
-                try {
-                    // Add ₹1.25 to balance and update ads watched
-                    await updateDoc(doc(db, 'users', currentUser.uid), {
-                        balance: increment(1.25),
-                        'watchAndEarn.adsWatched': increment(1)
-                    });
-                    
+            setTimeout(() => {
+                // Add ₹1.25 to balance and update ads watched
+                db.collection('users').doc(currentUser.uid).update({
+                    balance: firebase.firestore.FieldValue.increment(1.25),
+                    'watchAndEarn.adsWatched': firebase.firestore.FieldValue.increment(1)
+                })
+                .then(() => {
                     showToast('Ad completed! ₹1.25 added to your balance');
                     loadUserData();
-                } catch (error) {
+                })
+                .catch((error) => {
                     showToast('Error processing ad reward', 'error');
-                }
+                });
             }, 3000);
         }
 
@@ -2391,8 +1982,196 @@
             return Math.random().toString(36).substring(2, 8).toUpperCase();
         }
 
+        // Admin functions
+        function loadAdminData() {
+            if (!currentUser || !adminEmails.includes(currentUser.email)) return;
+            
+            // Load deposit requests
+            db.collection('deposit_requests').where('status', '==', 'pending').get()
+                .then((querySnapshot) => {
+                    const depositList = document.getElementById('deposit-requests-list');
+                    depositList.innerHTML = '';
+                    
+                    querySnapshot.forEach((doc) => {
+                        const request = doc.data();
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${request.accountName}</td>
+                            <td>₹${request.amount}</td>
+                            <td>${request.method}</td>
+                            <td>${request.transactionId}</td>
+                            <td>${request.status}</td>
+                            <td>
+                                <button class="admin-action-btn btn-approve" onclick="approveDeposit('${doc.id}', ${request.amount}, '${request.userId}')">Approve</button>
+                                <button class="admin-action-btn btn-reject" onclick="rejectDeposit('${doc.id}')">Reject</button>
+                            </td>
+                        `;
+                        depositList.appendChild(row);
+                    });
+                });
+            
+            // Load withdrawal requests
+            db.collection('withdraw_requests').where('status', '==', 'pending').get()
+                .then((querySnapshot) => {
+                    const withdrawalList = document.getElementById('withdrawal-requests-list');
+                    withdrawalList.innerHTML = '';
+                    
+                    querySnapshot.forEach((doc) => {
+                        const request = doc.data();
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${request.name}</td>
+                            <td>₹${request.amount}</td>
+                            <td>${request.method}</td>
+                            <td>${request.accountNumber}</td>
+                            <td>${request.status}</td>
+                            <td>
+                                <button class="admin-action-btn btn-approve" onclick="approveWithdrawal('${doc.id}', ${request.amount}, '${request.userId}')">Approve</button>
+                                <button class="admin-action-btn btn-reject" onclick="rejectWithdrawal('${doc.id}', ${request.amount}, '${request.userId}')">Reject</button>
+                            </td>
+                        `;
+                        withdrawalList.appendChild(row);
+                    });
+                });
+        }
+
+        function searchUsers() {
+            const searchTerm = document.getElementById('user-search').value.toLowerCase();
+            const resultsContainer = document.getElementById('user-search-results');
+            
+            db.collection('users').get()
+                .then((querySnapshot) => {
+                    resultsContainer.innerHTML = '';
+                    
+                    querySnapshot.forEach((doc) => {
+                        const user = doc.data();
+                        if (user.name.toLowerCase().includes(searchTerm)) {
+                            const userCard = document.createElement('div');
+                            userCard.className = 'action-card';
+                            userCard.innerHTML = `
+                                <h3>${user.name}</h3>
+                                <p>Email: ${user.email}</p>
+                                <p>Phone: ${user.phone}</p>
+                                <p>Balance: ₹${user.balance}</p>
+                                <p>VIP Level: ${user.vip}</p>
+                                <div class="form-group">
+                                    <label>Adjust Balance</label>
+                                    <input type="number" id="adjust-balance-${doc.id}" class="form-control" value="${user.balance}">
+                                </div>
+                                <button class="btn btn-primary" onclick="updateUserBalance('${doc.id}')">Update Balance</button>
+                            `;
+                            resultsContainer.appendChild(userCard);
+                        }
+                    });
+                });
+        }
+
+        function updateUserBalance(userId) {
+            const newBalance = parseFloat(document.getElementById(`adjust-balance-${userId}`).value);
+            
+            db.collection('users').doc(userId).update({
+                balance: newBalance
+            })
+            .then(() => {
+                showToast('Balance updated successfully');
+            })
+            .catch((error) => {
+                showToast('Error updating balance', 'error');
+            });
+        }
+
+        function approveDeposit(requestId, amount, userId) {
+            // Update request status
+            db.collection('deposit_requests').doc(requestId).update({
+                status: 'approved'
+            })
+            .then(() => {
+                // Add amount to user's balance
+                return db.collection('users').doc(userId).update({
+                    balance: firebase.firestore.FieldValue.increment(amount)
+                });
+            })
+            .then(() => {
+                showToast('Deposit approved');
+                loadAdminData();
+            })
+            .catch((error) => {
+                showToast('Error approving deposit', 'error');
+            });
+        }
+
+        function rejectDeposit(requestId) {
+            db.collection('deposit_requests').doc(requestId).update({
+                status: 'rejected'
+            })
+            .then(() => {
+                showToast('Deposit rejected');
+                loadAdminData();
+            })
+            .catch((error) => {
+                showToast('Error rejecting deposit', 'error');
+            });
+        }
+
+        function approveWithdrawal(requestId, amount, userId) {
+            db.collection('withdraw_requests').doc(requestId).update({
+                status: 'approved'
+            })
+            .then(() => {
+                showToast('Withdrawal approved');
+                loadAdminData();
+            })
+            .catch((error) => {
+                showToast('Error approving withdrawal', 'error');
+            });
+        }
+
+        function rejectWithdrawal(requestId, amount, userId) {
+            // Update request status
+            db.collection('withdraw_requests').doc(requestId).update({
+                status: 'rejected'
+            })
+            .then(() => {
+                // Return amount to user's balance
+                return db.collection('users').doc(userId).update({
+                    balance: firebase.firestore.FieldValue.increment(amount)
+                });
+            })
+            .then(() => {
+                showToast('Withdrawal rejected and amount returned');
+                loadAdminData();
+            })
+            .catch((error) => {
+                showToast('Error rejecting withdrawal', 'error');
+            });
+        }
+
+        function sendAnnouncement() {
+            const title = document.getElementById('announcement-title').value;
+            const content = document.getElementById('announcement-content').value;
+            
+            if (!title || !content) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+            
+            db.collection('announcements').add({
+                title: title,
+                content: content,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                showToast('Announcement sent');
+                document.getElementById('announcement-title').value = '';
+                document.getElementById('announcement-content').value = '';
+            })
+            .catch((error) => {
+                showToast('Error sending announcement', 'error');
+            });
+        }
+
         // Game functions
-        async function startScratchGame() {
+        function startScratchGame() {
             const selectedBet = document.querySelector('#scratch-modal .bet-option.selected');
             if (!selectedBet) {
                 showToast('Please select a bet amount', 'error');
@@ -2405,99 +2184,35 @@
                 return;
             }
             
-            try {
-                // Deduct bet amount
-                await updateDoc(doc(db, 'users', currentUser.uid), {
-                    balance: increment(-betAmount),
-                    gamesPlayed: increment(1)
-                });
-                
+            // Deduct bet amount
+            db.collection('users').doc(currentUser.uid).update({
+                balance: firebase.firestore.FieldValue.increment(-betAmount)
+            })
+            .then(() => {
                 // Start the game
                 showToast('Game started! Find matching animals');
                 
-                // Game logic would be implemented here
-                // 20% chance to win
+                // Game logic with 20% win chance
                 if (Math.random() < 0.2) {
                     // Win 2x bet amount
                     const winAmount = betAmount * 2;
-                    await updateDoc(doc(db, 'users', currentUser.uid), {
-                        balance: increment(winAmount),
-                        gamesWon: increment(1),
-                        totalWon: increment(winAmount)
+                    db.collection('users').doc(currentUser.uid).update({
+                        balance: firebase.firestore.FieldValue.increment(winAmount)
+                    })
+                    .then(() => {
+                        showToast(`Congratulations! You won ₹${winAmount}`);
+                        loadUserData();
                     });
-                    
-                    showToast(`Congratulations! You won ₹${winAmount}`);
-                    createConfetti();
                 } else {
                     showToast('Sorry, better luck next time!', 'warning');
                 }
-                
-                loadUserData();
-            } catch (error) {
+            })
+            .catch((error) => {
                 showToast('Error starting game', 'error');
-            }
+            });
         }
 
         // Other game functions would follow similar patterns
-
-        // UI enhancement functions
-        function createParticles() {
-            const particlesContainer = document.createElement('div');
-            particlesContainer.className = 'particles';
-            document.body.appendChild(particlesContainer);
-            
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                // Random size
-                const size = Math.random() * 5 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random position
-                particle.style.left = `${Math.random() * 100}vw`;
-                particle.style.top = `${Math.random() * 100}vh`;
-                
-                // Random animation delay
-                particle.style.animationDelay = `${Math.random() * 10}s`;
-                
-                // Random color
-                const colors = ['#00a8ff', '#ffce00', '#00ff8c', '#ff3860'];
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        function createConfetti() {
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                
-                // Random size
-                const size = Math.random() * 10 + 5;
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-                
-                // Random position
-                confetti.style.left = `${Math.random() * 100}vw`;
-                
-                // Random color
-                const colors = ['#00a8ff', '#ffce00', '#00ff8c', '#ff3860', '#7209b7', '#f72585'];
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Random animation delay
-                confetti.style.animationDelay = `${Math.random() * 0.5}s`;
-                
-                document.body.appendChild(confetti);
-                
-                // Remove after animation completes
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }
-        }
 
         // Initialize the app
         window.addEventListener('DOMContentLoaded', function() {
