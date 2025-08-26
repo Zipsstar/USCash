@@ -6,9 +6,30 @@
     <title>USCASH - Premium Gaming Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
+            authDomain: "pakcashplay.firebaseapp.com",
+            projectId: "pakcashplay",
+            storageBucket: "pakcashplay.firebasestorage.app",
+            messagingSenderId: "551195851632",
+            appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // Make Firebase available globally
+        window.firebase = { db, auth, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc };
+    </script>
     <style>
         :root {
             --primary: #0a0a1a;
@@ -753,9 +774,250 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #0077b6;
         }
+
+        /* New Game Styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .card {
+            width: 80px;
+            height: 120px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            margin: 0 auto;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .card .front {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0077b6 100%);
+            color: white;
+        }
+
+        .card .back {
+            background: white;
+            color: black;
+            transform: rotateY(180deg);
+            border: 2px solid var(--secondary);
+        }
+
+        .timer-display {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--accent);
+        }
+
+        .archery-board {
+            width: 300px;
+            height: 300px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+            border: 10px solid #8B4513;
+        }
+
+        .archery-target {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .target-10 { width: 60px; height: 60px; background: gold; z-index: 10; }
+        .target-9 { width: 100px; height: 100px; background: red; z-index: 9; }
+        .target-8 { width: 140px; height: 140px; background: blue; z-index: 8; }
+        .target-7 { width: 180px; height: 180px; background: black; z-index: 7; }
+        .target-6 { width: 220px; height: 220px; background: white; z-index: 6; border: 1px solid #ccc; }
+
+        .archery-pointer {
+            position: absolute;
+            width: 5px;
+            height: 40px;
+            background: #333;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.1s;
+        }
+
+        .archery-controls {
+            margin: 20px 0;
+        }
+
+        .chess-board {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            border: 2px solid #333;
+        }
+
+        .chess-square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .chess-square.white {
+            background: #f0d9b5;
+        }
+
+        .chess-square.black {
+            background: #b58863;
+        }
+
+        .tower-game {
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tower-block {
+            position: absolute;
+            background: #8B4513;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        /* Terms Modal */
+        .terms-modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .terms-content {
+            background: var(--modal-bg);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        .terms-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .terms-text {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .announcement-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .announcement-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .announcement-modal {
+            max-width: 800px;
+        }
+
+        .announcement-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .announcement-item {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .announcement-item:last-child {
+            border-bottom: none;
+        }
+
+        .announcement-date {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
+    <!-- Terms and Conditions Modal -->
+    <div class="terms-modal" id="terms-modal">
+        <div class="terms-content">
+            <h2 class="terms-title"><i class="fas fa-exclamation-circle"></i> Important Notice</h2>
+            <div class="terms-text">
+                <p>Welcome to USCASH Gaming Platform. Please read the following terms carefully:</p>
+                <p>1. This platform is not responsible for abandoned accounts.</p>
+                <p>2. If a user leaves their account inactive for more than 15 days, the platform reserves the right not to return the deposited money.</p>
+                <p>3. All games have a winning probability of approximately 20%.</p>
+                <p>4. The minimum withdrawal amount is ₹300 (350 PKR).</p>
+                <p>5. By using this platform, you agree to these terms and conditions.</p>
+            </div>
+            <button class="btn btn-primary" onclick="acceptTerms()">
+                <i class="fas fa-check"></i> I Accept
+            </button>
+        </div>
+    </div>
+
     <!-- Header Section -->
     <header>
         <div class="container">
@@ -774,6 +1036,10 @@
                     <div class="status">
                         <div class="status-dot"></div>
                         <span>Online</span>
+                    </div>
+                    <div class="announcement-icon" onclick="openModal('announcement-modal')">
+                        <i class="fas fa-bell"></i>
+                        <div class="announcement-badge">3</div>
                     </div>
                 </div>
             </div>
@@ -884,7 +1150,7 @@
                     <h3 class="game-title">
                         <i class="fas fa-times"></i> Tic-Tac-Toe
                     </h3>
-                    <p class="game-desc">Challenge opponents. Winner takes the bet!</p>
+                    <p class="game-desc">Challenge AI. Winner takes the bet!</p>
                     <button class="play-btn">
                         <i class="fas fa-play"></i> Play Now
                     </button>
@@ -901,7 +1167,7 @@
                     <h3 class="game-title">
                         <i class="fas fa-bullseye"></i> Archery
                     </h3>
-                    <p class="game-desc">Test your accuracy. Higher score wins!</p>
+                    <p class="game-desc">Test your accuracy. Hit the center 5 times to win!</p>
                     <button class="play-btn">
                         <i class="fas fa-play"></i> Play Now
                     </button>
@@ -912,13 +1178,47 @@
             <div class="game-card" onclick="openModal('chess-modal')">
                 <div class="game-thumb">
                     <img src="https://images.unsplash.com/photo-1528199886455-14d30f0fd2c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Chess">
-                    <div class="game-badge">DEMO</div>
+                    <div class="game-badge">STRATEGY</div>
                 </div>
                 <div class="game-info">
                     <h3 class="game-title">
                         <i class="fas fa-chess"></i> Chess
                     </h3>
-                    <p class="game-desc">Strategic 8x8 board game. Demo version.</p>
+                    <p class="game-desc">Challenge our AI in a game of strategic chess!</p>
+                    <button class="play-btn">
+                        <i class="fas fa-play"></i> Play Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Impossible Tower Game -->
+            <div class="game-card" onclick="openModal('tower-modal')">
+                <div class="game-thumb">
+                    <img src="https://images.unsplash.com/photo-1612489846076-ef8f35d63139?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Impossible Tower">
+                    <div class="game-badge">SKILL</div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">
+                        <i class="fas fa-building"></i> Impossible Tower
+                    </h3>
+                    <p class="game-desc">Build the tallest tower without letting it collapse!</p>
+                    <button class="play-btn">
+                        <i class="fas fa-play"></i> Play Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Number Match Game -->
+            <div class="game-card" onclick="openModal('number-match-modal')">
+                <div class="game-thumb">
+                    <img src="https://images.unsplash.com/photo-1586892472172-1249afd49e0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Number Match">
+                    <div class="game-badge">2x WIN</div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">
+                        <i class="fas fa-sort-numeric-up"></i> Number Match
+                    </h3>
+                    <p class="game-desc">Match cards to reach the target number and win!</p>
                     <button class="play-btn">
                         <i class="fas fa-play"></i> Play Now
                     </button>
@@ -1028,6 +1328,28 @@
                         <i class="fas fa-coins"></i> Earned from referrals: ₹1,250.00
                     </label>
                 </div>
+            </div>
+
+            <!-- Watch & Earn Card -->
+            <div class="action-card">
+                <h3 class="action-title">
+                    <i class="fas fa-tv"></i> Watch & Earn
+                </h3>
+                <p>Watch ads to earn rewards! 10 ads per day for 4 days after each deposit.</p>
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-ad"></i> Ads Watched Today: 3/10
+                    </label>
+                    <label>
+                        <i class="fas fa-calendar"></i> Days Remaining: 2/4
+                    </label>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;" onclick="watchAd()">
+                    <i class="fas fa-play-circle"></i> Watch Ad & Earn
+                </button>
+                <button class="btn" style="width: 100%; background: var(--accent); color: black;" onclick="unlockWatchAndEarn()">
+                    <i class="fas fa-unlock"></i> Unlock for 12 Days (₹200)
+                </button>
             </div>
         </div>
 
@@ -1229,7 +1551,7 @@
         </div>
     </div>
 
-    <!-- Other Game Modals (simplified for brevity) -->
+    <!-- Find Ace Modal -->
     <div class="modal" id="find-ace-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1240,10 +1562,54 @@
             </div>
             <div class="modal-body">
                 <div class="game-container">
-                    <p>Find the Ace card to win 2x your bet!</p>
-                    <!-- Game content would go here -->
-                    <button class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-play"></i> Play Find Ace (2x)
+                    <p>Find the Ace card among these cards. You have 4 flips and 15 seconds!</p>
+                    <div class="timer-display" id="find-ace-timer">15</div>
+                    <div class="card-grid" id="find-ace-grid">
+                        <div class="card" data-value="A">
+                            <div class="front">?</div>
+                            <div class="back">A</div>
+                        </div>
+                        <div class="card" data-value="K">
+                            <div class="front">?</div>
+                            <div class="back">K</div>
+                        </div>
+                        <div class="card" data-value="Q">
+                            <div class="front">?</div>
+                            <div class="back">Q</div>
+                        </div>
+                        <div class="card" data-value="J">
+                            <div class="front">?</div>
+                            <div class="back">J</div>
+                        </div>
+                        <div class="card" data-value="10">
+                            <div class="front">?</div>
+                            <div class="back">10</div>
+                        </div>
+                        <div class="card" data-value="9">
+                            <div class="front">?</div>
+                            <div class="back">9</div>
+                        </div>
+                        <div class="card" data-value="8">
+                            <div class="front">?</div>
+                            <div class="back">8</div>
+                        </div>
+                        <div class="card" data-value="7">
+                            <div class="front">?</div>
+                            <div class="back">7</div>
+                        </div>
+                        <div class="card" data-value="6">
+                            <div class="front">?</div>
+                            <div class="back">6</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-coins"></i> Select your bet amount (₹)
+                        </label>
+                        <input type="number" class="form-control" value="100" min="10">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="startFindAceGame()">
+                        <i class="fas fa-play"></i> Start Game (2x)
                     </button>
                     <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
                         <i class="fas fa-info-circle"></i> Win chance: 20%
@@ -1253,6 +1619,7 @@
         </div>
     </div>
 
+    <!-- Fruit Game Modal -->
     <div class="modal" id="fruit-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1276,6 +1643,222 @@
         </div>
     </div>
 
+    <!-- Tic-Tac-Toe Modal -->
+    <div class="modal" id="tictactoe-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-times"></i> Tic-Tac-Toe
+                </h3>
+                <button class="close-modal" onclick="closeModal('tictactoe-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-container">
+                    <p>Play against our AI. Make a line of 3 to win!</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 80px); grid-template-rows: repeat(3, 80px); gap: 5px; margin: 20px auto; width: fit-content;">
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                        <div class="tictactoe-cell" style="width: 80px; height: 80px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-coins"></i> Select your bet amount (₹)
+                        </label>
+                        <input type="number" class="form-control" value="100" min="10">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="startTicTacToe()">
+                        <i class="fas fa-play"></i> Start Game (2x)
+                    </button>
+                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
+                        <i class="fas fa-info-circle"></i> Win chance: 20%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Archery Modal -->
+    <div class="modal" id="archery-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-bullseye"></i> Archery Challenge
+                </h3>
+                <button class="close-modal" onclick="closeModal('archery-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-container">
+                    <p>Hit the center 5 times to win! You have 10 arrows.</p>
+                    <div class="archery-board">
+                        <div class="archery-target target-6"></div>
+                        <div class="archery-target target-7"></div>
+                        <div class="archery-target target-8"></div>
+                        <div class="archery-target target-9"></div>
+                        <div class="archery-target target-10"></div>
+                        <div class="archery-pointer" id="archery-pointer"></div>
+                    </div>
+                    <div class="archery-controls">
+                        <button class="btn btn-primary" id="archery-shoot" style="width: 100%;">Aim and Shoot!</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 15px 0;">
+                        <div>Score: <span id="archery-score">0</span>/50</div>
+                        <div>Shots: <span id="archery-shots">0</span>/10</div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-coins"></i> Select your bet amount (₹)
+                        </label>
+                        <input type="number" class="form-control" value="100" min="10">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="startArcheryGame()">
+                        <i class="fas fa-play"></i> Start Game (2x)
+                    </button>
+                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
+                        <i class="fas fa-info-circle"></i> Win chance: 20%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chess Modal -->
+    <div class="modal" id="chess-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-chess"></i> Chess Challenge
+                </h3>
+                <button class="close-modal" onclick="closeModal('chess-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-container">
+                    <p>Play against our AI in a game of chess. Checkmate to win!</p>
+                    <div class="chess-board" id="chess-board">
+                        <!-- Chess board will be generated by JavaScript -->
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-coins"></i> Select your bet amount (₹)
+                        </label>
+                        <input type="number" class="form-control" value="100" min="10">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="startChessGame()">
+                        <i class="fas fa-play"></i> Start Game (2x)
+                    </button>
+                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
+                        <i class="fas fa-info-circle"></i> Win chance: 20%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impossible Tower Modal -->
+    <div class="modal" id="tower-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-building"></i> Impossible Tower
+                </h3>
+                <button class="close-modal" onclick="closeModal('tower-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-container">
+                    <p>Build the tallest tower without letting it collapse! Tap at the right moment to place blocks.</p>
+                    <div class="tower-game" id="tower-game">
+                        <!-- Tower game will be rendered by JavaScript -->
+                    </div>
+                    <div style="margin: 15px 0;">
+                        <div>Height: <span id="tower-height">0</span> blocks</div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-coins"></i> Select your bet amount (₹)
+                        </label>
+                        <input type="number" class="form-control" value="100" min="10">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="startTowerGame()">
+                        <i class="fas fa-play"></i> Start Game (2x)
+                    </button>
+                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
+                        <i class="fas fa-info-circle"></i> Win chance: 20%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Number Match Modal -->
+    <div class="modal" id="number-match-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-sort-numeric-up"></i> Number Match
+                </h3>
+                <button class="close-modal" onclick="closeModal('number-match-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-container">
+                    <p>Match cards to reach the target number: <span id="target-number" style="font-weight: bold; color: var(--accent);">50</span></p>
+                    <div class="timer-display" id="number-match-timer">10</div>
+                    <div class="card-grid" id="number-match-grid">
+                        <!-- Cards will be generated by JavaScript -->
+                    </div>
+                    <div style="margin: 15px 0;">
+                        <div>Current Sum: <span id="current-sum">0</span></div>
+                        <div>Flips Left: <span id="flips-left">4</span></div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-coins"></i> Select your bet amount (₹)
+                        </label>
+                        <input type="number" class="form-control" value="100" min="10">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="startNumberMatchGame()">
+                        <i class="fas fa-play"></i> Start Game (2x)
+                    </button>
+                    <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
+                        <i class="fas fa-info-circle"></i> Win chance: 20%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Announcement Modal -->
+    <div class="modal" id="announcement-modal">
+        <div class="modal-content announcement-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-bullhorn"></i> Announcements
+                </h3>
+                <button class="close-modal" onclick="closeModal('announcement-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="announcement-list">
+                    <div class="announcement-item">
+                        <div class="announcement-date">25 Aug 2023, 14:30</div>
+                        <div>Welcome to USCASH! New users get a 100% bonus on their first deposit.</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-date">24 Aug 2023, 10:15</div>
+                        <div>Maintenance scheduled for tomorrow from 2:00 AM to 4:00 AM. The platform will be unavailable during this time.</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-date">22 Aug 2023, 16:45</div>
+                        <div>New game added: Archery Challenge! Test your skills and win big.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
@@ -1293,9 +1876,18 @@
             appId: "1:551195851632:web:4dcf6a8fb36d82e6a6adb5"
         };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        // Check if terms accepted
+        window.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('termsAccepted')) {
+                document.getElementById('terms-modal').style.display = 'flex';
+            }
+            
+            // Set daily theme
+            setDailyTheme();
+            
+            // Check device type and adjust layout
+            checkDeviceType();
+        });
 
         // Daily theme rotation
         function setDailyTheme() {
@@ -1307,6 +1899,26 @@
             } else {
                 document.body.classList.remove('theme-day2');
             }
+        }
+
+        // Check device type and adjust layout
+        function checkDeviceType() {
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            if (isAndroid) {
+                document.body.classList.add('android-device');
+                // Adjust layout for Android
+                const gamesGrid = document.querySelector('.games-grid');
+                if (gamesGrid) {
+                    gamesGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
+                }
+            }
+        }
+
+        // Accept terms and conditions
+        function acceptTerms() {
+            localStorage.setItem('termsAccepted', 'true');
+            document.getElementById('terms-modal').style.display = 'none';
+            showToast('Terms accepted. Enjoy gaming!');
         }
 
         // Show toast notification
@@ -1397,6 +2009,401 @@
             showToast('Scratch the cards to find matching symbols!');
         }
 
+        // Start Find Ace game
+        function startFindAceGame() {
+            showToast('Find Ace game started! Cards will be shown for 3 seconds.');
+            
+            // Show all cards
+            const cards = document.querySelectorAll('#find-ace-grid .card');
+            cards.forEach(card => {
+                card.classList.add('flipped');
+            });
+            
+            // Set timer
+            let timeLeft = 15;
+            const timerElement = document.getElementById('find-ace-timer');
+            timerElement.textContent = timeLeft;
+            
+            const timer = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // Hide cards after 3 seconds
+                    setTimeout(() => {
+                        cards.forEach(card => {
+                            card.classList.remove('flipped');
+                        });
+                        showToast('Cards hidden! Find the Ace!');
+                    }, 3000);
+                }
+            }, 1000);
+            
+            // Add click event to cards
+            let flips = 0;
+            const maxFlips = 4;
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    if (flips < maxFlips && !this.classList.contains('flipped')) {
+                        this.classList.add('flipped');
+                        flips++;
+                        
+                        if (this.dataset.value === 'A') {
+                            // 20% chance to win
+                            if (Math.random() < 0.2) {
+                                showToast('Congratulations! You found the Ace and won 2x your bet!');
+                            } else {
+                                showToast('Sorry, better luck next time!', 'warning');
+                            }
+                            clearInterval(timer);
+                        }
+                        
+                        if (flips >= maxFlips) {
+                            showToast('No more flips left!', 'warning');
+                            clearInterval(timer);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Start Tic-Tac-Toe game
+        function startTicTacToe() {
+            showToast('Tic-Tac-Toe game started! You are X, AI is O.');
+            
+            // Add game logic here
+            const cells = document.querySelectorAll('.tictactoe-cell');
+            cells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    if (!this.textContent) {
+                        this.textContent = 'X';
+                        // Check for win or draw
+                        // Then AI move
+                        setTimeout(() => {
+                            // AI logic here
+                            const emptyCells = Array.from(cells).filter(cell => !cell.textContent);
+                            if (emptyCells.length > 0) {
+                                const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                                randomCell.textContent = 'O';
+                                
+                                // Check for win or draw again
+                            }
+                        }, 500);
+                    }
+                });
+            });
+        }
+
+        // Start Archery game
+        function startArcheryGame() {
+            showToast('Archery game started! Hit the center 5 times to win.');
+            
+            // Initialize archery game
+            const pointer = document.getElementById('archery-pointer');
+            let pointerX = 50;
+            let pointerY = 50;
+            let movingRight = true;
+            let movingDown = true;
+            
+            // Move pointer animation
+            const movePointer = setInterval(() => {
+                if (movingRight) {
+                    pointerX += 2;
+                    if (pointerX >= 90) movingRight = false;
+                } else {
+                    pointerX -= 2;
+                    if (pointerX <= 10) movingRight = true;
+                }
+                
+                if (movingDown) {
+                    pointerY += 1;
+                    if (pointerY >= 90) movingDown = false;
+                } else {
+                    pointerY -= 1;
+                    if (pointerY <= 10) movingDown = true;
+                }
+                
+                pointer.style.left = pointerX + '%';
+                pointer.style.bottom = pointerY + '%';
+            }, 50);
+            
+            // Shoot button event
+            let score = 0;
+            let shots = 0;
+            const maxShots = 10;
+            
+            document.getElementById('archery-shoot').addEventListener('click', function() {
+                if (shots < maxShots) {
+                    shots++;
+                    document.getElementById('archery-shots').textContent = shots;
+                    
+                    // Calculate score based on pointer position
+                    const distanceFromCenter = Math.sqrt(Math.pow(pointerX - 50, 2) + Math.pow(pointerY - 50, 2));
+                    let points = 0;
+                    
+                    if (distanceFromCenter < 10) points = 10;
+                    else if (distanceFromCenter < 20) points = 9;
+                    else if (distanceFromCenter < 30) points = 8;
+                    else if (distanceFromCenter < 40) points = 7;
+                    else if (distanceFromCenter < 50) points = 6;
+                    
+                    score += points;
+                    document.getElementById('archery-score').textContent = score;
+                    
+                    // Play sound
+                    const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO+9iJNwgZaLvt6siIMwgUXrPp8M2NNgoWVqzo89KYPAwVU6fj9NWhQRAVTaPh99ipRBMVSp/g+dyvSBcWTp3e+OC2ThwYUZrc9+O9VB8bU5ja9+XEWiIdVZbY9ujKYCQfV5XV9+zQZCchVpPU9/DUaCsjWJHS9/PabDAlWpDQ9/XgcDUnW4/O9/bldDopXI3N9/nreT8rXozM9/zwfEMsX4vL+P/1gEgvYIvK+AD6hEwyYYrJ+AL9hk80YorI+AT/iFI2Y4rH+AbBi1Q4ZInG+AnEjVY5ZYjF+AvHkFk7ZofE+A3Kkls9Z4bD+A/MlF0/aIXC+BHPlmBBaYTB+BPSmGJDaIO/+BXUm2REaYK++BfWnmZGa4G9+BnYoGlIbYC8+BvaomtKboC7+B3cpG1LcH+6+B/epm9Ncn65+CHgqHFQdH24+CPiqnNTdn23+CThrHZWeXy2+CbjrnhZfHy1+CjksHtcf3y0+Cvlsn5fgnyz+C3mtIBihH2y+C/otYJkh3+x+DHpt4RniYCw+DPquIZqi4Kv+DXruohsjYSu+DfsvIqHkIet+DjtvYyKkoiv+Druvo6NlIqv+DzvwJCRl42v+D7wwpKUmpCv+EDxxJWYnZKv+ELyxpeboJWv+ETzyJqepJiv+Eb0yp2hp5uv+Ej1zKClraCv+Er2zaOqsKSv+Ez3z6Wws6iw+E740Ki0trKx+E/50qu4ubi0+FD61K6+vL23+FL71rHBwcK6+FT82LPDxca9+Fb92rbHyMrA+Vf+27nKzM7E+ln/3LvN0NPJ+1v/3b3Q09bP/F3/3r/S2NrU/l//38HU3ODZ/2EA4MLW4eTfAmQB4cTY5erjBWYC4sba6O7pB2cD5Mjc7PLvCWgE5crd7/b1C2kF5szf8vn6DWsG587g9fz+D20H6c/h9///EHAJ6tHi+QARE3IK69Pk/AMTFXQL7NXm/gUVFnUM7dfpAAcXGHcO7trrAgkZGngP793tBAobHHkQ8d/wBgwdfhLy4fIIDx+AE/Pj9AoRIYIU9OX2DBMjhBX15/gOFiaGF/bo+RAYKYgZ+Or8Ehosihv57P8UHC6LHfrvAhcfMY0f/PMFGiI0jyH+9QccJDaRJAD4CR4mOJMlAvoMICg6lCcE/A4iKjyWKgX+ECQsPpgsBwASJi5AmS4JAhQoMEOcMQoDFSoyRZ40DAUXLDRIoTYPBhkuNkqkOREHGzA4TKc8EgkdMjpPqj8UCx80PFOtQhYNIQ==');
+                    audio.play();
+                    
+                    if (shots >= maxShots) {
+                        clearInterval(movePointer);
+                        // Check win condition
+                        if (score >= 25) {
+                            // 20% chance to win
+                            if (Math.random() < 0.2) {
+                                showToast('Congratulations! You scored ' + score + ' points and won 2x your bet!');
+                            } else {
+                                showToast('You scored ' + score + ' points but didn\'t reach the target. Better luck next time!', 'warning');
+                            }
+                        } else {
+                            showToast('You scored ' + score + ' points. Better luck next time!', 'warning');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Start Chess game
+        function startChessGame() {
+            showToast('Chess game started! Make your move.');
+            
+            // Initialize chess board
+            const chessBoard = document.getElementById('chess-board');
+            chessBoard.innerHTML = '';
+            
+            // Create chess board squares
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    const square = document.createElement('div');
+                    square.className = `chess-square ${(i + j) % 2 === 0 ? 'white' : 'black'}`;
+                    chessBoard.appendChild(square);
+                    
+                    // Add pieces (simplified for example)
+                    if (i === 1) square.innerHTML = '♟'; // Black pawns
+                    if (i === 6) square.innerHTML = '♙'; // White pawns
+                    if (i === 0) {
+                        if (j === 0 || j === 7) square.innerHTML = '♜'; // Black rooks
+                        if (j === 1 || j === 6) square.innerHTML = '♞'; // Black knights
+                        if (j === 2 || j === 5) square.innerHTML = '♝'; // Black bishops
+                        if (j === 3) square.innerHTML = '♛'; // Black queen
+                        if (j === 4) square.innerHTML = '♚'; // Black king
+                    }
+                    if (i === 7) {
+                        if (j === 0 || j === 7) square.innerHTML = '♖'; // White rooks
+                        if (j === 1 || j === 6) square.innerHTML = '♘'; // White knights
+                        if (j === 2 || j === 5) square.innerHTML = '♗'; // White bishops
+                        if (j === 3) square.innerHTML = '♕'; // White queen
+                        if (j === 4) square.innerHTML = '♔'; // White king
+                    }
+                    
+                    // Add click event for moves
+                    square.addEventListener('click', function() {
+                        // Chess move logic would go here
+                        // This is a simplified example
+                        showToast('Move made. AI thinking...');
+                        
+                        // Simulate AI move after delay
+                        setTimeout(() => {
+                            // AI would make a move here
+                            showToast('AI moved.');
+                        }, 1000);
+                    });
+                }
+            }
+        }
+
+        // Start Tower game
+        function startTowerGame() {
+            showToast('Impossible Tower game started! Tap at the right moment to place blocks.');
+            
+            // Initialize tower game
+            const towerGame = document.getElementById('tower-game');
+            towerGame.innerHTML = '';
+            
+            // Tower game logic would go here
+            // This is a simplified example
+            let height = 0;
+            let blockWidth = 100;
+            let blockPosition = 150;
+            
+            // Add initial block
+            addBlock();
+            
+            function addBlock() {
+                const block = document.createElement('div');
+                block.className = 'tower-block';
+                block.style.width = blockWidth + 'px';
+                block.style.height = '20px';
+                block.style.left = blockPosition + 'px';
+                block.style.bottom = (height * 20) + 'px';
+                towerGame.appendChild(block);
+                
+                height++;
+                document.getElementById('tower-height').textContent = height;
+                
+                // Gradually make the game harder
+                blockWidth -= 2;
+                
+                // Move block left and right
+                let movingRight = true;
+                const moveBlock = setInterval(() => {
+                    if (movingRight) {
+                        blockPosition += 2;
+                        if (blockPosition >= 300 - blockWidth) movingRight = false;
+                    } else {
+                        blockPosition -= 2;
+                        if (blockPosition <= 0) movingRight = true;
+                    }
+                    
+                    block.style.left = blockPosition + 'px';
+                }, 50);
+                
+                // Add click event to place block
+                towerGame.addEventListener('click', function placeBlock() {
+                    clearInterval(moveBlock);
+                    
+                    // Check if block is placed correctly
+                    const placementError = Math.abs(blockPosition - 150);
+                    
+                    if (placementError > 30) {
+                        // Tower collapses
+                        showToast('Tower collapsed! You reached height ' + height, 'warning');
+                        towerGame.removeEventListener('click', placeBlock);
+                        
+                        // 20% chance to win if height is sufficient
+                        if (height > 15 && Math.random() < 0.2) {
+                            showToast('Congratulations! You built a tower of ' + height + ' blocks and won 2x your bet!');
+                        }
+                    } else {
+                        // Continue building
+                        addBlock();
+                    }
+                }, { once: true });
+            }
+        }
+
+        // Start Number Match game
+        function startNumberMatchGame() {
+            showToast('Number Match game started! Match cards to reach the target.');
+            
+            // Initialize number match game
+            const targetNumber = 50;
+            document.getElementById('target-number').textContent = targetNumber;
+            
+            // Generate cards with numbers
+            const numbers = [0, 1, 2, 3, 4, 5, 6, 9, 0, 1, 2, 3, 4, 5, 6, 9]; // 16 cards with repetitions
+            const numberGrid = document.getElementById('number-match-grid');
+            numberGrid.innerHTML = '';
+            
+            // Shuffle numbers
+            for (let i = numbers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+            }
+            
+            // Create cards
+            numbers.forEach((number, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="front">?</div>
+                    <div class="back">${number}</div>
+                `;
+                card.dataset.value = number;
+                numberGrid.appendChild(card);
+            });
+            
+            // Show cards for 3 seconds
+            const cards = document.querySelectorAll('#number-match-grid .card');
+            cards.forEach(card => {
+                card.classList.add('flipped');
+            });
+            
+            // Set timer
+            let timeLeft = 10;
+            const timerElement = document.getElementById('number-match-timer');
+            timerElement.textContent = timeLeft;
+            
+            const timer = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // Hide cards after 3 seconds
+                    setTimeout(() => {
+                        cards.forEach(card => {
+                            card.classList.remove('flipped');
+                        });
+                        showToast('Cards hidden! Find the numbers that sum to ' + targetNumber);
+                    }, 3000);
+                }
+            }, 1000);
+            
+            // Add click event to cards
+            let currentSum = 0;
+            let flipsLeft = 4;
+            document.getElementById('current-sum').textContent = currentSum;
+            document.getElementById('flips-left').textContent = flipsLeft;
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    if (flipsLeft > 0 && !this.classList.contains('flipped')) {
+                        this.classList.add('flipped');
+                        flipsLeft--;
+                        currentSum += parseInt(this.dataset.value);
+                        
+                        document.getElementById('current-sum').textContent = currentSum;
+                        document.getElementById('flips-left').textContent = flipsLeft;
+                        
+                        if (currentSum === targetNumber) {
+                            // 20% chance to win
+                            if (Math.random() < 0.2) {
+                                showToast('Congratulations! You reached the target and won 2x your bet!');
+                            } else {
+                                showToast('Sorry, better luck next time!', 'warning');
+                            }
+                            clearInterval(timer);
+                        } else if (flipsLeft <= 0) {
+                            showToast('No more flips left! Your sum was ' + currentSum, 'warning');
+                            clearInterval(timer);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Watch ad function
+        function watchAd() {
+            showToast('Playing ad...');
+            
+            // Simulate ad playback
+            setTimeout(() => {
+                // 20% chance to get reward
+                if (Math.random() < 0.2) {
+                    showToast('Ad completed! You earned ₹10.');
+                } else {
+                    showToast('Ad completed! No reward this time.', 'warning');
+                }
+            }, 3000);
+        }
+
+        // Unlock Watch & Earn
+        function unlockWatchAndEarn() {
+            showToast('Watch & Earn feature unlocked for 12 days! ₹200 deducted from your balance.');
+        }
+
         // Switch history tabs
         function switchHistoryTab(tabName) {
             // Hide all content
@@ -1482,9 +2489,6 @@
             document.getElementById('account-number').value = '';
             document.getElementById('account-name').value = '';
         }
-
-        // Initialize daily theme
-        setDailyTheme();
     </script>
 </body>
 </html>
