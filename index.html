@@ -458,7 +458,7 @@
         
         /* Admin Tables */
         .admin-table-container {
-            background: rgba(13, 27, 42, 0.7);
+            background: rgba(13, 27, 42, 极速赛车开奖结果历史记录);
             border-radius: 15px;
             padding: 20px;
             margin: 30px 0;
@@ -471,7 +471,7 @@
             border-collapse: collapse;
         }
         
-        .admin-table th, .admin-table td {
+        .admin-table th, .极速赛车开奖结果历史记录 td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid rgba(62, 146, 204, 0.3);
@@ -494,7 +494,7 @@
         
         .status-approved {
             color: var(--success);
-            font-weight: 600;
+            font-weight: 极速赛车开奖结果历史记录;
         }
         
         .status-rejected {
@@ -508,7 +508,7 @@
             border: none;
             cursor: pointer;
             font-weight: 600;
-            margin-right: 5px;
+            margin-right: 5极速赛车开奖结果历史记录;
         }
         
         .btn-approve {
@@ -556,7 +556,7 @@
             background: var(--success);
             color: white;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5极速赛车开奖结果历史记录 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: none;
             max-width: 350px;
@@ -595,7 +595,7 @@
             transition: right 0.3s;
             padding: 20px;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-            border-left: 1px solid var(--secondary);
+            border-left极速赛车开奖结果历史记录 1px solid var(--secondary);
         }
         
         .side-menu.open {
@@ -609,8 +609,7 @@
             margin-bottom: 30px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--secondary);
-        }
-        
+极速赛车开奖结果历史记录
         .menu-title {
             font-family: 'Orbitron', sans-serif;
             color: var(--accent);
@@ -661,9 +660,203 @@
             z-index: 900;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+        
+        /* Game Styles */
+        .game-container {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .game-header {
+            background: rgba(13, 27, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(62, 146, 204, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .game-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(45, 199, 255, 0.5);
+        }
+        
+        .game-description {
+            color: var(--light);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .betting-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .bet-option {
+            padding: 10px 20px;
+            background: rgba(10, 36, 99, 0.7);
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .bet-option:hover, .bet-option.selected {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-area {
+            background: rgba(13, 27, 42, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(62, 146, 204, 0.3);
+        }
+        
+        .game-controls {
+            margin-top: 30px;
+        }
+        
+        .scratch-card-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .scratch-card {
+            width: 100%;
+            height: 100px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scratch-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .scratch-card-front, .scratch-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+        }
+        
+        .scratch-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .countdown-timer {
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+        
+        /* Terms and Conditions */
+        .terms-container {
+            background: rgba(13, 27, 42, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--secondary);
+        }
+        
+        .terms-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .terms-content {
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .terms-checkbox input {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
+    <!-- Terms and Conditions Modal -->
+    <div class="modal" id="terms-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Terms and Conditions</h3>
+                <button class="close-modal" data-modal="terms-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="terms-container">
+                    <h3 class="terms-title">USCash Platform Terms</h3>
+                    <div class="terms-content">
+                        <p>By using USCash, you agree to the following terms and conditions:</p>
+                        <ol>
+                            <li>You must be at least 18 years old to use this platform.</li>
+                            <li>All games are based on skill and chance. Results are random and fair.</li>
+                            <li>Deposits and withdrawals are subject to verification and approval.</li>
+                            <li>Minimum deposit amount is RS 150.</li>
+                            <li>Minimum withdrawal amount is RS 300.</li>
+                            <li>If an account remains inactive for more than 15 days, the platform reserves the right not to return deposited funds.</li>
+                            <li>Users are responsible for maintaining the security of their accounts.</li>
+                            <li>The platform reserves the right to modify these terms at any time.</li>
+                            <li>Any attempt to manipulate games or exploit the system will result in immediate account termination.</li>
+                            <li>Customer support is available to assist with any issues or concerns.</li>
+                        </ol>
+                        <p>Since terms & conditions or gambling promotions are not added, users are informed that the platform is not responsible for abandoned accounts. If a user leaves their account inactive for more than 15 days, the platform reserves the right not to return the deposited money. The user must accept these rules to continue; otherwise, access is denied.</p>
+                    </div>
+                </div>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="accept-terms">
+                    <label for="accept-terms">I have read and accept the terms and conditions</label>
+                </div>
+                <button class="btn btn-primary btn-block" id="accept-terms-btn" disabled>Accept and Continue</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Authentication Section -->
     <div class="auth-container" id="auth-container">
         <div class="auth-box">
@@ -673,11 +866,11 @@
             </div>
             
             <div class="auth-tabs">
-                <div class="auth-tab active" data-tab="login">Login</div>
+                <div class="auth极速赛车开奖结果历史记录 active" data-tab="login">Login</div>
                 <div class="auth-tab" data-tab="signup">Sign Up</div>
             </div>
             
-            <div class="auth-form active" id="login-form">
+            <div class="auth-form active" id极速赛车开奖结果历史记录"login-form">
                 <div class="form-group">
                     <label for="login-email">Email</label>
                     <input type="email" id="login-email" placeholder="Enter your email">
@@ -716,7 +909,7 @@
                     <input type="password" id="signup-password" placeholder="Create a password">
                 </div>
                 
-                <div class="form-group">
+                <极速赛车开奖结果历史记录 class="form-group">
                     <label for="signup-confirm-password">Confirm Password</label>
                     <input type="password" id="signup-confirm-password" placeholder="Confirm your password">
                 </div>
@@ -790,9 +983,9 @@
                 </div>
                 
                 <div class="action-card" data-action="withdraw">
-                    <i class="fas fa-wallet action-icon"></i>
+                    <i class="fas fa-wallet action-icon"></极速赛车开奖结果历史记录>
                     <h3>Withdraw</h3>
-                    <p>Withdraw your earnings (Minimum RS 300)</p>
+                    <p>Withdraw your earnings (Minimum RS 300)</极速赛车开奖结果历史记录>
                 </div>
                 
                 <div class="action-card" data-action="watch-earn">
@@ -827,7 +1020,7 @@
         
         <div class="side-menu" id="side-menu">
             <div class="menu-header">
-                <h3 class="menu-title">Menu</h3>
+                <h3 class极速赛车开奖结果历史记录"menu-title">Menu</h3>
                 <button class="close-menu" id="close-menu">
                     <i class="fas fa-times"></i>
                 </button>
@@ -837,11 +1030,11 @@
                 <i class="fas fa-headset"></i> Customer Service
             </div>
             
-            <div class="menu-item">
+            <div class="menu-item" id="game-history-btn">
                 <i class="fas fa-history"></i> Game History
             </div>
             
-            <div class="menu-item">
+            <div class="menu-item" id="updates-btn">
                 <i class="fas fa-bell"></i> Upcoming Updates
             </div>
             
@@ -919,7 +1112,7 @@
                 <div class="admin-card" id="back-to-user">
                     <i class="fas fa-sign-out-alt admin-icon"></i>
                     <h3>Back to User View</h3>
-                </div>
+                </极速赛车开奖结果历史记录>
             </div>
             
             <!-- Admin Content Areas -->
@@ -951,7 +1144,7 @@
                             <th>Method</th>
                             <th>Transaction ID</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th>Actions</极速赛车开奖结果历史记录>
                         </tr>
                     </thead>
                     <tbody id="deposits-table-body">
@@ -997,7 +1190,7 @@
                 </table>
             </div>
             
-            <div id="admin-announcement-content" class="admin-table-container" style="display: none;">
+            <div id="admin-announcement-content" class="admin-table-container极速赛车开奖结果历史记录 style="display: none;">
                 <h3>Send Announcement</h3>
                 <div class="form-group">
                     <label for="announcement-title">Title</label>
@@ -1075,16 +1268,16 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="withdraw-account-number">Account Number</label>
+                    <label for="极速赛车开奖结果历史记录-account-number">Account Number</label>
                     <input type="text" id="withdraw-account-number" placeholder="Enter account number">
-                </div>
+                </极速赛车开奖结果历史记录>
                 
                 <div class="form-group">
                     <label for="withdraw-method">Payment Method</label>
                     <select id="withdraw-method">
                         <option value="jazzcash">JazzCash</option>
                         <option value="easypaisa">EasyPaisa</option>
-                        <option value="nayapay">Naya Pay</option>
+                        <option value="nayap极速赛车开奖结果历史记录">Naya Pay</option>
                     </select>
                 </div>
                 
@@ -1119,6 +1312,196 @@
                 </div>
                 
                 <button class="btn btn-primary btn-block" id="submit-customer-service">Send Message</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Watch & Earn Modal -->
+    <div class="modal" id="watch-earn-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Watch & Earn</h3>
+                <button class="close-modal" data-modal="watch-earn-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="watch-earn-unlock" style="text-align: center;">
+                    <i class="fas fa-lock" style="font-size: 3rem; color: var(--warning); margin-bottom: 20px;"></i>
+                    <h3>Unlock Watch & Earn</h3>
+                    <p>Pay RS 150 to unlock the Watch & Earn feature for 4 days</p>
+                    <button class="btn btn-primary" id="unlock-watch-earn">Unlock for RS 150</button>
+                </div>
+                
+                <div id="watch-earn-content" style="display: none;">
+                    <div class="ads-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                        <!-- Ads will be populated here -->
+                    </div>
+                    <div class="watch-earn-timer" style="text-align: center; margin-top: 20px;">
+                        <h4>Time Remaining: <span id="watch-earn-time">4 days</span></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Refer & Earn Modal -->
+    <div class="modal" id="refer-earn-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Refer & Earn</h3>
+                <button class="close-modal" data-modal="refer-earn-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Your Referral Code</label>
+                    <div style="display: flex;">
+                        <input type="text" id="referral-code" readonly style="flex: 1;">
+                        <button class="btn" id="copy-referral" style="margin-left: 10px;">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Referral Stats</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px;">
+                        <div style="background: rgba(10, 36, 99, 0.5); padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 2rem; color: var(--accent);" id="referral-count">0</div>
+                            <div>Total Referrals</div>
+                        </div>
+                        <div style="background: rgba(10, 36, 99, 0.5); padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 2rem; color: var(--accent);" id="referral-earnings">RS 0.00</div>
+                            <div>Total Earnings</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h4>How It Works</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Share your referral code with friends</li>
+                        <li>When they sign up and make their first deposit, you get 5% of their deposit amount</li>
+                        <li>VIP Levels:
+                            <ul style="padding-left: 20px;">
+                                <li>5 referrals: VIP Level 2</li>
+                                <li>10 referrals: VIP Level 3</li>
+                                <li>15 referrals: VIP Level 4</li>
+                                <li>25 referrals: VIP Level 5 + Special Salary</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Games Selection Modal -->
+    <div class="modal" id="games-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Select a Game</h3>
+                <button class="close-modal" data-modal="games-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="betting-options">
+                    <div class="bet-option" data-bet="20">RS 20</div>
+                    <div class="bet-option" data-bet="50">RS 50</div>
+                    <div class="bet-option" data-bet="70">RS 70</div>
+                    <div class="bet-option" data-bet="100">RS 100</div>
+                    <div class="bet-option" data-bet="150">RS 150</div>
+                    <div class="bet-option" data-bet="180">RS 180</div>
+                    <div class="bet-option" data-bet="200">RS 200</div>
+                    <div class="bet-option" data-bet="300">RS 300</div>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <h4>Selected Bet: <span id="selected-bet">RS 0</span></h4>
+                </div>
+                
+                <div class="games-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div class="game-option" data-game="scratch">
+                        <div style="background: rgba(10, 36, 99, 0.7); padding: 20px; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-clone" style="font-size: 3rem; color: var(--accent);"></i>
+                            <h4>Scratch Match</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="game-option" data-game="aim">
+                        <div style="background: rgba(10, 36, 99, 0.7); padding: 20px; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-bullseye" style="font-size: 3rem; color: var(--accent);"></i>
+                            <h4>Perfect Aim</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="game-option" data-game="tower">
+                        <div style="background: rgba(10, 36, 99, 0.7); padding: 20px; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-building" style="font-size: 3rem; color: var(--accent);"></i>
+                            <h4>Impossible Tower</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="game-option" data-game="fruit">
+                        <div style="background: rgba(10, 36, 99, 0.7); padding: 20px; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-apple-alt" style="font-size: 3rem; color: var(--accent);"></i>
+                            <h4>Fruit Shooting</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="game-option" data-game="tictactoe">
+                        <div style="background: rgba(10, 36, 99, 0.7); padding: 20px; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-times" style="font-size: 3rem; color: var(--accent);"></i>
+                            <h4>Tic-Tac-Toe</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="game-option" data-game="findace">
+                        <div style="background: rgba(10, 36, 99, 0.7); padding: 20极速赛车开奖结果历史记录; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-search" style="font-size: 3rem; color: var(--accent);"></i>
+                            <h4>Find Ace</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scratch Match Game -->
+    <div class="game-container" id="scratch-game">
+        <header class="game-header">
+            <div class="container header-content">
+                <div class="logo">
+                    <i class="fas fa-clone logo-icon"></i>
+                    <h1>Scratch Match</h1>
+                </div>
+                
+                <div class="user-info">
+                    <div class="balance-box">
+                        <span class="balance-amount">RS 0.00</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="container game-content">
+            <h2 class="game-title">Scratch Match</h2>
+            <p class="game-description">Find 3 matching symbols to win 2x your bet amount!</p>
+            
+            <div class="countdown-timer" id="scratch-timer">15</div>
+            
+            <div class="game-area">
+                <div class="scratch-card-container" id="scratch-cards">
+                    <!-- Cards will be populated here -->
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn btn-primary" id="start-scratch">Start Game</button>
+                <button class="btn" id="exit-scratch">Exit Game</button>
             </div>
         </div>
     </div>
@@ -1158,7 +1541,7 @@
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyBM7DY6i11IPk8DAvVA6tsgmz7Epi5bJh0",
+            apiKey: "AIzaSyBM7DY6i11IP极速赛车开奖结果历史记录DAvVA6tsgmz7Epi5bJh0",
             authDomain: "pakcashplay.firebaseapp.com",
             projectId: "pakcashplay",
             storageBucket: "pakcashplay.firebasestorage.app",
@@ -1200,6 +1583,9 @@
         const depositModal = document.getElementById('deposit-modal');
         const withdrawModal = document.getElementById('withdraw-modal');
         const customerServiceModal = document.getElementById('customer-service-modal');
+        const watchEarnModal = document.getElementById('watch-earn-modal');
+        const referEarnModal = document.getElementById('refer-earn-modal');
+        const gamesModal = document.getElementById('games-modal');
         const closeModalBtns = document.querySelectorAll('.close-modal');
         const submitDepositBtn = document.getElementById('submit-deposit');
         const submitWithdrawalBtn = document.getElementById('submit-withdrawal');
@@ -1208,6 +1594,18 @@
         const actionCards = document.querySelectorAll('.action-card');
         const adminCards = document.querySelectorAll('.admin-card');
         const marqueeText = document.getElementById('marquee-text');
+        const unlockWatchEarnBtn = document.getElementById('unlock-watch-earn');
+        const copyReferralBtn = document.getElementById('copy-referral');
+        const betOptions = document.querySelectorAll('.bet-option');
+        const gameOptions = document.querySelectorAll('.game-option');
+        const scratchGame = document.getElementById('scratch-game');
+        const scratchCards = document.getElementById('scratch-cards');
+        const startScratchBtn = document.getElementById('start-scratch');
+        const exitScratchBtn = document.getElementById('exit-scratch');
+        const scratchTimer = document.getElementById('scratch-timer');
+        const termsModal = document.getElementById('terms-modal');
+        const acceptTermsCheckbox = document.getElementById('accept-terms');
+        const acceptTermsBtn = document.getElementById('accept-terms-btn');
 
         // Admin content areas
         const adminUsersContent = document.getElementById('admin-users-content');
@@ -1218,6 +1616,14 @@
         const adminMarqueeContent = document.getElementById('admin-marquee-content');
         const sendAnnouncementBtn = document.getElementById('send-announcement-btn');
         const updateMarqueeBtn = document.getElementById('update-marquee-btn');
+
+        // Game variables
+        let currentBet = 0;
+        let selectedGame = '';
+        let scratchCardValues = [];
+        let selectedCards = [];
+        let scratchGameActive = false;
+        let scratchTimerInterval;
 
         // Auth Tab Switching
         authTabs.forEach(tab => {
@@ -1250,12 +1656,29 @@
             document.querySelector('[data-tab="login"]').classList.add('active');
         });
 
+        // Accept Terms Checkbox
+        acceptTermsCheckbox.addEventListener('change', () => {
+            acceptTermsBtn.disabled = !acceptTermsCheckbox.checked;
+        });
+
+        // Accept Terms Button
+        acceptTermsBtn.addEventListener('click', () => {
+            termsModal.style.display = 'none';
+            // Continue with signup process
+            handleSignup();
+        });
+
         // Sign Up Functionality
-        signupBtn.addEventListener('click', async () => {
+        signupBtn.addEventListener('click', () => {
+            // Show terms and conditions first
+            termsModal.style.display = 'block';
+        });
+
+        async function handleSignup() {
             const name = document.getElementById('signup-name').value;
             const email = document.getElementById('signup-email').value;
             const phone = document.getElementById('signup-phone').value;
-            const password = document.getElementById('signup-password').value;
+            const password = document.getElementById极速赛车开奖结果历史记录signup-password').value;
             const confirmPassword = document.getElementById('signup-confirm-password').value;
             const referralCode = document.getElementById('signup-referral').value;
 
@@ -1276,9 +1699,35 @@
             }
 
             try {
+                // Check if email already exists
+                const usersQuery = query(collection(db, "users"), where("email", "==", email));
+                const emailSnapshot = await getDocs(usersQuery);
+                if (!emailSnapshot.empty) {
+                    showNotification('Email already registered', 'error');
+                    return;
+                }
+
+                // Check if phone already exists
+                const phoneQuery = query(collection(db, "users"), where("phone", "==", phone));
+                const phoneSnapshot = await getDocs(phoneQuery);
+                if (!phoneSnapshot.empty) {
+                    showNotification('Phone number already registered', 'error');
+                    return;
+                }
+
                 // Create user with email and password
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
+
+                // If referral code provided, validate it
+                let referredBy = null;
+                if (referralCode) {
+                    const referralQuery = query(collection(db, "users"), where("referralCode", "==", referralCode));
+                    const referralSnapshot = await getDocs(referralQuery);
+                    if (!referralSnapshot.empty) {
+                        referredBy = referralSnapshot.docs[0].id;
+                    }
+                }
 
                 // Create user document in Firestore
                 await setDoc(doc(db, "users", user.uid), {
@@ -1290,10 +1739,38 @@
                     referrals: 0,
                     referralEarnings: 0,
                     watchAndEarn: false,
+                    watchAndEarnExpiry: null,
                     referralCode: generateReferralCode(),
-                    referredBy: referralCode || null,
-                    createdAt: serverTimestamp()
+                    referredBy: referredBy,
+                    createdAt: serverTimestamp(),
+                    lastActive: serverTimestamp()
                 });
+
+                // If referred by someone, update their referral count
+                if (referredBy) {
+                    const referrerDoc = await getDoc(doc(db, "users", referredBy));
+                    if (referrerDoc.exists()) {
+                        const referrerData = referrerDoc.data();
+                        await updateDoc(doc(db, "users", referredBy), {
+                            referrals: (referrerData.referrals || 0) + 1
+                        });
+
+                        // Update VIP level based on referrals
+                        const newReferralCount = referrerData.referrals + 1;
+                        let newVipLevel = 0;
+                        if (newReferralCount >= 25) newVipLevel = 5;
+                        else if (newReferralCount >= 15) newVipLevel = 4;
+                        else if (newReferralCount >= 10) newVipLevel = 3;
+                        else if (newReferralCount >= 5) newVipLevel = 2;
+                        else newVipLevel = referrerData.vip || 0;
+
+                        if (newVipLevel !== referrerData.vip) {
+                            await updateDoc(doc(db, "users", referredBy), {
+                                vip: newVipLevel
+                            });
+                        }
+                    }
+                }
 
                 showNotification('Account created successfully!');
                 
@@ -1306,7 +1783,7 @@
             } catch (error) {
                 showNotification(error.message, 'error');
             }
-        });
+        }
 
         // Login Functionality
         loginBtn.addEventListener('click', async () => {
@@ -1325,6 +1802,11 @@
                 
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
+                
+                // Update last active timestamp
+                await updateDoc(doc(db, "users", user.uid), {
+                    lastActive: serverTimestamp()
+                });
                 
                 showNotification('Login successful!');
                 
@@ -1386,7 +1868,7 @@
             authForms.forEach(form => form.classList.remove('active'));
             loginForm.classList.add('active');
             authTabs.forEach(t => t.classList.remove('active'));
-            document.querySelector('[data-tab="login"]').class.classList.add('active');
+            document.querySelector('[data-tab="login"]').classList.add('active');
         });
 
         // Logout
@@ -1437,7 +1919,7 @@
                         showReferEarn();
                         break;
                     case 'games':
-                        showGames();
+                        gamesModal.style.display = 'block';
                         break;
                     case 'announcements':
                         showAnnouncements();
@@ -1458,7 +1940,7 @@
                 
                 switch(action) {
                     case 'manage-users':
-                        adminUsersContent.style.display = 'block';
+                        adminUsers极速赛车开奖结果历史记录.style.display = 'block';
                         loadAdminUsers();
                         break;
                     case 'deposit-requests':
@@ -1565,6 +2047,11 @@
                         return;
                     }
 
+                    // Deduct amount from user's balance immediately
+                    await updateDoc(doc(db, "users", user.uid), {
+                        balance: userData.balance - amount
+                    });
+
                     // Add withdrawal request to Firestore
                     await addDoc(collection(db, "withdrawals"), {
                         userId: user.uid,
@@ -1584,6 +2071,9 @@
                     document.getElementById('withdraw-account-name').value = '';
                     document.getElementById('withdraw-account-number').value = '';
                     document.getElementById('withdraw-amount').value = '';
+                    
+                    // Refresh balance display
+                    balanceAmount.textContent = `RS ${(userData.balance - amount).toFixed(2)}`;
                 }
                 
             } catch (error) {
@@ -1603,7 +2093,7 @@
 
             try {
                 const user = auth.currentUser;
-                if (!user) {
+                if (!极速赛车开奖结果历史记录) {
                     showNotification('You must be logged in to contact customer service', 'error');
                     return;
                 }
@@ -1699,7 +2189,7 @@
                 const user = auth.currentUser;
                 if (!user) return;
                 
-                refreshBalanceBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                refreshBalanceBtn.innerHTML = '<极速赛车开奖结果历史记录 class="fas fa-spinner fa-spin"></i>';
                 
                 // Get updated user data
                 const docRef = doc(db, "users", user.uid);
@@ -1716,6 +2206,110 @@
                 showNotification(error.message, 'error');
                 refreshBalanceBtn.innerHTML = '<i class="fas fa-sync-alt"></i>';
             }
+        });
+
+        // Unlock Watch & Earn
+        unlockWatchEarnBtn.addEventListener('click', async () => {
+            try {
+                const user = auth.currentUser;
+                if (!user) {
+                    showNotification('You must be logged in to unlock this feature', 'error');
+                    return;
+                }
+
+                // Check if user has sufficient balance
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    if (userData.balance < 150) {
+                        showNotification('Insufficient balance. You need RS 150 to unlock this feature.', 'error');
+                        return;
+                    }
+
+                    // Deduct RS 150 from user's balance
+                    await updateDoc(doc(db, "users", user.uid), {
+                        balance: userData.balance - 150,
+                        watchAndEarn: true,
+                        watchAndEarnExpiry: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000) // 4 days from now
+                    });
+
+                    showNotification('Watch & Earn feature unlocked for 4 days!');
+                    watchEarnModal.style.display = 'none';
+                    
+                    // Refresh balance display
+                    balanceAmount.textContent = `RS ${(userData.balance - 150).toFixed(2)}`;
+                    
+                    // Load watch & earn content
+                    loadWatchAndEarn();
+                }
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        });
+
+        // Copy Referral Code
+        copyReferralBtn.addEventListener('click', () => {
+            const referralCodeInput = document.getElementById('referral-code');
+            referralCodeInput.select();
+            document.execCommand('copy');
+            showNotification('Referral code copied to clipboard!');
+        });
+
+        // Bet Options Selection
+        betOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                betOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                currentBet = parseInt(option.getAttribute('data-bet'));
+                document.getElementById('selected-bet').textContent = `RS ${currentBet}`;
+            });
+        });
+
+        // Game Options Selection
+        gameOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                if (currentBet === 0) {
+                    showNotification('Please select a bet amount first', 'error');
+                    return;
+                }
+
+                selectedGame = option.getAttribute('data-game');
+                gamesModal.style.display = 'none';
+
+                // Start the selected game
+                switch(selectedGame) {
+                    case 'scratch':
+                        startScratchGame();
+                        break;
+                    case 'aim':
+                        showNotification('Perfect Aim game would start here');
+                        break;
+                    case 'tower':
+                        showNotification('Impossible Tower game would start here');
+                        break;
+                    case 'fruit':
+                        showNotification('Fruit Shooting game would start here');
+                        break;
+                    case 'tictactoe':
+                        showNotification('Tic-Tac-Toe game would start here');
+                        break;
+                    case 'findace':
+                        showNotification('Find Ace game would start here');
+                        break;
+                }
+            });
+        });
+
+        // Start Scratch Game
+        startScratchBtn.addEventListener('click', () => {
+            startScratchGame();
+        });
+
+        // Exit Scratch Game
+        exitScratchBtn.addEventListener('click', () => {
+            scratchGame.style.display = 'none';
+            dashboard.style.display = 'block';
+            clearInterval(scratchTimerInterval);
         });
 
         // Check Auth State
@@ -1753,6 +2347,20 @@
                     // Update VIP badge
                     const vipBadge = document.querySelector('.vip-badge');
                     vipBadge.textContent = `VIP ${userData.vip}`;
+                    
+                    // Update referral code if needed
+                    const referralCodeInput = document.getElementById('referral-code');
+                    if (referralCodeInput) {
+                        referralCodeInput.value = userData.referralCode || '';
+                    }
+                    
+                    // Update referral stats
+                    const referralCount = document.getElementById('referral-count');
+                    const referralEarnings = document.getElementById('referral-earnings');
+                    if (referralCount && referralEarnings) {
+                        referralCount.textContent = userData.referrals || 0;
+                        referralEarnings.textContent = `RS ${(userData.referralEarnings || 0).toFixed(2)}`;
+                    }
                     
                     // Show dashboard
                     authContainer.style.display = 'none';
@@ -1825,14 +2433,14 @@
                 
             } catch (error) {
                 showNotification(error.message, 'error');
-                document.getElementById('users-table-body').innerHTML = '<tr><td colspan="5" class="text-center">Error loading users</td></tr>';
+                document.getElementById('users-table-body').innerHTML = '<tr><td colspan="5" class极速赛车开奖结果历史记录"text-center">Error loading users</td></tr>';
             }
         }
 
         // Edit User (for admin)
         async function editUser(userId) {
             try {
-                const userDoc = await getDoc(doc(db, "users", userId));
+                const userDoc = await极速赛车开奖结果历史记录oc(db, "users", userId));
                 if (userDoc.exists()) {
                     const user = userDoc.data();
                     
@@ -1850,7 +2458,7 @@
                                 <input type="number" id="edit-user-balance" value="${user.balance || 0}" step="0.01">
                             </div>
                             <div class="form-group">
-                                <label for="edit-user-vip">VIP Level</label>
+                                <label for="edit-user-v极速赛车开奖结果历史记录">VIP Level</label>
                                 <input type="number" id="edit-user-vip" value="${user.vip || 0}" min="0" max="10">
                             </div>
                             <button class="btn btn-primary" id="save-user-changes" data-userid="${userId}">Save Changes</button>
@@ -1891,7 +2499,7 @@
                         
                         // Add event listener to close button
                         document.querySelector('[data-modal="edit-user-modal"]').addEventListener('click', () => {
-                            modal.style.display = 'none';
+                            modal.style.display极速赛车开奖结果历史记录'none';
                         });
                     }, 100);
                 }
@@ -1912,11 +2520,11 @@
                 depositsTableBody.innerHTML = '';
                 
                 if (querySnapshot.empty) {
-                    depositsTableBody.innerHTML = '<tr><td colspan="6" class="text-center">No deposit requests found</td></tr>';
+                    depositsTableBody.innerHTML = '<tr><极速赛车开奖结果历史记录 colspan="6" class="text-center">No deposit requests found</td></tr>';
                     return;
                 }
                 
-                querySnapshot.forEach((doc) => {
+                querySnapshot.forEach((doc)极速赛车开奖结果历史记录 {
                     const deposit = doc.data();
                     const row = document.createElement('tr');
                     
@@ -1973,7 +2581,7 @@
                 const deposit = depositDoc.data();
                 
                 // Update deposit status
-                await updateDoc(doc(db, "deposits", depositId), {
+                await updateDoc(doc(db, "deposits", deposit极速赛车开奖结果历史记录), {
                     status: status,
                     processedAt: serverTimestamp()
                 });
@@ -2003,7 +2611,7 @@
                 const withdrawalsTableBody = document.getElementById('withdrawals-table-body');
                 withdrawalsTableBody.innerHTML = '<tr><td colspan="6" class="text-center">Loading withdrawals...</td></tr>';
                 
-                const q = query(collection(db, "withdrawals"), orderBy("createdAt", "desc"));
+                const q = query(collection(db, "withdrawals"), orderBy("created极速赛车开奖结果历史记录", "desc"));
                 const querySnapshot = await getDocs(q);
                 
                 withdrawalsTableBody.innerHTML = '';
@@ -2026,7 +2634,7 @@
                         <td>
                             ${withdrawal.status === 'pending' ? `
                                 <button class="action-btn btn-approve" data-withdrawalid="${doc.id}" data-action="approve-withdrawal">Approve</button>
-                                <button class="action-btn btn-reject" data-withdrawalid="${doc.id}" data-action="reject-withdrawal">Reject</button>
+                                <button class="action-btn btn-reject极速赛车开奖结果历史记录 data-withdrawalid="${doc.id}" data-action="reject-withdrawal">Reject</button>
                             ` : 'Processed'}
                         </td>
                     `;
@@ -2141,6 +2749,369 @@
             adminPanel.style.display = 'block';
         }
 
+        // Show Watch & Earn
+        async function showWatchEarn() {
+            try {
+                const user = auth.currentUser;
+                if (!user) {
+                    showNotification('You must be logged in to access this feature', 'error');
+                    return;
+                }
+
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    
+                    if (userData.watchAndEarn) {
+                        // Check if still valid
+                        const expiryDate = userData.watchAndEarnExpiry?.toDate();
+                        if (expiryDate && expiryDate > new Date()) {
+                            // Load watch & earn content
+                            loadWatchAndEarn();
+                            watchEarnModal.style.display = 'block';
+                        } else {
+                            // Expired, reset the feature
+                            await updateDoc(doc(db, "users", user.uid), {
+                                watchAndEarn: false,
+                                watchAndEarnExpiry: null
+                            });
+                            document.getElementById('watch-earn-unlock').style.display = 'block';
+                            document.getElementById('watch-earn-content').style.display = 'none';
+                            watchEarnModal.style.display = 'block';
+                        }
+                    } else {
+                        document.getElementById('watch-earn-unlock').style.display = 'block';
+                        document.getElementById('watch-earn-content').style.display = 'none';
+                        watchEarnModal.style.display = 'block';
+                    }
+                }
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        // Load Watch & Earn Content
+        async function loadWatchAndEarn() {
+            try {
+                const user = auth.currentUser;
+                if (!user) return;
+
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    
+                    if (userData.watchAndEarn) {
+                        document.getElementById('watch-earn-unlock').style.display = 'none';
+                        document.getElementById('watch-earn-content').style.display = 'block';
+                        
+                        // Calculate time remaining
+                        const expiryDate = userData.watchAndEarnExpiry?.toDate();
+                        if (expiryDate) {
+                            const now = new Date();
+                            const diffMs = expiryDate - now;
+                            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                            const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            
+                            document.getElementById('watch-earn-time').textContent = `${diffDays} days, ${diffHours} hours`;
+                        }
+                        
+                        // Load ads
+                        const adsContainer = document.querySelector('.ads-container');
+                        adsContainer.innerHTML = '';
+                        
+                        for (let i = 0; i < 10; i++) {
+                            const adElement = document.createElement('div');
+                            adElement.className = 'ad-item';
+                            adElement.innerHTML = `
+                                <div style="background: rgba(10, 36, 99, 0.7); padding: 15px; border-radius: 8px; text-align: center;">
+                                    <i class="fas fa-ad" style="font-size: 2rem; color: var(--accent);"></i>
+                                    <h4>Ad ${i+1}</h4>
+                                    <p>Watch this ad to earn RS 1.25</p>
+                                    <button class="btn btn-primary watch-ad-btn" data-ad="${i}">Watch Ad</button>
+                                </div>
+                            `;
+                            adsContainer.appendChild(adElement);
+                        }
+                        
+                        // Add event listeners to watch buttons
+                        setTimeout(() => {
+                            document.querySelectorAll('.watch-ad-btn').forEach(btn => {
+                                btn.addEventListener('click', async () => {
+                                    const adIndex = btn.getAttribute('data-ad');
+                                    
+                                    // Simulate watching an ad
+                                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Watching...';
+                                    btn.disabled = true;
+                                    
+                                    setTimeout(async () => {
+                                        // Add RS 1.25 to user's balance
+                                        await updateDoc(doc(db, "users", user.uid), {
+                                            balance: (userData.balance || 0) + 1.25
+                                        });
+                                        
+                                        showNotification('You earned RS 1.25 for watching the ad!');
+                                        btn.innerHTML = 'Watched';
+                                        
+                                        // Refresh balance display
+                                        balanceAmount.textContent = `RS ${((userData.balance || 0) + 1.25).toFixed(2)}`;
+                                    }, 3000);
+                                });
+                            });
+                        }, 100);
+                    }
+                }
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        // Show Refer & Earn
+        async function showReferEarn() {
+            try {
+                const user = auth.currentUser;
+                if (!user) {
+                    showNotification('You must be logged in to access this feature', 'error');
+                    return;
+                }
+
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    
+                    // Update referral stats
+                    const referralCount = document.getElementById('referral-count');
+                    const referralEarnings = document.getElementById('referral-earnings');
+                    if (referralCount && referralEarnings) {
+                        referralCount.textContent = userData.referrals || 0;
+                        referralEarnings.textContent = `RS ${(userData.referralEarnings || 0).toFixed(2)}`;
+                    }
+                    
+                    referEarnModal.style.display = 'block';
+                }
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        // Show Announcements
+        async function showAnnouncements() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "announcements"));
+                let announcementsHTML = '<div style="text-align: center;"><h3>Announcements</h3></div>';
+                
+                if (querySnapshot.empty) {
+                    announcementsHTML += '<p>No announcements found.</p>';
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        const announcement = doc.data();
+                        const date = announcement.createdAt ? new Date(announcement.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                        
+                        announcementsHTML += `
+                            <div style="background: rgba(10, 36, 99, 0.5); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                <h4>${announcement.title || 'No Title'}</h4>
+                                <p>${announcement.content || 'No Content'}</p>
+                                <small>Posted on: ${date}</small>
+                            </div>
+                        `;
+                    });
+                }
+                
+                // Create a modal for announcements
+                const modalContent = `
+                    <div class="modal-header">
+                        <h3 class="modal-title">Announcements</h3>
+                        <button class="close-modal" data-modal="announcements-modal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ${announcementsHTML}
+                    </div>
+                `;
+                
+                // Create modal if it doesn't exist
+                let modal = document.getElementById('announcements-modal');
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'announcements-modal';
+                    modal.className = 'modal';
+                    document.body.appendChild(modal);
+                }
+                
+                modal.innerHTML = `<div class="modal-content">${modalContent}</div>`;
+                modal.style.display = 'block';
+                
+                // Add event listener to close button
+                setTimeout(() => {
+                    document.querySelector('[data-modal="announcements-modal"]').addEventListener('click', () => {
+                        modal.style.display = 'none';
+                    });
+                }, 100);
+                
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        // Start Scratch Game
+        function startScratchGame() {
+            dashboard.style.display = 'none';
+            scratchGame.style.display = 'block';
+            
+            // Initialize scratch cards
+            scratchCards.innerHTML = '';
+            scratchCardValues = [];
+            selectedCards = [];
+            
+            // Create card values (3 cows, 3 hens, 3 ducks)
+            const symbols = ['cow', 'hen', 'duck'];
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    scratchCardValues.push(symbols[i]);
+                }
+            }
+            
+            // Shuffle the cards
+            for (let i = scratchCardValues.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [scratchCardValues[i], scratchCardValues[j]] = [scratchCardValues[j], scratchCardValues[i]];
+            }
+            
+            // Create card elements
+            for (let i = 0; i < 9; i++) {
+                const card = document.createElement('div');
+                card.className = 'scratch-card';
+                card.setAttribute('data-index', i);
+                card.innerHTML = `
+                    <div class="scratch-card-front">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <div class="scratch-card-back">
+                        <i class="fas fa-${scratchCardValues[i] === 'cow' ? 'cow' : scratchCardValues[i] === 'hen' ? 'egg' : 'feather'}"></i>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    if (!scratchGameActive || selectedCards.includes(i)) return;
+                    
+                    card.classList.add('flipped');
+                    selectedCards.push(i);
+                    
+                    // Check for win condition
+                    if (selectedCards.length === 3) {
+                        checkScratchWin();
+                    }
+                });
+                
+                scratchCards.appendChild(card);
+            }
+            
+            // Reset game state
+            scratchGameActive = false;
+            startScratchBtn.disabled = false;
+            scratchTimer.textContent = '15';
+        }
+
+        // Check Scratch Game Win
+        async function checkScratchWin() {
+            const selectedValues = selectedCards.map(index => scratchCardValues[index]);
+            
+            // Check if all three selected cards have the same value
+            const allSame = selectedValues.every(val => val === selectedValues[0]);
+            
+            if (allSame) {
+                // User wins
+                clearInterval(scratchTimerInterval);
+                showNotification(`Congratulations! You won RS ${currentBet * 2}!`);
+                
+                // Add winnings to user's balance
+                const user = auth.currentUser;
+                if (user) {
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    if (userDoc.exists()) {
+                        const userData = userDoc.data();
+                        await updateDoc(doc(db, "users", user.uid), {
+                            balance: (userData.balance || 0) + (currentBet * 2)
+                        });
+                        
+                        // Refresh balance display
+                        balanceAmount.textContent = `RS ${((userData.balance || 0) + (currentBet * 2)).toFixed(2)}`;
+                    }
+                }
+                
+                // Record game history
+                await addDoc(collection(db, "game_history"), {
+                    userId: user.uid,
+                    game: 'scratch',
+                    bet: currentBet,
+                    win: currentBet * 2,
+                    result: 'win',
+                    createdAt: serverTimestamp()
+                });
+                
+                // Reset game after delay
+                setTimeout(() => {
+                    scratchGame.style.display = 'none';
+                    dashboard.style.display = 'block';
+                }, 3000);
+            } else if (selectedCards.length === 3) {
+                // User loses
+                showNotification('Sorry, you didn\'t match 3 symbols. Try again!');
+                
+                // Record game history
+                const user = auth.currentUser;
+                if (user) {
+                    await addDoc(collection(db, "game_history"), {
+                        userId: user.uid,
+                        game: 'scratch',
+                        bet: currentBet,
+                        win: 0,
+                        result: 'loss',
+                        createdAt: serverTimestamp()
+                    });
+                }
+                
+                // Reset cards after delay
+                setTimeout(() => {
+                    selectedCards.forEach(index => {
+                        const card = document.querySelector(`.scratch-card[data-index="${index}"]`);
+                        card.classList.remove('flipped');
+                    });
+                    selectedCards = [];
+                }, 2000);
+            }
+        }
+
+        // Start Scratch Game Timer
+        function startScratchTimer() {
+            let timeLeft = 15;
+            scratchTimer.textContent = timeLeft;
+            
+            scratchTimerInterval = setInterval(() => {
+                timeLeft--;
+                scratchTimer.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(scratchTimerInterval);
+                    scratchGameActive = false;
+                    showNotification('Time\'s up! Game over.');
+                    
+                    // Record game history
+                    const user = auth.currentUser;
+                    if (user) {
+                        addDoc(collection(db, "game_history"), {
+                            userId: user.uid,
+                            game: 'scratch',
+                            bet: currentBet,
+                            win: 0,
+                            result: 'timeout',
+                            createdAt: serverTimestamp()
+                        });
+                    }
+                }
+            }, 1000);
+        }
+
         // Show Notification
         function showNotification(message, type = 'success') {
             notification.textContent = message;
@@ -2165,23 +3136,6 @@
                 code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             return code;
-        }
-
-        // Demo Functions for Actions
-        function showWatchEarn() {
-            showNotification('Watch & Earn functionality would open here');
-        }
-
-        function showReferEarn() {
-            showNotification('Refer & Earn functionality would open here');
-        }
-
-        function showGames() {
-            showNotification('Games functionality would open here');
-        }
-
-        function showAnnouncements() {
-            showNotification('Announcements functionality would open here');
         }
     </script>
 </body>
