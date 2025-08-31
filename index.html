@@ -646,6 +646,8 @@
             font-size: 1.1rem;
             transition: all 0.3s;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
         }
 
         .auth-form button:hover {
@@ -923,6 +925,7 @@
             animation: scroll 20s linear infinite;
             font-size: 1.1rem;
             text-shadow: 0 0 5px var(--secondary);
+            font-weight: bold;
         }
 
         .announcement-content span {
@@ -1134,6 +1137,7 @@
             justify-content: center;
             gap: 20px;
             margin-top: 20px;
+            display: none;
         }
 
         .ad-container {
@@ -1687,9 +1691,6 @@
     </div>
 
 
-    <!-- Existing game sections (scratchGame, fruitGame, etc.) remain the same -->
-    <!-- ... -->
-
     <!-- Firebase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -1792,6 +1793,12 @@
                 loadAdminData();
             } else if (section === 'watchEarn') {
                 loadWatchEarnSection();
+            } else if (section === 'deposit') {
+                loadDepositHistory();
+            } else if (section === 'withdraw') {
+                loadWithdrawHistory();
+            } else if (section === 'vip') {
+                loadVipData();
             }
         }
 
@@ -1962,7 +1969,8 @@
                                 if (!querySnapshot.empty) {
                                     const referrerId = querySnapshot.docs[0].id;
                                     return db.collection('users').doc(referrerId).update({
-                                        referralCount: firebase.firestore.FieldValue.increment(1)
+                                        referralCount: firebase.firestore.FieldValue.increment(1),
+                                        referralEarnings: firebase.firestore.FieldValue.increment(50)
                                     });
                                 }
                             });
@@ -2093,28 +2101,37 @@
                     }
 
                     // Update VIP section if visible
-                    if (document.getElementById('vipSection').style.display === 'block') {
-                        document.getElementById('userReferralCode').textContent = userData.referralCode || 'N/A';
-                        document.getElementById('referralCount').textContent = userData.referralCount || 0;
-                        document.getElementById('referralEarnings').textContent = 'Rs. ' + (userData.referralEarnings || 0);
-
-                        // Show copy button if referral code exists
-                        if (userData.referralCode) {
-                            document.querySelector('.referral-code-copy').style.display = 'block';
-                        }
-
-                        // Set VIP status
-                        const earnings = userData.referralEarnings || 0;
-                        let vipStatus = 'Basic';
-                        if (earnings >= 5000) vipStatus = 'Gold';
-                        else if (earnings >= 1000) vipStatus = 'Silver';
-                        document.getElementById('vipStatus').textContent = vipStatus;
-                    }
+                    loadVipData();
                 }
             });
 
             // Load transaction history
             loadTransactionHistory();
+        }
+
+        function loadVipData() {
+            if (!currentUser) return;
+            
+            db.collection('users').doc(currentUser.uid).get().then(doc => {
+                if (doc.exists) {
+                    const userData = doc.data();
+                    document.getElementById('userReferralCode').textContent = userData.referralCode || 'N/A';
+                    document.getElementById('referralCount').textContent = userData.referralCount || 0;
+                    document.getElementById('referralEarnings').textContent = 'Rs. ' + (userData.referralEarnings || 0);
+
+                    // Show copy button if referral code exists
+                    if (userData.referralCode) {
+                        document.querySelector('.referral-code-copy').style.display = 'block';
+                    }
+
+                    // Set VIP status
+                    const earnings = userData.referralEarnings || 0;
+                    let vipStatus = 'Basic';
+                    if (earnings >= 5000) vipStatus = 'Gold';
+                    else if (earnings >= 1000) vipStatus = 'Silver';
+                    document.getElementById('vipStatus').textContent = vipStatus;
+                }
+            });
         }
 
         function refreshBalance() {
@@ -2151,6 +2168,167 @@
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
+        }
+
+        // Deposit and Withdrawal functions
+        function submitDeposit() {
+            if (!currentUser) {
+                showToast('Please login to deposit', 'error');
+                return;
+            }
+
+            const amount = parseFloat(document.getElementById('depositAmount').value);
+            const number = document.getElementById('depositNumber').value;
+            const txnId = document.getElementById('depositTxnId').value;
+
+            if (!amount || amount <= 0 || !number || !txnId) {
+                showToast('Please fill all fields with valid values', 'error');
+                return;
+            }
+
+            // Show loading state
+            const depositBtn = document.querySelector('#depositForm .submit-btn');
+            depositBtn.disabled = true;
+            depositBtn.textContent = 'Processing...';
+
+            // Create deposit request
+            db.collection('deposit_requests').add({
+                userId: currentUser.uid,
+                amount: amount,
+                method: 'JazzCash',
+                accountNumber: number,
+                transactionId: txnId,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                showToast('Deposit request submitted successfully! It will be processed soon.', 'success');
+                document.getElementById('depositForm').reset();
+                loadDepositHistory();
+            })
+            .catch(error => {
+                showToast('Error submitting deposit request: ' + error.message, 'error');
+            })
+            .finally(() => {
+                depositBtn.disabled = false;
+                depositBtn.textContent = 'Submit Deposit';
+            });
+        }
+
+        function submitWithdraw() {
+            if (!currentUser) {
+                showToast('Please login to withdraw', 'error');
+                return;
+            }
+
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            const number = document.getElementById('withdrawNumber').value;
+
+            if (!amount || amount <= 0 || !number) {
+                showToast('Please fill all fields with valid values', 'error');
+                return;
+            }
+
+            if (amount > balance) {
+                showToast('Insufficient balance for withdrawal', 'error');
+                return;
+            }
+
+            // Show loading state
+            const withdrawBtn = document.querySelector('#withdrawForm .submit-btn');
+            withdrawBtn.disabled = true;
+            withdrawBtn.textContent = 'Processing...';
+
+            // Create withdrawal request
+            db.collection('withdraw_requests').add({
+                userId: currentUser.uid,
+                amount: amount,
+                method: 'JazzCash',
+                accountNumber: number,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                showToast('Withdrawal request submitted successfully! It will be processed soon.', 'success');
+                document.getElementById('withdrawForm').reset();
+                loadWithdrawHistory();
+            })
+            .catch(error => {
+                showToast('Error submitting withdrawal request: ' + error.message, 'error');
+            })
+            .finally(() => {
+                withdrawBtn.disabled = false;
+                withdrawBtn.textContent = 'Submit Withdraw';
+            });
+        }
+
+        function loadDepositHistory() {
+            if (!currentUser) return;
+
+            db.collection('deposit_requests')
+                .where('userId', '==', currentUser.uid)
+                .orderBy('createdAt', 'desc')
+                .get()
+                .then(querySnapshot => {
+                    const container = document.getElementById('depositHistory');
+                    container.innerHTML = '<h3>Deposit History</h3>';
+
+                    if (querySnapshot.empty) {
+                        container.innerHTML += '<p>No deposit history found</p>';
+                        return;
+                    }
+
+                    querySnapshot.forEach(doc => {
+                        const data = doc.data();
+                        const item = document.createElement('div');
+                        item.className = 'transaction-item';
+                        item.innerHTML = `
+                            <div><strong>Amount:</strong> Rs. ${data.amount}</div>
+                            <div><strong>Method:</strong> ${data.method}</div>
+                            <div><strong>Account:</strong> ${data.accountNumber}</div>
+                            <div><strong>Status:</strong> <span class="transaction-${data.status}">${data.status}</span></div>
+                            <div><strong>Date:</strong> ${data.createdAt.toDate().toLocaleString()}</div>
+                        `;
+                        container.appendChild(item);
+                    });
+                });
+        }
+
+        function loadWithdrawHistory() {
+            if (!currentUser) return;
+
+            db.collection('withdraw_requests')
+                .where('userId', '==', currentUser.uid)
+                .orderBy('createdAt', 'desc')
+                .get()
+                .then(querySnapshot => {
+                    const container = document.getElementById('withdrawHistory');
+                    container.innerHTML = '<h3>Withdraw History</h3>';
+
+                    if (querySnapshot.empty) {
+                        container.innerHTML += '<p>No withdrawal history found</p>';
+                        return;
+                    }
+
+                    querySnapshot.forEach(doc => {
+                        const data = doc.data();
+                        const item = document.createElement('div');
+                        item.className = 'transaction-item';
+                        item.innerHTML = `
+                            <div><strong>Amount:</strong> Rs. ${data.amount}</div>
+                            <div><strong>Method:</strong> ${data.method}</div>
+                            <div><strong>Account:</strong> ${data.accountNumber}</div>
+                            <div><strong>Status:</strong> <span class="transaction-${data.status}">${data.status}</span></div>
+                            <div><strong>Date:</strong> ${data.createdAt.toDate().toLocaleString()}</div>
+                        `;
+                        container.appendChild(item);
+                    });
+                });
+        }
+
+        function loadTransactionHistory() {
+            loadDepositHistory();
+            loadWithdrawHistory();
         }
 
         // Watch and Earn functionality
