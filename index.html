@@ -8,30 +8,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #FFD700;
-            --secondary: #1E90FF;
-            --dark: #0A0A0A;
-            --light: #FFFFFF;
-            --accent: #FF6347;
+            --primary: #4fc3f7; /* Light blue */
+            --secondary: #0288d1; /* Darker blue */
+            --dark: #0A1929; /* Dark blue-black */
+            --light: #E0F7FA; /* Light blueish white */
+            --accent: #00e5ff; /* Cyan accent */
+            --success: #64dd17; /* Success green */
+            --warning: #ffab00; /* Warning amber */
+            --error: #ff5252; /* Error red */
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark);
-            color: var(--primary);
+            color: var(--light);
             text-align: center;
             margin: 0;
             padding: 0;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
-                            radial-gradient(circle at 90% 80%, rgba(30, 144, 255, 0.05) 0%, transparent 20%);
+            background-image: radial-gradient(circle at 10% 20%, rgba(79, 195, 247, 0.05) 0%, transparent 20%),
+                            radial-gradient(circle at 90% 80%, rgba(2, 136, 209, 0.05) 0%, transparent 20%);
         }
 
         h1 {
             font-size: 2.8rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.3);
             margin: 20px 0;
             letter-spacing: 2px;
             position: relative;
@@ -55,7 +58,7 @@
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.2);
             position: relative;
             z-index: 100;
         }
@@ -84,7 +87,7 @@
             border: 2px solid var(--primary);
             border-radius: 15px;
             box-sizing: border-box;
-            background-color: rgba(10, 10, 10, 0.8);
+            background-color: rgba(10, 25, 41, 0.8);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
@@ -110,7 +113,7 @@
 
         .gold-box {
             display: inline-block;
-            background: linear-gradient(145deg, var(--primary), #e6c200);
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: var(--dark);
             margin: 8px;
             padding: 12px 20px;
@@ -125,8 +128,8 @@
 
         .gold-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
-            background: linear-gradient(145deg, #ffdf00, var(--primary));
+            box-shadow: 0 8px 16px rgba(79, 195, 247, 0.3);
+            background: linear-gradient(145deg, var(--accent), var(--primary));
         }
 
         .gold-box.active {
@@ -154,7 +157,7 @@
             align-items: center;
             justify-content: center;
             border: 2px solid var(--primary);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -188,7 +191,7 @@
             font-size: 3rem;
             margin-bottom: 15px;
             color: var(--primary);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.8);
         }
 
         /* Updated game thumbnails */
@@ -240,7 +243,7 @@
         }
 
         .card.flipped {
-            background: linear-gradient(145deg, var(--primary), #e6c200);
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: var(--dark);
             transform: rotateY(180deg);
             box-shadow: 0 0 15px var(--primary);
@@ -412,7 +415,7 @@
             width: 320px;
             height: 320px;
             margin: 25px auto;
-            background-color: rgba(255, 215, 0, 0.1);
+            background-color: rgba(79, 195, 247, 0.1);
             padding: 15px;
             border-radius: 15px;
         }
@@ -605,7 +608,7 @@
         }
 
         .auth-tab:hover {
-            background-color: rgba(255, 215, 0, 0.1);
+            background-color: rgba(79, 195, 247, 0.1);
         }
 
         .auth-form {
@@ -637,7 +640,7 @@
         .auth-form button {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(145deg, var(--primary), #e6c200);
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: var(--dark);
             border: none;
             border-radius: 8px;
@@ -651,9 +654,9 @@
         }
 
         .auth-form button:hover {
-            background: linear-gradient(145deg, #ffdf00, var(--primary));
+            background: linear-gradient(145deg, var(--accent), var(--primary));
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
         }
 
         .auth-form button:disabled {
@@ -696,7 +699,7 @@
             padding: 12px 20px;
             border-radius: 30px;
             border: 1px solid var(--primary);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
         }
 
         #balanceAmount {
@@ -724,7 +727,7 @@
             padding: 10px 20px;
             border-radius: 30px;
             border: 1px solid var(--secondary);
-            box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+            box-shadow: 0 0 15px rgba(2, 136, 209, 0.2);
             gap: 10px;
         }
 
@@ -788,7 +791,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(145deg, var(--primary), #e6c200);
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: var(--dark);
             border: none;
             padding: 12px 25px;
@@ -802,9 +805,9 @@
         }
 
         .submit-btn:hover {
-            background: linear-gradient(145deg, #ffdf00, var(--primary));
+            background: linear-gradient(145deg, var(--accent), var(--primary));
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
         }
 
         .transaction-history {
@@ -814,7 +817,7 @@
             padding: 15px;
             background-color: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(79, 195, 247, 0.3);
         }
 
         .transaction-item {
@@ -836,15 +839,15 @@
         }
 
         .transaction-approved {
-            color: lime;
+            color: var(--success);
         }
 
         .transaction-pending {
-            color: var(--primary);
+            color: var(--warning);
         }
 
         .transaction-rejected {
-            color: var(--accent);
+            color: var(--error);
         }
 
         /* VIP Section Styles */
@@ -890,7 +893,7 @@
 
         .stat-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.2);
         }
 
         .stat-label {
@@ -903,39 +906,6 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--primary);
-        }
-
-        /* Announcement Bar */
-        .announcement-bar {
-            position: relative;
-            background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.2), transparent);
-            color: var(--light);
-            padding: 12px 0;
-            overflow: hidden;
-            margin: 0 auto;
-            width: 100%;
-            border-top: 1px solid var(--secondary);
-            border-bottom: 1px solid var(--secondary);
-        }
-
-        .announcement-content {
-            display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            animation: scroll 20s linear infinite;
-            font-size: 1.1rem;
-            text-shadow: 0 0 5px var(--secondary);
-            font-weight: bold;
-        }
-
-        .announcement-content span {
-            color: var(--secondary);
-            font-weight: bold;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
         }
 
         /* Toast notification */
@@ -1122,7 +1092,7 @@
         }
 
         .side-menu-item:hover {
-            background-color: rgba(255, 215, 0, 0.1);
+            background-color: rgba(79, 195, 247, 0.1);
             transform: translateX(5px);
         }
 
@@ -1208,7 +1178,7 @@
         }
 
         .game-history-table th {
-            background-color: rgba(255, 215, 0, 0.1);
+            background-color: rgba(79, 195, 247, 0.1);
         }
 
         .game-history-table tr:nth-child(even) {
@@ -1255,7 +1225,7 @@
         }
 
         .admin-form button {
-            background: linear-gradient(145deg, var(--primary), #e6c200);
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: var(--dark);
             border: none;
             padding: 10px 15px;
@@ -1280,7 +1250,7 @@
         }
 
         .user-result:hover {
-            background-color: rgba(255, 215, 0, 0.1);
+            background-color: rgba(79, 195, 247, 0.1);
         }
 
         /* Message Center */
@@ -1337,6 +1307,80 @@
             background-color: #b9f2ff; /* Diamond */
             color: #000;
         }
+
+        /* Notification Bell */
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-left: 15px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--error);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 300px;
+            background-color: var(--dark);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .notification-dropdown.show {
+            display: block;
+        }
+
+        .notification-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--primary);
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-item {
+            padding: 12px;
+            border-bottom: 1px solid rgba(79, 195, 247, 0.2);
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item.unread {
+            background-color: rgba(79, 195, 247, 0.1);
+        }
+
+        .notification-time {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -1359,7 +1403,7 @@
             </ul>
             <div class="terms-buttons">
                 <button class="gold-box" onclick="acceptTerms()">I Accept</button>
-                <button class="gold-box" style="background: var(--accent);" onclick="rejectTerms()">I Decline</button>
+                <button class="gold-box" style="background: var(--error);" onclick="rejectTerms()">I Decline</button>
             </div>
         </div>
     </div>
@@ -1382,13 +1426,6 @@
         </div>
         <div class="side-menu-item" onclick="showSection('terms')">
             <i class="fas fa-file-contract"></i> Terms & Conditions
-        </div>
-    </div>
-
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <div class="announcement-content">
-            <span>📢 For deposits contact VIP users (verified with blue tick) or WhatsApp us at USCash WhatsApp channel</span>
         </div>
     </div>
 
@@ -1445,7 +1482,25 @@
             <span id="usernameDisplay"></span>
             <span id="phoneDisplay"></span>
             <i class="fas fa-check-circle verified-badge" id="verifiedBadge" style="display:none;"></i>
+            
+            <!-- Notification Bell -->
+            <div class="notification-bell" onclick="toggleNotifications()">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="notificationCount" style="display: none;">0</span>
+                
+                <!-- Notification Dropdown -->
+                <div class="notification-dropdown" id="notificationDropdown">
+                    <div class="notification-header">
+                        <span>Notifications</span>
+                        <span onclick="markAllAsRead()" style="cursor: pointer; font-size: 0.8rem;">Mark all as read</span>
+                    </div>
+                    <div id="notificationList">
+                        <!-- Notifications will be populated here -->
+                    </div>
+                </div>
+            </div>
         </div>
+        
         <div class="balance-container">
             <span>Balance: Rs. <span id="balanceAmount">0</span></span>
             <i class="fas fa-sync-alt refresh-balance" onclick="refreshBalance()"></i>
@@ -1762,6 +1817,19 @@
         function toggleSideMenu() {
             const sideMenu = document.getElementById('sideMenu');
             sideMenu.classList.toggle('open');
+        }
+
+        // Toggle notifications
+        function toggleNotifications() {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Mark all notifications as read
+        function markAllAsRead() {
+            // Implementation for marking notifications as read
+            showToast('All notifications marked as read', 'success');
+            document.getElementById('notificationCount').style.display = 'none';
         }
 
         // Contact support
@@ -2163,7 +2231,7 @@
             toast.textContent = message;
             toast.className = 'toast';
             toast.classList.add('show');
-            toast.style.borderLeftColor = type === 'success' ? 'lime' : type === 'error' ? 'red' : 'var(--primary)';
+            toast.style.borderLeftColor = type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--error)' : 'var(--primary)';
             
             setTimeout(() => {
                 toast.classList.remove('show');
@@ -2239,6 +2307,11 @@
             withdrawBtn.disabled = true;
             withdrawBtn.textContent = 'Processing...';
 
+            // Deduct the amount from user's balance immediately
+            balance -= amount;
+            updateUserBalance(balance);
+            updateBalanceDisplay();
+
             // Create withdrawal request
             db.collection('withdraw_requests').add({
                 userId: currentUser.uid,
@@ -2254,6 +2327,10 @@
                 loadWithdrawHistory();
             })
             .catch(error => {
+                // If there's an error, return the amount to the user's balance
+                balance += amount;
+                updateUserBalance(balance);
+                updateBalanceDisplay();
                 showToast('Error submitting withdrawal request: ' + error.message, 'error');
             })
             .finally(() => {
@@ -2534,7 +2611,7 @@
                             <div><strong>Transaction ID:</strong> ${data.transactionId}</div>
                             <div>
                                 <button onclick="approveRequest('deposit', '${doc.id}', '${data.userId}', ${data.amount})">Approve</button>
-                                <button onclick="rejectRequest('deposit', '${doc.id}')" style="background: var(--accent);">Reject</button>
+                                <button onclick="rejectRequest('deposit', '${doc.id}')" style="background: var(--error);">Reject</button>
                             </div>
                         `;
                         requestsContainer.appendChild(requestEl);
@@ -2558,10 +2635,10 @@
                             <div><strong>User ID:</strong> ${data.userId}</div>
                             <div><strong>Amount:</strong> Rs. ${data.amount}</div>
                             <div><strong>Method:</strong> ${data.method}</div>
-                            <div><strong>Account:</strong> ${data.accountNumber} (${data.accountName})</div>
+                            <div><strong>Account:</strong> ${data.accountNumber}</div>
                             <div>
                                 <button onclick="approveRequest('withdraw', '${doc.id}', '${data.userId}', ${data.amount})">Approve</button>
-                                <button onclick="rejectRequest('withdraw', '${doc.id}')" style="background: var(--accent);">Reject</button>
+                                <button onclick="rejectRequest('withdraw', '${doc.id}', '${data.userId}', ${data.amount})" style="background: var(--error);">Reject</button>
                             </div>
                         `;
                         requestsContainer.appendChild(requestEl);
@@ -2665,7 +2742,7 @@
             });
         }
 
-        function rejectRequest(type, requestId) {
+        function rejectRequest(type, requestId, userId, amount) {
             const collection = type === 'deposit' ? 'deposit_requests' : 'withdraw_requests';
                 
             db.collection(collection).doc(requestId).update({
@@ -2674,11 +2751,8 @@
             }).then(() => {
                 if (type === 'withdraw') {
                     // For withdrawals, return the amount to user's balance
-                    db.collection(collection).doc(requestId).get().then(doc => {
-                        const data = doc.data();
-                        db.collection('users').doc(data.userId).update({
-                            balance: firebase.firestore.FieldValue.increment(data.amount)
-                        });
+                    db.collection('users').doc(userId).update({
+                        balance: firebase.firestore.FieldValue.increment(amount)
                     });
                 }
                 showToast('Request rejected', 'success');
