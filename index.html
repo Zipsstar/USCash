@@ -278,6 +278,7 @@
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
             animation: pulse 2s infinite;
             touch-action: manipulation;
+            overflow: hidden;
         }
         
         @keyframes pulse {
@@ -286,19 +287,47 @@
             100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
         }
         
-        .gold-box {
-            width: 70px;
-            height: 50px;
-            background: var(--secondary-gradient);
-            border-radius: 10px;
+        .cobra-container {
             position: relative;
+            width: 180px;
+            height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
         }
         
-        .gold-box::before {
+        .cobra-snake {
+            width: 150px;
+            height: 150px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,20 C60,10 80,15 80,30 C80,45 65,50 50,50 C35,50 20,45 20,30 C20,15 40,10 50,20 Z" fill="%23C5A100" stroke="%23FFD700" stroke-width="2"/><circle cx="40" cy="30" r="5" fill="%23000"/><circle cx="60" cy="30" r="5" fill="%23000"/><path d="M45,40 Q50,45 55,40" stroke="%23000" stroke-width="2" fill="none"/><path d="M50,50 C40,60 30,70 40,80 C50,90 60,85 60,75 C60,65 50,60 50,50 Z" fill="%23C5A100" stroke="%23FFD700" stroke-width="2"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: cobraMove 3s infinite alternate;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+        }
+        
+        @keyframes cobraMove {
+            0% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-5px) rotate(0deg); }
+            100% { transform: translateY(0) rotate(5deg); }
+        }
+        
+        .gold-pile {
+            position: absolute;
+            bottom: 30px;
+            width: 70px;
+            height: 40px;
+            background: var(--secondary-gradient);
+            border-radius: 10px 10px 5px 5px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+        
+        .gold-pile::before {
             content: "";
             position: absolute;
             width: 100%;
@@ -308,32 +337,11 @@
             top: 4px;
         }
         
-        .snake {
-            position: absolute;
-            width: 100px;
-            height: 18px;
-            background: linear-gradient(to right, #C5A100, #FFD700);
-            border-radius: 9px;
-            top: 50px;
-            left: 30px;
-            transform: rotate(-15deg);
-            animation: snakeMove 3s infinite alternate;
-        }
-        
-        .snake::before {
-            content: "";
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: #C5A100;
-            border-radius: 50%;
-            left: -9px;
-            top: 0;
-        }
-        
-        @keyframes snakeMove {
-            0% { transform: rotate(-15deg); }
-            100% { transform: rotate(15deg); }
+        .gold-pile::after {
+            content: "💰";
+            font-size: 20px;
+            position: relative;
+            z-index: 3;
         }
         
         .tap-instruction {
@@ -615,6 +623,16 @@
                 height: 250px;
             }
             
+            .cobra-container {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .cobra-snake {
+                width: 130px;
+                height: 130px;
+            }
+            
             .stat-card {
                 padding: 15px;
             }
@@ -636,6 +654,16 @@
             .mining-zone {
                 width: 220px;
                 height: 220px;
+            }
+            
+            .cobra-container {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .cobra-snake {
+                width: 110px;
+                height: 110px;
             }
             
             .logo {
@@ -744,10 +772,12 @@
                 
                 <div class="mining-area">
                     <div class="mining-zone" id="miningZone">
-                        <div class="snake"></div>
-                        <div class="gold-box"></div>
+                        <div class="cobra-container">
+                            <div class="cobra-snake"></div>
+                            <div class="gold-pile"></div>
+                        </div>
                     </div>
-                    <div class="tap-instruction">Tap the gold box to mine coins!</div>
+                    <div class="tap-instruction">Tap the gold pile to mine coins!</div>
                 </div>
                 
                 <div class="auto-mining-section">
@@ -1204,11 +1234,11 @@
         }
         
         function playSparkleEffect() {
-            const goldBox = document.querySelector('.gold-box');
-            goldBox.style.boxShadow = '0 0 30px rgba(255, 215, 0, 1)';
+            const goldPile = document.querySelector('.gold-pile');
+            goldPile.style.boxShadow = '0 0 30px rgba(255, 215, 0, 1)';
             
             setTimeout(() => {
-                goldBox.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.7)';
+                goldPile.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.7)';
             }, 300);
         }
         
