@@ -191,6 +191,22 @@
         .announcement-icon {
             cursor: pointer;
             font-size: 20px;
+            position: relative;
+        }
+        
+        .announcement-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .main-content {
@@ -508,6 +524,38 @@
             margin-right: 10px;
         }
         
+        /* Announcements Styles */
+        .announcement-item {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .announcement-title {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .announcement-date {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .announcement-content {
+            line-height: 1.5;
+        }
+        
+        .no-announcements {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
         /* Responsive Styles */
         @media (max-width: 768px) {
             .stats-grid {
@@ -595,7 +643,10 @@
                     <div class="user-info">
                         <div class="balance-display" id="balanceDisplay">0 Coins</div>
                         <div class="user-rank" id="userRank">Rank 1</div>
-                        <div class="announcement-icon" id="announcementIcon">📢</div>
+                        <div class="announcement-icon" id="announcementIcon">
+                            📢
+                            <div class="announcement-badge" id="announcementBadge" style="display: none;">0</div>
+                        </div>
                         <button class="btn btn-secondary" id="logoutBtn">Logout</button>
                     </div>
                 </div>
@@ -703,12 +754,26 @@
         </div>
     </div>
     
+    <!-- Announcements Modal -->
+    <div id="announcementsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📢 Announcements</h2>
+                <button class="close-modal" id="closeAnnouncementsModal">&times;</button>
+            </div>
+            <div id="announcementsList">
+                <!-- Announcements will be dynamically added here -->
+                <div class="no-announcements">No announcements available</div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Firebase SDK -->
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, query, orderBy, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -737,7 +802,12 @@
             setDoc,
             getDoc,
             updateDoc,
-            onSnapshot
+            onSnapshot,
+            collection,
+            query,
+            orderBy,
+            addDoc,
+            serverTimestamp
         };
     </script>
     
@@ -762,10 +832,14 @@
         const referralCode = document.getElementById('referralCode');
         const userRank = document.getElementById('userRank');
         const announcementIcon = document.getElementById('announcementIcon');
+        const announcementBadge = document.getElementById('announcementBadge');
         const termsModal = document.getElementById('termsModal');
         const closeTermsModal = document.getElementById('closeTermsModal');
         const agreeCheckbox = document.getElementById('agreeCheckbox');
         const agreeButton = document.getElementById('agreeButton');
+        const announcementsModal = document.getElementById('announcementsModal');
+        const closeAnnouncementsModal = document.getElementById('closeAnnouncementsModal');
+        const announcementsList = document.getElementById('announcementsList');
         
         // Game State
         let userData = {
@@ -778,12 +852,15 @@
             role: 'user',
             lastLogin: null,
             autoMiningEnd: null,
-            agreedToTerms: false
+            agreedToTerms: false,
+            lastSeenAnnouncement: null
         };
         
         let autoMiningInterval = null;
         let autoMiningTimeLeft = 0;
         let autoMiningTotalTime = 2 * 60 * 60; // 2 hours in seconds
+        let announcements = [];
+        let unreadAnnouncementsCount = 0;
         
         // Auth Tab Switching
         loginTab.addEventListener('click', () => {
@@ -855,7 +932,8 @@
                     role: 'user',
                     lastLogin: new Date().toISOString(),
                     autoMiningEnd: null,
-                    agreedToTerms: false
+                    agreedToTerms: false,
+                    lastSeenAnnouncement: null
                 };
                 
                 await window.firebaseFunctions.setDoc(
@@ -933,6 +1011,13 @@
         
         closeTermsModal.addEventListener('click', hideTermsModal);
         
+        // Announcements
+        announcementIcon.addEventListener('click', () => {
+            showAnnouncementsModal();
+        });
+        
+        closeAnnouncementsModal.addEventListener('click', hideAnnouncementsModal);
+        
         // Functions
         function showAuthMessage(message) {
             authMessage.textContent = message;
@@ -964,6 +1049,9 @@
                     saveUserData();
                 }
             }
+            
+            // Load announcements
+            loadAnnouncements();
         }
         
         async function loadUserData(uid) {
@@ -1133,6 +1221,16 @@
             termsModal.style.display = 'none';
         }
         
+        function showAnnouncementsModal() {
+            announcementsModal.style.display = 'flex';
+            // Mark announcements as seen
+            markAnnouncementsAsSeen();
+        }
+        
+        function hideAnnouncementsModal() {
+            announcementsModal.style.display = 'none';
+        }
+        
         function resetGameState() {
             userData = {
                 uid: null,
@@ -1144,7 +1242,8 @@
                 role: 'user',
                 lastLogin: null,
                 autoMiningEnd: null,
-                agreedToTerms: false
+                agreedToTerms: false,
+                lastSeenAnnouncement: null
             };
             
             if (autoMiningInterval) {
@@ -1182,8 +1281,120 @@
             }
         }
         
+        // Announcements Functions
+        async function loadAnnouncements() {
+            try {
+                const announcementsRef = window.firebaseFunctions.collection(window.firebaseFirestore, "announcements");
+                const q = window.firebaseFunctions.query(announcementsRef, window.firebaseFunctions.orderBy("timestamp", "desc"));
+                
+                window.firebaseFunctions.onSnapshot(q, (querySnapshot) => {
+                    announcements = [];
+                    querySnapshot.forEach((doc) => {
+                        announcements.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                    
+                    renderAnnouncements();
+                    updateUnreadAnnouncementsCount();
+                });
+            } catch (error) {
+                console.error('Error loading announcements:', error);
+            }
+        }
+        
+        function renderAnnouncements() {
+            announcementsList.innerHTML = '';
+            
+            if (announcements.length === 0) {
+                announcementsList.innerHTML = '<div class="no-announcements">No announcements available</div>';
+                return;
+            }
+            
+            announcements.forEach(announcement => {
+                const announcementItem = document.createElement('div');
+                announcementItem.className = 'announcement-item';
+                
+                const announcementDate = new Date(announcement.timestamp?.toDate() || new Date()).toLocaleDateString();
+                
+                announcementItem.innerHTML = `
+                    <div class="announcement-title">
+                        <span>${announcement.title || 'Announcement'}</span>
+                        <span class="announcement-date">${announcementDate}</span>
+                    </div>
+                    <div class="announcement-content">${announcement.content || ''}</div>
+                `;
+                
+                announcementsList.appendChild(announcementItem);
+            });
+        }
+        
+        function updateUnreadAnnouncementsCount() {
+            if (!userData.lastSeenAnnouncement || announcements.length === 0) {
+                unreadAnnouncementsCount = announcements.length;
+            } else {
+                // Find the index of the last seen announcement
+                const lastSeenIndex = announcements.findIndex(a => a.id === userData.lastSeenAnnouncement);
+                unreadAnnouncementsCount = lastSeenIndex === -1 ? announcements.length : announcements.length - (lastSeenIndex + 1);
+            }
+            
+            if (unreadAnnouncementsCount > 0) {
+                announcementBadge.textContent = unreadAnnouncementsCount;
+                announcementBadge.style.display = 'flex';
+            } else {
+                announcementBadge.style.display = 'none';
+            }
+        }
+        
+        function markAnnouncementsAsSeen() {
+            if (announcements.length > 0) {
+                userData.lastSeenAnnouncement = announcements[0].id;
+                saveUserData();
+                unreadAnnouncementsCount = 0;
+                announcementBadge.style.display = 'none';
+            }
+        }
+        
         // Initialize
         showAuth();
+        
+        // For testing: Add sample announcements (remove in production)
+        setTimeout(async () => {
+            // Only add sample announcements if none exist
+            try {
+                const announcementsRef = window.firebaseFunctions.collection(window.firebaseFirestore, "announcements");
+                const q = window.firebaseFunctions.query(announcementsRef);
+                const querySnapshot = await window.firebaseFunctions.getDoc(q);
+                
+                if (querySnapshot.empty) {
+                    // Add sample announcements
+                    const sampleAnnouncements = [
+                        {
+                            title: "Welcome to GoldMinning!",
+                            content: "We're excited to have you on board. Start mining coins and invite friends to earn bonuses!",
+                            timestamp: window.firebaseFunctions.serverTimestamp()
+                        },
+                        {
+                            title: "Auto Mining Feature",
+                            content: "Remember to activate Auto Mining to earn coins even when you're not actively playing!",
+                            timestamp: window.firebaseFunctions.serverTimestamp()
+                        },
+                        {
+                            title: "Referral Bonus Increased",
+                            content: "We've increased the referral bonus to 10 coins for each friend who signs up using your code!",
+                            timestamp: window.firebaseFunctions.serverTimestamp()
+                        }
+                    ];
+                    
+                    for (const announcement of sampleAnnouncements) {
+                        await window.firebaseFunctions.addDoc(announcementsRef, announcement);
+                    }
+                }
+            } catch (error) {
+                console.error('Error adding sample announcements:', error);
+            }
+        }, 2000);
     </script>
 </body>
 </html>
