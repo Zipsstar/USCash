@@ -267,7 +267,10 @@
             width: 280px;
             height: 280px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            background: 
+                radial-gradient(circle at 30% 20%, #87CEEB 0%, transparent 30%),
+                radial-gradient(circle at 70% 25%, #87CEEB 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, #2E8B57 0%, #228B22 30%, #006400 70%, transparent 100%);
             border: 3px solid var(--accent);
             display: flex;
             justify-content: center;
@@ -287,6 +290,120 @@
             100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
         }
         
+        /* Nature Elements */
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to bottom, #87CEEB, #B0E2FF);
+            border-radius: 50% 50% 0 0;
+            z-index: 1;
+        }
+        
+        .grass {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, #2E8B57, #228B22, #006400);
+            border-radius: 0 0 50% 50%;
+            z-index: 1;
+        }
+        
+        .plant {
+            position: absolute;
+            z-index: 2;
+        }
+        
+        .plant-1 {
+            bottom: 30%;
+            left: 20%;
+            width: 25px;
+            height: 40px;
+            background: 
+                linear-gradient(to right, #32CD32, #228B22);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transform: rotate(-5deg);
+        }
+        
+        .plant-2 {
+            bottom: 25%;
+            right: 25%;
+            width: 20px;
+            height: 35px;
+            background: 
+                linear-gradient(to right, #32CD32, #228B22);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transform: rotate(10deg);
+        }
+        
+        .plant-3 {
+            bottom: 35%;
+            left: 60%;
+            width: 30px;
+            height: 50px;
+            background: 
+                linear-gradient(to right, #32CD32, #228B22);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transform: rotate(-15deg);
+        }
+        
+        .plant-4 {
+            bottom: 28%;
+            right: 15%;
+            width: 22px;
+            height: 38px;
+            background: 
+                linear-gradient(to right, #32CD32, #228B22);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transform: rotate(5deg);
+        }
+        
+        .plant-5 {
+            bottom: 32%;
+            left: 40%;
+            width: 18px;
+            height: 32px;
+            background: 
+                linear-gradient(to right, #32CD32, #228B22);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transform: rotate(-8deg);
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .cloud-1 {
+            top: 15%;
+            left: 20%;
+            width: 40px;
+            height: 25px;
+            opacity: 0.8;
+        }
+        
+        .cloud-2 {
+            top: 25%;
+            right: 25%;
+            width: 35px;
+            height: 20px;
+            opacity: 0.7;
+        }
+        
+        .cloud-3 {
+            top: 10%;
+            right: 15%;
+            width: 30px;
+            height: 18px;
+            opacity: 0.9;
+        }
+        
         .cobra-container {
             position: relative;
             width: 180px;
@@ -294,6 +411,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 3;
         }
         
         .cobra-snake {
@@ -324,7 +442,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 2;
+            z-index: 4;
         }
         
         .gold-pile::before {
@@ -341,7 +459,7 @@
             content: "💰";
             font-size: 20px;
             position: relative;
-            z-index: 3;
+            z-index: 5;
         }
         
         .tap-instruction {
@@ -772,6 +890,23 @@
                 
                 <div class="mining-area">
                     <div class="mining-zone" id="miningZone">
+                        <!-- Sky and Nature Background -->
+                        <div class="sky"></div>
+                        <div class="grass"></div>
+                        
+                        <!-- Plants -->
+                        <div class="plant plant-1"></div>
+                        <div class="plant plant-2"></div>
+                        <div class="plant plant-3"></div>
+                        <div class="plant plant-4"></div>
+                        <div class="plant plant-5"></div>
+                        
+                        <!-- Clouds -->
+                        <div class="cloud cloud-1"></div>
+                        <div class="cloud cloud-2"></div>
+                        <div class="cloud cloud-3"></div>
+                        
+                        <!-- Cobra and Gold Pile -->
                         <div class="cobra-container">
                             <div class="cobra-snake"></div>
                             <div class="gold-pile"></div>
@@ -1103,7 +1238,7 @@
         // Terms Modal
         agreeCheckbox.addEventListener('change', (e) => {
             agreeButton.disabled = !e.target.checked;
-        });
+        }
         
         agreeButton.addEventListener('click', () => {
             userData.agreedToTerms = true;
