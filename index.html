@@ -1009,7 +1009,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, query, orderBy, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
         // Your web app's Firebase configuration
@@ -1035,6 +1035,7 @@
             createUserWithEmailAndPassword,
             signInWithEmailAndPassword,
             signOut,
+            onAuthStateChanged,
             doc,
             setDoc,
             getDoc,
@@ -1131,14 +1132,6 @@
                 // Load user data from Firestore
                 await loadUserData(user.uid);
                 
-                // Show dashboard
-                showDashboard();
-                
-                // Show terms modal if user hasn't agreed yet
-                if (!userData.agreedToTerms) {
-                    showTermsModal();
-                }
-                
             } catch (error) {
                 showAuthMessage(error.message);
             }
@@ -1158,8 +1151,8 @@
                 );
                 const user = userCredential.user;
                 
-                // Create user data in Firestore
-                userData = {
+                // Create user data in Firestore - FIXED: Use setDoc instead of updateDoc for initial creation
+                const userDataToSave = {
                     uid: user.uid,
                     email: email,
                     phone: phone,
@@ -1175,16 +1168,16 @@
                 
                 await window.firebaseFunctions.setDoc(
                     window.firebaseFunctions.doc(window.firebaseFirestore, "users", user.uid),
-                    userData
+                    userDataToSave
                 );
+                
+                // Set the userData object
+                userData = userDataToSave;
                 
                 // Handle referral if provided
                 if (referral) {
                     await handleReferral(referral, user.uid);
                 }
-                
-                // Show dashboard
-                showDashboard();
                 
                 // Show terms modal
                 showTermsModal();
@@ -1238,7 +1231,7 @@
         // Terms Modal
         agreeCheckbox.addEventListener('change', (e) => {
             agreeButton.disabled = !e.target.checked;
-        }
+        });
         
         agreeButton.addEventListener('click', () => {
             userData.agreedToTerms = true;
@@ -1304,6 +1297,9 @@
                     userData.lastLogin = new Date().toISOString();
                     await saveUserData();
                     
+                    // Show dashboard after loading user data
+                    showDashboard();
+                    
                     // Set up real-time listener for user data
                     window.firebaseFunctions.onSnapshot(docRef, (doc) => {
                         if (doc.exists()) {
@@ -1315,9 +1311,51 @@
                             updateReferralDisplay();
                         }
                     });
+                    
+                    // Show terms modal if user hasn't agreed yet
+                    if (!userData.agreedToTerms) {
+                        showTermsModal();
+                    }
+                } else {
+                    // User document doesn't exist - create it
+                    await createUserDocument(uid);
                 }
             } catch (error) {
                 console.error('Error loading user data:', error);
+                showAuthMessage('Error loading user data. Please try again.');
+            }
+        }
+        
+        async function createUserDocument(uid) {
+            try {
+                const user = window.firebaseAuth.currentUser;
+                if (!user) return;
+                
+                const userDataToSave = {
+                    uid: uid,
+                    email: user.email,
+                    phone: '',
+                    balance: 0,
+                    coins: 0,
+                    referrals: 0,
+                    role: 'user',
+                    lastLogin: new Date().toISOString(),
+                    autoMiningEnd: null,
+                    agreedToTerms: false,
+                    lastSeenAnnouncement: null
+                };
+                
+                await window.firebaseFunctions.setDoc(
+                    window.firebaseFunctions.doc(window.firebaseFirestore, "users", uid),
+                    userDataToSave
+                );
+                
+                userData = userDataToSave;
+                showDashboard();
+                showTermsModal();
+            } catch (error) {
+                console.error('Error creating user document:', error);
+                showAuthMessage('Error creating user profile. Please try again.');
             }
         }
         
@@ -1595,6 +1633,17 @@
         
         // Initialize
         showAuth();
+        
+        // Check if user is already logged in
+        window.firebaseFunctions.onAuthStateChanged(window.firebaseAuth, (user) => {
+            if (user) {
+                // User is signed in
+                loadUserData(user.uid);
+            } else {
+                // User is signed out
+                showAuth();
+            }
+        });
         
         // For testing: Add sample announcements (remove in production)
         setTimeout(async () => {
