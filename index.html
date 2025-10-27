@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GoldMinning - Gold Mining Game</title>
     <style>
-        /* All existing CSS remains unchanged */
         :root {
             --primary: #000000;
             --accent: #FFD700;
@@ -716,114 +715,67 @@
             font-size: 16px;
         }
         
-        /* NEW STYLES FOR GEMS AND STAKING */
-        .gems-balance {
+        /* --- START: Gems & Staking Feature Styles --- */
+        .balance-container {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #b19cd9;
-            text-shadow: 0 0 10px rgba(177, 156, 217, 0.5);
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
         }
         
-        .stake-button {
-            background: linear-gradient(90deg, #8A2BE2, #9370DB);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-            width: 100%;
-        }
-        
-        .stake-button:hover {
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-            transform: translateY(-2px);
-        }
-        
-        .stake-button:disabled {
-            background: #555;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .staking-section {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(177, 156, 217, 0.3);
-        }
-        
-        .staking-section h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #b19cd9;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .staking-input {
-            width: 100%;
-            padding: 16px 18px;
-            border-radius: 12px;
-            border: 1px solid rgba(177, 156, 217, 0.3);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: var(--text);
-            transition: all 0.3s;
+        .gems-display {
             font-size: 16px;
-            margin-bottom: 15px;
-        }
-        
-        .staking-info {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 12px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 1px dashed rgba(177, 156, 217, 0.5);
-            font-size: 14px;
-        }
-        
-        .active-staking {
-            background-color: rgba(177, 156, 217, 0.1);
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 15px;
-            border-left: 4px solid #8A2BE2;
-        }
-        
-        .staking-timer {
-            font-size: 18px;
             font-weight: 600;
-            color: #b19cd9;
+            color: #FF69B4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        }
+        
+        .staking-item {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #FF69B4;
+        }
+        
+        .staking-amount {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .staking-countdown {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .no-staking {
             text-align: center;
-            margin: 10px 0;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
         }
         
         .gem-animation {
             position: fixed;
-            font-size: 30px;
+            font-size: 24px;
             z-index: 10000;
             pointer-events: none;
-            animation: floatGem 2s ease-out forwards;
+            animation: gemFloat 2s ease-out forwards;
         }
         
-        @keyframes floatGem {
+        @keyframes gemFloat {
             0% {
-                opacity: 1;
                 transform: translateY(0) scale(1);
+                opacity: 1;
             }
             100% {
+                transform: translateY(-100px) scale(0.5);
                 opacity: 0;
-                transform: translateY(-100px) scale(1.5);
             }
         }
+        /* --- END: Gems & Staking Feature Styles --- */
         
         /* Responsive Adjustments */
         @media (max-width: 480px) {
@@ -969,8 +921,12 @@
                         <span>🏆</span> GoldMinning
                     </div>
                     <div class="user-info">
-                        <div class="balance-display" id="balanceDisplay">0 Coins</div>
-                        <div class="gems-balance" id="gemsBalance">💎 0</div>
+                        <!-- --- START: Gems & Staking Feature - Updated Balance Display --- -->
+                        <div class="balance-container">
+                            <div class="balance-display" id="balanceDisplay">0 Coins</div>
+                            <div class="gems-display" id="gemsDisplay">💎 0 Gems</div>
+                        </div>
+                        <!-- --- END: Gems & Staking Feature - Updated Balance Display --- -->
                         <div class="user-rank" id="userRank">Rank 1</div>
                         <div class="announcement-icon" id="announcementIcon">
                             📢
@@ -987,11 +943,12 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <h3>Total Balance</h3>
-                        <div class="stat-value" id="totalBalance">0 Coins</div>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Gems Balance</h3>
-                        <div class="stat-value" id="totalGems">💎 0</div>
+                        <!-- --- START: Gems & Staking Feature - Updated Total Balance --- -->
+                        <div class="stat-value">
+                            <div id="totalBalance">0 Coins</div>
+                            <div id="totalGems">💎 0 Gems</div>
+                        </div>
+                        <!-- --- END: Gems & Staking Feature - Updated Total Balance --- -->
                     </div>
                     <div class="stat-card">
                         <h3>Referrals</h3>
@@ -1030,25 +987,6 @@
                     <div class="tap-instruction">Tap the gold pile to mine coins!</div>
                 </div>
                 
-                <!-- NEW STAKING SECTION -->
-                <div class="staking-section">
-                    <h3>💎 Stake Coins for Gems</h3>
-                    <p>Stake your coins to earn gems! 2000 coins = 1 gem after 3 days.</p>
-                    <input type="number" id="stakeAmount" class="staking-input" placeholder="Enter coins to stake (min 2000)" min="2000">
-                    <div class="staking-info">
-                        <p>Minimum stake: 2000 coins</p>
-                        <p>Conversion rate: 2000 coins = 1 gem</p>
-                        <p>Staking period: 3 days</p>
-                    </div>
-                    <button class="stake-button" id="stakeButton">Stake Coins</button>
-                    
-                    <div id="activeStaking" class="active-staking" style="display: none;">
-                        <h4>Active Staking</h4>
-                        <div id="stakingDetails"></div>
-                        <div class="staking-timer" id="stakingTimer"></div>
-                    </div>
-                </div>
-                
                 <div class="auto-mining-section">
                     <div class="auto-mining-header">
                         <h3>Auto Mining</h3>
@@ -1064,6 +1002,21 @@
                 </div>
                 
                 <div class="features-grid">
+                    <!-- --- START: Gems & Staking Feature - New Staking Card --- -->
+                    <div class="feature-card">
+                        <h3>💎 Stake Coins</h3>
+                        <p>Stake your coins to earn gems! 2000 coins = 1 gem after 3 days.</p>
+                        <button class="btn btn-primary" id="stakeCoinsBtn">Stake Coins</button>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>⏳ Active Staking</h3>
+                        <div id="activeStakingList">
+                            <div class="no-staking">No active staking</div>
+                        </div>
+                    </div>
+                    <!-- --- END: Gems & Staking Feature - New Staking Card --- -->
+                    
                     <div class="feature-card">
                         <h3>👥 Referral System</h3>
                         <p>Invite friends and earn rewards!</p>
@@ -1093,55 +1046,79 @@
         </footer>
     </div>
     
+    <!-- Terms & Conditions Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📜 Terms & Conditions</h2>
+                <button class="close-modal" id="closeTermsModal">&times;</button>
+            </div>
+            <div class="terms-content">
+                <p>This is a skill-based mining game.</p>
+                <p>Users earn coins by manual tapping or auto-mining.</p>
+                <p>Deposit $1 to unlock mining access until the coin price is announced.</p>
+                <p>The coin price will be revealed between 0.00003 and 0.7 USD.</p>
+                <p>Users may gain profit or face partial loss based on the final price.</p>
+                <p>Coins represent your in-game effort, not a guaranteed return.</p>
+                <p>Each user can have only one account per Gmail and phone number.</p>
+                <p>Auto-mining runs for 2 hours and must be restarted after time ends.</p>
+                <p>Withdrawals will open once the coin price is officially declared.</p>
+                <p>Deposit section shows contact details of Assistant Mining Agents.</p>
+                <p>Referrals help users grow faster and unlock rewards.</p>
+                <p>Reaching Senior Assistant Level gives a chance to earn $200/month. But confirmed by company you will receive a mail as confirmation.</p>
+                <p>To qualify, complete 30 referrals in 1 week, 90 in 3 weeks, and 2 daily afterward.</p>
+                <p>Any use of auto-tapping or cheating tools will lead to permanent account ban.</p>
+                <p>By clicking or playing, you are accepting our Terms & Conditions and agree to follow all game rules.</p>
+            </div>
+            <div class="agree-checkbox">
+                <input type="checkbox" id="agreeCheckbox">
+                <label for="agreeCheckbox">I agree to the Terms & Conditions</label>
+            </div>
+            <button class="btn btn-primary" id="agreeButton" disabled>I Agree</button>
+        </div>
+    </div>
+    
     <!-- Announcements Modal -->
     <div id="announcementsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Announcements</h2>
-                <button class="close-modal" id="closeAnnouncements">&times;</button>
+                <h2 class="modal-title">📢 Announcements</h2>
+                <button class="close-modal" id="closeAnnouncementsModal">&times;</button>
             </div>
             <div id="announcementsList">
-                <!-- Announcements will be loaded here -->
-                <div class="no-announcements">No announcements at this time.</div>
+                <!-- Announcements will be dynamically added here -->
+                <div class="no-announcements">No announcements available</div>
             </div>
         </div>
     </div>
     
-    <!-- Terms Modal -->
-    <div id="termsModal" class="modal">
+    <!-- --- START: Gems & Staking Feature - Staking Modal --- -->
+    <div id="stakingModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Terms & Conditions</h2>
-                <button class="close-modal" id="closeTerms">&times;</button>
+                <h2 class="modal-title">💎 Stake Coins</h2>
+                <button class="close-modal" id="closeStakingModal">&times;</button>
             </div>
-            <div class="terms-content">
-                <p>Welcome to GoldMinning! By using our platform, you agree to the following terms and conditions:</p>
-                <p>1. You must be at least 18 years old to use this platform.</p>
-                <p>2. All mining activities are virtual and for entertainment purposes.</p>
-                <p>3. Coins earned have no real monetary value unless officially announced.</p>
-                <p>4. Referral rewards are subject to terms and may change without notice.</p>
-                <p>5. We reserve the right to modify or terminate services at any time.</p>
-                <p>6. Users are responsible for maintaining the security of their accounts.</p>
-                <p>7. Any fraudulent activity will result in immediate account termination.</p>
-                <p>8. Withdrawals are only possible after official coin price announcement.</p>
-                <p>9. Auto mining requires active internet connection to function.</p>
-                <p>10. We are not responsible for any losses due to technical issues.</p>
+            <div class="form-group">
+                <label for="stakeAmount">Amount to Stake (minimum 2000 coins)</label>
+                <input type="number" id="stakeAmount" class="form-control" min="2000" step="1" value="2000">
+                <div style="margin-top: 10px; color: rgba(255,255,255,0.7);">
+                    You will receive: <span id="gemsToReceive">1</span> 💎
+                </div>
             </div>
-            <div class="agree-checkbox">
-                <input type="checkbox" id="agreeTerms">
-                <label for="agreeTerms">I agree to the Terms & Conditions</label>
-            </div>
-            <button class="btn btn-primary" id="acceptTerms" disabled>Accept & Continue</button>
+            <button class="btn btn-primary" id="confirmStakeBtn">Stake Now</button>
         </div>
     </div>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- --- END: Gems & Staking Feature - Staking Modal --- -->
     
-    <script>
-        // Firebase configuration
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, query, orderBy, addDoc, serverTimestamp, where, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAxkcz5xCEIBnvPkLdQf_7aKcIPFNsf3u0",
             authDomain: "goldmining-7f702.firebaseapp.com",
@@ -1152,10 +1129,36 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        // Make Firebase available globally
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseFirestore = db;
+        window.firebaseFunctions = {
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged,
+            doc,
+            setDoc,
+            getDoc,
+            updateDoc,
+            onSnapshot,
+            collection,
+            query,
+            orderBy,
+            addDoc,
+            serverTimestamp,
+            where,
+            getDocs
+        };
+    </script>
+    
+    <!-- Game Logic -->
+    <script>
         // DOM Elements
         const authSection = document.getElementById('authSection');
         const dashboardSection = document.getElementById('dashboardSection');
@@ -1164,53 +1167,65 @@
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
         const authMessage = document.getElementById('authMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
         const balanceDisplay = document.getElementById('balanceDisplay');
         const totalBalance = document.getElementById('totalBalance');
-        const gemsBalance = document.getElementById('gemsBalance');
-        const totalGems = document.getElementById('totalGems');
-        const userRank = document.getElementById('userRank');
-        const referralCount = document.getElementById('referralCount');
-        const referralCode = document.getElementById('referralCode');
         const miningZone = document.getElementById('miningZone');
         const autoMiningToggle = document.getElementById('autoMiningToggle');
-        const autoMiningStatus = document.getElementById('autoMiningStatus');
         const timerProgress = document.getElementById('timerProgress');
         const timerText = document.getElementById('timerText');
-        const logoutBtn = document.getElementById('logoutBtn');
+        const referralCount = document.getElementById('referralCount');
+        const referralCode = document.getElementById('referralCode');
+        const userRank = document.getElementById('userRank');
         const announcementIcon = document.getElementById('announcementIcon');
         const announcementBadge = document.getElementById('announcementBadge');
-        const announcementsModal = document.getElementById('announcementsModal');
-        const closeAnnouncements = document.getElementById('closeAnnouncements');
-        const announcementsList = document.getElementById('announcementsList');
         const termsModal = document.getElementById('termsModal');
-        const closeTerms = document.getElementById('closeTerms');
-        const agreeTerms = document.getElementById('agreeTerms');
-        const acceptTerms = document.getElementById('acceptTerms');
-
-        // NEW GEMS AND STAKING ELEMENTS
+        const closeTermsModal = document.getElementById('closeTermsModal');
+        const agreeCheckbox = document.getElementById('agreeCheckbox');
+        const agreeButton = document.getElementById('agreeButton');
+        const announcementsModal = document.getElementById('announcementsModal');
+        const closeAnnouncementsModal = document.getElementById('closeAnnouncementsModal');
+        const announcementsList = document.getElementById('announcementsList');
+        
+        // --- START: Gems & Staking Feature - New DOM Elements ---
+        const gemsDisplay = document.getElementById('gemsDisplay');
+        const totalGems = document.getElementById('totalGems');
+        const stakeCoinsBtn = document.getElementById('stakeCoinsBtn');
+        const stakingModal = document.getElementById('stakingModal');
+        const closeStakingModal = document.getElementById('closeStakingModal');
         const stakeAmount = document.getElementById('stakeAmount');
-        const stakeButton = document.getElementById('stakeButton');
-        const activeStaking = document.getElementById('activeStaking');
-        const stakingDetails = document.getElementById('stakingDetails');
-        const stakingTimer = document.getElementById('stakingTimer');
-
+        const gemsToReceive = document.getElementById('gemsToReceive');
+        const confirmStakeBtn = document.getElementById('confirmStakeBtn');
+        const activeStakingList = document.getElementById('activeStakingList');
+        // --- END: Gems & Staking Feature - New DOM Elements ---
+        
         // Game State
         let userData = {
+            uid: null,
+            email: null,
+            phone: null,
+            balance: 0,
             coins: 0,
-            gems: 0,
-            rank: 1,
-            referralCount: 0,
-            referralCode: '',
-            autoMining: false,
-            lastMine: null,
-            lastAutoMine: null,
-            staking: null
+            referrals: 0,
+            role: 'user',
+            lastLogin: null,
+            autoMiningEnd: null,
+            agreedToTerms: false,
+            lastSeenAnnouncement: null
         };
         
-        let autoMiningInterval;
+        let autoMiningInterval = null;
+        let autoMiningTimeLeft = 0;
+        let autoMiningTotalTime = 2 * 60 * 60; // 2 hours in seconds
         let announcements = [];
-        let unreadAnnouncements = 0;
-
+        let unreadAnnouncementsCount = 0;
+        
+        // --- START: Gems & Staking Feature - New Game State ---
+        let gems = 0;
+        let activeStakes = [];
+        let stakingCheckInterval = null;
+        // --- END: Gems & Staking Feature - New Game State ---
+        
         // Auth Tab Switching
         loginTab.addEventListener('click', () => {
             loginTab.classList.add('active');
@@ -1219,7 +1234,7 @@
             signupForm.classList.remove('active');
             authMessage.style.display = 'none';
         });
-
+        
         signupTab.addEventListener('click', () => {
             signupTab.classList.add('active');
             loginTab.classList.remove('active');
@@ -1227,552 +1242,851 @@
             loginForm.classList.remove('active');
             authMessage.style.display = 'none';
         });
-
-        // Authentication
-        loginForm.addEventListener('submit', (e) => {
+        
+        // Login Form Submission
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
-            const referral = document.getElementById('loginReferral').value;
             
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Check if user accepted terms
-                    checkUserTerms(userCredential.user.uid);
-                })
-                .catch((error) => {
-                    showAuthMessage(error.message);
-                });
+            try {
+                const userCredential = await window.firebaseFunctions.signInWithEmailAndPassword(
+                    window.firebaseAuth, email, password
+                );
+                const user = userCredential.user;
+                
+                // Load user data from Firestore
+                await loadUserData(user.uid);
+                
+            } catch (error) {
+                showAuthMessage(error.message);
+            }
         });
-
-        signupForm.addEventListener('submit', (e) => {
+        
+        // Signup Form Submission
+        signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
             const phone = document.getElementById('signupPhone').value;
             const referral = document.getElementById('signupReferral').value;
             
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Create user document
-                    const userId = userCredential.user.uid;
-                    const userRef = db.collection('users').doc(userId);
-                    
-                    // Generate referral code
-                    const refCode = generateReferralCode();
-                    
-                    return userRef.set({
-                        email: email,
-                        phone: phone,
-                        coins: 100, // Starting bonus
-                        gems: 0,
-                        rank: 1,
-                        referralCode: refCode,
-                        referralCount: 0,
-                        referredBy: referral || null,
-                        autoMining: false,
-                        lastMine: null,
-                        lastAutoMine: null,
-                        staking: null,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                })
-                .then(() => {
-                    // Show terms modal
-                    showTermsModal();
-                })
-                .catch((error) => {
-                    showAuthMessage(error.message);
-                });
-        });
-
-        // Check if user accepted terms
-        function checkUserTerms(userId) {
-            db.collection('users').doc(userId).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        const userData = doc.data();
-                        if (userData.termsAccepted) {
-                            loadDashboard();
-                        } else {
-                            showTermsModal();
-                        }
-                    }
-                });
-        }
-
-        // Show terms modal
-        function showTermsModal() {
-            termsModal.style.display = 'flex';
-        }
-
-        // Close terms modal
-        closeTerms.addEventListener('click', () => {
-            termsModal.style.display = 'none';
-        });
-
-        // Accept terms
-        agreeTerms.addEventListener('change', () => {
-            acceptTerms.disabled = !agreeTerms.checked;
-        });
-
-        acceptTerms.addEventListener('click', () => {
-            if (agreeTerms.checked) {
-                const user = auth.currentUser;
-                if (user) {
-                    db.collection('users').doc(user.uid).update({
-                        termsAccepted: true,
-                        termsAcceptedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => {
-                        termsModal.style.display = 'none';
-                        loadDashboard();
-                    });
+            try {
+                const userCredential = await window.firebaseFunctions.createUserWithEmailAndPassword(
+                    window.firebaseAuth, email, password
+                );
+                const user = userCredential.user;
+                
+                // Create user data in Firestore - FIXED: Use setDoc instead of updateDoc for initial creation
+                const userDataToSave = {
+                    uid: user.uid,
+                    email: email,
+                    phone: phone,
+                    balance: 0,
+                    coins: 0,
+                    referrals: 0,
+                    role: 'user',
+                    lastLogin: new Date().toISOString(),
+                    autoMiningEnd: null,
+                    agreedToTerms: false,
+                    lastSeenAnnouncement: null,
+                    // --- START: Gems & Staking Feature - Add gems to user data ---
+                    gems: 0
+                    // --- END: Gems & Staking Feature - Add gems to user data ---
+                };
+                
+                await window.firebaseFunctions.setDoc(
+                    window.firebaseFunctions.doc(window.firebaseFirestore, "users", user.uid),
+                    userDataToSave
+                );
+                
+                // Set the userData object
+                userData = userDataToSave;
+                
+                // Handle referral if provided
+                if (referral) {
+                    await handleReferral(referral, user.uid);
                 }
+                
+                // Show terms modal
+                showTermsModal();
+                
+            } catch (error) {
+                showAuthMessage(error.message);
             }
         });
-
-        // Generate referral code
-        function generateReferralCode() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let result = '';
-            for (let i = 0; i < 8; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
+        
+        // Logout
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await window.firebaseFunctions.signOut(window.firebaseAuth);
+                showAuth();
+                resetGameState();
+            } catch (error) {
+                console.error('Logout error:', error);
             }
-            return result;
-        }
-
-        // Show auth message
+        });
+        
+        // Mining Zone Click
+        miningZone.addEventListener('click', (e) => {
+            if (!userData.uid) return;
+            
+            // Update balance - ONE TAP = ONE COIN ONLY
+            userData.balance += 1;
+            userData.coins += 1;
+            
+            // Update display
+            updateBalanceDisplay();
+            
+            // Save to Firestore
+            saveUserData();
+            
+            // Show +1 animation
+            showPlusOneAnimation(e);
+            
+            // Play sparkle effect
+            playSparkleEffect();
+        });
+        
+        // Auto Mining Toggle
+        autoMiningToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                startAutoMining();
+            } else {
+                stopAutoMining();
+            }
+        });
+        
+        // Terms Modal
+        agreeCheckbox.addEventListener('change', (e) => {
+            agreeButton.disabled = !e.target.checked;
+        });
+        
+        agreeButton.addEventListener('click', () => {
+            userData.agreedToTerms = true;
+            saveUserData();
+            hideTermsModal();
+        });
+        
+        closeTermsModal.addEventListener('click', hideTermsModal);
+        
+        // Announcements
+        announcementIcon.addEventListener('click', () => {
+            showAnnouncementsModal();
+        });
+        
+        closeAnnouncementsModal.addEventListener('click', hideAnnouncementsModal);
+        
+        // --- START: Gems & Staking Feature - Event Listeners ---
+        stakeCoinsBtn.addEventListener('click', () => {
+            showStakingModal();
+        });
+        
+        closeStakingModal.addEventListener('click', hideStakingModal);
+        
+        stakeAmount.addEventListener('input', (e) => {
+            const amount = parseInt(e.target.value) || 0;
+            const gems = Math.floor(amount / 2000);
+            gemsToReceive.textContent = gems;
+        });
+        
+        confirmStakeBtn.addEventListener('click', async () => {
+            await createStaking();
+        });
+        // --- END: Gems & Staking Feature - Event Listeners ---
+        
+        // Functions
         function showAuthMessage(message) {
             authMessage.textContent = message;
             authMessage.style.display = 'block';
         }
-
-        // Load dashboard
-        function loadDashboard() {
+        
+        function showAuth() {
+            authSection.style.display = 'flex';
+            dashboardSection.style.display = 'none';
+        }
+        
+        function showDashboard() {
             authSection.style.display = 'none';
             dashboardSection.style.display = 'block';
+            updateBalanceDisplay();
+            updateReferralDisplay();
             
-            const user = auth.currentUser;
-            if (user) {
-                // Load user data
-                const userRef = db.collection('users').doc(user.uid);
-                userRef.onSnapshot((doc) => {
-                    if (doc.exists) {
-                        userData = doc.data();
-                        updateUI();
-                        
-                        // Check for auto mining
-                        if (userData.autoMining) {
-                            startAutoMining();
-                        }
-                        
-                        // Load announcements
-                        loadAnnouncements();
-                    }
-                });
-            }
-        }
-
-        // Update UI with user data
-        function updateUI() {
-            balanceDisplay.textContent = `${userData.coins} Coins`;
-            totalBalance.textContent = `${userData.coins} Coins`;
-            gemsBalance.textContent = `💎 ${userData.gems}`;
-            totalGems.textContent = `💎 ${userData.gems}`;
-            userRank.textContent = `Rank ${userData.rank}`;
-            referralCount.textContent = userData.referralCount;
-            referralCode.textContent = userData.referralCode;
-            
-            // Update auto mining status
-            autoMiningToggle.checked = userData.autoMining;
-            autoMiningStatus.textContent = userData.autoMining ? 'Active' : 'Inactive';
-            
-            // Update staking information
-            updateStakingUI();
-        }
-
-        // NEW: Update staking UI
-        function updateStakingUI() {
-            if (userData.staking && userData.staking.active) {
-                activeStaking.style.display = 'block';
-                const stakedAmount = userData.staking.amount;
-                const gemsToReceive = Math.floor(stakedAmount / 2000);
-                const startTime = userData.staking.startTime.toDate();
-                const endTime = new Date(startTime.getTime() + 3 * 24 * 60 * 60 * 1000); // 3 days
+            // Check if auto mining is active
+            if (userData.autoMiningEnd) {
+                const endTime = new Date(userData.autoMiningEnd).getTime();
+                const now = new Date().getTime();
                 
-                stakingDetails.innerHTML = `
-                    <p>Staked: ${stakedAmount} coins</p>
-                    <p>Will receive: ${gemsToReceive} gems</p>
-                    <p>Started: ${startTime.toLocaleDateString()}</p>
-                    <p>Ends: ${endTime.toLocaleDateString()}</p>
-                `;
-                
-                updateStakingTimer(endTime);
-                
-                // Check if staking period is over
-                if (new Date() >= endTime) {
-                    completeStaking();
-                }
-            } else {
-                activeStaking.style.display = 'none';
-            }
-        }
-
-        // NEW: Update staking timer
-        function updateStakingTimer(endTime) {
-            const now = new Date();
-            const timeLeft = endTime - now;
-            
-            if (timeLeft <= 0) {
-                stakingTimer.textContent = "Staking complete!";
-                return;
-            }
-            
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            
-            stakingTimer.textContent = `Time left: ${days}d ${hours}h ${minutes}m`;
-            
-            // Update every minute
-            setTimeout(() => updateStakingTimer(endTime), 60000);
-        }
-
-        // NEW: Complete staking and award gems
-        function completeStaking() {
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            const userRef = db.collection('users').doc(user.uid);
-            const stakedAmount = userData.staking.amount;
-            const gemsToReceive = Math.floor(stakedAmount / 2000);
-            
-            userRef.update({
-                gems: firebase.firestore.FieldValue.increment(gemsToReceive),
-                staking: {
-                    active: false,
-                    completed: true,
-                    amount: stakedAmount,
-                    gemsReceived: gemsToReceive,
-                    startTime: userData.staking.startTime,
-                    endTime: firebase.firestore.FieldValue.serverTimestamp()
-                }
-            }).then(() => {
-                // Show gem animation
-                showGemAnimation(gemsToReceive);
-            });
-        }
-
-        // NEW: Show gem animation when gems are received
-        function showGemAnimation(gemCount) {
-            for (let i = 0; i < gemCount; i++) {
-                setTimeout(() => {
-                    const gem = document.createElement('div');
-                    gem.className = 'gem-animation';
-                    gem.textContent = '💎';
-                    gem.style.left = `${Math.random() * 80 + 10}%`;
-                    gem.style.top = '80%';
-                    
-                    document.body.appendChild(gem);
-                    
-                    setTimeout(() => {
-                        document.body.removeChild(gem);
-                    }, 2000);
-                }, i * 200);
-            }
-        }
-
-        // Mining functionality
-        miningZone.addEventListener('click', () => {
-            mineCoins();
-        });
-
-        function mineCoins() {
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            const coinsEarned = calculateMiningReward();
-            const userRef = db.collection('users').doc(user.uid);
-            
-            userRef.update({
-                coins: firebase.firestore.FieldValue.increment(coinsEarned),
-                lastMine: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                // Show visual feedback
-                showMiningEffect(coinsEarned);
-            });
-        }
-
-        function calculateMiningReward() {
-            // Base reward + random bonus
-            const baseReward = 10;
-            const randomBonus = Math.floor(Math.random() * 6); // 0-5
-            return baseReward + randomBonus;
-        }
-
-        function showMiningEffect(coinsEarned) {
-            // Create floating coin text
-            const coinText = document.createElement('div');
-            coinText.textContent = `+${coinsEarned}`;
-            coinText.style.position = 'absolute';
-            coinText.style.color = '#FFD700';
-            coinText.style.fontWeight = 'bold';
-            coinText.style.fontSize = '20px';
-            coinText.style.textShadow = '0 0 5px rgba(0,0,0,0.8)';
-            coinText.style.pointerEvents = 'none';
-            coinText.style.zIndex = '10';
-            
-            // Position near the gold pile
-            const miningZoneRect = miningZone.getBoundingClientRect();
-            coinText.style.left = `${miningZoneRect.width / 2}px`;
-            coinText.style.top = `${miningZoneRect.height - 60}px`;
-            
-            miningZone.appendChild(coinText);
-            
-            // Animate floating up
-            let position = 0;
-            const floatInterval = setInterval(() => {
-                position += 2;
-                coinText.style.transform = `translateY(-${position}px)`;
-                coinText.style.opacity = 1 - (position / 100);
-                
-                if (position > 100) {
-                    clearInterval(floatInterval);
-                    miningZone.removeChild(coinText);
-                }
-            }, 30);
-        }
-
-        // Auto Mining
-        autoMiningToggle.addEventListener('change', () => {
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            const userRef = db.collection('users').doc(user.uid);
-            
-            if (autoMiningToggle.checked) {
-                userRef.update({
-                    autoMining: true,
-                    lastAutoMine: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
+                if (endTime > now) {
+                    autoMiningTimeLeft = Math.floor((endTime - now) / 1000);
                     startAutoMining();
-                });
-            } else {
-                userRef.update({
-                    autoMining: false
-                }).then(() => {
-                    stopAutoMining();
-                });
+                } else {
+                    // Auto mining has ended
+                    userData.autoMiningEnd = null;
+                    saveUserData();
+                }
             }
-        });
-
+            
+            // Load announcements
+            loadAnnouncements();
+            
+            // --- START: Gems & Staking Feature - Load staking data ---
+            loadStakingRecords();
+            startStakingCheckInterval();
+            // --- END: Gems & Staking Feature - Load staking data ---
+        }
+        
+        async function loadUserData(uid) {
+            try {
+                const docRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", uid);
+                const docSnap = await window.firebaseFunctions.getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    userData = data;
+                    userData.uid = uid;
+                    
+                    // --- START: Gems & Staking Feature - Load gems ---
+                    gems = data.gems || 0;
+                    // --- END: Gems & Staking Feature - Load gems ---
+                    
+                    // Update last login
+                    userData.lastLogin = new Date().toISOString();
+                    await saveUserData();
+                    
+                    // Show dashboard after loading user data
+                    showDashboard();
+                    
+                    // Set up real-time listener for user data
+                    window.firebaseFunctions.onSnapshot(docRef, (doc) => {
+                        if (doc.exists()) {
+                            const updatedData = doc.data();
+                            userData.balance = updatedData.balance;
+                            userData.coins = updatedData.coins;
+                            userData.referrals = updatedData.referrals;
+                            // --- START: Gems & Staking Feature - Update gems ---
+                            gems = updatedData.gems || 0;
+                            // --- END: Gems & Staking Feature - Update gems ---
+                            updateBalanceDisplay();
+                            updateReferralDisplay();
+                        }
+                    });
+                    
+                    // Show terms modal if user hasn't agreed yet
+                    if (!userData.agreedToTerms) {
+                        showTermsModal();
+                    }
+                } else {
+                    // User document doesn't exist - create it
+                    await createUserDocument(uid);
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                showAuthMessage('Error loading user data. Please try again.');
+            }
+        }
+        
+        async function createUserDocument(uid) {
+            try {
+                const user = window.firebaseAuth.currentUser;
+                if (!user) return;
+                
+                const userDataToSave = {
+                    uid: uid,
+                    email: user.email,
+                    phone: '',
+                    balance: 0,
+                    coins: 0,
+                    referrals: 0,
+                    role: 'user',
+                    lastLogin: new Date().toISOString(),
+                    autoMiningEnd: null,
+                    agreedToTerms: false,
+                    lastSeenAnnouncement: null,
+                    // --- START: Gems & Staking Feature - Add gems to new user ---
+                    gems: 0
+                    // --- END: Gems & Staking Feature - Add gems to new user ---
+                };
+                
+                await window.firebaseFunctions.setDoc(
+                    window.firebaseFunctions.doc(window.firebaseFirestore, "users", uid),
+                    userDataToSave
+                );
+                
+                userData = userDataToSave;
+                showDashboard();
+                showTermsModal();
+            } catch (error) {
+                console.error('Error creating user document:', error);
+                showAuthMessage('Error creating user profile. Please try again.');
+            }
+        }
+        
+        async function saveUserData() {
+            if (!userData.uid) return;
+            
+            try {
+                const docRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", userData.uid);
+                await window.firebaseFunctions.updateDoc(docRef, {
+                    ...userData,
+                    // --- START: Gems & Staking Feature - Save gems ---
+                    gems: gems
+                    // --- END: Gems & Staking Feature - Save gems ---
+                });
+            } catch (error) {
+                console.error('Error saving user data:', error);
+            }
+        }
+        
+        function updateBalanceDisplay() {
+            balanceDisplay.textContent = `${userData.balance} Coins`;
+            totalBalance.textContent = `${userData.balance} Coins`;
+            // --- START: Gems & Staking Feature - Update gems display ---
+            gemsDisplay.textContent = `💎 ${gems} Gems`;
+            totalGems.textContent = `💎 ${gems} Gems`;
+            // --- END: Gems & Staking Feature - Update gems display ---
+        }
+        
+        function updateReferralDisplay() {
+            referralCount.textContent = userData.referrals;
+            referralCode.textContent = userData.uid || 'Loading...';
+        }
+        
+        function showPlusOneAnimation(e) {
+            const plusOne = document.createElement('span');
+            plusOne.innerText = '+1';
+            plusOne.style.position = 'absolute';
+            plusOne.style.left = e.pageX - 10 + 'px';
+            plusOne.style.top = e.pageY - 20 + 'px';
+            plusOne.style.color = '#FFD700';
+            plusOne.style.fontWeight = 'bold';
+            plusOne.style.fontSize = '18px';
+            plusOne.style.opacity = '1';
+            plusOne.style.transition = 'all 0.8s ease-out';
+            plusOne.style.zIndex = '1000';
+            plusOne.style.pointerEvents = 'none';
+            
+            document.body.appendChild(plusOne);
+            
+            setTimeout(() => {
+                plusOne.style.top = (e.pageY - 60) + 'px';
+                plusOne.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => {
+                plusOne.remove();
+            }, 900);
+        }
+        
+        function playSparkleEffect() {
+            const goldPile = document.querySelector('.gold-pile');
+            goldPile.style.boxShadow = '0 0 30px rgba(255, 215, 0, 1)';
+            
+            setTimeout(() => {
+                goldPile.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.7)';
+            }, 300);
+        }
+        
         function startAutoMining() {
+            autoMiningToggle.checked = true;
+            
+            // Set auto mining end time if not already set
+            if (!userData.autoMiningEnd) {
+                const endTime = new Date();
+                endTime.setHours(endTime.getHours() + 2);
+                userData.autoMiningEnd = endTime.toISOString();
+                autoMiningTimeLeft = autoMiningTotalTime;
+                saveUserData();
+            } else {
+                // Calculate time left from stored end time
+                const endTime = new Date(userData.autoMiningEnd).getTime();
+                const now = new Date().getTime();
+                autoMiningTimeLeft = Math.floor((endTime - now) / 1000);
+            }
+            
+            // Start the interval
             if (autoMiningInterval) clearInterval(autoMiningInterval);
             
             autoMiningInterval = setInterval(() => {
-                const user = auth.currentUser;
-                if (!user) return;
+                if (autoMiningTimeLeft <= 0) {
+                    stopAutoMining();
+                    return;
+                }
                 
-                const coinsEarned = calculateAutoMiningReward();
-                const userRef = db.collection('users').doc(user.uid);
+                // Add coins every second
+                userData.balance += 0.1;
+                userData.coins += 0.1;
                 
-                userRef.update({
-                    coins: firebase.firestore.FieldValue.increment(coinsEarned),
-                    lastAutoMine: firebase.firestore.FieldValue.serverTimestamp()
-                });
+                // Update display
+                updateBalanceDisplay();
                 
-                // Update timer progress
-                updateTimerProgress();
-            }, 60000); // Every minute
+                // Update timer
+                autoMiningTimeLeft--;
+                updateAutoMiningTimer();
+                
+                // Save every 30 seconds
+                if (autoMiningTimeLeft % 30 === 0) {
+                    saveUserData();
+                }
+                
+            }, 1000);
             
-            // Initialize timer
-            updateTimerProgress();
+            updateAutoMiningTimer();
         }
-
+        
         function stopAutoMining() {
+            autoMiningToggle.checked = false;
+            
             if (autoMiningInterval) {
                 clearInterval(autoMiningInterval);
                 autoMiningInterval = null;
             }
             
+            userData.autoMiningEnd = null;
+            saveUserData();
+            
             timerProgress.style.width = '0%';
             timerText.textContent = 'Auto Mining: Inactive';
         }
-
-        function calculateAutoMiningReward() {
-            // Auto mining gives slightly less than manual mining
-            const baseReward = 5;
-            const randomBonus = Math.floor(Math.random() * 4); // 0-3
-            return baseReward + randomBonus;
+        
+        function updateAutoMiningTimer() {
+            const percentage = ((autoMiningTotalTime - autoMiningTimeLeft) / autoMiningTotalTime) * 100;
+            timerProgress.style.width = `${percentage}%`;
+            
+            const hours = Math.floor(autoMiningTimeLeft / 3600);
+            const minutes = Math.floor((autoMiningTimeLeft % 3600) / 60);
+            const seconds = autoMiningTimeLeft % 60;
+            
+            timerText.textContent = `Auto Mining: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
-
-        function updateTimerProgress() {
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += 1;
-                timerProgress.style.width = `${progress}%`;
+        
+        function showTermsModal() {
+            termsModal.style.display = 'flex';
+        }
+        
+        function hideTermsModal() {
+            termsModal.style.display = 'none';
+        }
+        
+        function showAnnouncementsModal() {
+            announcementsModal.style.display = 'flex';
+            // Mark announcements as seen
+            markAnnouncementsAsSeen();
+        }
+        
+        function hideAnnouncementsModal() {
+            announcementsModal.style.display = 'none';
+        }
+        
+        function resetGameState() {
+            userData = {
+                uid: null,
+                email: null,
+                phone: null,
+                balance: 0,
+                coins: 0,
+                referrals: 0,
+                role: 'user',
+                lastLogin: null,
+                autoMiningEnd: null,
+                agreedToTerms: false,
+                lastSeenAnnouncement: null
+            };
+            
+            // --- START: Gems & Staking Feature - Reset gems and staking ---
+            gems = 0;
+            activeStakes = [];
+            if (stakingCheckInterval) {
+                clearInterval(stakingCheckInterval);
+                stakingCheckInterval = null;
+            }
+            // --- END: Gems & Staking Feature - Reset gems and staking ---
+            
+            if (autoMiningInterval) {
+                clearInterval(autoMiningInterval);
+                autoMiningInterval = null;
+            }
+            
+            autoMiningTimeLeft = 0;
+            timerProgress.style.width = '0%';
+            timerText.textContent = 'Auto Mining: Inactive';
+        }
+        
+        async function handleReferral(referralCode, newUserId) {
+            try {
+                // Find the user with this referral code
+                const docRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", referralCode);
+                const docSnap = await window.firebaseFunctions.getDoc(docRef);
                 
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
-                    timerText.textContent = 'Auto Mining: Complete';
-                    setTimeout(() => {
-                        timerText.textContent = 'Auto Mining: Active';
-                    }, 2000);
-                }
-            }, 600); // 60 seconds total for 100% progress
-        }
-
-        // NEW: Staking functionality
-        stakeButton.addEventListener('click', () => {
-            const amount = parseInt(stakeAmount.value);
-            
-            if (isNaN(amount) || amount < 2000) {
-                alert('Minimum stake amount is 2000 coins');
-                return;
-            }
-            
-            if (amount > userData.coins) {
-                alert('Insufficient coins');
-                return;
-            }
-            
-            if (userData.staking && userData.staking.active) {
-                alert('You already have an active stake');
-                return;
-            }
-            
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            const userRef = db.collection('users').doc(user.uid);
-            
-            userRef.update({
-                coins: firebase.firestore.FieldValue.increment(-amount),
-                staking: {
-                    active: true,
-                    amount: amount,
-                    startTime: firebase.firestore.FieldValue.serverTimestamp()
-                }
-            }).then(() => {
-                stakeAmount.value = '';
-                alert(`Successfully staked ${amount} coins! You will receive ${Math.floor(amount/2000)} gems in 3 days.`);
-            });
-        });
-
-        // Announcements
-        function loadAnnouncements() {
-            db.collection('announcements')
-                .orderBy('createdAt', 'desc')
-                .limit(10)
-                .get()
-                .then((querySnapshot) => {
-                    announcements = [];
-                    unreadAnnouncements = 0;
+                if (docSnap.exists()) {
+                    const referrerData = docSnap.data();
                     
-                    if (querySnapshot.empty) {
-                        announcementsList.innerHTML = '<div class="no-announcements">No announcements at this time.</div>';
-                        announcementBadge.style.display = 'none';
-                        return;
-                    }
-                    
-                    let announcementsHTML = '';
-                    querySnapshot.forEach((doc) => {
-                        const announcement = doc.data();
-                        announcements.push(announcement);
-                        
-                        // Check if announcement is unread
-                        const lastRead = userData.lastAnnouncementRead || new Date(0);
-                        if (announcement.createdAt.toDate() > lastRead) {
-                            unreadAnnouncements++;
-                        }
-                        
-                        announcementsHTML += `
-                            <div class="announcement-item">
-                                <div class="announcement-title">
-                                    ${announcement.title}
-                                    <span class="announcement-date">${formatDate(announcement.createdAt.toDate())}</span>
-                                </div>
-                                <div class="announcement-content">${announcement.content}</div>
-                            </div>
-                        `;
+                    // Update referrer's referral count
+                    await window.firebaseFunctions.updateDoc(docRef, {
+                        referrals: referrerData.referrals + 1
                     });
                     
-                    announcementsList.innerHTML = announcementsHTML;
+                    // Give bonus to new user
+                    userData.balance += 10;
+                    userData.coins += 10;
+                    updateBalanceDisplay();
+                    saveUserData();
+                }
+            } catch (error) {
+                console.error('Error handling referral:', error);
+            }
+        }
+        
+        // Announcements Functions
+        async function loadAnnouncements() {
+            try {
+                const announcementsRef = window.firebaseFunctions.collection(window.firebaseFirestore, "announcements");
+                const q = window.firebaseFunctions.query(announcementsRef, window.firebaseFunctions.orderBy("timestamp", "desc"));
+                
+                window.firebaseFunctions.onSnapshot(q, (querySnapshot) => {
+                    announcements = [];
+                    querySnapshot.forEach((doc) => {
+                        announcements.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
                     
-                    // Update badge
-                    if (unreadAnnouncements > 0) {
-                        announcementBadge.textContent = unreadAnnouncements;
-                        announcementBadge.style.display = 'flex';
-                    } else {
-                        announcementBadge.style.display = 'none';
-                    }
+                    renderAnnouncements();
+                    updateUnreadAnnouncementsCount();
                 });
+            } catch (error) {
+                console.error('Error loading announcements:', error);
+            }
         }
-
-        announcementIcon.addEventListener('click', () => {
-            announcementsModal.style.display = 'flex';
+        
+        function renderAnnouncements() {
+            announcementsList.innerHTML = '';
             
-            // Mark announcements as read
-            const user = auth.currentUser;
-            if (user && unreadAnnouncements > 0) {
-                db.collection('users').doc(user.uid).update({
-                    lastAnnouncementRead: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                
-                announcementBadge.style.display = 'none';
-                unreadAnnouncements = 0;
+            if (announcements.length === 0) {
+                announcementsList.innerHTML = '<div class="no-announcements">No announcements available</div>';
+                return;
             }
-        });
-
-        closeAnnouncements.addEventListener('click', () => {
-            announcementsModal.style.display = 'none';
-        });
-
-        // Logout
-        logoutBtn.addEventListener('click', () => {
-            auth.signOut().then(() => {
-                dashboardSection.style.display = 'none';
-                authSection.style.display = 'flex';
-                stopAutoMining();
+            
+            announcements.forEach(announcement => {
+                const announcementItem = document.createElement('div');
+                announcementItem.className = 'announcement-item';
                 
-                // Reset forms
-                loginForm.reset();
-                signupForm.reset();
-                authMessage.style.display = 'none';
-            });
-        });
-
-        // Utility functions
-        function formatDate(date) {
-            return date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
+                const announcementDate = new Date(announcement.timestamp?.toDate() || new Date()).toLocaleDateString();
+                
+                announcementItem.innerHTML = `
+                    <div class="announcement-title">
+                        <span>${announcement.title || 'Announcement'}</span>
+                        <span class="announcement-date">${announcementDate}</span>
+                    </div>
+                    <div class="announcement-content">${announcement.content || ''}</div>
+                `;
+                
+                announcementsList.appendChild(announcementItem);
             });
         }
-
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === announcementsModal) {
-                announcementsModal.style.display = 'none';
+        
+        function updateUnreadAnnouncementsCount() {
+            if (!userData.lastSeenAnnouncement || announcements.length === 0) {
+                unreadAnnouncementsCount = announcements.length;
+            } else {
+                // Find the index of the last seen announcement
+                const lastSeenIndex = announcements.findIndex(a => a.id === userData.lastSeenAnnouncement);
+                unreadAnnouncementsCount = lastSeenIndex === -1 ? announcements.length : announcements.length - (lastSeenIndex + 1);
             }
-            if (e.target === termsModal) {
-                termsModal.style.display = 'none';
+            
+            if (unreadAnnouncementsCount > 0) {
+                announcementBadge.textContent = unreadAnnouncementsCount;
+                announcementBadge.style.display = 'flex';
+            } else {
+                announcementBadge.style.display = 'none';
             }
-        });
-
-        // Auth state observer
-        auth.onAuthStateChanged((user) => {
+        }
+        
+        function markAnnouncementsAsSeen() {
+            if (announcements.length > 0) {
+                userData.lastSeenAnnouncement = announcements[0].id;
+                saveUserData();
+                unreadAnnouncementsCount = 0;
+                announcementBadge.style.display = 'none';
+            }
+        }
+        
+        // --- START: Gems & Staking Feature - New Functions ---
+        function showStakingModal() {
+            stakingModal.style.display = 'flex';
+            // Reset stake amount to minimum
+            stakeAmount.value = 2000;
+            gemsToReceive.textContent = 1;
+        }
+        
+        function hideStakingModal() {
+            stakingModal.style.display = 'none';
+        }
+        
+        async function createStaking() {
+            const amount = parseInt(stakeAmount.value);
+            
+            // Validation
+            if (amount < 2000) {
+                alert('Minimum staking amount is 2000 coins');
+                return;
+            }
+            
+            if (amount > userData.balance) {
+                alert('You do not have enough coins');
+                return;
+            }
+            
+            if (amount % 2000 !== 0) {
+                alert('Amount must be in multiples of 2000 coins');
+                return;
+            }
+            
+            try {
+                // Deduct coins from balance
+                userData.balance -= amount;
+                updateBalanceDisplay();
+                
+                // Create staking record
+                const stakingRef = window.firebaseFunctions.collection(
+                    window.firebaseFirestore, 
+                    "users", 
+                    userData.uid, 
+                    "staking"
+                );
+                
+                const startTime = new Date();
+                const endTime = new Date(startTime.getTime() + 3 * 24 * 60 * 60 * 1000); // 3 days
+                const gemsToEarn = amount / 2000;
+                
+                const stakingRecord = {
+                    amount: amount,
+                    startTime: startTime.toISOString(),
+                    endTime: endTime.toISOString(),
+                    status: "active",
+                    convertedGems: gemsToEarn
+                };
+                
+                await window.firebaseFunctions.addDoc(stakingRef, stakingRecord);
+                
+                // Save user data
+                await saveUserData();
+                
+                // Hide modal and show success
+                hideStakingModal();
+                alert(`Successfully staked ${amount} coins! You will receive ${gemsToEarn} gems in 3 days.`);
+                
+                // Reload staking records
+                loadStakingRecords();
+                
+            } catch (error) {
+                console.error('Error creating staking:', error);
+                alert('Error creating staking. Please try again.');
+                // Refund coins if error
+                userData.balance += amount;
+                updateBalanceDisplay();
+            }
+        }
+        
+        async function loadStakingRecords() {
+            if (!userData.uid) return;
+            
+            try {
+                const stakingRef = window.firebaseFunctions.collection(
+                    window.firebaseFirestore, 
+                    "users", 
+                    userData.uid, 
+                    "staking"
+                );
+                const q = window.firebaseFunctions.query(
+                    stakingRef, 
+                    window.firebaseFunctions.where("status", "==", "active")
+                );
+                
+                const querySnapshot = await window.firebaseFunctions.getDocs(q);
+                activeStakes = [];
+                
+                querySnapshot.forEach((doc) => {
+                    activeStakes.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                renderActiveStakes();
+                
+            } catch (error) {
+                console.error('Error loading staking records:', error);
+            }
+        }
+        
+        function renderActiveStakes() {
+            activeStakingList.innerHTML = '';
+            
+            if (activeStakes.length === 0) {
+                activeStakingList.innerHTML = '<div class="no-staking">No active staking</div>';
+                return;
+            }
+            
+            activeStakes.forEach(stake => {
+                const stakeItem = document.createElement('div');
+                stakeItem.className = 'staking-item';
+                
+                const endTime = new Date(stake.endTime);
+                const now = new Date();
+                const timeLeft = endTime - now;
+                
+                let timeText = "Completed!";
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    
+                    timeText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+                
+                stakeItem.innerHTML = `
+                    <div class="staking-amount">${stake.amount} Coins → ${stake.convertedGems} Gems</div>
+                    <div class="staking-countdown">Ends in: ${timeText}</div>
+                `;
+                
+                activeStakingList.appendChild(stakeItem);
+            });
+        }
+        
+        async function checkAndCompleteStakes() {
+            if (!userData.uid || activeStakes.length === 0) return;
+            
+            const now = new Date();
+            let updated = false;
+            
+            for (const stake of activeStakes) {
+                const endTime = new Date(stake.endTime);
+                
+                if (endTime <= now && stake.status === "active") {
+                    // Complete this stake
+                    try {
+                        const stakeRef = window.firebaseFunctions.doc(
+                            window.firebaseFirestore, 
+                            "users", 
+                            userData.uid, 
+                            "staking", 
+                            stake.id
+                        );
+                        
+                        // Update stake status
+                        await window.firebaseFunctions.updateDoc(stakeRef, {
+                            status: "completed"
+                        });
+                        
+                        // Add gems to user
+                        gems += stake.convertedGems;
+                        updateBalanceDisplay();
+                        
+                        // Save user data
+                        await saveUserData();
+                        
+                        // Show gem animation
+                        showGemAnimation(stake.convertedGems);
+                        
+                        updated = true;
+                        
+                    } catch (error) {
+                        console.error('Error completing stake:', error);
+                    }
+                }
+            }
+            
+            if (updated) {
+                // Reload staking records
+                loadStakingRecords();
+            }
+        }
+        
+        function startStakingCheckInterval() {
+            // Check every 10 seconds for completed stakes
+            stakingCheckInterval = setInterval(() => {
+                checkAndCompleteStakes();
+                renderActiveStakes(); // Update countdown display
+            }, 10000);
+        }
+        
+        function showGemAnimation(gemCount) {
+            for (let i = 0; i < Math.min(gemCount, 10); i++) {
+                setTimeout(() => {
+                    const gem = document.createElement('div');
+                    gem.className = 'gem-animation';
+                    gem.innerHTML = '💎';
+                    gem.style.left = Math.random() * 80 + 10 + '%';
+                    gem.style.top = '80%';
+                    
+                    document.body.appendChild(gem);
+                    
+                    setTimeout(() => {
+                        gem.remove();
+                    }, 2000);
+                }, i * 200);
+            }
+            
+            // Show notification
+            setTimeout(() => {
+                alert(`🎉 You received ${gemCount} gems from staking!`);
+            }, 500);
+        }
+        // --- END: Gems & Staking Feature - New Functions ---
+        
+        // Initialize
+        showAuth();
+        
+        // Check if user is already logged in
+        window.firebaseFunctions.onAuthStateChanged(window.firebaseAuth, (user) => {
             if (user) {
                 // User is signed in
-                checkUserTerms(user.uid);
+                loadUserData(user.uid);
             } else {
                 // User is signed out
-                dashboardSection.style.display = 'none';
-                authSection.style.display = 'flex';
-                stopAutoMining();
+                showAuth();
             }
         });
+        
+        // For testing: Add sample announcements (remove in production)
+        setTimeout(async () => {
+            // Only add sample announcements if none exist
+            try {
+                const announcementsRef = window.firebaseFunctions.collection(window.firebaseFirestore, "announcements");
+                const q = window.firebaseFunctions.query(announcementsRef);
+                const querySnapshot = await window.firebaseFunctions.getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    // Add sample announcements
+                    const sampleAnnouncements = [
+                        {
+                            title: "Welcome to GoldMinning!",
+                            content: "We're excited to have you on board. Start mining coins and invite friends to earn bonuses!",
+                            timestamp: window.firebaseFunctions.serverTimestamp()
+                        },
+                        {
+                            title: "Auto Mining Feature",
+                            content: "Remember to activate Auto Mining to earn coins even when you're not actively playing!",
+                            timestamp: window.firebaseFunctions.serverTimestamp()
+                        },
+                        {
+                            title: "Referral Bonus Increased",
+                            content: "We've increased the referral bonus to 10 coins for each friend who signs up using your code!",
+                            timestamp: window.firebaseFunctions.serverTimestamp()
+                        }
+                    ];
+                    
+                    for (const announcement of sampleAnnouncements) {
+                        await window.firebaseFunctions.addDoc(announcementsRef, announcement);
+                    }
+                }
+            } catch (error) {
+                console.error('Error adding sample announcements:', error);
+            }
+        }, 2000);
     </script>
 </body>
 </html>
