@@ -27,14 +27,14 @@
             color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
-            font-size: 16px;
-            line-height: 1.5;
+            font-size: 14px;
+            line-height: 1.4;
         }
         
         .container {
             width: 100%;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 10px;
         }
         
         /* Auth Styles - Android Optimized */
@@ -44,32 +44,32 @@
             align-items: center;
             min-height: 100vh;
             background: var(--background);
-            padding: 20px;
+            padding: 15px;
         }
         
         .auth-box {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 12px;
+            padding: 20px;
             width: 100%;
             max-width: 100%;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
         
         .auth-tabs {
             display: flex;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
         }
         
         .auth-tab {
-            padding: 12px 20px;
+            padding: 10px 15px;
             cursor: pointer;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.7);
             transition: all 0.3s;
-            font-size: 18px;
+            font-size: 16px;
         }
         
         .auth-tab.active {
@@ -86,20 +86,20 @@
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
+            margin-bottom: 6px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.8);
         }
         
         .form-control {
             width: 100%;
-            padding: 16px 18px;
-            border-radius: 12px;
+            padding: 14px 16px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 215, 0, 0.3);
             background-color: rgba(0, 0, 0, 0.5);
             color: var(--text);
@@ -110,20 +110,20 @@
         .form-control:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
         }
         
         .btn {
-            padding: 18px 25px;
-            border-radius: 16px;
+            padding: 16px 20px;
+            border-radius: 14px;
             border: none;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             display: inline-block;
             text-align: center;
-            font-size: 18px;
-            min-height: 60px;
+            font-size: 16px;
+            min-height: 55px;
         }
         
         .btn-primary {
@@ -133,7 +133,7 @@
         }
         
         .btn-primary:hover, .btn-primary:active {
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
             transform: translateY(-2px);
         }
         
@@ -141,8 +141,8 @@
             background: transparent;
             color: var(--accent);
             border: 2px solid var(--accent);
-            padding: 14px 20px;
-            min-height: 50px;
+            padding: 12px 18px;
+            min-height: 48px;
         }
         
         .btn-secondary:hover, .btn-secondary:active {
@@ -157,7 +157,7 @@
         
         .header {
             background-color: var(--primary);
-            padding: 15px 0;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
         
@@ -166,11 +166,11 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         
         .logo {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--accent);
             display: flex;
@@ -178,35 +178,49 @@
         }
         
         .logo span {
-            margin-right: 10px;
-            font-size: 24px;
+            margin-right: 8px;
+            font-size: 20px;
         }
         
         .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         
+        .balance-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        
         .balance-display {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--accent);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+        
+        .gems-display {
+            font-size: 14px;
+            font-weight: 600;
+            color: #FF69B4;
+            text-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
         }
         
         .user-rank {
             color: #3498db;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
         }
         
         .announcement-icon {
             cursor: pointer;
-            font-size: 22px;
+            font-size: 20px;
             position: relative;
-            padding: 8px;
+            padding: 6px;
         }
         
         .announcement-badge {
@@ -216,56 +230,56 @@
             background-color: #e74c3c;
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
         .main-content {
-            padding: 20px 0;
+            padding: 15px 0;
         }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
         }
         
         .stat-card {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 15px;
             border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
         }
         
         .stat-card h3 {
-            font-size: 16px;
-            margin-bottom: 12px;
+            font-size: 14px;
+            margin-bottom: 10px;
             color: rgba(255, 255, 255, 0.8);
         }
         
         .stat-value {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--accent);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
         
         .mining-area {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         
         .mining-zone {
-            width: 280px;
-            height: 280px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             background: 
                 radial-gradient(circle at 30% 20%, #87CEEB 0%, transparent 30%),
@@ -277,17 +291,17 @@
             align-items: center;
             position: relative;
             cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            margin-bottom: 15px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
             animation: pulse 2s infinite;
             touch-action: manipulation;
             overflow: hidden;
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); }
-            100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+            0% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.3); }
         }
         
         /* Nature Elements */
@@ -321,8 +335,8 @@
         .plant-1 {
             bottom: 30%;
             left: 20%;
-            width: 25px;
-            height: 40px;
+            width: 22px;
+            height: 35px;
             background: 
                 linear-gradient(to right, #32CD32, #228B22);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
@@ -332,8 +346,8 @@
         .plant-2 {
             bottom: 25%;
             right: 25%;
-            width: 20px;
-            height: 35px;
+            width: 18px;
+            height: 32px;
             background: 
                 linear-gradient(to right, #32CD32, #228B22);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
@@ -343,8 +357,8 @@
         .plant-3 {
             bottom: 35%;
             left: 60%;
-            width: 30px;
-            height: 50px;
+            width: 26px;
+            height: 45px;
             background: 
                 linear-gradient(to right, #32CD32, #228B22);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
@@ -354,8 +368,8 @@
         .plant-4 {
             bottom: 28%;
             right: 15%;
-            width: 22px;
-            height: 38px;
+            width: 20px;
+            height: 34px;
             background: 
                 linear-gradient(to right, #32CD32, #228B22);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
@@ -365,8 +379,8 @@
         .plant-5 {
             bottom: 32%;
             left: 40%;
-            width: 18px;
-            height: 32px;
+            width: 16px;
+            height: 28px;
             background: 
                 linear-gradient(to right, #32CD32, #228B22);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
@@ -383,31 +397,31 @@
         .cloud-1 {
             top: 15%;
             left: 20%;
-            width: 40px;
-            height: 25px;
+            width: 36px;
+            height: 22px;
             opacity: 0.8;
         }
         
         .cloud-2 {
             top: 25%;
             right: 25%;
-            width: 35px;
-            height: 20px;
+            width: 32px;
+            height: 18px;
             opacity: 0.7;
         }
         
         .cloud-3 {
             top: 10%;
             right: 15%;
-            width: 30px;
-            height: 18px;
+            width: 28px;
+            height: 16px;
             opacity: 0.9;
         }
         
         .cobra-container {
             position: relative;
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -415,8 +429,8 @@
         }
         
         .cobra-snake {
-            width: 150px;
-            height: 150px;
+            width: 130px;
+            height: 130px;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,20 C60,10 80,15 80,30 C80,45 65,50 50,50 C35,50 20,45 20,30 C20,15 40,10 50,20 Z" fill="%23C5A100" stroke="%23FFD700" stroke-width="2"/><circle cx="40" cy="30" r="5" fill="%23000"/><circle cx="60" cy="30" r="5" fill="%23000"/><path d="M45,40 Q50,45 55,40" stroke="%23000" stroke-width="2" fill="none"/><path d="M50,50 C40,60 30,70 40,80 C50,90 60,85 60,75 C60,65 50,60 50,50 Z" fill="%23C5A100" stroke="%23FFD700" stroke-width="2"/></svg>');
             background-size: contain;
             background-repeat: no-repeat;
@@ -433,12 +447,12 @@
         
         .gold-pile {
             position: absolute;
-            bottom: 30px;
-            width: 70px;
-            height: 40px;
+            bottom: 25px;
+            width: 60px;
+            height: 35px;
             background: var(--secondary-gradient);
-            border-radius: 10px 10px 5px 5px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            border-radius: 8px 8px 4px 4px;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -449,31 +463,31 @@
             content: "";
             position: absolute;
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 4px;
-            top: 4px;
+            border-radius: 3px;
+            top: 3px;
         }
         
         .gold-pile::after {
             content: "💰";
-            font-size: 20px;
+            font-size: 18px;
             position: relative;
             z-index: 5;
         }
         
         .tap-instruction {
-            margin-top: 15px;
+            margin-top: 12px;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 16px;
+            font-size: 14px;
             text-align: center;
         }
         
         .auto-mining-section {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 20px;
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
         
@@ -481,19 +495,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
         .auto-mining-header h3 {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--accent);
         }
         
         .auto-mining-toggle {
             position: relative;
             display: inline-block;
-            width: 65px;
-            height: 38px;
+            width: 60px;
+            height: 34px;
         }
         
         .auto-mining-toggle input {
@@ -511,14 +525,14 @@
             bottom: 0;
             background-color: #ccc;
             transition: .4s;
-            border-radius: 38px;
+            border-radius: 34px;
         }
         
         .slider:before {
             position: absolute;
             content: "";
-            height: 30px;
-            width: 30px;
+            height: 26px;
+            width: 26px;
             left: 4px;
             bottom: 4px;
             background-color: white;
@@ -531,14 +545,14 @@
         }
         
         input:checked + .slider:before {
-            transform: translateX(27px);
+            transform: translateX(26px);
         }
         
         .timer-bar {
-            height: 12px;
+            height: 10px;
             background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            margin-top: 15px;
+            border-radius: 5px;
+            margin-top: 12px;
             overflow: hidden;
         }
         
@@ -551,59 +565,65 @@
         
         .timer-text {
             text-align: center;
-            margin-top: 12px;
-            font-size: 16px;
+            margin-top: 10px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.7);
         }
         
         .features-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 15px;
         }
         
         .feature-card {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 18px;
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
         
         .feature-card h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
+            font-size: 16px;
+            margin-bottom: 12px;
             color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+        
+        .feature-card p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
         
         .referral-code {
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 12px;
-            border-radius: 10px;
-            margin: 15px 0;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 12px 0;
             font-family: monospace;
             text-align: center;
             border: 1px dashed rgba(255, 215, 0, 0.5);
-            font-size: 16px;
+            font-size: 14px;
             word-break: break-all;
         }
         
         .footer {
             background-color: var(--primary);
-            padding: 20px 0;
+            padding: 15px 0;
             text-align: center;
             border-top: 1px solid rgba(255, 215, 0, 0.2);
-            margin-top: 30px;
+            margin-top: 25px;
         }
         
         .footer p {
             color: var(--accent);
-            font-size: 16px;
+            font-size: 14px;
             border-bottom: 1px solid var(--accent);
             display: inline-block;
-            padding-bottom: 5px;
+            padding-bottom: 4px;
         }
         
         /* Modal Styles - Android Optimized */
@@ -618,30 +638,30 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
         }
         
         .modal-content {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 14px;
+            padding: 20px;
             width: 100%;
             max-width: 100%;
-            max-height: 85vh;
+            max-height: 80vh;
             overflow-y: auto;
             border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
         }
         
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .modal-title {
-            font-size: 22px;
+            font-size: 20px;
             color: var(--accent);
         }
         
@@ -649,117 +669,103 @@
             background: none;
             border: none;
             color: var(--text);
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
         }
         
         .terms-content {
-            max-height: 50vh;
+            max-height: 45vh;
             overflow-y: auto;
-            padding-right: 10px;
-            margin-bottom: 20px;
+            padding-right: 8px;
+            margin-bottom: 15px;
         }
         
         .terms-content p {
-            margin-bottom: 15px;
-            line-height: 1.6;
-            font-size: 16px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            font-size: 14px;
         }
         
         .agree-checkbox {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            font-size: 16px;
+            margin-bottom: 15px;
+            font-size: 14px;
         }
         
         .agree-checkbox input {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
         }
         
         /* Announcements Styles */
         .announcement-item {
             background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
             border-left: 4px solid var(--accent);
         }
         
         .announcement-title {
             font-weight: 600;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
-            font-size: 16px;
+            font-size: 14px;
         }
         
         .announcement-date {
-            font-size: 14px;
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.6);
         }
         
         .announcement-content {
-            line-height: 1.5;
-            font-size: 16px;
+            line-height: 1.4;
+            font-size: 14px;
         }
         
         .no-announcements {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             color: rgba(255, 255, 255, 0.6);
-            font-size: 16px;
+            font-size: 14px;
         }
         
-        /* --- START: Gems & Staking Feature Styles --- */
-        .balance-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 5px;
-        }
-        
-        .gems-display {
-            font-size: 16px;
-            font-weight: 600;
-            color: #FF69B4;
-            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-        }
-        
+        /* Staking Styles */
         .staking-item {
             background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
             border-left: 4px solid #FF69B4;
         }
         
         .staking-amount {
             font-weight: 600;
             color: var(--accent);
-            margin-bottom: 8px;
-            font-size: 16px;
+            margin-bottom: 6px;
+            font-size: 14px;
         }
         
         .staking-countdown {
-            font-size: 14px;
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.8);
         }
         
         .no-staking {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             color: rgba(255, 255, 255, 0.6);
-            font-size: 16px;
+            font-size: 14px;
         }
         
         .gem-animation {
             position: fixed;
-            font-size: 24px;
+            font-size: 22px;
             z-index: 10000;
             pointer-events: none;
             animation: gemFloat 2s ease-out forwards;
@@ -775,64 +781,64 @@
                 opacity: 0;
             }
         }
-        /* --- END: Gems & Staking Feature Styles --- */
 
         /* Success Message Styles */
         .success-message {
             position: fixed;
-            top: 20px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--secondary-gradient);
             color: var(--primary);
-            padding: 15px 25px;
-            border-radius: 12px;
+            padding: 12px 20px;
+            border-radius: 10px;
             font-weight: 600;
             z-index: 10000;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
             animation: slideDown 0.3s ease-out;
+            font-size: 14px;
         }
 
         @keyframes slideDown {
             from {
-                top: -100px;
+                top: -80px;
                 opacity: 0;
             }
             to {
-                top: 20px;
+                top: 15px;
                 opacity: 1;
             }
         }
 
-        /* --- START: ENHANCED ADMIN PANEL STYLES --- */
+        /* Admin Panel Styles */
         .admin-section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .admin-section h3 {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .admin-tabs {
             display: flex;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .admin-tab {
-            padding: 10px 20px;
+            padding: 8px 15px;
             cursor: pointer;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.7);
             transition: all 0.3s;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .admin-tab.active {
@@ -849,16 +855,16 @@
         }
 
         .users-list {
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .user-item {
             background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -870,24 +876,25 @@
 
         .user-email {
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            font-size: 14px;
         }
 
         .user-stats {
             display: flex;
-            gap: 15px;
-            font-size: 14px;
+            gap: 12px;
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.7);
         }
 
         .user-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .user-actions button {
-            padding: 8px 12px;
-            font-size: 14px;
+            padding: 6px 10px;
+            font-size: 12px;
             min-height: auto;
         }
 
@@ -895,163 +902,339 @@
             background: none;
             border: none;
             color: var(--accent);
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
-            padding: 5px;
-            margin-left: 10px;
+            padding: 4px;
+            margin-left: 8px;
         }
 
-        /* --- END: ENHANCED ADMIN PANEL STYLES --- */
-
-        /* --- START: 3D ANIMATION STYLES --- */
+        /* Welcome Animation Styles */
         .animation-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--background);
+            background: linear-gradient(to bottom, #0a1929, #1a3a5f);
+            color: #f0f0f0;
+            overflow: hidden;
+            z-index: 10000;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10000;
-            animation: fadeOut 2s ease-in-out 3s forwards;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        .goldmining-text {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--accent);
-            text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.8),
-                0 0 20px rgba(255, 215, 0, 0.6),
-                0 0 30px rgba(255, 215, 0, 0.4);
-            animation: 
-                pulseText 1.5s ease-in-out infinite alternate,
-                rotate3d 4s ease-in-out infinite;
+        
+        .welcome-scene {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        
+        .welcome-ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to top, #3a2c1a, #2a1c0a);
+            z-index: 1;
+        }
+        
+        .welcome-mountain {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 240px;
+            background: linear-gradient(to bottom, #3a2c1a, #2a1c0a);
+            border-radius: 50% 50% 0 0;
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+        }
+        
+        .mine-entrance {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(to bottom, #1a0c00, #000);
+            border-radius: 50% 50% 0 0;
+            z-index: 15;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+        }
+        
+        .welcome-boy {
+            position: absolute;
+            bottom: 130px;
+            width: 70px;
+            height: 105px;
+            z-index: 20;
             transform-style: preserve-3d;
         }
-
-        @keyframes pulseText {
-            from {
+        
+        .boy-left {
+            left: 20%;
+        }
+        
+        .boy-right {
+            right: 20%;
+        }
+        
+        .boy-body {
+            position: absolute;
+            width: 35px;
+            height: 60px;
+            background: #8b4513;
+            border-radius: 4px;
+            bottom: 0;
+            left: 18px;
+        }
+        
+        .boy-head {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: #f5d0a9;
+            border-radius: 50%;
+            bottom: 60px;
+            left: 22px;
+        }
+        
+        .boy-arm {
+            position: absolute;
+            width: 13px;
+            height: 35px;
+            background: #f5d0a9;
+            border-radius: 4px;
+            bottom: 45px;
+            transform-origin: top center;
+        }
+        
+        .boy-arm.left {
+            left: 4px;
+        }
+        
+        .boy-arm.right {
+            right: 4px;
+        }
+        
+        .boy-leg {
+            position: absolute;
+            width: 13px;
+            height: 45px;
+            background: #654321;
+            border-radius: 4px;
+            bottom: -25px;
+        }
+        
+        .boy-leg.left {
+            left: 13px;
+        }
+        
+        .boy-leg.right {
+            right: 13px;
+        }
+        
+        .gold-piece {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #daa520);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            z-index: 25;
+            transform-style: preserve-3d;
+        }
+        
+        .welcome-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3.5rem;
+            color: transparent;
+            z-index: 100;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-shadow: none;
+            opacity: 0;
+        }
+        
+        .text-gold {
+            background: linear-gradient(to bottom, #ffd700, #b8860b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        }
+        
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 2px #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+        
+        .skip-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            border-radius: 4px;
+            color: #ffd700;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .skip-button:hover {
+            background: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+        
+        .spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 12px 2px #ffd700;
+            opacity: 0;
+            z-index: 40;
+        }
+        
+        @keyframes throw-left-to-right {
+            0% { 
+                left: 20%; 
+                bottom: 170px;
+                transform: scale(1) rotateY(0deg);
+            }
+            50% { 
+                left: 50%; 
+                bottom: 250px;
+                transform: scale(1.2) rotateY(180deg);
+            }
+            100% { 
+                left: 80%; 
+                bottom: 170px;
+                transform: scale(1) rotateY(360deg);
+            }
+        }
+        
+        @keyframes throw-right-to-left {
+            0% { 
+                left: 80%; 
+                bottom: 170px;
+                transform: scale(1) rotateY(0deg);
+            }
+            50% { 
+                left: 50%; 
+                bottom: 250px;
+                transform: scale(1.2) rotateY(180deg);
+            }
+            100% { 
+                left: 20%; 
+                bottom: 170px;
+                transform: scale(1) rotateY(360deg);
+            }
+        }
+        
+        @keyframes throw-to-screen {
+            0% { 
+                left: 20%; 
+                bottom: 170px;
                 transform: scale(1);
-                text-shadow: 
-                    0 0 10px rgba(255, 215, 0, 0.8),
-                    0 0 20px rgba(255, 215, 0, 0.6),
-                    0 0 30px rgba(255, 215, 0, 0.4);
             }
-            to {
-                transform: scale(1.1);
-                text-shadow: 
-                    0 0 15px rgba(255, 215, 0, 1),
-                    0 0 25px rgba(255, 215, 0, 0.8),
-                    0 0 35px rgba(255, 215, 0, 0.6);
+            50% { 
+                left: 50%; 
+                bottom: 40%;
+                transform: scale(2);
             }
-        }
-
-        @keyframes rotate3d {
-            0% {
-                transform: perspective(1000px) rotateY(0deg);
-            }
-            25% {
-                transform: perspective(1000px) rotateY(15deg);
-            }
-            50% {
-                transform: perspective(1000px) rotateY(0deg);
-            }
-            75% {
-                transform: perspective(1000px) rotateY(-15deg);
-            }
-            100% {
-                transform: perspective(1000px) rotateY(0deg);
-            }
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
+            100% { 
+                left: 50%; 
+                bottom: 40%;
+                transform: scale(25);
                 opacity: 0;
-                visibility: hidden;
             }
         }
-        /* --- END: 3D ANIMATION STYLES --- */
+        
+        @keyframes arm-throw {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-60deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes arm-catch {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(30deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes text-reveal {
+            0% { 
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+                letter-spacing: 15px;
+            }
+            70% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+                letter-spacing: 4px;
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+                letter-spacing: 4px;
+            }
+        }
+        
+        @keyframes spark-animation {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(2); }
+        }
+        
+        @keyframes boy-bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
         
         /* Responsive Adjustments */
         @media (max-width: 480px) {
             .container {
-                padding: 0 10px;
+                padding: 0 8px;
             }
             
             .auth-box {
-                padding: 20px;
+                padding: 15px;
             }
             
             .auth-tab {
-                padding: 10px 15px;
-                font-size: 16px;
+                padding: 8px 12px;
+                font-size: 14px;
             }
             
             .btn {
-                padding: 16px 20px;
-                font-size: 16px;
-                min-height: 55px;
-            }
-            
-            .mining-zone {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .cobra-container {
-                width: 160px;
-                height: 160px;
-            }
-            
-            .cobra-snake {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .stat-card {
-                padding: 15px;
-            }
-            
-            .stat-value {
-                font-size: 22px;
-            }
-            
-            .feature-card {
-                padding: 15px;
-            }
-            
-            .modal-content {
-                padding: 20px;
-            }
-
-            .success-message {
-                padding: 12px 20px;
+                padding: 14px 18px;
                 font-size: 14px;
+                min-height: 50px;
             }
-
-            .goldmining-text {
-                font-size: 36px;
-            }
-
-            .user-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .user-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-        }
-        
-        @media (max-width: 360px) {
+            
             .mining-zone {
                 width: 220px;
                 height: 220px;
@@ -1067,16 +1250,93 @@
                 height: 110px;
             }
             
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .stat-value {
+                font-size: 18px;
+            }
+            
+            .feature-card {
+                padding: 15px;
+            }
+            
+            .modal-content {
+                padding: 15px;
+            }
+
+            .success-message {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .user-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .user-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .welcome-text {
+                font-size: 2.5rem;
+            }
+            
+            .welcome-boy {
+                transform: scale(0.7);
+            }
+            
+            .boy-left {
+                left: 15%;
+            }
+            
+            .boy-right {
+                right: 15%;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .mining-zone {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .cobra-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .cobra-snake {
+                width: 95px;
+                height: 95px;
+            }
+            
             .logo {
-                font-size: 20px;
+                font-size: 16px;
             }
             
             .balance-display {
-                font-size: 16px;
+                font-size: 14px;
             }
-
-            .goldmining-text {
-                font-size: 28px;
+            
+            .welcome-text {
+                font-size: 2rem;
+            }
+            
+            .welcome-boy {
+                transform: scale(0.6);
+            }
+            
+            .boy-left {
+                left: 10%;
+            }
+            
+            .boy-right {
+                right: 10%;
             }
         }
         
@@ -1089,9 +1349,46 @@
     </style>
 </head>
 <body>
-    <!-- 3D Animation Container -->
+    <!-- Welcome Animation Container -->
     <div id="animationContainer" class="animation-container">
-        <div class="goldmining-text">GoldMinning</div>
+        <div class="welcome-scene">
+            <div class="particles" id="particles"></div>
+            <div class="welcome-ground"></div>
+            <div class="welcome-mountain">
+                <div class="mine-entrance"></div>
+            </div>
+            
+            <!-- Left Boy -->
+            <div class="welcome-boy boy-left" id="boyLeft">
+                <div class="boy-head"></div>
+                <div class="boy-body"></div>
+                <div class="boy-arm left" id="leftBoyLeftArm"></div>
+                <div class="boy-arm right" id="leftBoyRightArm"></div>
+                <div class="boy-leg left"></div>
+                <div class="boy-leg right"></div>
+            </div>
+            
+            <!-- Right Boy -->
+            <div class="welcome-boy boy-right" id="boyRight">
+                <div class="boy-head"></div>
+                <div class="boy-body"></div>
+                <div class="boy-arm left" id="rightBoyLeftArm"></div>
+                <div class="boy-arm right" id="rightBoyRightArm"></div>
+                <div class="boy-leg left"></div>
+                <div class="boy-leg right"></div>
+            </div>
+            
+            <!-- Gold Piece -->
+            <div class="gold-piece" id="goldPiece"></div>
+            
+            <!-- Welcome Text -->
+            <div class="welcome-text" id="welcomeText">
+                <div class="text-outline">Welcome to</div>
+                <div class="text-gold">Gold Mining</div>
+            </div>
+        </div>
+        
+        <button class="skip-button" id="skipButton">Enter Site</button>
     </div>
 
     <!-- Authentication Section -->
@@ -1138,7 +1435,7 @@
                 <button type="submit" class="btn btn-primary">Create Account</button>
             </form>
             
-            <div id="authMessage" style="margin-top: 15px; text-align: center; color: #ff6b6b; display: none; font-size: 16px;"></div>
+            <div id="authMessage" style="margin-top: 12px; text-align: center; color: #ff6b6b; display: none; font-size: 14px;"></div>
         </div>
     </div>
     
@@ -1151,12 +1448,10 @@
                         <span>🏆</span> GoldMinning
                     </div>
                     <div class="user-info">
-                        <!-- --- START: Gems & Staking Feature - Updated Balance Display --- -->
                         <div class="balance-container">
                             <div class="balance-display" id="balanceDisplay">0 Coins</div>
                             <div class="gems-display" id="gemsDisplay">💎 0 Gems</div>
                         </div>
-                        <!-- --- END: Gems & Staking Feature - Updated Balance Display --- -->
                         <div class="user-rank" id="userRank">Rank 1</div>
                         <button class="refresh-btn" id="refreshBtn" title="Refresh Balance">🔄</button>
                         <div class="announcement-icon" id="announcementIcon">
@@ -1174,12 +1469,10 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <h3>Total Balance</h3>
-                        <!-- --- START: Gems & Staking Feature - Updated Total Balance --- -->
                         <div class="stat-value">
                             <div id="totalBalance">0 Coins</div>
                             <div id="totalGems">💎 0 Gems</div>
                         </div>
-                        <!-- --- END: Gems & Staking Feature - Updated Total Balance --- -->
                     </div>
                     <div class="stat-card">
                         <h3>Referrals</h3>
@@ -1233,7 +1526,6 @@
                 </div>
                 
                 <div class="features-grid">
-                    <!-- --- START: Gems & Staking Feature - New Staking Card --- -->
                     <div class="feature-card">
                         <h3>💎 Stake Coins</h3>
                         <p>Stake your coins to earn gems! 2000 coins = 1 gem after 3 days.</p>
@@ -1246,7 +1538,6 @@
                             <div class="no-staking">No active staking</div>
                         </div>
                     </div>
-                    <!-- --- END: Gems & Staking Feature - New Staking Card --- -->
                     
                     <div class="feature-card">
                         <h3>👥 Referral System</h3>
@@ -1258,13 +1549,13 @@
                     <div class="feature-card">
                         <h3>💰 Deposit</h3>
                         <p>To deposit, contact your Assistant Mining Agent.</p>
-                        <button class="btn btn-primary" style="margin-top: 15px;">Contact Agent</button>
+                        <button class="btn btn-primary" style="margin-top: 12px;">Contact Agent</button>
                     </div>
                     
                     <div class="feature-card">
                         <h3>💸 Withdrawal</h3>
                         <p>Withdrawals will open once the coin price is officially announced.</p>
-                        <button class="btn btn-secondary" style="margin-top: 15px;" disabled>Withdraw Locked</button>
+                        <button class="btn btn-secondary" style="margin-top: 12px;" disabled>Withdraw Locked</button>
                     </div>
                 </div>
             </div>
@@ -1285,21 +1576,15 @@
                 <button class="close-modal" id="closeTermsModal">&times;</button>
             </div>
             <div class="terms-content">
-                <p>This is a skill-based mining game.</p>
-                <p>Users earn coins by manual tapping or auto-mining.</p>
-                <p>Deposit $1 to unlock mining access until the coin price is announced.</p>
-                <p>The coin price will be revealed between 0.00003 and 0.7 USD.</p>
-                <p>Users may gain profit or face partial loss based on the final price.</p>
-                <p>Coins represent your in-game effort, not a guaranteed return.</p>
-                <p>Each user can have only one account per Gmail and phone number.</p>
-                <p>Auto-mining runs for 2 hours and must be restarted after time ends.</p>
-                <p>Withdrawals will open once the coin price is officially declared.</p>
-                <p>Deposit section shows contact details of Assistant Mining Agents.</p>
-                <p>Referrals help users grow faster and unlock rewards.</p>
-                <p>Reaching Senior Assistant Level gives a chance to earn $200/month. But confirmed by company you will receive a mail as confirmation.</p>
-                <p>To qualify, complete 30 referrals in 1 week, 90 in 3 weeks, and 2 daily afterward.</p>
-                <p>Any use of auto-tapping or cheating tools will lead to permanent account ban.</p>
-                <p>By clicking or playing, you are accepting our Terms & Conditions and agree to follow all game rules.</p>
+                This is a skill-based mining game where users earn through manual tapping or auto-mining. To participate, users must deposit $1 to unlock mining access until the official price is announced. The price will be revealed within the range of $0.00003 to $0.7, with a chance of adjustment according to the rules made by the company in the future. Users may experience either profit or partial loss depending on the final value. The earnings represent in-game effort and do not guarantee any financial return.
+
+Each user is allowed only one account per Gmail and phone number. Auto-mining runs for 2 hours at a time and must be restarted once the session ends. Withdrawals will remain locked until the price is officially declared. The deposit section contains the contact details of Assistant Mining Agents for user guidance and assistance.
+
+The referral system enables users to grow faster and unlock exclusive rewards. Users who reach the Senior Assistant Level may become eligible to earn up to $200 per month, subject to official company confirmation via email. To qualify, a user must achieve 30 referrals in one week, 90 in three weeks, and maintain at least two referrals per day thereafter.
+
+Any use of auto-tapping, hacking, or cheating tools is strictly prohibited and will result in a permanent account ban. By clicking or playing, you acknowledge that you have read and accepted these Terms and Conditions and agree to follow all game rules.
+
+The name of this game does not imply ownership of any real gold, mine, or physical asset—it is purely a virtual skill-based experience for entertainment and reward purposes.
             </div>
             <div class="agree-checkbox">
                 <input type="checkbox" id="agreeCheckbox">
@@ -1317,13 +1602,12 @@
                 <button class="close-modal" id="closeAnnouncementsModal">&times;</button>
             </div>
             <div id="announcementsList">
-                <!-- Announcements will be dynamically added here -->
                 <div class="no-announcements">No announcements available</div>
             </div>
         </div>
     </div>
     
-    <!-- --- START: Gems & Staking Feature - Staking Modal --- -->
+    <!-- Staking Modal -->
     <div id="stakingModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1333,16 +1617,15 @@
             <div class="form-group">
                 <label for="stakeAmount">Amount to Stake (minimum 2000 coins)</label>
                 <input type="number" id="stakeAmount" class="form-control" min="2000" step="1" value="2000">
-                <div style="margin-top: 10px; color: rgba(255,255,255,0.7);">
+                <div style="margin-top: 8px; color: rgba(255,255,255,0.7);">
                     You will receive: <span id="gemsToReceive">1</span> 💎
                 </div>
             </div>
             <button class="btn btn-primary" id="confirmStakeBtn">Stake Now</button>
         </div>
     </div>
-    <!-- --- END: Gems & Staking Feature - Staking Modal --- -->
 
-    <!-- --- START: ENHANCED ADMIN PANEL --- -->
+    <!-- Admin Panel -->
     <div id="adminPanel" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1437,12 +1720,11 @@
                 </div>
             </div>
             
-            <div style="margin-top: 30px; text-align: center;">
+            <div style="margin-top: 25px; text-align: center;">
                 <button class="btn btn-secondary" id="closeAdminPanelBtn">Close Admin Panel</button>
             </div>
         </div>
     </div>
-    <!-- --- END: ENHANCED ADMIN PANEL --- -->
     
     <!-- Firebase SDK -->
     <script type="module">
@@ -1490,6 +1772,164 @@
         };
     </script>
     
+    <!-- Welcome Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const goldPiece = document.getElementById('goldPiece');
+            const welcomeText = document.getElementById('welcomeText');
+            const skipButton = document.getElementById('skipButton');
+            const boyLeft = document.getElementById('boyLeft');
+            const boyRight = document.getElementById('boyRight');
+            const leftBoyRightArm = document.getElementById('leftBoyRightArm');
+            const rightBoyLeftArm = document.getElementById('rightBoyLeftArm');
+            const animationContainer = document.getElementById('animationContainer');
+            
+            // Create particles for background
+            createParticles();
+            
+            // Start the animation sequence
+            setTimeout(startAnimation, 1000);
+            
+            function startAnimation() {
+                // First throw - left to right
+                goldPiece.style.left = '20%';
+                goldPiece.style.bottom = '170px';
+                goldPiece.style.opacity = '1';
+                
+                // Animate left boy throwing
+                leftBoyRightArm.style.animation = 'arm-throw 1s ease-in-out';
+                
+                setTimeout(() => {
+                    goldPiece.style.animation = 'throw-left-to-right 1.5s ease-in-out';
+                    
+                    // Animate right boy catching
+                    setTimeout(() => {
+                        rightBoyLeftArm.style.animation = 'arm-catch 0.5s ease-in-out';
+                        boyRight.style.animation = 'boy-bounce 0.5s ease-in-out';
+                    }, 1300);
+                }, 300);
+                
+                // Second throw - right to left
+                setTimeout(() => {
+                    // Animate right boy throwing
+                    rightBoyLeftArm.style.animation = 'arm-throw 1s ease-in-out';
+                    
+                    setTimeout(() => {
+                        goldPiece.style.animation = 'throw-right-to-left 1.5s ease-in-out';
+                        
+                        // Animate left boy catching
+                        setTimeout(() => {
+                            leftBoyRightArm.style.animation = 'arm-catch 0.5s ease-in-out';
+                            boyLeft.style.animation = 'boy-bounce 0.5s ease-in-out';
+                        }, 1300);
+                    }, 300);
+                }, 3000);
+                
+                // Third throw - towards screen with text reveal
+                setTimeout(() => {
+                    // Animate left boy throwing towards screen
+                    leftBoyRightArm.style.animation = 'arm-throw 1s ease-in-out';
+                    
+                    setTimeout(() => {
+                        goldPiece.style.animation = 'throw-to-screen 2s ease-in-out forwards';
+                        
+                        // Show welcome text
+                        setTimeout(() => {
+                            welcomeText.style.opacity = '1';
+                            welcomeText.style.animation = 'text-reveal 1.5s ease-out forwards';
+                            
+                            // Create celebration sparks
+                            createCelebrationSparks();
+                            
+                            // Auto transition to auth after animation completes
+                            setTimeout(() => {
+                                hideAnimation();
+                            }, 3000);
+                        }, 1500);
+                    }, 300);
+                }, 6000);
+            }
+            
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                
+                for (let i = 0; i < 25; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.position = 'absolute';
+                    particle.style.width = Math.random() * 4 + 2 + 'px';
+                    particle.style.height = particle.style.width;
+                    particle.style.backgroundColor = '#ffd700';
+                    particle.style.borderRadius = '50%';
+                    particle.style.opacity = Math.random() * 0.5 + 0.1;
+                    
+                    // Random position
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.top = Math.random() * 100 + 'vh';
+                    
+                    particlesContainer.appendChild(particle);
+                    
+                    // Animate particle
+                    const animation = particle.animate([
+                        { transform: 'translateY(0px)' },
+                        { transform: 'translateY(-15px)' }
+                    ], {
+                        duration: 2000 + Math.random() * 3000,
+                        iterations: Infinity,
+                        direction: 'alternate',
+                        easing: 'ease-in-out'
+                    });
+                }
+            }
+            
+            function createCelebrationSparks() {
+                for (let i = 0; i < 40; i++) {
+                    setTimeout(() => {
+                        createSpark(
+                            Math.random() * window.innerWidth,
+                            Math.random() * window.innerHeight
+                        );
+                    }, i * 100);
+                }
+            }
+            
+            function createSpark(x, y) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                document.querySelector('.welcome-scene').appendChild(spark);
+                
+                // Animate spark
+                spark.animate([
+                    { opacity: 1, transform: 'scale(1)' },
+                    { opacity: 0, transform: 'scale(2)' }
+                ], {
+                    duration: 500 + Math.random() * 500,
+                    easing: 'ease-out'
+                });
+                
+                // Remove spark after animation
+                setTimeout(() => {
+                    spark.remove();
+                }, 1000);
+            }
+            
+            function hideAnimation() {
+                animationContainer.style.opacity = '0';
+                animationContainer.style.transition = 'opacity 0.5s ease-out';
+                setTimeout(() => {
+                    animationContainer.style.display = 'none';
+                    document.getElementById('authSection').style.display = 'flex';
+                }, 500);
+            }
+            
+            // Skip button functionality
+            skipButton.addEventListener('click', function() {
+                hideAnimation();
+            });
+        });
+    </script>
+    
     <!-- Game Logic -->
     <script>
         // DOM Elements
@@ -1520,7 +1960,7 @@
         const closeAnnouncementsModal = document.getElementById('closeAnnouncementsModal');
         const announcementsList = document.getElementById('announcementsList');
         
-        // --- START: Gems & Staking Feature - New DOM Elements ---
+        // Gems & Staking Feature Elements
         const gemsDisplay = document.getElementById('gemsDisplay');
         const totalGems = document.getElementById('totalGems');
         const stakeCoinsBtn = document.getElementById('stakeCoinsBtn');
@@ -1530,9 +1970,8 @@
         const gemsToReceive = document.getElementById('gemsToReceive');
         const confirmStakeBtn = document.getElementById('confirmStakeBtn');
         const activeStakingList = document.getElementById('activeStakingList');
-        // --- END: Gems & Staking Feature - New DOM Elements ---
-
-        // --- START: ENHANCED ADMIN PANEL ELEMENTS ---
+        
+        // Admin Panel Elements
         const adminPanel = document.getElementById('adminPanel');
         const closeAdminModal = document.getElementById('closeAdminModal');
         const sendAnnouncementBtn = document.getElementById('sendAnnouncementBtn');
@@ -1543,16 +1982,14 @@
         const usersList = document.getElementById('usersList');
         const sendPersonalMessageBtn = document.getElementById('sendPersonalMessageBtn');
         const refreshBtn = document.getElementById('refreshBtn');
-        // --- END: ENHANCED ADMIN PANEL ELEMENTS ---
         
-        // --- START: ADMIN TABS ---
+        // Admin Tabs
         const announcementsTab = document.getElementById('announcementsTab');
         const usersTab = document.getElementById('usersTab');
         const personalTab = document.getElementById('personalTab');
         const announcementsContent = document.getElementById('announcementsContent');
         const usersContent = document.getElementById('usersContent');
         const personalContent = document.getElementById('personalContent');
-        // --- END: ADMIN TABS ---
         
         // Game State
         let userData = {
@@ -1576,11 +2013,10 @@
         let announcements = [];
         let unreadAnnouncementsCount = 0;
         
-        // --- START: Gems & Staking Feature - New Game State ---
+        // Gems & Staking Feature State
         let gems = 0;
         let activeStakes = [];
         let stakingCheckInterval = null;
-        // --- END: Gems & Staking Feature - New Game State ---
         
         // Auth Tab Switching
         loginTab.addEventListener('click', () => {
@@ -1639,7 +2075,7 @@
                 // Show success message
                 showSuccessMessage('Account created successfully!');
                 
-                // Create user data in Firestore - FIXED: Use setDoc instead of updateDoc for initial creation
+                // Create user data in Firestore
                 const userDataToSave = {
                     uid: user.uid,
                     email: email,
@@ -1653,9 +2089,7 @@
                     autoMiningEnd: null,
                     agreedToTerms: false,
                     lastSeenAnnouncement: null,
-                    // --- START: Gems & Staking Feature - Add gems to user data ---
                     gems: 0
-                    // --- END: Gems & Staking Feature - Add gems to user data ---
                 };
                 
                 await window.firebaseFunctions.setDoc(
@@ -1740,7 +2174,7 @@
         
         closeAnnouncementsModal.addEventListener('click', hideAnnouncementsModal);
         
-        // --- START: Gems & Staking Feature - Event Listeners ---
+        // Gems & Staking Feature Event Listeners
         stakeCoinsBtn.addEventListener('click', () => {
             showStakingModal();
         });
@@ -1756,9 +2190,8 @@
         confirmStakeBtn.addEventListener('click', async () => {
             await createStaking();
         });
-        // --- END: Gems & Staking Feature - Event Listeners ---
-
-        // --- START: ENHANCED ADMIN PANEL EVENT LISTENERS ---
+        
+        // Admin Panel Event Listeners
         closeAdminModal.addEventListener('click', hideAdminPanel);
         closeAdminPanelBtn.addEventListener('click', hideAdminPanel);
         sendAnnouncementBtn.addEventListener('click', sendAnnouncement);
@@ -1780,7 +2213,6 @@
         personalTab.addEventListener('click', () => {
             setActiveAdminTab('personal');
         });
-        // --- END: ENHANCED ADMIN PANEL EVENT LISTENERS ---
         
         // Functions
         function showAuthMessage(message) {
@@ -1828,10 +2260,9 @@
             // Load announcements
             loadAnnouncements();
             
-            // --- START: Gems & Staking Feature - Load staking data ---
+            // Load staking data
             loadStakingRecords();
             startStakingCheckInterval();
-            // --- END: Gems & Staking Feature - Load staking data ---
 
             // Add admin button if user is admin
             addAdminButton();
@@ -1847,9 +2278,8 @@
                     userData = data;
                     userData.uid = uid;
                     
-                    // --- START: Gems & Staking Feature - Load gems ---
+                    // Load gems
                     gems = data.gems || 0;
-                    // --- END: Gems & Staking Feature - Load gems ---
                     
                     // Update last login
                     userData.lastLogin = new Date().toISOString();
@@ -1866,9 +2296,7 @@
                             userData.coins = updatedData.coins;
                             userData.referrals = updatedData.referrals;
                             userData.rank = updatedData.rank || 1;
-                            // --- START: Gems & Staking Feature - Update gems ---
                             gems = updatedData.gems || 0;
-                            // --- END: Gems & Staking Feature - Update gems ---
                             updateBalanceDisplay();
                             updateReferralDisplay();
                             updateRankDisplay();
@@ -1907,9 +2335,7 @@
                     autoMiningEnd: null,
                     agreedToTerms: false,
                     lastSeenAnnouncement: null,
-                    // --- START: Gems & Staking Feature - Add gems to new user ---
                     gems: 0
-                    // --- END: Gems & Staking Feature - Add gems to new user ---
                 };
                 
                 await window.firebaseFunctions.setDoc(
@@ -1933,9 +2359,7 @@
                 const docRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", userData.uid);
                 await window.firebaseFunctions.updateDoc(docRef, {
                     ...userData,
-                    // --- START: Gems & Staking Feature - Save gems ---
                     gems: gems
-                    // --- END: Gems & Staking Feature - Save gems ---
                 });
             } catch (error) {
                 console.error('Error saving user data:', error);
@@ -1947,10 +2371,8 @@
             const formattedBalance = parseFloat(userData.balance).toFixed(2);
             balanceDisplay.textContent = `${formattedBalance} Coins`;
             totalBalance.textContent = `${formattedBalance} Coins`;
-            // --- START: Gems & Staking Feature - Update gems display ---
             gemsDisplay.textContent = `💎 ${gems} Gems`;
             totalGems.textContent = `💎 ${gems} Gems`;
-            // --- END: Gems & Staking Feature - Update gems display ---
         }
         
         function updateReferralDisplay() {
@@ -1970,7 +2392,7 @@
             plusOne.style.top = e.pageY - 20 + 'px';
             plusOne.style.color = '#FFD700';
             plusOne.style.fontWeight = 'bold';
-            plusOne.style.fontSize = '18px';
+            plusOne.style.fontSize = '16px';
             plusOne.style.opacity = '1';
             plusOne.style.transition = 'all 0.8s ease-out';
             plusOne.style.zIndex = '1000';
@@ -1990,10 +2412,10 @@
         
         function playSparkleEffect() {
             const goldPile = document.querySelector('.gold-pile');
-            goldPile.style.boxShadow = '0 0 30px rgba(255, 215, 0, 1)';
+            goldPile.style.boxShadow = '0 0 25px rgba(255, 215, 0, 1)';
             
             setTimeout(() => {
-                goldPile.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.7)';
+                goldPile.style.boxShadow = '0 0 12px rgba(255, 215, 0, 0.7)';
             }, 300);
         }
         
@@ -2108,14 +2530,12 @@
                 lastSeenAnnouncement: null
             };
             
-            // --- START: Gems & Staking Feature - Reset gems and staking ---
             gems = 0;
             activeStakes = [];
             if (stakingCheckInterval) {
                 clearInterval(stakingCheckInterval);
                 stakingCheckInterval = null;
             }
-            // --- END: Gems & Staking Feature - Reset gems and staking ---
             
             if (autoMiningInterval) {
                 clearInterval(autoMiningInterval);
@@ -2227,7 +2647,7 @@
             }
         }
         
-        // --- START: Gems & Staking Feature - New Functions ---
+        // Gems & Staking Feature Functions
         function showStakingModal() {
             stakingModal.style.display = 'flex';
             // Reset stake amount to minimum
@@ -2450,9 +2870,8 @@
                 alert(`🎉 You received ${gemCount} gems from staking!`);
             }, 500);
         }
-        // --- END: Gems & Staking Feature - New Functions ---
 
-        // --- START: ENHANCED ADMIN PANEL FUNCTIONS ---
+        // Admin Panel Functions
         function showAdminPanel() {
             if (isAdminUser()) {
                 adminPanel.style.display = 'flex';
@@ -2495,7 +2914,7 @@
                     adminBtn.className = 'btn btn-secondary';
                     adminBtn.innerHTML = '🔧 Admin';
                     adminBtn.onclick = showAdminPanel;
-                    adminBtn.style.marginLeft = '10px';
+                    adminBtn.style.marginLeft = '8px';
                     
                     document.querySelector('.user-info').appendChild(adminBtn);
                 }
@@ -2765,10 +3184,9 @@
                 alert('Error updating user balance: ' + error.message);
             }
         }
-        // --- END: ENHANCED ADMIN PANEL FUNCTIONS ---
         
         // Initialize
-        showAuth();
+        // The welcome animation will automatically transition to auth after completion
         
         // Check if user is already logged in
         window.firebaseFunctions.onAuthStateChanged(window.firebaseAuth, (user) => {
@@ -2780,11 +3198,6 @@
                 showAuth();
             }
         });
-        
-        // Hide 3D animation after 3 seconds
-        setTimeout(() => {
-            document.getElementById('animationContainer').style.display = 'none';
-        }, 3000);
         
         // For testing: Add sample announcements (remove in production)
         setTimeout(async () => {
