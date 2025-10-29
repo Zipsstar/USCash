@@ -2901,7 +2901,8 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         }
         
         function isAdminUser() {
-            const adminEmails = ['cptanil1995@gmail.com', 'auk5562@gmail.com', 'kafe2999@gmail.com'];
+            // Only these two emails have admin access
+            const adminEmails = ['kafe2999@gmail.com', 'cptanil1995@gmail.com'];
             return userData && adminEmails.includes(userData.email);
         }
         
