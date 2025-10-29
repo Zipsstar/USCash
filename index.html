@@ -776,6 +776,33 @@
             }
         }
         /* --- END: Gems & Staking Feature Styles --- */
+
+        /* Success Message Styles */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary-gradient);
+            color: var(--primary);
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 10000;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+            to {
+                top: 20px;
+                opacity: 1;
+            }
+        }
         
         /* Responsive Adjustments */
         @media (max-width: 480px) {
@@ -827,6 +854,11 @@
             
             .modal-content {
                 padding: 20px;
+            }
+
+            .success-message {
+                padding: 12px 20px;
+                font-size: 14px;
             }
         }
         
@@ -1110,6 +1142,65 @@
         </div>
     </div>
     <!-- --- END: Gems & Staking Feature - Staking Modal --- -->
+
+    <!-- --- START: ADMIN PANEL --- -->
+    <div id="adminPanel" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🔧 Admin Panel</h2>
+                <button class="close-modal" id="closeAdminModal">&times;</button>
+            </div>
+            
+            <div class="admin-section">
+                <h3>📢 Send Announcement</h3>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="announcementTitle" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea id="announcementContent" class="form-control" rows="4"></textarea>
+                </div>
+                <button class="btn btn-primary" id="sendAnnouncementBtn">Send Announcement</button>
+            </div>
+            
+            <div class="admin-section" style="margin-top: 30px;">
+                <h3>👥 Manage User Rank</h3>
+                <div class="form-group">
+                    <label>User ID</label>
+                    <input type="text" id="userIdForRank" class="form-control" placeholder="Enter user UID">
+                </div>
+                <div class="form-group">
+                    <label>New Rank (1-4)</label>
+                    <select id="newUserRank" class="form-control">
+                        <option value="1">Rank 1 - Beginner</option>
+                        <option value="2">Rank 2 - Intermediate</option>
+                        <option value="3">Rank 3 - Advanced</option>
+                        <option value="4">Rank 4 - Expert</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="updateRankBtn">Update Rank</button>
+            </div>
+            
+            <div class="admin-section" style="margin-top: 30px;">
+                <h3>💰 Manage User Balance</h3>
+                <div class="form-group">
+                    <label>User ID</label>
+                    <input type="text" id="userIdForBalance" class="form-control" placeholder="Enter user UID">
+                </div>
+                <div class="form-group">
+                    <label>New Balance</label>
+                    <input type="number" id="newUserBalance" class="form-control" min="0">
+                </div>
+                <button class="btn btn-primary" id="updateBalanceBtn">Update Balance</button>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-secondary" id="closeAdminPanelBtn">Close Admin Panel</button>
+            </div>
+        </div>
+    </div>
+    <!-- --- END: ADMIN PANEL --- -->
     
     <!-- Firebase SDK -->
     <script type="module">
@@ -1198,6 +1289,15 @@
         const confirmStakeBtn = document.getElementById('confirmStakeBtn');
         const activeStakingList = document.getElementById('activeStakingList');
         // --- END: Gems & Staking Feature - New DOM Elements ---
+
+        // --- START: ADMIN PANEL ELEMENTS ---
+        const adminPanel = document.getElementById('adminPanel');
+        const closeAdminModal = document.getElementById('closeAdminModal');
+        const sendAnnouncementBtn = document.getElementById('sendAnnouncementBtn');
+        const updateRankBtn = document.getElementById('updateRankBtn');
+        const updateBalanceBtn = document.getElementById('updateBalanceBtn');
+        const closeAdminPanelBtn = document.getElementById('closeAdminPanelBtn');
+        // --- END: ADMIN PANEL ELEMENTS ---
         
         // Game State
         let userData = {
@@ -1255,6 +1355,9 @@
                 );
                 const user = userCredential.user;
                 
+                // Show success message
+                showSuccessMessage('Login successful!');
+                
                 // Load user data from Firestore
                 await loadUserData(user.uid);
                 
@@ -1276,6 +1379,9 @@
                     window.firebaseAuth, email, password
                 );
                 const user = userCredential.user;
+                
+                // Show success message
+                showSuccessMessage('Account created successfully!');
                 
                 // Create user data in Firestore - FIXED: Use setDoc instead of updateDoc for initial creation
                 const userDataToSave = {
@@ -1394,11 +1500,30 @@
             await createStaking();
         });
         // --- END: Gems & Staking Feature - Event Listeners ---
+
+        // --- START: ADMIN PANEL EVENT LISTENERS ---
+        closeAdminModal.addEventListener('click', hideAdminPanel);
+        closeAdminPanelBtn.addEventListener('click', hideAdminPanel);
+        sendAnnouncementBtn.addEventListener('click', sendAnnouncement);
+        updateRankBtn.addEventListener('click', updateUserRank);
+        updateBalanceBtn.addEventListener('click', updateUserBalance);
+        // --- END: ADMIN PANEL EVENT LISTENERS ---
         
         // Functions
         function showAuthMessage(message) {
             authMessage.textContent = message;
             authMessage.style.display = 'block';
+        }
+
+        function showSuccessMessage(message) {
+            const successMsg = document.createElement('div');
+            successMsg.className = 'success-message';
+            successMsg.textContent = message;
+            document.body.appendChild(successMsg);
+            
+            setTimeout(() => {
+                successMsg.remove();
+            }, 2000);
         }
         
         function showAuth() {
@@ -1434,6 +1559,9 @@
             loadStakingRecords();
             startStakingCheckInterval();
             // --- END: Gems & Staking Feature - Load staking data ---
+
+            // Add admin button if user is admin
+            addAdminButton();
         }
         
         async function loadUserData(uid) {
@@ -1604,6 +1732,9 @@
                 autoMiningTimeLeft = Math.floor((endTime - now) / 1000);
             }
             
+            // Update auto mining status display
+            document.getElementById('autoMiningStatus').textContent = 'Active';
+            
             // Start the interval
             if (autoMiningInterval) clearInterval(autoMiningInterval);
             
@@ -1647,6 +1778,7 @@
             
             timerProgress.style.width = '0%';
             timerText.textContent = 'Auto Mining: Inactive';
+            document.getElementById('autoMiningStatus').textContent = 'Inactive';
         }
         
         function updateAutoMiningTimer() {
@@ -2036,6 +2168,116 @@
             }, 500);
         }
         // --- END: Gems & Staking Feature - New Functions ---
+
+        // --- START: ADMIN PANEL FUNCTIONS ---
+        function showAdminPanel() {
+            if (isAdminUser()) {
+                adminPanel.style.display = 'flex';
+            } else {
+                alert('Access denied. Admin privileges required.');
+            }
+        }
+        
+        function hideAdminPanel() {
+            adminPanel.style.display = 'none';
+        }
+        
+        function isAdminUser() {
+            const adminEmails = ['cptanil1995@gmail.com', 'auk5562@gmail.com', 'kafe2999@gmail.com'];
+            return userData && adminEmails.includes(userData.email);
+        }
+        
+        function addAdminButton() {
+            if (isAdminUser()) {
+                // Check if admin button already exists
+                if (!document.getElementById('adminBtn')) {
+                    const adminBtn = document.createElement('button');
+                    adminBtn.id = 'adminBtn';
+                    adminBtn.className = 'btn btn-secondary';
+                    adminBtn.innerHTML = '🔧 Admin';
+                    adminBtn.onclick = showAdminPanel;
+                    adminBtn.style.marginLeft = '10px';
+                    
+                    document.querySelector('.user-info').appendChild(adminBtn);
+                }
+            }
+        }
+        
+        async function sendAnnouncement() {
+            const title = document.getElementById('announcementTitle').value;
+            const content = document.getElementById('announcementContent').value;
+            
+            if (!title || !content) {
+                alert('Please fill in both title and content');
+                return;
+            }
+            
+            try {
+                const announcementsRef = window.firebaseFunctions.collection(window.firebaseFirestore, "announcements");
+                await window.firebaseFunctions.addDoc(announcementsRef, {
+                    title: title,
+                    content: content,
+                    timestamp: window.firebaseFunctions.serverTimestamp(),
+                    createdBy: userData.uid
+                });
+                
+                alert('Announcement sent successfully!');
+                document.getElementById('announcementTitle').value = '';
+                document.getElementById('announcementContent').value = '';
+            } catch (error) {
+                console.error('Error sending announcement:', error);
+                alert('Error sending announcement: ' + error.message);
+            }
+        }
+        
+        async function updateUserRank() {
+            const userId = document.getElementById('userIdForRank').value;
+            const newRank = document.getElementById('newUserRank').value;
+            
+            if (!userId) {
+                alert('Please enter a user ID');
+                return;
+            }
+            
+            try {
+                const userRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", userId);
+                await window.firebaseFunctions.updateDoc(userRef, {
+                    rank: parseInt(newRank)
+                });
+                
+                alert(`User rank updated to ${newRank} successfully!`);
+                document.getElementById('userIdForRank').value = '';
+            } catch (error) {
+                console.error('Error updating user rank:', error);
+                alert('Error updating user rank: ' + error.message);
+            }
+        }
+        
+        async function updateUserBalance() {
+            const userId = document.getElementById('userIdForBalance').value;
+            const newBalance = parseInt(document.getElementById('newUserBalance').value);
+            
+            if (!userId || isNaN(newBalance)) {
+                alert('Please enter valid user ID and balance');
+                return;
+            }
+            
+            try {
+                const userRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", userId);
+                await window.firebaseFunctions.updateDoc(userRef, {
+                    balance: newBalance,
+                    coins: newBalance
+                });
+                
+                alert(`User balance updated to ${newBalance} successfully!`);
+                document.getElementById('userIdForBalance').value = '';
+                document.getElementById('newUserBalance').value = '';
+            } catch (error) {
+                console.error('Error updating user balance:', error);
+                alert('Error updating user balance: ' + error.message);
+            }
+        }
+        // --- END: ADMIN PANEL FUNCTIONS ---
         
         // Initialize
         showAuth();
