@@ -803,6 +803,180 @@
                 opacity: 1;
             }
         }
+
+        /* --- START: ENHANCED ADMIN PANEL STYLES --- */
+        .admin-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .admin-section h3 {
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .admin-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .admin-tab.active {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .admin-panel-content {
+            display: none;
+        }
+
+        .admin-panel-content.active {
+            display: block;
+        }
+
+        .users-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .user-item {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info-small {
+            flex: 1;
+        }
+
+        .user-email {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .user-actions button {
+            padding: 8px 12px;
+            font-size: 14px;
+            min-height: auto;
+        }
+
+        .refresh-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        /* --- END: ENHANCED ADMIN PANEL STYLES --- */
+
+        /* --- START: 3D ANIMATION STYLES --- */
+        .animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeOut 2s ease-in-out 3s forwards;
+        }
+
+        .goldmining-text {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent);
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 20px rgba(255, 215, 0, 0.6),
+                0 0 30px rgba(255, 215, 0, 0.4);
+            animation: 
+                pulseText 1.5s ease-in-out infinite alternate,
+                rotate3d 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes pulseText {
+            from {
+                transform: scale(1);
+                text-shadow: 
+                    0 0 10px rgba(255, 215, 0, 0.8),
+                    0 0 20px rgba(255, 215, 0, 0.6),
+                    0 0 30px rgba(255, 215, 0, 0.4);
+            }
+            to {
+                transform: scale(1.1);
+                text-shadow: 
+                    0 0 15px rgba(255, 215, 0, 1),
+                    0 0 25px rgba(255, 215, 0, 0.8),
+                    0 0 35px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        @keyframes rotate3d {
+            0% {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+            25% {
+                transform: perspective(1000px) rotateY(15deg);
+            }
+            50% {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+            75% {
+                transform: perspective(1000px) rotateY(-15deg);
+            }
+            100% {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        /* --- END: 3D ANIMATION STYLES --- */
         
         /* Responsive Adjustments */
         @media (max-width: 480px) {
@@ -860,6 +1034,21 @@
                 padding: 12px 20px;
                 font-size: 14px;
             }
+
+            .goldmining-text {
+                font-size: 36px;
+            }
+
+            .user-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .user-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
         
         @media (max-width: 360px) {
@@ -885,6 +1074,10 @@
             .balance-display {
                 font-size: 16px;
             }
+
+            .goldmining-text {
+                font-size: 28px;
+            }
         }
         
         /* Prevent zoom on input focus for iOS */
@@ -896,6 +1089,11 @@
     </style>
 </head>
 <body>
+    <!-- 3D Animation Container -->
+    <div id="animationContainer" class="animation-container">
+        <div class="goldmining-text">GoldMinning</div>
+    </div>
+
     <!-- Authentication Section -->
     <div id="authSection" class="auth-container">
         <div class="auth-box">
@@ -960,6 +1158,7 @@
                         </div>
                         <!-- --- END: Gems & Staking Feature - Updated Balance Display --- -->
                         <div class="user-rank" id="userRank">Rank 1</div>
+                        <button class="refresh-btn" id="refreshBtn" title="Refresh Balance">🔄</button>
                         <div class="announcement-icon" id="announcementIcon">
                             📢
                             <div class="announcement-badge" id="announcementBadge" style="display: none;">0</div>
@@ -1143,7 +1342,7 @@
     </div>
     <!-- --- END: Gems & Staking Feature - Staking Modal --- -->
 
-    <!-- --- START: ADMIN PANEL --- -->
+    <!-- --- START: ENHANCED ADMIN PANEL --- -->
     <div id="adminPanel" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1151,48 +1350,91 @@
                 <button class="close-modal" id="closeAdminModal">&times;</button>
             </div>
             
-            <div class="admin-section">
-                <h3>📢 Send Announcement</h3>
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" id="announcementTitle" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Content</label>
-                    <textarea id="announcementContent" class="form-control" rows="4"></textarea>
-                </div>
-                <button class="btn btn-primary" id="sendAnnouncementBtn">Send Announcement</button>
+            <div class="admin-tabs">
+                <div class="admin-tab active" id="announcementsTab">Announcements</div>
+                <div class="admin-tab" id="usersTab">Manage Users</div>
+                <div class="admin-tab" id="personalTab">Personal Messages</div>
             </div>
             
-            <div class="admin-section" style="margin-top: 30px;">
-                <h3>👥 Manage User Rank</h3>
-                <div class="form-group">
-                    <label>User ID</label>
-                    <input type="text" id="userIdForRank" class="form-control" placeholder="Enter user UID">
+            <!-- Announcements Tab -->
+            <div id="announcementsContent" class="admin-panel-content active">
+                <div class="admin-section">
+                    <h3>📢 Send Announcement</h3>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="announcementTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        <textarea id="announcementContent" class="form-control" rows="4"></textarea>
+                    </div>
+                    <button class="btn btn-primary" id="sendAnnouncementBtn">Send Announcement</button>
                 </div>
-                <div class="form-group">
-                    <label>New Rank (1-4)</label>
-                    <select id="newUserRank" class="form-control">
-                        <option value="1">Rank 1 - Beginner</option>
-                        <option value="2">Rank 2 - Intermediate</option>
-                        <option value="3">Rank 3 - Advanced</option>
-                        <option value="4">Rank 4 - Expert</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary" id="updateRankBtn">Update Rank</button>
             </div>
             
-            <div class="admin-section" style="margin-top: 30px;">
-                <h3>💰 Manage User Balance</h3>
-                <div class="form-group">
-                    <label>User ID</label>
-                    <input type="text" id="userIdForBalance" class="form-control" placeholder="Enter user UID">
+            <!-- Users Tab -->
+            <div id="usersContent" class="admin-panel-content">
+                <div class="admin-section">
+                    <h3>👥 Manage Users</h3>
+                    <button class="btn btn-secondary" id="loadUsersBtn">Load All Users</button>
+                    <div class="users-list" id="usersList">
+                        <!-- Users will be loaded here -->
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>New Balance</label>
-                    <input type="number" id="newUserBalance" class="form-control" min="0">
+                
+                <div class="admin-section">
+                    <h3>👤 Manage Specific User</h3>
+                    <div class="form-group">
+                        <label>User ID</label>
+                        <input type="text" id="userIdForRank" class="form-control" placeholder="Enter user UID">
+                    </div>
+                    <div class="form-group">
+                        <label>New Rank (1-4)</label>
+                        <select id="newUserRank" class="form-control">
+                            <option value="1">Rank 1 - Beginner</option>
+                            <option value="2">Rank 2 - Intermediate</option>
+                            <option value="3">Rank 3 - Advanced</option>
+                            <option value="4">Rank 4 - Expert</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" id="updateRankBtn">Update Rank</button>
                 </div>
-                <button class="btn btn-primary" id="updateBalanceBtn">Update Balance</button>
+                
+                <div class="admin-section">
+                    <h3>💰 Manage User Balance</h3>
+                    <div class="form-group">
+                        <label>User ID</label>
+                        <input type="text" id="userIdForBalance" class="form-control" placeholder="Enter user UID">
+                    </div>
+                    <div class="form-group">
+                        <label>New Balance</label>
+                        <input type="number" id="newUserBalance" class="form-control" min="0">
+                    </div>
+                    <button class="btn btn-primary" id="updateBalanceBtn">Update Balance</button>
+                </div>
+            </div>
+            
+            <!-- Personal Messages Tab -->
+            <div id="personalContent" class="admin-panel-content">
+                <div class="admin-section">
+                    <h3>📩 Send Personal Message</h3>
+                    <div class="form-group">
+                        <label>Select User</label>
+                        <select id="personalMessageUser" class="form-control">
+                            <option value="all">All Users</option>
+                            <!-- Users will be populated here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="personalMessageTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea id="personalMessageContent" class="form-control" rows="4"></textarea>
+                    </div>
+                    <button class="btn btn-primary" id="sendPersonalMessageBtn">Send Message</button>
+                </div>
             </div>
             
             <div style="margin-top: 30px; text-align: center;">
@@ -1200,7 +1442,7 @@
             </div>
         </div>
     </div>
-    <!-- --- END: ADMIN PANEL --- -->
+    <!-- --- END: ENHANCED ADMIN PANEL --- -->
     
     <!-- Firebase SDK -->
     <script type="module">
@@ -1290,14 +1532,27 @@
         const activeStakingList = document.getElementById('activeStakingList');
         // --- END: Gems & Staking Feature - New DOM Elements ---
 
-        // --- START: ADMIN PANEL ELEMENTS ---
+        // --- START: ENHANCED ADMIN PANEL ELEMENTS ---
         const adminPanel = document.getElementById('adminPanel');
         const closeAdminModal = document.getElementById('closeAdminModal');
         const sendAnnouncementBtn = document.getElementById('sendAnnouncementBtn');
         const updateRankBtn = document.getElementById('updateRankBtn');
         const updateBalanceBtn = document.getElementById('updateBalanceBtn');
         const closeAdminPanelBtn = document.getElementById('closeAdminPanelBtn');
-        // --- END: ADMIN PANEL ELEMENTS ---
+        const loadUsersBtn = document.getElementById('loadUsersBtn');
+        const usersList = document.getElementById('usersList');
+        const sendPersonalMessageBtn = document.getElementById('sendPersonalMessageBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        // --- END: ENHANCED ADMIN PANEL ELEMENTS ---
+        
+        // --- START: ADMIN TABS ---
+        const announcementsTab = document.getElementById('announcementsTab');
+        const usersTab = document.getElementById('usersTab');
+        const personalTab = document.getElementById('personalTab');
+        const announcementsContent = document.getElementById('announcementsContent');
+        const usersContent = document.getElementById('usersContent');
+        const personalContent = document.getElementById('personalContent');
+        // --- END: ADMIN TABS ---
         
         // Game State
         let userData = {
@@ -1308,6 +1563,7 @@
             coins: 0,
             referrals: 0,
             role: 'user',
+            rank: 1,
             lastLogin: null,
             autoMiningEnd: null,
             agreedToTerms: false,
@@ -1392,6 +1648,7 @@
                     coins: 0,
                     referrals: 0,
                     role: 'user',
+                    rank: 1,
                     lastLogin: new Date().toISOString(),
                     autoMiningEnd: null,
                     agreedToTerms: false,
@@ -1501,13 +1758,29 @@
         });
         // --- END: Gems & Staking Feature - Event Listeners ---
 
-        // --- START: ADMIN PANEL EVENT LISTENERS ---
+        // --- START: ENHANCED ADMIN PANEL EVENT LISTENERS ---
         closeAdminModal.addEventListener('click', hideAdminPanel);
         closeAdminPanelBtn.addEventListener('click', hideAdminPanel);
         sendAnnouncementBtn.addEventListener('click', sendAnnouncement);
         updateRankBtn.addEventListener('click', updateUserRank);
         updateBalanceBtn.addEventListener('click', updateUserBalance);
-        // --- END: ADMIN PANEL EVENT LISTENERS ---
+        loadUsersBtn.addEventListener('click', loadAllUsers);
+        sendPersonalMessageBtn.addEventListener('click', sendPersonalMessage);
+        refreshBtn.addEventListener('click', refreshBalance);
+        
+        // Admin Tabs
+        announcementsTab.addEventListener('click', () => {
+            setActiveAdminTab('announcements');
+        });
+        
+        usersTab.addEventListener('click', () => {
+            setActiveAdminTab('users');
+        });
+        
+        personalTab.addEventListener('click', () => {
+            setActiveAdminTab('personal');
+        });
+        // --- END: ENHANCED ADMIN PANEL EVENT LISTENERS ---
         
         // Functions
         function showAuthMessage(message) {
@@ -1592,11 +1865,13 @@
                             userData.balance = updatedData.balance;
                             userData.coins = updatedData.coins;
                             userData.referrals = updatedData.referrals;
+                            userData.rank = updatedData.rank || 1;
                             // --- START: Gems & Staking Feature - Update gems ---
                             gems = updatedData.gems || 0;
                             // --- END: Gems & Staking Feature - Update gems ---
                             updateBalanceDisplay();
                             updateReferralDisplay();
+                            updateRankDisplay();
                         }
                     });
                     
@@ -1627,6 +1902,7 @@
                     coins: 0,
                     referrals: 0,
                     role: 'user',
+                    rank: 1,
                     lastLogin: new Date().toISOString(),
                     autoMiningEnd: null,
                     agreedToTerms: false,
@@ -1667,8 +1943,10 @@
         }
         
         function updateBalanceDisplay() {
-            balanceDisplay.textContent = `${userData.balance} Coins`;
-            totalBalance.textContent = `${userData.balance} Coins`;
+            // Format balance to 2 decimal places
+            const formattedBalance = parseFloat(userData.balance).toFixed(2);
+            balanceDisplay.textContent = `${formattedBalance} Coins`;
+            totalBalance.textContent = `${formattedBalance} Coins`;
             // --- START: Gems & Staking Feature - Update gems display ---
             gemsDisplay.textContent = `💎 ${gems} Gems`;
             totalGems.textContent = `💎 ${gems} Gems`;
@@ -1678,6 +1956,10 @@
         function updateReferralDisplay() {
             referralCount.textContent = userData.referrals;
             referralCode.textContent = userData.uid || 'Loading...';
+        }
+        
+        function updateRankDisplay() {
+            userRank.textContent = `Rank ${userData.rank || 1}`;
         }
         
         function showPlusOneAnimation(e) {
@@ -1819,6 +2101,7 @@
                 coins: 0,
                 referrals: 0,
                 role: 'user',
+                rank: 1,
                 lastLogin: null,
                 autoMiningEnd: null,
                 agreedToTerms: false,
@@ -2169,10 +2452,12 @@
         }
         // --- END: Gems & Staking Feature - New Functions ---
 
-        // --- START: ADMIN PANEL FUNCTIONS ---
+        // --- START: ENHANCED ADMIN PANEL FUNCTIONS ---
         function showAdminPanel() {
             if (isAdminUser()) {
                 adminPanel.style.display = 'flex';
+                // Load users for personal messages dropdown
+                loadUsersForDropdown();
             } else {
                 alert('Access denied. Admin privileges required.');
             }
@@ -2180,6 +2465,20 @@
         
         function hideAdminPanel() {
             adminPanel.style.display = 'none';
+        }
+        
+        function setActiveAdminTab(tabName) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.admin-panel-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Add active class to selected tab and content
+            document.getElementById(`${tabName}Tab`).classList.add('active');
+            document.getElementById(`${tabName}Content`).classList.add('active');
         }
         
         function isAdminUser() {
@@ -2277,7 +2576,196 @@
                 alert('Error updating user balance: ' + error.message);
             }
         }
-        // --- END: ADMIN PANEL FUNCTIONS ---
+        
+        async function loadAllUsers() {
+            try {
+                const usersRef = window.firebaseFunctions.collection(window.firebaseFirestore, "users");
+                const querySnapshot = await window.firebaseFunctions.getDocs(usersRef);
+                
+                usersList.innerHTML = '';
+                
+                if (querySnapshot.empty) {
+                    usersList.innerHTML = '<div class="no-announcements">No users found</div>';
+                    return;
+                }
+                
+                querySnapshot.forEach((doc) => {
+                    const user = doc.data();
+                    const userItem = document.createElement('div');
+                    userItem.className = 'user-item';
+                    
+                    userItem.innerHTML = `
+                        <div class="user-info-small">
+                            <div class="user-email">${user.email}</div>
+                            <div class="user-stats">
+                                <span>Rank: ${user.rank || 1}</span>
+                                <span>Balance: ${parseFloat(user.balance || 0).toFixed(2)}</span>
+                                <span>Gems: ${user.gems || 0}</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-secondary" onclick="promptUpdateRank('${doc.id}')">Update Rank</button>
+                            <button class="btn btn-secondary" onclick="promptUpdateBalance('${doc.id}')">Update Balance</button>
+                        </div>
+                    `;
+                    
+                    usersList.appendChild(userItem);
+                });
+                
+            } catch (error) {
+                console.error('Error loading users:', error);
+                alert('Error loading users: ' + error.message);
+            }
+        }
+        
+        async function loadUsersForDropdown() {
+            try {
+                const usersRef = window.firebaseFunctions.collection(window.firebaseFirestore, "users");
+                const querySnapshot = await window.firebaseFunctions.getDocs(usersRef);
+                
+                const dropdown = document.getElementById('personalMessageUser');
+                // Clear existing options except "All Users"
+                while (dropdown.children.length > 1) {
+                    dropdown.removeChild(dropdown.lastChild);
+                }
+                
+                querySnapshot.forEach((doc) => {
+                    const user = doc.data();
+                    const option = document.createElement('option');
+                    option.value = doc.id;
+                    option.textContent = user.email;
+                    dropdown.appendChild(option);
+                });
+                
+            } catch (error) {
+                console.error('Error loading users for dropdown:', error);
+            }
+        }
+        
+        async function sendPersonalMessage() {
+            const userId = document.getElementById('personalMessageUser').value;
+            const title = document.getElementById('personalMessageTitle').value;
+            const content = document.getElementById('personalMessageContent').value;
+            
+            if (!title || !content) {
+                alert('Please fill in both title and content');
+                return;
+            }
+            
+            try {
+                const personalMessagesRef = window.firebaseFunctions.collection(window.firebaseFirestore, "personalMessages");
+                
+                if (userId === 'all') {
+                    // Send to all users
+                    const usersRef = window.firebaseFunctions.collection(window.firebaseFirestore, "users");
+                    const querySnapshot = await window.firebaseFunctions.getDocs(usersRef);
+                    
+                    const promises = [];
+                    querySnapshot.forEach((doc) => {
+                        const promise = window.firebaseFunctions.addDoc(personalMessagesRef, {
+                            userId: doc.id,
+                            title: title,
+                            content: content,
+                            timestamp: window.firebaseFunctions.serverTimestamp(),
+                            sentBy: userData.uid,
+                            isRead: false
+                        });
+                        promises.push(promise);
+                    });
+                    
+                    await Promise.all(promises);
+                    alert('Personal message sent to all users successfully!');
+                } else {
+                    // Send to specific user
+                    await window.firebaseFunctions.addDoc(personalMessagesRef, {
+                        userId: userId,
+                        title: title,
+                        content: content,
+                        timestamp: window.firebaseFunctions.serverTimestamp(),
+                        sentBy: userData.uid,
+                        isRead: false
+                    });
+                    
+                    alert('Personal message sent successfully!');
+                }
+                
+                document.getElementById('personalMessageTitle').value = '';
+                document.getElementById('personalMessageContent').value = '';
+                
+            } catch (error) {
+                console.error('Error sending personal message:', error);
+                alert('Error sending personal message: ' + error.message);
+            }
+        }
+        
+        function refreshBalance() {
+            // Add a spinning animation to the refresh button
+            const refreshIcon = refreshBtn.querySelector('span') || refreshBtn;
+            refreshIcon.style.animation = 'spin 1s linear';
+            
+            setTimeout(() => {
+                refreshIcon.style.animation = '';
+            }, 1000);
+            
+            // Force update the balance display
+            updateBalanceDisplay();
+            
+            // Show success message
+            showSuccessMessage('Balance refreshed!');
+        }
+        
+        // Global functions for user actions
+        window.promptUpdateRank = function(userId) {
+            const newRank = prompt('Enter new rank (1-4):');
+            if (newRank && newRank >= 1 && newRank <= 4) {
+                updateSpecificUserRank(userId, parseInt(newRank));
+            } else {
+                alert('Invalid rank. Please enter a number between 1 and 4.');
+            }
+        };
+        
+        window.promptUpdateBalance = function(userId) {
+            const newBalance = prompt('Enter new balance:');
+            if (newBalance && !isNaN(newBalance)) {
+                updateSpecificUserBalance(userId, parseFloat(newBalance));
+            } else {
+                alert('Invalid balance. Please enter a valid number.');
+            }
+        };
+        
+        async function updateSpecificUserRank(userId, newRank) {
+            try {
+                const userRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", userId);
+                await window.firebaseFunctions.updateDoc(userRef, {
+                    rank: newRank
+                });
+                
+                alert(`User rank updated to ${newRank} successfully!`);
+                // Reload users list
+                loadAllUsers();
+            } catch (error) {
+                console.error('Error updating user rank:', error);
+                alert('Error updating user rank: ' + error.message);
+            }
+        }
+        
+        async function updateSpecificUserBalance(userId, newBalance) {
+            try {
+                const userRef = window.firebaseFunctions.doc(window.firebaseFirestore, "users", userId);
+                await window.firebaseFunctions.updateDoc(userRef, {
+                    balance: newBalance,
+                    coins: newBalance
+                });
+                
+                alert(`User balance updated to ${newBalance} successfully!`);
+                // Reload users list
+                loadAllUsers();
+            } catch (error) {
+                console.error('Error updating user balance:', error);
+                alert('Error updating user balance: ' + error.message);
+            }
+        }
+        // --- END: ENHANCED ADMIN PANEL FUNCTIONS ---
         
         // Initialize
         showAuth();
@@ -2292,6 +2780,11 @@
                 showAuth();
             }
         });
+        
+        // Hide 3D animation after 3 seconds
+        setTimeout(() => {
+            document.getElementById('animationContainer').style.display = 'none';
+        }, 3000);
         
         // For testing: Add sample announcements (remove in production)
         setTimeout(async () => {
