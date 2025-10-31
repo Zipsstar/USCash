@@ -2808,8 +2808,9 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             }
             
             try {
-                // DEDUCT COINS FROM BALANCE - This is the key change
+                // DEDUCT COINS FROM USER BALANCE
                 userData.balance -= amount;
+                userData.coins -= amount;
                 updateBalanceDisplay();
                 
                 // Create staking record
@@ -2839,7 +2840,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 
                 // Hide modal and show success
                 hideStakingModal();
-                alert(`Successfully staked ${amount} coins! You will receive ${gemsToEarn} gems in 3 days.`);
+                showSuccessMessage(`Successfully staked ${amount} coins! You will receive ${gemsToEarn} gems in 3 days.`);
                 
                 // Reload staking records
                 loadStakingRecords();
@@ -2849,6 +2850,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 alert('Error creating staking. Please try again.');
                 // Refund coins if error
                 userData.balance += amount;
+                userData.coins += amount;
                 updateBalanceDisplay();
             }
         }
@@ -2996,7 +2998,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             
             // Show notification
             setTimeout(() => {
-                alert(`🎉 You received ${gemCount} gems from staking!`);
+                showSuccessMessage(`🎉 You received ${gemCount} gems from staking!`);
             }, 500);
         }
 
@@ -3047,6 +3049,12 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                     adminBtn.style.marginLeft = '8px';
                     
                     document.querySelector('.user-info').appendChild(adminBtn);
+                }
+            } else {
+                // Remove admin button if user is not admin
+                const adminBtn = document.getElementById('adminBtn');
+                if (adminBtn) {
+                    adminBtn.remove();
                 }
             }
         }
