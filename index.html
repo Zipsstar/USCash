@@ -908,6 +908,40 @@
             margin-left: 8px;
         }
 
+        /* Three Dots Menu Styles */
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+            padding: 6px;
+            color: var(--accent);
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+            z-index: 100;
+            min-width: 180px;
+        }
+
+        .menu-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
         /* Welcome Animation Styles */
         .animation-container {
             position: fixed;
@@ -1458,6 +1492,12 @@
                             📢
                             <div class="announcement-badge" id="announcementBadge" style="display: none;">0</div>
                         </div>
+                        <div class="menu-icon" id="menuIcon">⋯</div>
+                        <div class="menu-dropdown" id="menuDropdown">
+                            <div class="menu-item" id="instructionsMenuItem">📋 Instructions</div>
+                            <div class="menu-item" id="termsMenuItem">📜 Terms & Conditions</div>
+                            <div class="menu-item" id="customerServiceMenuItem">👨‍💼 Customer Service</div>
+                        </div>
                         <button class="btn btn-secondary" id="logoutBtn">Logout</button>
                     </div>
                 </div>
@@ -1723,6 +1763,64 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             <div style="margin-top: 25px; text-align: center;">
                 <button class="btn btn-secondary" id="closeAdminPanelBtn">Close Admin Panel</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div id="instructionsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📋 Game Instructions</h2>
+                <button class="close-modal" id="closeInstructionsModal">&times;</button>
+            </div>
+            <div class="terms-content">
+                <h3>How to Play:</h3>
+                <p><strong>1. Manual Mining:</strong> Tap the gold pile in the mining area to earn coins. Each tap gives you 1 coin.</p>
+                <p><strong>2. Auto Mining:</strong> Enable auto mining to earn 0.1 coins per second for 2 hours. You can restart it after it ends.</p>
+                <p><strong>3. Staking:</strong> Stake 2000 coins to earn 1 gem after 3 days. Gems can be used for exclusive rewards.</p>
+                <p><strong>4. Referrals:</strong> Share your referral code with friends. When they sign up using your code, you both get 10 coins bonus.</p>
+                <p><strong>5. Ranks:</strong> Progress through 4 ranks (Beginner to Expert) by being active and referring friends.</p>
+                
+                <h3>Important Notes:</h3>
+                <p>- One account per Gmail and phone number only</p>
+                <p>- Auto-tapping or cheating tools are prohibited</p>
+                <p>- Withdrawals will be available after official coin price announcement</p>
+                <p>- Contact your Assistant Mining Agent for deposits</p>
+                
+                <h3>Rewards:</h3>
+                <p>- Senior Assistant Level: Eligible for up to $200/month (requires 30 referrals in one week, 90 in three weeks)</p>
+                <p>- Maintain at least 2 referrals per day to qualify for rewards</p>
+            </div>
+            <button class="btn btn-primary" id="closeInstructionsBtn">Close</button>
+        </div>
+    </div>
+
+    <!-- Customer Service Modal -->
+    <div id="customerServiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">👨‍💼 Customer Service</h2>
+                <button class="close-modal" id="closeCustomerServiceModal">&times;</button>
+            </div>
+            <div class="terms-content">
+                <h3>Need Help?</h3>
+                <p>If you have any questions, issues, or need assistance with your account, please contact our customer service team.</p>
+                
+                <h3>Email Support:</h3>
+                <p>📧 <strong>uscash4gmail.com</strong></p>
+                <p>Our support team will respond to your queries within 24 hours.</p>
+                
+                <h3>Common Issues:</h3>
+                <p>- Account verification problems</p>
+                <p>- Mining or staking issues</p>
+                <p>- Referral bonus not received</p>
+                <p>- Deposit assistance needed</p>
+                <p>- General game questions</p>
+                
+                <h3>Important:</h3>
+                <p>Please include your user ID and email address in all communications for faster resolution.</p>
+            </div>
+            <button class="btn btn-primary" id="closeCustomerServiceBtn">Close</button>
         </div>
     </div>
     
@@ -1991,6 +2089,19 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         const usersContent = document.getElementById('usersContent');
         const personalContent = document.getElementById('personalContent');
         
+        // New Menu Elements
+        const menuIcon = document.getElementById('menuIcon');
+        const menuDropdown = document.getElementById('menuDropdown');
+        const instructionsMenuItem = document.getElementById('instructionsMenuItem');
+        const termsMenuItem = document.getElementById('termsMenuItem');
+        const customerServiceMenuItem = document.getElementById('customerServiceMenuItem');
+        const instructionsModal = document.getElementById('instructionsModal');
+        const closeInstructionsModal = document.getElementById('closeInstructionsModal');
+        const closeInstructionsBtn = document.getElementById('closeInstructionsBtn');
+        const customerServiceModal = document.getElementById('customerServiceModal');
+        const closeCustomerServiceModal = document.getElementById('closeCustomerServiceModal');
+        const closeCustomerServiceBtn = document.getElementById('closeCustomerServiceBtn');
+        
         // Game State
         let userData = {
             uid: null,
@@ -2212,6 +2323,23 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         
         personalTab.addEventListener('click', () => {
             setActiveAdminTab('personal');
+        });
+        
+        // New Menu Event Listeners
+        menuIcon.addEventListener('click', toggleMenu);
+        instructionsMenuItem.addEventListener('click', showInstructionsModal);
+        termsMenuItem.addEventListener('click', showTermsModal);
+        customerServiceMenuItem.addEventListener('click', showCustomerServiceModal);
+        closeInstructionsModal.addEventListener('click', hideInstructionsModal);
+        closeInstructionsBtn.addEventListener('click', hideInstructionsModal);
+        closeCustomerServiceModal.addEventListener('click', hideCustomerServiceModal);
+        closeCustomerServiceBtn.addEventListener('click', hideCustomerServiceModal);
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuIcon.contains(e.target) && !menuDropdown.contains(e.target)) {
+                menuDropdown.style.display = 'none';
+            }
         });
         
         // Functions
@@ -2498,6 +2626,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         
         function showTermsModal() {
             termsModal.style.display = 'flex';
+            hideMenu();
         }
         
         function hideTermsModal() {
@@ -3073,39 +3202,57 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             }
             
             try {
-                const personalMessagesRef = window.firebaseFunctions.collection(window.firebaseFirestore, "personalMessages");
-                
+                // For "all" users, we need to create personal messages for each user
                 if (userId === 'all') {
-                    // Send to all users
+                    // Get all users
                     const usersRef = window.firebaseFunctions.collection(window.firebaseFirestore, "users");
                     const querySnapshot = await window.firebaseFunctions.getDocs(usersRef);
                     
+                    // Create a personal message for each user
                     const promises = [];
-                    querySnapshot.forEach((doc) => {
-                        const promise = window.firebaseFunctions.addDoc(personalMessagesRef, {
-                            userId: doc.id,
+                    querySnapshot.forEach((userDoc) => {
+                        const personalMessage = {
+                            userId: userDoc.id,
                             title: title,
                             content: content,
                             timestamp: window.firebaseFunctions.serverTimestamp(),
                             sentBy: userData.uid,
                             isRead: false
-                        });
-                        promises.push(promise);
+                        };
+                        
+                        // Store in the user's personalMessages subcollection
+                        const userPersonalMessagesRef = window.firebaseFunctions.collection(
+                            window.firebaseFirestore, 
+                            "users", 
+                            userDoc.id, 
+                            "personalMessages"
+                        );
+                        
+                        promises.push(window.firebaseFunctions.addDoc(userPersonalMessagesRef, personalMessage));
                     });
                     
                     await Promise.all(promises);
                     alert('Personal message sent to all users successfully!');
                 } else {
                     // Send to specific user
-                    await window.firebaseFunctions.addDoc(personalMessagesRef, {
+                    const personalMessage = {
                         userId: userId,
                         title: title,
                         content: content,
                         timestamp: window.firebaseFunctions.serverTimestamp(),
                         sentBy: userData.uid,
                         isRead: false
-                    });
+                    };
                     
+                    // Store in the user's personalMessages subcollection
+                    const userPersonalMessagesRef = window.firebaseFunctions.collection(
+                        window.firebaseFirestore, 
+                        "users", 
+                        userId, 
+                        "personalMessages"
+                    );
+                    
+                    await window.firebaseFunctions.addDoc(userPersonalMessagesRef, personalMessage);
                     alert('Personal message sent successfully!');
                 }
                 
@@ -3132,6 +3279,37 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             
             // Show success message
             showSuccessMessage('Balance refreshed!');
+        }
+        
+        // New Menu Functions
+        function toggleMenu() {
+            if (menuDropdown.style.display === 'block') {
+                menuDropdown.style.display = 'none';
+            } else {
+                menuDropdown.style.display = 'block';
+            }
+        }
+        
+        function hideMenu() {
+            menuDropdown.style.display = 'none';
+        }
+        
+        function showInstructionsModal() {
+            instructionsModal.style.display = 'flex';
+            hideMenu();
+        }
+        
+        function hideInstructionsModal() {
+            instructionsModal.style.display = 'none';
+        }
+        
+        function showCustomerServiceModal() {
+            customerServiceModal.style.display = 'flex';
+            hideMenu();
+        }
+        
+        function hideCustomerServiceModal() {
+            customerServiceModal.style.display = 'none';
         }
         
         // Global functions for user actions
