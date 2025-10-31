@@ -2808,7 +2808,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             }
             
             try {
-                // Deduct coins from balance
+                // DEDUCT COINS FROM BALANCE - This is the key change
                 userData.balance -= amount;
                 updateBalanceDisplay();
                 
@@ -2834,7 +2834,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 
                 await window.firebaseFunctions.addDoc(stakingRef, stakingRecord);
                 
-                // Save user data
+                // Save user data with updated balance
                 await saveUserData();
                 
                 // Hide modal and show success
