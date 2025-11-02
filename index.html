@@ -2808,9 +2808,8 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             }
             
             try {
-                // DEDUCT COINS FROM USER BALANCE
+                // Deduct coins from balance
                 userData.balance -= amount;
-                userData.coins -= amount;
                 updateBalanceDisplay();
                 
                 // Create staking record
@@ -2835,12 +2834,12 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 
                 await window.firebaseFunctions.addDoc(stakingRef, stakingRecord);
                 
-                // Save user data with updated balance
+                // Save user data
                 await saveUserData();
                 
                 // Hide modal and show success
                 hideStakingModal();
-                showSuccessMessage(`Successfully staked ${amount} coins! You will receive ${gemsToEarn} gems in 3 days.`);
+                alert(`Successfully staked ${amount} coins! You will receive ${gemsToEarn} gems in 3 days.`);
                 
                 // Reload staking records
                 loadStakingRecords();
@@ -2850,7 +2849,6 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 alert('Error creating staking. Please try again.');
                 // Refund coins if error
                 userData.balance += amount;
-                userData.coins += amount;
                 updateBalanceDisplay();
             }
         }
@@ -2998,7 +2996,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             
             // Show notification
             setTimeout(() => {
-                showSuccessMessage(`🎉 You received ${gemCount} gems from staking!`);
+                alert(`🎉 You received ${gemCount} gems from staking!`);
             }, 500);
         }
 
@@ -3049,12 +3047,6 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                     adminBtn.style.marginLeft = '8px';
                     
                     document.querySelector('.user-info').appendChild(adminBtn);
-                }
-            } else {
-                // Remove admin button if user is not admin
-                const adminBtn = document.getElementById('adminBtn');
-                if (adminBtn) {
-                    adminBtn.remove();
                 }
             }
         }
