@@ -259,14 +259,14 @@
         
         /* Changed balance and coin color to dark orange with medium bold font */
         .balance-display {
-            font-size: 18px;
+            font-size: 16px; /* Slightly reduced */
             font-weight: 600; /* Medium bold */
             color: var(--balance-green);
             text-shadow: 2px 2px 0 var(--outline);
         }
         
         .gems-display {
-            font-size: 16px;
+            font-size: 14px; /* Slightly reduced */
             font-weight: 600; /* Medium bold */
             color: #FF69B4;
             text-shadow: 2px 2px 0 #8B008B;
@@ -275,7 +275,7 @@
         .user-rank {
             color: var(--balance-green);
             font-weight: 600; /* Medium bold */
-            font-size: 14px;
+            font-size: 12px; /* Slightly reduced */
             text-shadow: 1px 1px 0 #1a5276;
             background: linear-gradient(135deg, #AED6F1, #3498DB);
             padding: 5px 10px;
@@ -285,14 +285,14 @@
         
         .announcement-icon {
             cursor: pointer;
-            font-size: 24px;
+            font-size: 20px; /* Slightly reduced */
             position: relative;
             padding: 8px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             border-radius: 50%;
             border: 3px solid var(--outline);
-            width: 45px;
-            height: 45px;
+            width: 40px; /* Slightly reduced */
+            height: 40px; /* Slightly reduced */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -306,9 +306,9 @@
             background-color: #e74c3c;
             color: white;
             border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            font-size: 12px;
+            width: 20px; /* Slightly reduced */
+            height: 20px; /* Slightly reduced */
+            font-size: 11px; /* Slightly reduced */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -356,7 +356,7 @@
         }
         
         .stat-value {
-            font-size: 24px;
+            font-size: 22px; /* Slightly reduced */
             font-weight: 600; /* Medium bold */
             color: var(--balance-green);
             text-shadow: 2px 2px 0 var(--outline);
@@ -1154,13 +1154,13 @@
             background: linear-gradient(135deg, #FFD700, #FFA500);
             border: 3px solid var(--outline);
             color: var(--outline);
-            font-size: 20px;
+            font-size: 18px; /* Slightly reduced */
             cursor: pointer;
             padding: 8px;
             margin-left: 10px;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 40px; /* Slightly reduced */
+            height: 40px; /* Slightly reduced */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1176,13 +1176,13 @@
         /* Three Dots Menu Styles */
         .menu-icon {
             cursor: pointer;
-            font-size: 28px;
+            font-size: 24px; /* Slightly reduced */
             padding: 8px;
             color: var(--outline);
             background: linear-gradient(135deg, #FFD700, #FFA500);
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 40px; /* Slightly reduced */
+            height: 40px; /* Slightly reduced */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -3528,7 +3528,8 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 gems += diamonds;
                 updateBalanceDisplay();
                 saveUserData();
-                showSuccessMessage(`🎉 Successfully purchased ${diamonds} diamonds for $${price}!`);
+                // Updated store feedback message
+                showSuccessMessage("Thank you! Your request is pending. If the transaction is confirmed as correct, you will receive your diamonds shortly.");
             }, 3000);
         }
         
@@ -3557,13 +3558,15 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                     gems += 10;
                     updateBalanceDisplay();
                     saveUserData();
-                    showSuccessMessage('🎉 Coupon redeemed! You received 10 diamonds!');
+                    // Updated store feedback message
+                    showSuccessMessage("Thank you! Your request is pending. If the transaction is confirmed as correct, you will receive your diamonds shortly.");
                     couponCode.value = '';
                 } else if (code.toLowerCase() === 'goldmine25') {
                     gems += 25;
                     updateBalanceDisplay();
                     saveUserData();
-                    showSuccessMessage('🎉 Coupon redeemed! You received 25 diamonds!');
+                    // Updated store feedback message
+                    showSuccessMessage("Thank you! Your request is pending. If the transaction is confirmed as correct, you will receive your diamonds shortly.");
                     couponCode.value = '';
                 } else {
                     alert('Invalid coupon code. Please try again.');
