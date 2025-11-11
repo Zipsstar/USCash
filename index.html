@@ -14,7 +14,7 @@
             --card-bg: #FFE4B5;
             --outline: #8B4513;
             --shadow: rgba(139, 69, 19, 0.5);
-            --balance-green: #006400; /* Dark green for balance and coins */
+            --balance-green: #FF8C00; /* Changed to dark orange for balance and coins */
         }
         
         * {
@@ -257,23 +257,24 @@
             gap: 5px;
         }
         
+        /* Changed balance and coin color to dark orange with medium bold font */
         .balance-display {
             font-size: 18px;
-            font-weight: 800;
+            font-weight: 600; /* Medium bold */
             color: var(--balance-green);
             text-shadow: 2px 2px 0 var(--outline);
         }
         
         .gems-display {
             font-size: 16px;
-            font-weight: 800;
+            font-weight: 600; /* Medium bold */
             color: #FF69B4;
             text-shadow: 2px 2px 0 #8B008B;
         }
         
         .user-rank {
             color: var(--balance-green);
-            font-weight: 800;
+            font-weight: 600; /* Medium bold */
             font-size: 14px;
             text-shadow: 1px 1px 0 #1a5276;
             background: linear-gradient(135deg, #AED6F1, #3498DB);
@@ -356,7 +357,7 @@
         
         .stat-value {
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 600; /* Medium bold */
             color: var(--balance-green);
             text-shadow: 2px 2px 0 var(--outline);
         }
@@ -1546,6 +1547,123 @@
             50% { transform: translateY(-8px); }
             100% { transform: translateY(0); }
         }
+
+        /* Store Styles */
+        .store-packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .package-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid var(--outline);
+            box-shadow: 0 5px 10px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .package-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px var(--shadow);
+        }
+
+        .package-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--outline);
+            text-shadow: 1px 1px 0 white;
+        }
+
+        .package-item p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--outline);
+            text-shadow: 1px 1px 0 white;
+        }
+
+        .package-item .btn {
+            min-height: 45px;
+            font-size: 16px;
+        }
+
+        .coupon-section {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 3px solid var(--outline);
+            box-shadow: 0 5px 10px var(--shadow);
+            margin-top: 20px;
+        }
+
+        .coupon-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--outline);
+            text-shadow: 1px 1px 0 white;
+        }
+
+        .coupon-section p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--outline);
+            text-shadow: 1px 1px 0 white;
+        }
+
+        .pending-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pending-content {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 5px solid var(--outline);
+            box-shadow: 0 10px 25px var(--shadow), inset 0 0 15px rgba(255, 255, 255, 0.5);
+            max-width: 300px;
+        }
+
+        .pending-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--outline);
+            text-shadow: 1px 1px 0 white;
+        }
+
+        .pending-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--outline);
+            text-shadow: 1px 1px 0 white;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(139, 69, 19, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         
         /* Responsive Adjustments */
         @media (max-width: 480px) {
@@ -1629,6 +1747,10 @@
             
             .boy-right {
                 right: 15%;
+            }
+
+            .store-packages {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -1796,8 +1918,9 @@
                             <div class="menu-item" id="instructionsMenuItem">📋 Instructions</div>
                             <div class="menu-item" id="termsMenuItem">📜 Terms & Conditions</div>
                             <div class="menu-item" id="customerServiceMenuItem">👨‍💼 Customer Service</div>
+                            <div class="menu-item" id="storeMenuItem">🛒 Store</div>
+                            <div class="menu-item" id="logoutMenuItem">🚪 Logout</div>
                         </div>
-                        <button class="btn btn-secondary" id="logoutBtn">Logout</button>
                     </div>
                 </div>
             </div>
@@ -1876,6 +1999,12 @@
                         <div id="activeStakingList">
                             <div class="no-staking">No active staking</div>
                         </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🛒 Store</h3>
+                        <p>Buy diamonds to use for exclusive features!</p>
+                        <button class="btn btn-primary" id="storeBtn">Open Store</button>
                     </div>
                     
                     <div class="feature-card">
@@ -1961,6 +2090,48 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 </div>
             </div>
             <button class="btn btn-primary" id="confirmStakeBtn">Stake Now</button>
+        </div>
+    </div>
+
+    <!-- Store Modal -->
+    <div id="storeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🛒 Diamond Store</h2>
+                <button class="close-modal" id="closeStoreModal">&times;</button>
+            </div>
+            <div class="store-packages">
+                <div class="package-item">
+                    <h3>10 Diamonds</h3>
+                    <p>Price: $0.30</p>
+                    <button class="btn btn-primary" data-diamonds="10" data-price="0.30">Buy Now</button>
+                </div>
+                <div class="package-item">
+                    <h3>25 Diamonds</h3>
+                    <p>Price: $0.50</p>
+                    <button class="btn btn-primary" data-diamonds="25" data-price="0.50">Buy Now</button>
+                </div>
+                <div class="package-item">
+                    <h3>40 Diamonds</h3>
+                    <p>Price: $1.00</p>
+                    <button class="btn btn-primary" data-diamonds="40" data-price="1.00">Buy Now</button>
+                </div>
+            </div>
+            <div class="coupon-section">
+                <h3>Redeem Coupon</h3>
+                <p>Enter your coupon code below:</p>
+                <input type="text" id="couponCode" class="form-control" placeholder="Enter coupon code">
+                <button class="btn btn-secondary" id="submitCouponBtn">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Popup -->
+    <div id="pendingPopup" class="pending-popup">
+        <div class="pending-content">
+            <div class="spinner"></div>
+            <h3>Processing</h3>
+            <p>Your purchase is pending. Please wait for confirmation.</p>
         </div>
     </div>
 
@@ -2077,8 +2248,9 @@ The name of this game does not imply ownership of any real gold, mine, or physic
                 <p><strong>1. Manual Mining:</strong> Tap the gold pile in the mining area to earn coins. Each tap gives you 1 coin.</p>
                 <p><strong>2. Auto Mining:</strong> Enable auto mining to earn 0.1 coins per second for 2 hours. You can restart it after it ends.</p>
                 <p><strong>3. Staking:</strong> Stake 2000 coins to earn 1 gem after 3 days. Gems can be used for exclusive rewards.</p>
-                <p><strong>4. Referrals:</strong> Share your referral code with friends. When they sign up using your code, you both get 10 coins bonus.</p>
-                <p><strong>5. Ranks:</strong> Progress through 4 ranks (Beginner to Expert) by being active and referring friends.</p>
+                <p><strong>4. Store:</strong> Buy diamonds or redeem coupon codes to get gems instantly.</p>
+                <p><strong>5. Referrals:</strong> Share your referral code with friends. When they sign up using your code, you both get 10 coins bonus.</p>
+                <p><strong>6. Ranks:</strong> Progress through 4 ranks (Beginner to Expert) by being active and referring friends.</p>
                 
                 <h3>Important Notes:</h3>
                 <p>- One account per Gmail and phone number only</p>
@@ -2337,7 +2509,6 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
         const authMessage = document.getElementById('authMessage');
-        const logoutBtn = document.getElementById('logoutBtn');
         const balanceDisplay = document.getElementById('balanceDisplay');
         const totalBalance = document.getElementById('totalBalance');
         const miningZone = document.getElementById('miningZone');
@@ -2368,6 +2539,15 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         const confirmStakeBtn = document.getElementById('confirmStakeBtn');
         const activeStakingList = document.getElementById('activeStakingList');
         
+        // Store Feature Elements
+        const storeBtn = document.getElementById('storeBtn');
+        const storeModal = document.getElementById('storeModal');
+        const closeStoreModal = document.getElementById('closeStoreModal');
+        const submitCouponBtn = document.getElementById('submitCouponBtn');
+        const couponCode = document.getElementById('couponCode');
+        const pendingPopup = document.getElementById('pendingPopup');
+        const storeMenuItem = document.getElementById('storeMenuItem');
+        
         // Admin Panel Elements
         const adminPanel = document.getElementById('adminPanel');
         const closeAdminModal = document.getElementById('closeAdminModal');
@@ -2394,6 +2574,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         const instructionsMenuItem = document.getElementById('instructionsMenuItem');
         const termsMenuItem = document.getElementById('termsMenuItem');
         const customerServiceMenuItem = document.getElementById('customerServiceMenuItem');
+        const logoutMenuItem = document.getElementById('logoutMenuItem');
         const instructionsModal = document.getElementById('instructionsModal');
         const closeInstructionsModal = document.getElementById('closeInstructionsModal');
         const closeInstructionsBtn = document.getElementById('closeInstructionsBtn');
@@ -2524,7 +2705,7 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         });
         
         // Logout
-        logoutBtn.addEventListener('click', async () => {
+        logoutMenuItem.addEventListener('click', async () => {
             try {
                 await window.firebaseFunctions.signOut(window.firebaseAuth);
                 showAuth();
@@ -2599,6 +2780,31 @@ The name of this game does not imply ownership of any real gold, mine, or physic
         
         confirmStakeBtn.addEventListener('click', async () => {
             await createStaking();
+        });
+        
+        // Store Feature Event Listeners
+        storeBtn.addEventListener('click', () => {
+            showStoreModal();
+        });
+        
+        storeMenuItem.addEventListener('click', () => {
+            showStoreModal();
+            hideMenu();
+        });
+        
+        closeStoreModal.addEventListener('click', hideStoreModal);
+        
+        // Buy buttons in store
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-primary') && e.target.closest('.package-item')) {
+                const diamonds = parseInt(e.target.getAttribute('data-diamonds'));
+                const price = parseFloat(e.target.getAttribute('data-price'));
+                showPendingPopup(diamonds, price);
+            }
+        });
+        
+        submitCouponBtn.addEventListener('click', () => {
+            redeemCoupon();
         });
         
         // Admin Panel Event Listeners
@@ -3300,6 +3506,69 @@ The name of this game does not imply ownership of any real gold, mine, or physic
             setTimeout(() => {
                 showSuccessMessage(`🎉 You received ${gemCount} gems from staking!`);
             }, 500);
+        }
+
+        // Store Feature Functions
+        function showStoreModal() {
+            storeModal.style.display = 'flex';
+        }
+        
+        function hideStoreModal() {
+            storeModal.style.display = 'none';
+        }
+        
+        function showPendingPopup(diamonds, price) {
+            pendingPopup.style.display = 'flex';
+            
+            // Simulate processing for 3 seconds
+            setTimeout(() => {
+                hidePendingPopup();
+                // In a real app, this would be where you process the payment
+                // For now, we'll just add the diamonds to the user's gems
+                gems += diamonds;
+                updateBalanceDisplay();
+                saveUserData();
+                showSuccessMessage(`🎉 Successfully purchased ${diamonds} diamonds for $${price}!`);
+            }, 3000);
+        }
+        
+        function hidePendingPopup() {
+            pendingPopup.style.display = 'none';
+        }
+        
+        function redeemCoupon() {
+            const code = couponCode.value.trim();
+            
+            if (!code) {
+                alert('Please enter a coupon code');
+                return;
+            }
+            
+            // Show pending popup
+            pendingPopup.style.display = 'flex';
+            
+            // Simulate processing for 3 seconds
+            setTimeout(() => {
+                hidePendingPopup();
+                
+                // In a real app, you would validate the coupon code against a database
+                // For now, we'll simulate a successful redemption
+                if (code.toLowerCase() === 'welcome10') {
+                    gems += 10;
+                    updateBalanceDisplay();
+                    saveUserData();
+                    showSuccessMessage('🎉 Coupon redeemed! You received 10 diamonds!');
+                    couponCode.value = '';
+                } else if (code.toLowerCase() === 'goldmine25') {
+                    gems += 25;
+                    updateBalanceDisplay();
+                    saveUserData();
+                    showSuccessMessage('🎉 Coupon redeemed! You received 25 diamonds!');
+                    couponCode.value = '';
+                } else {
+                    alert('Invalid coupon code. Please try again.');
+                }
+            }, 3000);
         }
 
         // Admin Panel Functions
